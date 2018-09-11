@@ -1,0 +1,21 @@
+#principal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+.articulo-principal {
+  flex: 1;
+  justify-content: center;
+  text-align: justify;
+  margin: 60px;
+}
+
+.articulo-header {
+  margin: 15px;
+  text-align: center;
+}
+
+.boton-ver-detalles {
+  margin: auto;
+}

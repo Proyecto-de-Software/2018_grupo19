@@ -3,13 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Hospital Alejandro Korn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="layout.css">
   </head>
   <body>
     <nav>
-      <img src="" alt="Logo">
-      <a href="#">Inicio</a>
-      <a href="#">Consultas</a>
-      <a href="#">Pacientes</a>
+      <section id="nav-inicio">
+        <img src="recursos/logo_hospital.svg" alt="Logo">
+        <a href="#">Inicio</a>
+        <a href="#">Consultas</a>
+        <a href="#">Pacientes</a>
+      </section>
+      <section id="nav-busqueda">
+        <form action="index.html" method="post">
+          <input type="text" placeholder="Buscar.." required>
+          <button type="submit"><img src="recursos/search2.png" alt="Buscar"></button>
+        </form>
+        <a href="#">Iniciar sesión</a>
+      </section>
+    </nav>
     <footer>
       <p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
       <p>v 0.1.0</p>

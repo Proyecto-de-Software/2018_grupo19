@@ -3,16 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>Hospital Alejandro Korn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../layout.css">
+    <link rel="stylesheet" href="login.css">
   </head>
   <body>
     <nav>
-      <img src="" alt="Logo">
-      <p>
-        Hospital Dr. Alejandro Korn
-      </p>
+      <section id="nav-inicio">
+        <img src="../recursos/logo_hospital.svg" alt="Logo">
+        <p>Hospital Dr. Alejandro Korn</p>
+      </section>
     </nav>
-    <section>
-      <form action="#" method="post">
+    <section id ="formulario-sesion">
+      <form action="../index.html" method="post">
         <p>
           Usuario
         </p>
@@ -20,8 +23,8 @@
         <p>
           Contraseña
         </p>
-        <input type="password" placeholder="">
-        <button type="submit">Iniciar</button>
+        <input type="password" placeholder="Contraseña">
+        <button id="boton-iniciar-sesion" type="submit">Iniciar</button>
       </form>
     </section>
     <footer>
