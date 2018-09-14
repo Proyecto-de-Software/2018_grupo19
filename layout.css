@@ -49,6 +49,36 @@ footer {
   padding: 15px;
 }
 
+.dropdown {
+  list-style: none;
+}
+
+.dropdown li {
+  float: left;
+  position: relative;
+}
+
+.dropdown ul {
+  list-style: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+.dropdown ul li {
+  float: none;
+}
+
+.dropdown ul li:hover {
+  background-color: burlywood;
+}
+
+.dropdown ul a {
+  white-space: nowrap; 
+}
+.dropdown li:hover ul {
+  visibility: visible;
+}
+
 #form-busqueda {
   display: flex;
   align-content: center;
