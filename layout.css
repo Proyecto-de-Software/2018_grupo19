@@ -36,14 +36,10 @@ nav {
   padding: 15px;
 }
 
-#nav-busqueda {
+#nav-busqueda, #nav-inicio {
   display: flex;
   flex-wrap: wrap;
-}
-
-#nav-inicio {
-  display: flex;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 footer {
@@ -51,4 +47,25 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 15px;
+}
+
+#form-busqueda {
+  display: flex;
+  align-content: center;
+}
+
+@media only screen and (max-width:768px) {
+  nav{
+    display: flex;
+    justify-content: center;
+  }
+
+  #nav-busqueda {
+    display: flex;
+    justify-content: center;
+  }
+
+  #nav-busqueda > * {
+    margin-top: 5px;
+  }
 }
