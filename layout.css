@@ -14,7 +14,24 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: "recursos/fondo.jpg";
+}
+
+nav a {
+  color: black;
+  text-decoration: none;
+}
+
+#nav-inicio > *, #nav-busqueda > * {
+  margin-left: 10px;
+}
+
+.contenido{
+  flex: 1 0 auto;
+}
+
+nav, footer {
+  background-color: #f6eded;
+  flex-shrink: 0;
 }
 
 nav {
@@ -57,6 +74,7 @@ footer {
   padding: 15px;
   border-top: 2px solid lightblue;
   font-size: 13px;
+  flex-shrink: 0;
 }
 
 /* Dropdown menu */
@@ -91,8 +109,7 @@ footer {
 }
 
 .dropdown ul a {
-  white-space: nowrap; 
-  
+  white-space: nowrap;
 }
 .dropdown li:hover ul {
   visibility: visible;
