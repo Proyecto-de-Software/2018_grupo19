@@ -16,15 +16,21 @@
     </nav>
     <section id ="formulario-sesion">
       <form action="../index.html" method="post">
-        <p>
-          Usuario
-        </p>
-        <input type="text" placeholder="Usuario" id="inputUsuario" title="inputUsuario">
-        <p>
-          Contraseña
-        </p>
-        <input type="password" placeholder="Contraseña" id="inputContrasena" title="inputContrasena">
-        <button id="boton-iniciar-sesion" type="submit">Iniciar</button>
+        <div class="form-element">
+            <p>
+                Usuario
+            </p>
+             <input type="text" placeholder="Usuario" id="inputUsuario" title="inputUsuario" class="inputLogin">      
+        </div>
+        <div class="form-element">
+            <p>
+                Contraseña
+            </p>
+            <input type="password" placeholder="Contraseña" id="inputContrasena" title="inputContrasena" class="inputLogin">      
+        </div>
+        <div class="form-element form-element-button">
+          <button id="boton-iniciar-sesion" type="submit">Iniciar</button>
+        </div>
       </form>
     </section>
     <footer>

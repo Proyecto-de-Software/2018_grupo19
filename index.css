@@ -8,7 +8,17 @@
   justify-content: center;
   text-align: justify;
   margin: 20px;
-  width: 300px;
+  width: 350px;
+  background-color: white;
+  padding: 35px 20px 35px 20px;
+  font-size: 16px;
+  border: 2px solid lightblue;
+  border-radius: 5px;
+}
+
+.buttonVerDetalles {
+  display: flex;
+  justify-content: center;
 }
 
 .articulo-header {
@@ -17,5 +27,13 @@
 }
 
 .boton-ver-detalles {
-  margin: auto;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #eeeeee;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.boton-ver-detalles:hover {
+  background-color: lightblue;
 }

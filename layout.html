@@ -8,31 +8,30 @@
   </head>
   <body>
     <nav>
-      <section id="nav-inicio">
+      <div id="nav-inicio">
         <img src="recursos/logo_hospital.svg" alt="Logo">
         <a href="#">Inicio</a>
         <a href="#">Consultas</a>
         <a href="#">Pacientes</a>
-
+      </div>
+      <div id="nav-busqueda">
         <ul class="dropdown">
           <li>
-            <a href="#">Administración</a>
+            <a href="#" >Administración</a>
             <ul>
-              <li><a href="">Usuarios</a></li>
-              <li><a href="">Roles</a></li>
-              <li><a href="">Permisos</a></li>
+              <a href="#"><li>Usuarios</li></a>
+              <a href="#"><li>Roles</li></a>
+              <a href="#"><li>Permisos</li></a>
+              <a href="#"><li>Configuracion</li></a>
             </ul>
           </li>
         </ul>
-
-      </section>
-      <section id="nav-busqueda">
-        <form action="index.html" method="post">
-          <input type="text" placeholder="Buscar.." required>
-          <button type="submit"><img src="recursos/search2.png" alt="Buscar"></button>
+        <form action="index.html" method="post" id="form-busqueda">
+          <input type="text" placeholder="Buscar.." id="inputBuscar" title="inputBuscar" required>
+          <button type="submit" id="buttonBuscar"><img src="recursos/search.svg" alt="Icono de busqueda"></button>
         </form>
         <a href="#">Iniciar sesión</a>
-      </section>
+      </div>
     </nav>
     <footer>
       <p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
