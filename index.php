@@ -1,5 +1,5 @@
 <?php
-require_once 'vendor/autoload.php';
+require_once 'composer/vendor/autoload.php';
 
 $loader = new Twig_Loader_Filesystem('vistas');
 $twig = new Twig_Environment($loader);
