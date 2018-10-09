@@ -1,6 +1,7 @@
 <?php
 
 require 'model/SesionRepository.php';
+require 'views/Home.php';
 
 /*
     Clase que se encarga del rooteo
@@ -18,10 +19,8 @@ class RooterController {
   }
 
   private function home(){
-    $loader = new Twig_Loader_Filesystem('views');
-    $twig = new Twig_Environment($loader);
-    $template = $twig->load('index.html');
-    echo $template->render();
+    $view = new Home();
+    $view->show();
   }
 
   private function iniciarSesion(){
