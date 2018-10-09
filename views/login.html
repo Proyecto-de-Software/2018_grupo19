@@ -15,18 +15,18 @@
       </div>
     </nav>
     <section id ="formulario-sesion" class="contenido">
-      <form action="../index.html" method="post">
+      <form action="../index.php?comando=iniciarSesion" method="post">
         <div class="form-element">
             <p>
                 Usuario
             </p>
-             <input type="text" placeholder="Usuario" id="inputUsuario" title="inputUsuario" class="inputLogin" required>
+             <input type="text" placeholder="Usuario" id="inputUsuario" title="inputUsuario" class="inputLogin" name="usuario" required>
         </div>
         <div class="form-element">
             <p>
                 Contraseña
             </p>
-            <input type="password" placeholder="Contraseña" id="inputContrasena" title="inputContrasena" class="inputLogin" required>
+            <input type="password" placeholder="Contraseña" id="inputContrasena" title="inputContrasena" class="inputLogin" name="contrasena" required>
         </div>
         <div class="form-element form-element-button">
           <button id="boton-iniciar-sesion" type="submit">Iniciar</button>

@@ -1,13 +1,11 @@
 <?php
 require_once 'composer/vendor/autoload.php';
-require 'model/Conexion.php';
+require_once 'controller/RooterController.php';
 
-$loader = new Twig_Loader_Filesystem('views');
-$twig = new Twig_Environment($loader);
+if (isset($_GET['comando'])) {
+  RooterController::singleton()->redireccionar($_GET['comando']);
+} else {
+  RooterController::singleton()->redireccionar('');
+}
 
-$template = $twig->load('index.html');
-echo $template->render();
-
-$con=new Conexion();
-$con->conectarse();
 ?>
