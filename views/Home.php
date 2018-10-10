@@ -1,6 +1,6 @@
 <?php
 
-require 'TwigView.php';
+require_once 'TwigView.php';
 
 class Home extends TwigView {
 
