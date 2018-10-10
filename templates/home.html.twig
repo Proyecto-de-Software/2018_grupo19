@@ -1,79 +1,59 @@
-<!DOCTYPE html>
-<html lang="es" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Hospital Alejandro Korn</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="templates/styles/administracion.css">
+{% extends "layout.html.twig" %}
+
+{% block estilos %}
+  {{ parent() }}
     <link rel="stylesheet" href="templates/styles/home.css">
-  </head>
-  <body>
-    <nav>
-      <div id="nav-inicio">
-        <img src="/recursos/logo_hospital.svg" alt="Logo del Hospital Alejandro Korn">
-        <p>Hospital Dr. Alejandro Korn</p>
-      </div>
-      <div id="nav-busqueda">
-        <form action="index.php" method="post" id="form-busqueda">
-          <input type="text" placeholder="Buscar.." id="inputBuscar" title="inputBuscar" required>
-          <button type="submit" id="buttonBuscar"><img src="recursos/search.svg" alt="Icono de busqueda"></button>
-        </form>
-        <a href="index.php?comando=login">Iniciar sesión</a>
-      </div>
-    </nav>
-    <section id="principal" class="contenido">
-      <article class="articulo-principal">
-        <header class="articulo-header">
-          <h3>Primer Texto</h3>
-        </header>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Fusce sodales, risus non bibendum semper, metus purus varius enim,
-          scelerisque lacinia dolor elit a lectus. Morbi cursus, leo vitae facilisis condimentum,
-          elit sapien commodo tellus, a malesuada nunc diam et diam. Nullam blandit volutpat eleifend.
-          Suspendisse risus sem, hendrerit sed suscipit consequat, blandit quis tortor. Aliquam erat volutpat.
-          Vestibulum rhoncus tellus sed diam tempus, ac volutpat sem tristique. Donec vestibulum dignissim odio.
-          Donec hendrerit est nec augue convallis semper. Suspendisse porttitor massa quam, quis consectetur justo blandit quis.
-        </p>
-        <div class="buttonVerDetalles">
-          <button type="button" class="boton-ver-detalles"> Ver detalles >></button>
-        </div>
-      </article>
-      <article class="articulo-principal">
-        <header class="articulo-header">
-          <h3>Segundo Texto</h3>
-        </header>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Fusce sodales, risus non bibendum semper, metus purus varius enim, scelerisque lacinia dolor elit a lectus.
-          Morbi cursus, leo vitae facilisis condimentum, elit sapien commodo tellus, a malesuada nunc diam et diam.
-          Nullam blandit volutpat eleifend. Suspendisse risus sem, hendrerit sed suscipit consequat, blandit quis tortor.
-          Aliquam erat volutpat. Vestibulum rhoncus tellus sed diam tempus, ac volutpat sem tristique. Donec vestibulum dignissim odio.
-          Donec hendrerit est nec augue convallis semper. Suspendisse porttitor massa quam, quis consectetur justo blandit quis.
-        </p>
-        <div class="buttonVerDetalles">
-          <button type="button" class="boton-ver-detalles"> Ver detalles >></button>
+  {% endblock %}
 
-        </div>
-      </article>
-      <article class="articulo-principal">
-        <header class="articulo-header">
-          <h3>Tercer Texto</h3>
-        </header>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sodales, risus non bibendum semper, metus purus varius enim,
-          scelerisque lacinia dolor elit a lectus. Morbi cursus, leo vitae facilisis condimentum, elit sapien commodo tellus,
-          a malesuada nunc diam et diam. Nullam blandit volutpat eleifend. Suspendisse risus sem, hendrerit sed suscipit consequat, blandit quis tortor. Aliquam erat volutpat. Vestibulum rhoncus tellus sed diam tempus, ac volutpat sem tristique. Donec vestibulum dignissim odio. Donec hendrerit est nec augue convallis semper. Suspendisse porttitor massa quam, quis consectetur justo blandit quis.
-        </p>
-        <div class="buttonVerDetalles">
-          <button type="button" class="boton-ver-detalles"> Ver detalles >></button>
+{% block contenido %}
+  <section id="principal" class="contenido">
+    <article class="articulo-principal">
+      <header class="articulo-header">
+        <h3>Primer Texto</h3>
+      </header>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Fusce sodales, risus non bibendum semper, metus purus varius enim,
+        scelerisque lacinia dolor elit a lectus. Morbi cursus, leo vitae facilisis condimentum,
+        elit sapien commodo tellus, a malesuada nunc diam et diam. Nullam blandit volutpat eleifend.
+        Suspendisse risus sem, hendrerit sed suscipit consequat, blandit quis tortor. Aliquam erat volutpat.
+        Vestibulum rhoncus tellus sed diam tempus, ac volutpat sem tristique. Donec vestibulum dignissim odio.
+        Donec hendrerit est nec augue convallis semper. Suspendisse porttitor massa quam, quis consectetur justo blandit quis.
+      </p>
+      <div class="buttonVerDetalles">
+        <button type="button" class="boton-ver-detalles"> Ver detalles >></button>
+      </div>
+    </article>
+    <article class="articulo-principal">
+      <header class="articulo-header">
+        <h3>Segundo Texto</h3>
+      </header>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Fusce sodales, risus non bibendum semper, metus purus varius enim, scelerisque lacinia dolor elit a lectus.
+        Morbi cursus, leo vitae facilisis condimentum, elit sapien commodo tellus, a malesuada nunc diam et diam.
+        Nullam blandit volutpat eleifend. Suspendisse risus sem, hendrerit sed suscipit consequat, blandit quis tortor.
+        Aliquam erat volutpat. Vestibulum rhoncus tellus sed diam tempus, ac volutpat sem tristique. Donec vestibulum dignissim odio.
+        Donec hendrerit est nec augue convallis semper. Suspendisse porttitor massa quam, quis consectetur justo blandit quis.
+      </p>
+      <div class="buttonVerDetalles">
+        <button type="button" class="boton-ver-detalles"> Ver detalles >></button>
 
-        </div>
-      </article>
-    </section>
-    <footer>
-      <p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
-      <p>v 0.1.0</p>
-    </footer>
-  </body>
-</html>
+      </div>
+    </article>
+    <article class="articulo-principal">
+      <header class="articulo-header">
+        <h3>Tercer Texto</h3>
+      </header>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sodales, risus non bibendum semper, metus purus varius enim,
+        scelerisque lacinia dolor elit a lectus. Morbi cursus, leo vitae facilisis condimentum, elit sapien commodo tellus,
+        a malesuada nunc diam et diam. Nullam blandit volutpat eleifend. Suspendisse risus sem, hendrerit sed suscipit consequat, blandit quis tortor. Aliquam erat volutpat. Vestibulum rhoncus tellus sed diam tempus, ac volutpat sem tristique. Donec vestibulum dignissim odio. Donec hendrerit est nec augue convallis semper. Suspendisse porttitor massa quam, quis consectetur justo blandit quis.
+      </p>
+      <div class="buttonVerDetalles">
+        <button type="button" class="boton-ver-detalles"> Ver detalles >></button>
+
+      </div>
+    </article>
+  </section>
+{% endblock %}

@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html lang="es" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Hospital Alejandro Korn</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="templates/styles/administracion.css">
-    <link rel="stylesheet" href="templates/styles/login.css">
-  </head>
-  <body>
-    <nav>
-      <div id="nav-inicio">
-        <img src="/recursos/logo_hospital.svg" alt="Logo del Hospital Alejandro Korn">
-        <p>Hospital Dr. Alejandro Korn</p>
+
+{% extends "layout.html.twig" %}
+
+{% block estilos %}
+  {{ parent() }}
+  <link rel="stylesheet" href="templates/styles/layout.css">
+  <link rel="stylesheet" href="templates/styles/login.css">
+{% endblock %}
+
+{% block contenido %}
+  <section id ="formulario-sesion" class="contenido">
+    <form id="form-login" action="index.php?comando=iniciarSesion" method="post">
+      <div class="form-element">
+        <p>
+          Usuario
+        </p>
+        <input type="text" placeholder="Usuario" id="inputUsuario" title="inputUsuario" class="inputLogin" name="usuario" required>
       </div>
-    </nav>
-    <section id ="formulario-sesion" class="contenido">
-      <form action="index.php?comando=iniciarSesion" method="post">
-        <div class="form-element">
-            <p>
-                Usuario
-            </p>
-             <input type="text" placeholder="Usuario" id="inputUsuario" title="inputUsuario" class="inputLogin" name="usuario" required>
-        </div>
-        <div class="form-element">
-            <p>
-                Contraseña
-            </p>
-            <input type="password" placeholder="Contraseña" id="inputContrasena" title="inputContrasena" class="inputLogin" name="contrasena" required>
-        </div>
-        <div class="form-element form-element-button">
-          <button id="boton-iniciar-sesion" type="submit">Iniciar</button>
-        </div>
-      </form>
-    </section>
-    <footer>
-      <p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
-      <p>v 0.1.0</p>
-    </footer>
-  </body>
-</html>
+      <div class="form-element">
+        <p>
+          Contraseña
+        </p>
+      <input type="password" placeholder="Contraseña" id="inputContrasena" title="inputContrasena" class="inputLogin" name="contrasena" required>
+      </div>
+      <div class="form-element form-element-button">
+        <button id="boton-iniciar-sesion" type="submit">Iniciar</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
