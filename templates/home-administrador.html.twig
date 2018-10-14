@@ -6,21 +6,12 @@
 {% endblock %}
 
 
-{% block nav_izq %}
-  {{ parent() }}
-  <a href="#">Consultas</a>
-  <a href="#">Pacientes</a>
-{% endblock %}
-
-
 {% block nav_der %}
   <div class="dropdown">
     <a href="#">Administración</a>
     <ul class="dropdown-items">
       <li><a href="index.php?comando=busqueda-usuarios">Usuarios</a></li>
-      <li><a href="#">Roles</a></li>
-      <li><a href="#">Permisos</a></li>
-      <li><a href="#">Configuracion</a></li>
+      <li><a href="index.php?comando=configuracion">Configuracion</a></li>
     </ul>
   </div>
 {% endblock %}

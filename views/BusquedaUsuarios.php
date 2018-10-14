@@ -9,19 +9,23 @@ class BusquedaUsuarios extends TwigView {
     /* Usuarios hardcodeados */
     $adm = array(
       "nombre" => "Administrador",
-      "estado" => "Activo"
+      "estado" => "Activo",
+      "id" => "1"
     );
     $blas = array(
       "nombre" => "Blas Butera",
-      "estado" => "Bloqueado"
+      "estado" => "Bloqueado",
+      "id" => "2"
     );
     $fede = array(
       "nombre" => "Federico Di Claudio",
-      "estado" => "Activo"
+      "estado" => "Activo",
+      "id" => "3"
     );
     $pedro = array(
       "nombre" => "Pedro Dal Bianco",
-      "estado" => "Bloqueado"
+      "estado" => "Bloqueado",
+      "id" => "4"
     );
 
     $usuarios = array($adm, $blas, $fede, $pedro);

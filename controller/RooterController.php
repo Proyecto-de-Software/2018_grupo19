@@ -1,10 +1,11 @@
 <?php
 
 require 'model/SesionRepository.php';
-require 'views/Login.php';
-require 'views/Home.php';
-require 'views/Administracion.php';
-require_once 'views/BusquedaUsuarios.php';
+
+foreach (glob("views/*.php") as $vista)
+{
+    require_once $vista;
+}
 
 
 /*
@@ -47,6 +48,11 @@ class RooterController {
     $view->show();
   }
 
+  private function configuracion(){
+    $view = new Configuracion();
+    $view->show();
+  }
+
   public function redireccionar($comando){
     switch ($comando) {
       case 'iniciar-sesion':
@@ -59,8 +65,11 @@ class RooterController {
       case 'administracion':
         $this->administracion();
         break;
-      case 'administracion-usuarios':
-        $this->administracionUsuarios();
+      case 'busqueda-usuarios':
+        $this->busquedaUsuarios();
+        break;
+      case 'configuracion':
+        $this->configuracion();
         break;
       default:
         $this->home();
