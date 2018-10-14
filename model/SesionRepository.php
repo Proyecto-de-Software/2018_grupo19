@@ -9,13 +9,18 @@ class SesionRepository extends PDORepository{
 
     public function iniciarSesion($usuario, $contrasena) {
       $db = $this->conectarse();
-      $resultado = $db->query("SELECT * FROM usuario WHERE username = '$usuario' AND password = '$contrasena'");
-      if (!$resultado) {
+      $query = $db->prepare("SELECT * FROM usuario WHERE username = ? AND password = ?");
+      $query->execute(array($usuario, $contrasena));
+      if (!$query) {
         // Hacer algo si usuario o contrasenia erroneos
       } else {
-        while ($fila = $resultado->fetch()) {
+        while ($fila = $query->fetch()) {
           session_start();
-          $_SESSION['usuario'] = $fila['username'];
+          $_SESSION['id'] = $fila["id"];
+          $_SESSION['username'] = $fila['username'];
+          $_SESSION['activo'] = $fila['activo'];
+          $_SESSION['first_name'] = $fila['first_name'];
+          $_SESSION['last_name'] = $fila['last_name'];
         }
       }
     }

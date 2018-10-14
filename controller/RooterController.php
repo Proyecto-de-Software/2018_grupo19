@@ -51,17 +51,17 @@ class RooterController {
     switch ($comando) {
       case 'iniciarSesion':
         $this->iniciarSesion();
-        $this->home();
+        $this->administracion();
         break;
       case 'login':
         $this->login();
-      break;
+        break;
       case 'administracion':
-      $this->administracion();
-      break;
+        $this->administracion();
+        break;
       case 'administracion-usuarios':
-      $this->administracionUsuarios();
-      break;
+        $this->administracionUsuarios();
+        break;
       default:
         $this->home();
         break;
