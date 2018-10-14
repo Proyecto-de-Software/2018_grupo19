@@ -1,4 +1,4 @@
-.contenido { /*debe subirse un nivel en la jerarquía de herencia*/
+.contenido {
     display: flex;
     justify-content: center;
 }
@@ -112,6 +112,15 @@ footer {
 
 .nombre-hospital {
   color: gray;
+}
+
+#link-inicio {
+  display: flex;
+  align-items: center;
+}
+
+#logo {
+  margin-right: 10px;
 }
 
 /*  */

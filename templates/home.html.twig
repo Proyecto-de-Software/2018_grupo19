@@ -3,7 +3,11 @@
 {% block estilos %}
   {{ parent() }}
     <link rel="stylesheet" href="templates/styles/home.css">
-  {% endblock %}
+{% endblock %}
+
+{% block nav_der %}
+  <a href="index.php?comando=login">Iniciar sesión</a>
+{% endblock %}
 
 {% block contenido %}
   <section id="principal" class="contenido">

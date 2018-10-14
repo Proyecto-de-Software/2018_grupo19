@@ -12,17 +12,14 @@
     <nav>
       <div id="nav-izq">
         {% block nav_izq %}
-        <img src="recursos/logo_hospital.svg" alt="Logo">
-        <p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
+        <a id="link-inicio" href="index.php">
+          <img id="logo" src="recursos/logo_hospital.svg" alt="Logo">
+          <p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
+        </a>
         {% endblock %}
       </div>
       <div id="nav-der">
         {% block nav_der %}
-        <form action="index.html" method="post" id="form-busqueda">
-          <input type="text" placeholder="Buscar.." id="inputBuscar" title="inputBuscar" required>
-          <button type="submit" id="buttonBuscar"><img src="recursos/search.svg" alt="Icono de busqueda"></button>
-        </form>
-        <a href="index.php?comando=login">Iniciar sesión</a>
         {% endblock %}
       </div>
 

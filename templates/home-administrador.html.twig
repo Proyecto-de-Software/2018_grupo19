@@ -1,4 +1,4 @@
-{% extends "layout.html.twig" %}
+{% extends "home-logueado.html.twig" %}
 
 {% block estilos %}
   {{ parent() }}
@@ -8,7 +8,6 @@
 
 {% block nav_izq %}
   {{ parent() }}
-  <a href="#">Inicio</a>
   <a href="#">Consultas</a>
   <a href="#">Pacientes</a>
 {% endblock %}
@@ -24,6 +23,4 @@
       <li><a href="#">Configuracion</a></li>
     </ul>
   </div>
-  {{ parent() }}
 {% endblock %}
-

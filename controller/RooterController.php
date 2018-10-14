@@ -49,9 +49,9 @@ class RooterController {
 
   public function redireccionar($comando){
     switch ($comando) {
-      case 'iniciarSesion':
+      case 'iniciar-sesion':
         $this->iniciarSesion();
-        $this->administracion();
+        $this->home();
         break;
       case 'login':
         $this->login();
