@@ -1,8 +1,3 @@
-#formulario-sesion {
-  display: flex;
-  justify-content: center;
-}
-
 #form-login {
   display: flex;
   flex-direction: column;

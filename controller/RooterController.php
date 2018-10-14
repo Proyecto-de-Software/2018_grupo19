@@ -4,7 +4,7 @@ require 'model/SesionRepository.php';
 require 'views/Login.php';
 require 'views/Home.php';
 require 'views/Administracion.php';
-require_once 'views/AdministracionUsuarios.php';
+require_once 'views/BusquedaUsuarios.php';
 
 
 /*
@@ -42,8 +42,8 @@ class RooterController {
     $view->show();
   }
 
-  private function administracionUsuarios(){
-    $view = new AdministracionUsuarios();
+  private function busquedaUsuarios(){
+    $view = new BusquedaUsuarios();
     $view->show();
   }
 
@@ -55,13 +55,13 @@ class RooterController {
         break;
       case 'login':
         $this->login();
-      break;
+        break;
       case 'administracion':
-      $this->administracion();
-      break;
-      case 'administracion-usuarios':
-      $this->administracionUsuarios();
-      break;
+        $this->administracion();
+        break;
+      case 'busqueda-usuarios':
+        $this->busquedaUsuarios();
+        break;
       default:
         $this->home();
         break;

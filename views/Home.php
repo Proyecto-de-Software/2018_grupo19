@@ -8,3 +8,5 @@ class Home extends TwigView {
         echo self::getTwig()->render('home.html.twig');
     }
 }
+
+?>

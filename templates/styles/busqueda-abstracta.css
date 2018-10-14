@@ -1,4 +1,4 @@
-.tarjeta-user {
+.tarjeta-result {
     display: flex;
     border: 0.5px solid;
     width: 600px; /*se achica responsive*/
@@ -8,33 +8,33 @@
     background-color: #fafafa;
 }
 
-.tarjeta-user:visited, .tarjeta-user:active{
+.tarjeta-result:visited, .tarjeta-result:active{
     color:#1A237E;
 }
 
-.tarjeta-user:hover{
+.tarjeta-result:hover{
     background-color: lightblue;
 }
 
-.tarjeta-user h1,h2 {
+.tarjeta-result h1,h2 {
     margin: 0;
 }
 
-.tarjeta-user h1{
+.tarjeta-result h1{
     font-size: 0.8em;
 }
 
-.tarjeta-user h2{
+.tarjeta-result h2{
     font-size: 0.8em;
 }
 
-.user-image {
+.result-image {
     height: 40px;
     width: 40px;
     margin-right: 15px;
 }
 
-.nombreyfoto-tarjeta-user{
+.nombreyfoto-tarjeta-result{
     flex: 1;
     display: flex;
     justify-content: flex-start;
@@ -42,7 +42,7 @@
     padding: 5px;
 }
 
-.estado-tarjeta-user{
+.estado-tarjeta-result{
     flex: 1;
     display: flex;
     align-items: center;
@@ -51,8 +51,8 @@
     padding: 5px;
 }
 
-.contenido-de-usuarios {
-    display: flex;  
+.contenido-de-resultados {
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
@@ -63,7 +63,7 @@
     background-color: #fafafa;
 }
 
-.tabla-usuarios {
+.tabla-resultados {
     display: flex;
     flex-direction: column;
 }
@@ -80,13 +80,8 @@
     background-color: lightblue;
   }
 
-.contenido { /*debe subirse un nivel en la jerarquía de herencia*/
-    display: flex;
-    justify-content: center;
-}
-
 @media only screen and (max-width: 768px){
-    .tarjeta-user {
+    .tarjeta-result {
         width: 400px;
     }
 }

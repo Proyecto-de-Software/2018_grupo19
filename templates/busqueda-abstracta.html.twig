@@ -1,0 +1,31 @@
+{% extends "layout.html.twig" %}
+
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/busqueda-abstracta.css">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenido">
+    <div class="contenido-de-resultados">
+        <h1 class="titulo-contenido-de-resultados">{% block titulo %}{% endblock %}</h1>
+        <div class="tabla-resultados">
+        {% for resultado in resultados %}
+            <a href="#" class="tarjeta-result">
+                <div class="nombreyfoto-tarjeta-result">
+                    <img class="result-image" src="recursos/user.svg" alt="Imagen result">
+                    <h1>{{resultado.nombre}}</h1>
+                </div>
+                <div class="estado-tarjeta-result">
+                    <h1>Estado:</h1>
+                    <h2>{{resultado.estado}}</h2>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+        <a href="#" class="boton-crear">Crear {% block tituloCreacion %}{% endblock %}</a>
+    </div>
+</div>
+
+{% endblock %}

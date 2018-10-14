@@ -1,3 +1,8 @@
+.contenido { /*debe subirse un nivel en la jerarquía de herencia*/
+    display: flex;
+    justify-content: center;
+}
+
 * {
   margin: 0;
   padding: 0;
