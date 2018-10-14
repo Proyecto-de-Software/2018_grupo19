@@ -16,12 +16,12 @@
 
 {% block nav_der %}
   <div class="dropdown">
-    <a href="#" >Administración</a>
-    <ul>
-      <a href="#"><li>Usuarios</li></a>
-      <a href="#"><li>Roles</li></a>
-      <a href="#"><li>Permisos</li></a>
-      <a href="#"><li>Configuracion</li></a>
+    <a href="#">Administración</a>
+    <ul class="dropdown-items">
+      <li><a href="index.php?comando=administracion-usuarios">Usuarios</a></li>
+      <li><a href="#">Roles</a></li>
+      <li><a href="#">Permisos</a></li>
+      <li><a href="#">Configuracion</a></li>
     </ul>
   </div>
   {{ parent() }}

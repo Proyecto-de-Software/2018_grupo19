@@ -3,7 +3,7 @@
     .dropdown {
     float: left;
     position: relative;
-    background-color:#fafafa;
+    background-color:#C5CAE9;
     padding: 5px 5px 5px 0px;
   } 
   
@@ -17,11 +17,7 @@
   .dropdown ul li {
     float: none;
     width: auto;
-    background-color:#fafafa;
-  }
-  
-  .dropdown ul li:hover {
-    background-color: #EEEEEE;
+    background-color:#C5CAE9;
   }
   
   .dropdown ul a {
@@ -29,5 +25,11 @@
   }
   .dropdown:hover ul {
     visibility: visible;
-    
+    border-radius: 4px;
+  }
+
+  .dropdown-items{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
   }

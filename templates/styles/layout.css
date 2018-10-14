@@ -19,6 +19,14 @@ body {
 nav a {
   color: black;
   text-decoration: none;
+  border-radius: 4px;
+  border: 2px;
+  padding: 5px;
+}
+
+nav a:hover{
+  background-color: lightblue;
+  border-color: lightblue;
 }
 
 #nav-izq > *, #nav-der > * {
@@ -27,10 +35,11 @@ nav a {
 
 .contenido{
   flex: 1 0 auto;
+  background-color: #E8EAF6;
 }
 
 nav, footer {
-  background-color: #f6eded;
+  background-color: #C5CAE9;
   flex-shrink: 0;
 }
 
@@ -39,12 +48,9 @@ nav {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 15px;
-  border-bottom: 2px solid lightblue;
+  border-bottom: 2px solid #7986CB;
 }
 
-nav, footer {
-  background-color: #fafafa; /* Color Fondo nav y footer*/
-}
 
 #nav-der, #nav-izq {
   display: flex;
@@ -72,7 +78,7 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 15px;
-  border-top: 2px solid lightblue;
+  border-top: 2px solid #7986CB;
   font-size: 13px;
   flex-shrink: 0;
 }
@@ -81,7 +87,7 @@ footer {
 
 #inputBuscar, #buttonBuscar {
   background-color: white;
-  border: 1px solid lightblue;
+  border: 1px solid #7986CB;
   padding: 3px;
 }
 

@@ -1,0 +1,33 @@
+<?php
+
+require_once 'TwigView.php';
+
+class AdministracionUsuarios extends TwigView {
+
+    public function show() {
+
+        /* Usuarios hardcodeados */
+        $adm = array(
+            "nombre" => "Administrador",
+            "estado" => "Activo"
+        );
+        $blas = array(
+            "nombre" => "Blas Butera",
+            "estado" => "Bloqueado"
+        );
+        $fede = array(
+            "nombre" => "Federico Di Claudio",
+            "estado" => "Activo"
+        );
+        $pedro = array(
+            "nombre" => "Pedro Dalbianco",
+            "estado" => "Bloqueado"
+        );
+
+        $usuarios = array($adm, $blas, $fede, $pedro);
+
+        echo self::getTwig()->render('administracion-usuarios.html.twig', array('usuarios' => $usuarios));
+    }
+}
+
+?>

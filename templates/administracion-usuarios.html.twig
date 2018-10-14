@@ -1,0 +1,32 @@
+{% extends "administracion.html.twig" %}
+
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/administracion-usuarios.css">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenido">
+    <div class="contenido-de-usuarios">
+        <h1 class="titulo-contenido-de-usuarios">Usuarios</h1>
+        <div class="tabla-usuarios">
+        {% for usuario in usuarios %}
+            <a href="#" class="tarjeta-user">
+                <div class="nombreyfoto-tarjeta-user">
+                    <img class="user-image" src="recursos/user.svg" alt="Imagen user">
+                    <h1>{{usuario.nombre}}</h1>
+                </div>
+                <div class="estado-tarjeta-user">
+                    <h1>Estado:</h1>
+                    <h2>{{usuario.estado}}</h2>
+                </div>
+            </a>
+        {% endfor %}       
+        </div>
+        <a href="#" class="boton-crear">Crear usuario</a>
+
+    </div>
+</div>
+
+{% endblock %} 

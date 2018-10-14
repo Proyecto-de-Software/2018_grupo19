@@ -4,6 +4,7 @@ require 'model/SesionRepository.php';
 require 'views/Login.php';
 require 'views/Home.php';
 require 'views/Administracion.php';
+require_once 'views/AdministracionUsuarios.php';
 
 
 /*
@@ -41,6 +42,11 @@ class RooterController {
     $view->show();
   }
 
+  private function administracionUsuarios(){
+    $view = new AdministracionUsuarios();
+    $view->show();
+  }
+
   public function redireccionar($comando){
     switch ($comando) {
       case 'iniciarSesion':
@@ -52,6 +58,9 @@ class RooterController {
       break;
       case 'administracion':
       $this->administracion();
+      break;
+      case 'administracion-usuarios':
+      $this->administracionUsuarios();
       break;
       default:
         $this->home();
