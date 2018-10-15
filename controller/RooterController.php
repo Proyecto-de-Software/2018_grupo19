@@ -62,6 +62,11 @@ class RooterController {
     $view->show();
   }
 
+  private function sitioEnMantenimiento(){
+    $view = new SitioEnMantenimiento();
+    $view->show();
+  }
+
   public function redireccionar($comando){
     session_start();
     switch ($comando) {
@@ -80,6 +85,9 @@ class RooterController {
         break;
       case 'configuracion':
         $this->configuracion();
+        break;
+      case 'sitio-en-mantenimiento':
+        $this->sitioEnMantenimiento();
         break;
       default:
         $this->home();
