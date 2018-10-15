@@ -12,7 +12,7 @@
         <h1 class="titulo-contenido-de-resultados">{% block titulo %}{% endblock %}</h1>
         <div class="tabla-resultados">
         {% for resultado in resultados %}
-            <a href="#" class="tarjeta-result">
+            <a href="index.php?comando=editar-usuario&id={{resultado.id}}" class="tarjeta-result">
                 <div class="nombreyfoto-tarjeta-result">
                     <img class="result-image" src="recursos/user.svg" alt="Imagen result">
                     <h1>{{resultado.nombre}}</h1>
