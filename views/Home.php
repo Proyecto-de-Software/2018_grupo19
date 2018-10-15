@@ -4,8 +4,16 @@ require_once 'TwigView.php';
 
 class Home extends TwigView {
 
-    public function show() {
+    public function showHome() {
         echo self::getTwig()->render('home.html.twig');
+    }
+
+    public function showHomeLogueado(){
+        echo self::getTwig()->render('home-logueado.html.twig');
+    }
+
+    public function showHomeAdministrador() {
+        echo self::getTwig()->render('home-administrador.html.twig');
     }
 }
 

@@ -24,7 +24,17 @@ class RooterController {
 
   private function home(){
     $view = new Home();
-    $view->show();
+    //session_start();
+    var_dump($_SESSION);
+    if(!isset($_SESSION['id'])) {
+      $view->showHome();
+    } else {
+      if($_SESSION['id'] == 1) {
+        $view->showHomeAdministrador();
+      } else {
+        $view->showHomeLogueado();
+      }     
+    }
   }
 
   private function iniciarSesion(){
