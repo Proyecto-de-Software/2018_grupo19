@@ -26,7 +26,6 @@ class RooterController {
   private function home(){
     $view = new Home();
     //session_start();
-    var_dump($_SESSION);
     if(!isset($_SESSION['id'])) {
       $view->showHome();
     } else {
@@ -64,6 +63,7 @@ class RooterController {
   }
 
   public function redireccionar($comando){
+    session_start();
     switch ($comando) {
       case 'iniciar-sesion':
         $this->iniciarSesion();

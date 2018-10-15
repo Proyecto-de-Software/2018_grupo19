@@ -15,7 +15,6 @@ class SesionRepository extends PDORepository{
         // Hacer algo si usuario o contrasenia erroneos
       } else {
         while ($fila = $query->fetch()) {
-          session_start();
           $_SESSION['id'] = $fila["id"];
           $_SESSION['username'] = $fila['username'];
           $_SESSION['activo'] = $fila['activo'];
