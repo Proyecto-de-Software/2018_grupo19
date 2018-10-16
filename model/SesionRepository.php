@@ -12,7 +12,7 @@ class SesionRepository extends PDORepository{
       $query = $db->prepare("SELECT * FROM usuario WHERE username = ? AND password = ?");
       $query->execute(array($usuario, $contrasena));
       if (!$query) {
-        // Hacer algo si usuario o contrasenia erroneos
+        return false;
       } else {
         while ($fila = $query->fetch()) {
           $_SESSION['id'] = $fila["id"];
@@ -21,6 +21,7 @@ class SesionRepository extends PDORepository{
           $_SESSION['first_name'] = $fila['first_name'];
           $_SESSION['last_name'] = $fila['last_name'];
         }
+        return true;
       }
     }
 

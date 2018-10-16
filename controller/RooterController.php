@@ -1,11 +1,7 @@
 <?php
 
-require 'model/SesionRepository.php';
-
-foreach (glob("views/*.php") as $vista)
-{
-    require_once $vista;
-}
+require 'controller/SessionController.php';
+require 'controller/AdministradorController.php';
 
 
 /*
@@ -23,74 +19,54 @@ class RooterController {
     return self::$singleton;
   }
 
-  private function home(){
-    $view = new Home();
-    //session_start();
-    if(!isset($_SESSION['id'])) {
-      $view->showHome();
-    } else {
-      if($_SESSION['id'] == 1) {
-        $view->showHomeAdministrador();
-      } else {
-        $view->showHomeLogueado();
-      }     
-    }
-  }
-
-  private function iniciarSesion(){
-    $conexion=new SesionRepository();
-    $conexion->iniciarSesion($_POST['usuario'], $_POST['contrasena']);
-  }
-
-  private function login(){
-    $view = new Login();
-    $view->show();
-  }
-
-  private function administracion(){
-    $view = new Administracion();
-    $view->show();
-  }
-
-  private function busquedaUsuarios(){
-    $view = new BusquedaUsuarios();
-    $view->show();
-  }
-
-  private function configuracion(){
-    $view = new Configuracion();
-    $view->show();
-  }
-
-  private function sitioEnMantenimiento(){
-    $view = new SitioEnMantenimiento();
-    $view->show();
-  }
-
   public function redireccionar($comando){
+
     session_start();
+    
     switch ($comando) {
+      
+      /*
+      ** Session rotter
+      */
+
       case 'iniciar-sesion':
-        $this->iniciarSesion();
-        $this->home();
+        SessionController::singleton()->login();
         break;
+      
       case 'login':
-        $this->login();
+        SessionController::singleton()->redireccionarLogin();
         break;
-      case 'administracion':
-        $this->administracion();
+
+      case 'cerrar-session':
+        SessionController::singleton()->closeSession();
         break;
-      case 'busqueda-usuarios':
-        $this->busquedaUsuarios();
-        break;
+
+      /*
+      ** Administrador rooter
+      */
+      
       case 'configuracion':
-        $this->configuracion();
+        AdministradorController::singleton()->redireccionarConfiguracion();
         break;
+      
       case 'sitio-en-mantenimiento':
-        $this->sitioEnMantenimiento();
+        AdministradorController::singleton()->redireccionarSitioEnMantenimiento();
         break;
+
+      /*
+      ** Usuarios rooter
+      */ 
+
+      case 'busqueda-usuarios':
+        UsuarioController::singleton()->redireccionarBusquedaUsuarios();
+        break;
+
+      /*
+      ** Default
+      */
+      
       default:
-        $this->home();
+        SessionController::singleton()->redireccionarHome();
         break;
     }
   }
