@@ -9,7 +9,9 @@ foreach (glob("views/*.php") as $vista)
     require_once $vista;
 }
 
-class UsuarioController {
+include 'model/UsuariosRepository.php';
+
+class UsuarioController{
 
     private static $singleton;
 
@@ -22,7 +24,12 @@ class UsuarioController {
     }
 
     public function redireccionarBusquedaUsuarios(){
-        $view = new BusquedaUsuarios();
-        $view->show();
+        if(UsuariosRepository::singleton()->chequearPermiso('users_index', $_SESSION['id'])) {
+            $view = new BusquedaUsuarios();
+            $view->show();
+        } else {
+            // Redireccion pantalla de falta de permisos
+            echo 'Error de permisos';
+        }
     }
 }

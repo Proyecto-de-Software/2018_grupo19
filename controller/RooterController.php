@@ -2,6 +2,7 @@
 
 require 'controller/SessionController.php';
 require 'controller/AdministradorController.php';
+require 'controller/UsuarioController.php';
 
 
 /*

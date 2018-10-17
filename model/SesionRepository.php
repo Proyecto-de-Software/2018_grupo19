@@ -3,7 +3,7 @@
 /*
     Clase que realiza las consultas sobre la BD y crea los objetos (Para manejo de sesiones)
 */
-require 'PDORepository.php';
+require 'model/PDORepository.php';
 
 class SesionRepository extends PDORepository{
 
