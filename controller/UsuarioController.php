@@ -32,4 +32,22 @@ class UsuarioController{
             echo 'Error de permisos';
         }
     }
+
+    public function buscarUsername($pagina) {
+        if(UsuariosRepository::singleton()->chequerPermiso('users_index', $_SESSION['id'])) {
+            
+        } else {
+            // Redireccion pantalla de falta de permisos
+            echo 'Error de permisos';
+        }
+    }
+
+    public function buscarEstado($pagina) {
+        if(UsuariosRepository::singleton()->chequerPermiso('users_index', $_SESSION['id'])) {
+            
+        } else {
+            // Redireccion pantalla de falta de permisos
+            echo 'Error de permisos';
+        }
+    }
 }

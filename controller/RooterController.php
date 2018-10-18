@@ -87,6 +87,14 @@ class RooterController {
         case 'busqueda-usuarios':
           UsuarioController::singleton()->redireccionarBusquedaUsuarios();
           break;
+
+        case 'buscar-username':
+          UsuarioController::singleton()->buscarUsername(isset($_GET["numero-pagina"]) ? (int)$_GET["numero-pagina"]: 0);
+          break;
+
+        case 'buscar-estado':
+          UsuarioController::singleton()->buscarEstado(isset($_GET["numero-pagina"]) ? (int)$_GET["numero-pagina"]: 0);
+          break;
   
         /*
         ** Default
