@@ -12,6 +12,7 @@ class PDORepository {
         try {
           $this->dataBase = new PDO('mysql:host=localhost;dbname=grupo19', 'grupo19', 'NThlNWI1NWEwYjNi');
         } catch (PDOException $e) {
+          //Manejar error de DB
           echo "Error: " . $e->getMessage() . "<br/>";
           die();
         }
