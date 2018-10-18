@@ -54,5 +54,9 @@ class SessionController {
         $view = new Home();
         $view->showHome();
     }
+
+    public function redireccionarLoginObligatorio() {
+        // Nothing
+    }
     
 }

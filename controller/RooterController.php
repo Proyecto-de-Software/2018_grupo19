@@ -24,51 +24,84 @@ class RooterController {
 
     session_start();
     
-    switch ($comando) {
+    if(!isset($_SESSION["id"])) {
+
+      switch ($comando) {
+
+        case 'iniciar-sesion':
+          SessionController::singleton()->login();
+          break;
       
-      /*
-      ** Session rotter
-      */
+        case 'login':
+          SessionController::singleton()->redireccionarLogin();
+          break;
 
-      case 'iniciar-sesion':
-        SessionController::singleton()->login();
-        break;
+        case '':
+          SessionController::singleton()->redireccionarHome();
+          break;
+
+        default:
+          SessionController::singleton()->redireccionarLoginObligatorio();
+          break;
+
+      }
+
+    } else {
+
+      switch ($comando) {
       
-      case 'login':
-        SessionController::singleton()->redireccionarLogin();
-        break;
-
-      case 'cerrar-session':
-        SessionController::singleton()->closeSession();
-        break;
-
-      /*
-      ** Administrador rooter
-      */
+        /*
+        ** Session rotter
+        */
+  
+        case 'iniciar-sesion':
+          // MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
+          echo 'Session ya iniciada';
+          break;
       
-      case 'configuracion':
-        AdministradorController::singleton()->redireccionarConfiguracion();
-        break;
-      
-      case 'sitio-en-mantenimiento':
-        AdministradorController::singleton()->redireccionarSitioEnMantenimiento();
-        break;
+        case 'login':
+          // MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
+          echo 'Session ya iniciada';
+          break;
 
-      /*
-      ** Usuarios rooter
-      */ 
+        case 'cerrar-session':
+          SessionController::singleton()->closeSession();
+          break;
+  
+        /*
+        ** Administrador rooter
+        */
+        
+        case 'configuracion':
+          AdministradorController::singleton()->redireccionarConfiguracion();
+          break;
+        
+        case 'sitio-en-mantenimiento':
+          AdministradorController::singleton()->redireccionarSitioEnMantenimiento();
+          break;
+  
+        /*
+        ** Usuarios rooter
+        */ 
+  
+        case 'busqueda-usuarios':
+          UsuarioController::singleton()->redireccionarBusquedaUsuarios();
+          break;
+  
+        /*
+        ** Default
+        */
 
-      case 'busqueda-usuarios':
-        UsuarioController::singleton()->redireccionarBusquedaUsuarios();
-        break;
+        case '':
+          SessionController::singleton()->redireccionarHome();
+          break;
+        
+        default:
+          // MODIFICAR: ACA DEBERIA TIRAR ERROR
+          SessionController::singleton()->redireccionarHome();
+          break;
+      }
 
-      /*
-      ** Default
-      */
-      
-      default:
-        SessionController::singleton()->redireccionarHome();
-        break;
     }
   }
 }

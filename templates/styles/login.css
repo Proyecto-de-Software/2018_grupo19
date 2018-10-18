@@ -33,3 +33,7 @@
 #boton-iniciar-sesion:hover{
   background-color: lightblue;
 }
+
+.error-no-session {
+  color:red;
+}
