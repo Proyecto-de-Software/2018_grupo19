@@ -11,7 +11,7 @@ class SesionRepository extends PDORepository{
       $db = $this->conectarse();
       $query = $db->prepare("SELECT * FROM usuario WHERE username = ? AND password = ?");
       $query->execute(array($usuario, $contrasena));
-      if (!$query) {
+      if ($query->rowCount() == 0) {
         return false;
       } else {
         while ($fila = $query->fetch()) {
