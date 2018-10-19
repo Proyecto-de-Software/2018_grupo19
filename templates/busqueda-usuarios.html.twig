@@ -16,6 +16,18 @@
 {% block contenido %}
 
 <div class="contenido">
+    {% block busqueda %}
+        <form class="formulario-busqueda" action="index.php" method="get">
+            <input type="hidden" name="comando" value="busqueda-usuarios">
+            <input type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar..">
+            <select name="estado">
+                <option value=""></option>
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
+            </select>
+            <input type="submit" value="Filtrar">
+        </form>
+    {% endblock %}
     <div class="panel-principal">
         <h1 class="titulo-contenido-de-usuarios">Usuarios</h1>
         <div class="tabla-usuarios">

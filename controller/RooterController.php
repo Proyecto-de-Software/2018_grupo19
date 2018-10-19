@@ -55,12 +55,12 @@ class RooterController {
         */
 
         case 'iniciar-sesion':
-           MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
+          //MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
           echo 'Session ya iniciada';
           break;
 
         case 'login':
-           MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
+          //MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
           echo 'Session ya iniciada';
           break;
 
@@ -91,7 +91,7 @@ class RooterController {
         case 'creacion-usuario':
           UsuarioController::singleton()->redireccionarCreacionUsuario();
           break;
-  
+
         case 'buscar-username':
           UsuarioController::singleton()->buscarUsername(isset($_GET["numero-pagina"]) ? (int)$_GET["numero-pagina"]: 0);
           break;

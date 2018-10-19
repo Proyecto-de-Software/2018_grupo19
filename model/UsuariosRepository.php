@@ -26,7 +26,7 @@ class UsuariosRepository extends PDORepository {
         return ($query->rowCount() == 0);
     }
 
-    public function usuarios($estado = null,$nombreUsuario = null) {
+    public function usuarios($nombreUsuario = null, $estado = null) {
       $db = $this->conectarse();
 
       $sql = "SELECT * FROM usuario u";
@@ -45,7 +45,7 @@ class UsuariosRepository extends PDORepository {
           array_push($parametros,$nombreUsuario.'%');
         }
       }
-
+      
       $query = $db->prepare($sql);
       $query->execute($parametros);
 
