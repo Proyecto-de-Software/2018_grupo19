@@ -35,15 +35,11 @@
             <h2>Configuración del sitio</h2>
             <div class="label-input">
                 <label>Cantidad de elementos por página:</label>
-                <select class="inputf" name="cantidad">
-                    {% for i in 1..10 %}
-                      <option value={{i}} {% if i == cantElementos %} selected {% endif %} >{{i}}</option>
-                    {% endfor %}
-                </select>
+                <input type="number" name="cantidad" value="{{cantidad}}">
             </div>
             <div class="label-input">
                 <label>Sitio web deshabilitado:</label>
-                <input class="inputf checkb" {% if deshabilitado %} checked {% endif %}type="checkbox" name="estadoDelSitio">
+                <input class="inputf checkb" {% if estadoDelSitio %} checked {% endif %}type="checkbox" name="estadoDelSitio">
             </div>
         </form>
         <button type="submit" form="formulario" class="boton-panel-principal">Guardar cambios</button>

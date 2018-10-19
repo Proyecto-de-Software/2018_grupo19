@@ -27,7 +27,7 @@ class ConfiguracionRepository extends PDORepository {
       $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'cantidad'");
       $query->execute(array($cantidad));
       $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'estadoDelSitio'");
-      $query->execute(array($estadoDelSitio));
+      $query->execute(array($estadoDelSitio? 1:0));
       return true;
     } catch (Exception $e) {
       return false;
