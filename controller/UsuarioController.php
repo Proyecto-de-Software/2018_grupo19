@@ -1,5 +1,4 @@
-997
-  <?php
+<?php
 
 /*
 **  Controladores relacionados a tareas especificas a realizar con el usuario
