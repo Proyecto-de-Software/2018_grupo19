@@ -5,12 +5,20 @@
     <link rel="stylesheet" href="templates/styles/configuracion.css">
 {% endblock %}
 
+{% block nav_equipodeguardia %}
+    {# sin implementar #}
+{% endblock %}
+
+{% block nav_sinloguear %}
+    {# sin implementar #}
+{% endblock %}
+
 {% block contenido %}
 
 <div class="contenido">
-    <div class="panel-conf">
-        <h1>Configuración</h1>
-        <form class="form-conf" action="#">
+    <div class="panel-principal">
+        <form class="formulario-principal" action="#" id="formulario">
+            <h1>Configuración</h1>
             <h2>Información del hospital</h2>
             <div class="label-input">
                 <label>Título: </label>
@@ -38,7 +46,7 @@
                 <input class="inputf checkb" {% if deshabilitado %} checked {% endif %}type="checkbox">
             </div>
         </form>
-        <button class="boton-guardar">Guardar cambios</button>
+        <button type="submit" form="formulario" class="boton-panel-principal">Guardar cambios</button>
     </div>
 </div>
 

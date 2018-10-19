@@ -1,5 +1,39 @@
-{% extends "busqueda-abstracta.html.twig" %}
+{% extends "layout.html.twig" %}
 
-{% block titulo %}Usuario{% endblock %}
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/busqueda-usuarios.css">
+{% endblock %}
 
-{% block tituloCreacion %}usuario{% endblock %}
+{% block nav_equipodeguardia %}
+{# no se implementa #}
+{% endblock %}
+
+{% block nav_sinloguear %}
+{# no se implementa #}
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenido">
+    <div class="panel-principal">
+        <h1 class="titulo-contenido-de-usuarios">Usuarios</h1>
+        <div class="tabla-usuarios">
+        {% for resultado in resultados %}
+            <a href="index.php?comando=editar-usuario&id={{resultado.id}}" class="tarjeta-usuario">
+                <div class="nombreyfoto-tarjeta-usuario">
+                    <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
+                    <h1>{{resultado.nombre}}</h1>
+                </div>
+                <div class="estado-tarjeta-usuario">
+                    <h1>Estado:</h1>
+                    <h2>{{resultado.estado}}</h2>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+        <button class="boton-panel-principal">Crear usuario</button>
+    </div>
+</div>
+
+{% endblock %}

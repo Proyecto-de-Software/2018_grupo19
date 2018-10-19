@@ -55,12 +55,12 @@ class RooterController {
         */
   
         case 'iniciar-sesion':
-          // MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
+           MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
           echo 'Session ya iniciada';
           break;
       
         case 'login':
-          // MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
+           MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
           echo 'Session ya iniciada';
           break;
 
@@ -86,6 +86,10 @@ class RooterController {
   
         case 'busqueda-usuarios':
           UsuarioController::singleton()->redireccionarBusquedaUsuarios();
+          break;
+
+        case 'creacion-usuario':
+          UsuarioController::singleton()->redireccionarCreacionUsuario();
           break;
   
         /*

@@ -10,18 +10,28 @@
   </head>
   <body>
     <nav>
-      <div id="nav-izq">
-        {% block nav_izq %}
-        <a id="link-inicio" href="index.php">
+      <a id="link-inicio" href="index.php">
           <img id="logo" src="recursos/logo_hospital.svg" alt="Logo">
           <p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
-        </a>
-        {% endblock %}
+      </a>
+      {% block nav_administrador %}
+      <div class="dropdown">
+        <a href="#">Administración</a>
+          <ul class="dropdown-items">
+            <li><a href="index.php?comando=busqueda-usuarios">Usuarios</a></li>
+            <li><a href="index.php?comando=configuracion">Configuracion</a></li>
+        </ul>
       </div>
-      <div id="nav-der">
-        {% block nav_der %}
-        {% endblock %}
-      </div>
+      {% endblock %}
+
+      {% block nav_equipodeguardia %}
+        <a href="#">Pacientes</a>
+      </a>
+      {% endblock %}
+
+      {% block nav_sinloguear %}
+      <a href="index.php?comando=login">Iniciar sesión</a>
+      {% endblock %}
 
     </nav>
         {% block contenido %}

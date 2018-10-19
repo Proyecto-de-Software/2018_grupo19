@@ -1,0 +1,64 @@
+.tarjeta-usuario {
+    display: flex;
+    border: 0.5px solid;
+    width: 600px; /*se achica responsive*/
+    height: 60px;
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #fafafa;
+    color:black;
+}
+
+.tarjeta-usuario:visited, .tarjeta-usuario:active{
+    color:black;
+}
+
+.tarjeta-usuario:hover{
+    background-color: lightblue;
+}
+
+.tarjeta-usuario h1,h2 {
+    margin: 0;
+}
+
+.tarjeta-usuario h1{
+    font-size: 0.8em;
+}
+
+.tarjeta-usuario h2{
+    font-size: 0.8em;
+}
+
+.usuario-image {
+    height: 40px;
+    width: 40px;
+    margin-right: 15px;
+}
+
+.nombreyfoto-tarjeta-usuario{
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+}
+
+.estado-tarjeta-usuario{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.tabla-usuarios {
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 768px){
+    .tarjeta-usuario {
+        width: 400px;
+    }
+}

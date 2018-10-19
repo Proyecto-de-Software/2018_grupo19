@@ -5,7 +5,7 @@ require_once 'TwigView.php';
 class Home extends TwigView {
 
     public function showHome() {
-        echo self::getTwig()->render('home.html.twig');
+        echo self::getTwig()->render('home-sin-loguear.html.twig');
     }
 
     public function showHomeLogueado(){
