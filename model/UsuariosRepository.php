@@ -26,12 +26,31 @@ class UsuariosRepository extends PDORepository {
         return ($query->rowCount() == 0);
     }
 
-    public function usuarios() {
+    public function usuarios($estado = null,$nombreUsuario = null) {
       $db = $this->conectarse();
 
-      $query = $db->prepare("SELECT * FROM usuario u");
-      $query->execute();
-      
+      $sql = "SELECT * FROM usuario u";
+      $parametros = array();
+
+      if ($estado != null){
+        $sql = $sql." WHERE u.activo = ?";
+        array_push($parametros,$estado);
+        if ($nombreUsuario != null){
+          $sql = $sql." AND u.username LIKE ?";
+          array_push($parametros,$nombreUsuario.'%');
+        }
+      } else {
+        if ($nombreUsuario != null){
+          $sql = $sql." WHERE u.username LIKE ?";
+          array_push($parametros,$nombreUsuario.'%');
+        }
+      }
+
+      $query = $db->prepare($sql);
+      $query->execute($parametros);
+
       return (array_map('Usuario::generarDesdeBD',$query->fetchAll()));
     }
+
+
 }
