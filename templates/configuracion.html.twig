@@ -17,33 +17,33 @@
 
 <div class="contenido">
     <div class="panel-principal">
-        <form class="formulario-principal" action="#" id="formulario">
+        <form class="formulario-principal" action="index.php?comando=cambio-configuracion" method="post" id="formulario">
             <h1>Configuración</h1>
             <h2>Información del hospital</h2>
             <div class="label-input">
                 <label>Título: </label>
-                <input class="inputf" type="text" value={{titulo}}>
+                <input class="inputf" type="text" value={{titulo}} name="titulo">
             </div>
             <div class="label-input">
                 <label>Mail de contacto:</label>
-                <input class="inputf" type="text" value={{mail}}>
+                <input class="inputf" type="text" value={{mail}} name="mail" >
             </div>
             <div class="label-input">
                 <label>Descripción:</label>
-                <textarea class="inputf" cols="21" rows="5">{{desc}}</textarea>
+                <textarea class="inputf" cols="21" rows="5" name="descripcion">{{descripcion}} </textarea>
             </div>
             <h2>Configuración del sitio</h2>
             <div class="label-input">
                 <label>Cantidad de elementos por página:</label>
-                <select class="inputf">
+                <select class="inputf" name="cantidad">
                     {% for i in 1..10 %}
-                      <option value={{i}} {% if i == cantElementos %} selected {% endif %} >{{i}}</option>  
+                      <option value={{i}} {% if i == cantElementos %} selected {% endif %} >{{i}}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="label-input">
                 <label>Sitio web deshabilitado:</label>
-                <input class="inputf checkb" {% if deshabilitado %} checked {% endif %}type="checkbox">
+                <input class="inputf checkb" {% if deshabilitado %} checked {% endif %}type="checkbox" name="estadoDelSitio">
             </div>
         </form>
         <button type="submit" form="formulario" class="boton-panel-principal">Guardar cambios</button>

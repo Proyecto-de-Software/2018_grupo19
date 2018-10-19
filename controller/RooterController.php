@@ -80,6 +80,10 @@ class RooterController {
           AdministradorController::singleton()->redireccionarSitioEnMantenimiento();
           break;
 
+        case 'cambio-configuracion':
+          AdministradorController::singleton()->actualizarConfiguracion();
+          break;
+
         /*
         ** Usuarios rooter
         */

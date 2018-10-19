@@ -27,17 +27,6 @@ class UsuarioController{
         if(UsuariosRepository::singleton()->chequearPermiso('users_index', $_SESSION['id'])) {
             $view = new BusquedaUsuarios();
             $view->show(UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null,isset($_GET['estado'])? $_GET['estado']:null));
-
-            /* usuarios hardcodeados para pruebas
-
-            $blas = new Usuario(0,'blasbutera69@gmail.com','blas', true, '10/10/2018','10/10/2019','Blas','Butera');
-            $fede = new Usuario(1,'federicodicla@gmail.com','fede', true, '10/10/2018','10/10/2019','Federico','Diclaudio');
-            $pedro = new Usuario(2,'pedrodalb@gmail.com','pedro', true, '10/10/2018','10/10/2019','Pedro','Dalbianco');
-            $usuarios = array ($blas, $fede, $pedro);
-
-
-            //$view->show($usuarios);*/
-
         } else {
             // Redireccion pantalla de falta de permisos
             echo 'Error de permisos';
@@ -47,25 +36,5 @@ class UsuarioController{
     public function redireccionarCreacionUsuario(){
         $view = new CreacionUsuario();
         $view->show();
-    }
-
-
-    //Creo que no son necesarias las funciones de busqueda        Firma: el Barto
-    public function buscarUsername($pagina) {
-        if(UsuariosRepository::singleton()->chequerPermiso('users_index', $_SESSION['id'])) {
-
-        } else {
-            // Redireccion pantalla de falta de permisos
-            echo 'Error de permisos';
-        }
-    }
-
-    public function buscarEstado($pagina) {
-        if(UsuariosRepository::singleton()->chequerPermiso('users_index', $_SESSION['id'])) {
-
-        } else {
-            // Redireccion pantalla de falta de permisos
-            echo 'Error de permisos';
-        }
     }
 }

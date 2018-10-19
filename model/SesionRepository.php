@@ -7,6 +7,8 @@ require 'model/PDORepository.php';
 
 class SesionRepository extends PDORepository{
 
+    // AGREGAR UN SINGLETON
+
     public function iniciarSesion($usuario, $contrasena) {
       $db = $this->conectarse();
       $query = $db->prepare("SELECT * FROM usuario WHERE username = ? AND password = ?");

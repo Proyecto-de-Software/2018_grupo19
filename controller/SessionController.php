@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
 **  Controladores relacionados al manejo de sesiones
 */
 
@@ -12,7 +12,7 @@ foreach (glob("views/*.php") as $vista)
 }
 
 class SessionController {
-    
+
     private static $singleton;
 
     // Metodo para acceder al singleton
@@ -28,11 +28,12 @@ class SessionController {
         if(!isset($_SESSION['id'])) {
           $view->showHome();
         } else {
+          //Chequear administrador
           if($_SESSION['id'] == 1) {
             $view->showHomeAdministrador();
           } else {
             $view->showHomeLogueado();
-          }     
+          }
         }
       }
 
@@ -58,5 +59,5 @@ class SessionController {
     public function redireccionarLoginObligatorio() {
         // Nothing
     }
-    
+
 }

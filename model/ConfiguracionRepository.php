@@ -1,0 +1,56 @@
+<?php
+
+require_once 'model/PDORepository.php';
+
+class ConfiguracionRepository extends PDORepository {
+
+  private static $singleton;
+
+  // Metodo para acceder al singleton
+  public static function singleton() {
+      if(!isset(self::$singleton)){
+          self::$singleton = new self();
+      }
+      return self::$singleton;
+  }
+
+
+  public function actualizarConfiguracion($titulo, $mail, $descripcion, $cantidad, $estadoDelSitio) {
+    try {
+      $db = $this->conectarse();
+      $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'titulo'");
+      $query->execute(array($titulo));
+      $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'mail'");
+      $query->execute(array($mail));
+      $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'descripcion'");
+      $query->execute(array($descripcion));
+      $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'cantidad'");
+      $query->execute(array($cantidad));
+      $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'estadoDelSitio'");
+      $query->execute(array($estadoDelSitio));
+      return true;
+    } catch (Exception $e) {
+      return false;
+    }
+  }
+
+  public function getConfiguracion() {
+    try {
+      $db = $this->conectarse();
+      $query = $db->prepare("SELECT * FROM configuracion");
+      $query->execute();
+      return $this->parseResultado($query->fetchAll());
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  private function parseResultado($arreglo) {
+    $arregloParseado = array();
+    foreach ($arreglo as $key => $value) {
+      $arregloParseado[$value[1]] = $value[2];
+    }
+    return $arregloParseado;
+  }
+
+}
