@@ -45,11 +45,21 @@ class UsuariosRepository extends PDORepository {
           array_push($parametros,$nombreUsuario.'%');
         }
       }
-      
+
       $query = $db->prepare($sql);
       $query->execute($parametros);
 
       return (array_map('Usuario::generarDesdeBD',$query->fetchAll()));
+    }
+
+    public function usuario($id) {
+      $db = $this->conectarse();
+
+      $sql = "SELECT * FROM usuario u WHERE u.id = ?";
+      $query = $db->prepare($sql);
+      $query->execute(array($id));
+
+      return $query->fetch();
     }
 
 
