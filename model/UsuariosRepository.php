@@ -44,16 +44,16 @@ class UsuariosRepository extends PDORepository {
       return $query->fetch();
     }
 
-    public function crearUsuario($email,$username,$password,$activo,$updated_at,$created_at,$first_name,$last_name) {
+    public function crearUsuario($email,$username,$password,$activo,$first_name,$last_name) {
       $db = $this->conectarse();
-      $sql = "INSERT INTO `usuario` (`email`, `username`, `password`, `activo`, `updated_at`, `created_at`, `first_name`, `last_name`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO `usuario` (`id`, `email`, `username`, `password`, `activo`, `updated_at`, `created_at`, `first_name`, `last_name`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
       $query = $db->prepare($sql);
       $query->execute(array($email,$username,$password,$activo,date("Y-m-d H:i:s"),date("Y-m-d H:i:s"),$first_name,$last_name));
     }
 
-    public function updateUsuario($id,$email,$username,$activo,$first_name,$last_name) {
+    public function actualizarUsuario($id,$email,$activo,$first_name,$last_name) {
       $db = $this->conectarse();
-      $sql = "UPDATE `usuario` SET `email` = ?, `activo` = ?, `updated_at` = ?, `first_name` = ?, `last_name` = ?";
+      $sql = "UPDATE `usuario` SET `email` = ?, `activo` = ?, `updated_at` = ?, `first_name` = ?, `last_name` = ? WHERE usuario.id = $id";
       $query = $db->prepare($sql);
       $query->execute(array($email,$activo,date("Y-m-d H:i:s"),$first_name,$last_name));
     }

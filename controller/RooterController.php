@@ -13,7 +13,9 @@ class RooterController extends Controller{
 
   public function redireccionar($comando){
 
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     if(!isset($_SESSION["id"])) {
 
@@ -86,23 +88,22 @@ class RooterController extends Controller{
         case 'creacion-usuario':
           UsuarioController::singleton()->redireccionarCreacionUsuario();
           break;
-        
+
+        case 'insertar-usuario':
+          UsuarioController::singleton()->insertarUsuario();
+          break;
+
         case 'edicion-usuario':
           UsuarioController::singleton()->redireccionarEdicionUsuario();
           break;
-        
+
         case 'info-usuario':
           UsuarioController::singleton()->redireccionarInfoUsuario();
           break;
 
-        case 'buscar-username':
-          UsuarioController::singleton()->buscarUsername(isset($_GET["numero-pagina"]) ? (int)$_GET["numero-pagina"]: 0);
+        case 'actualizar-usuario':
+          UsuarioController::singleton()->actualizarUsuario();
           break;
-
-        case 'buscar-estado':
-          UsuarioController::singleton()->buscarEstado(isset($_GET["numero-pagina"]) ? (int)$_GET["numero-pagina"]: 0);
-          break;
-
         /*
         ** Default
         */

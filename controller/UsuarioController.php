@@ -5,6 +5,7 @@
 */
 
 require_once 'model/UsuariosRepository.php';
+require_once 'controller/RooterController.php';
 
 class UsuarioController extends Controller{
 
@@ -30,17 +31,11 @@ class UsuarioController extends Controller{
 
     public function redireccionarInfoUsuario(){
 
-        /* hardcodeado user que llegaría del modelo */
+        /* hardcodeados los roles que llegaría del modelo */
 
         $roles = array ('Administrador', 'Equipo de guardia');
 
-        $usuario = array(
-            'roles' => $roles,
-            'nombre' => 'Juan',
-            'apellido' => 'Pelotas',
-            'email' => 'JuanPelotas@gmail.com',
-            'estado' => 'Bloqueado'
-        );
+        $usuario = UsuariosRepository::singleton()->usuario($_GET['id']);
 
         $view = New InfoUsuario();
         $view->show($usuario);
@@ -48,20 +43,24 @@ class UsuarioController extends Controller{
 
     public function redireccionarEdicionUsuario(){
 
-        /* hardcodeado user para editar */
+        /* hardcodeados los roles para editar */
 
         $todosLosRoles = array ('Administrador', 'Equipo de guardia');
         $roles = array ('Equipo de guardia');
 
-        $usuario = array(
-            'roles' => $roles,
-            'nombre' => 'Juan',
-            'apellido' => 'Pelotas',
-            'email' => 'JuanPelotas@gmail.com',
-            'estado' => 'Bloqueado'
-        );
+        $usuario = UsuariosRepository::singleton()->usuario($_GET['id']);
 
         $view = New EdicionUsuario();
         $view->show($usuario, $todosLosRoles);
+    }
+
+    public function insertarUsuario(){
+      UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido']);
+      RooterController::singleton()->redireccionar('busqueda-usuarios');
+    }
+
+    public function actualizarUsuario(){
+      UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido']);
+      RooterController::singleton()->redireccionar('busqueda-usuarios');
     }
 }

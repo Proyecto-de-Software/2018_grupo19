@@ -12,15 +12,15 @@
 
 <div class="contenido">
     <div class="panel-principal">
-        <h1>{{usuario.nombre}} {{ usuario.apellido }}</h1>
+        <h1>{{usuario.first_name}} {{ usuario.last_name }}</h1>
         <p><strong>Email:</strong> {{usuario.email}}</p>
-        <p><strong>Estado:</strong> {{usuario.estado}}</p>
+        <p><strong>Estado:</strong> {% if usuario.activo == 1 %}Activo{% else %}Bloqueado{% endif %}</p>
         <h2>Roles</h2>
         {% for rol in usuario.roles %}
             <p>{{rol}}</p>
         {% endfor %}
     <div class="botones">
-    <button class="boton-panel-principal">Editar usuario</button>
+    <button class="boton-panel-principal" onclick="location.href='index.php?comando=edicion-usuario&id={{usuario.id}}'" >Editar usuario</button>
     <button class="boton-panel-principal">Borrar usuario</button>
     </div>
     </div>
