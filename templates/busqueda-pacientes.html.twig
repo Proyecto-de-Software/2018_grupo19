@@ -1,5 +1,42 @@
-{% extends "busqueda-abstracta.html.twig" %}
+{% extends "layout.html.twig" %}
 
-{% block titulo %}Paciente{% endblock %}
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/busqueda-usuarios.css">
+{% endblock %}
 
-{% block tituloCreacion %}paciente{% endblock %}
+{% block nav_equipodeguardia %}
+{# no se implementa #}
+{% endblock %}
+
+{% block nav_sinloguear %}
+{# no se implementa #}
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenido">
+    {% block busqueda %}
+        {# historia clinica, o apellido #}
+    {% endblock %}
+    <div class="panel-principal">
+        <h1 class="titulo-contenido-de-usuarios">Pacientes</h1>
+        <div class="tabla-usuarios">
+        {% for resultado in resultados %}
+            <a href="index.php?comando=info-usuario&id={{resultado.id}}" class="tarjeta-usuario">
+                <div class="nombreyfoto-tarjeta-usuario">
+                    <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
+                    <h1>{{resultado.first_name}}</h1>
+                </div>
+                <div class="estado-tarjeta-usuario">
+                    <h1>Estado:</h1>
+                    <h2>{% if resultado.activo == 1 %}Activo{% else %}Bloqueado{% endif %}</h2>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+        <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente'" >Crear usuario</button>
+    </div>
+</div>
+
+{% endblock %}

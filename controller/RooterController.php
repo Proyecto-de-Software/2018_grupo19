@@ -4,6 +4,7 @@ require_once 'controller/Controller.php';
 require_once 'controller/SessionController.php';
 require_once 'controller/AdministradorController.php';
 require_once 'controller/UsuarioController.php';
+require_once 'controller/PacienteController.php';
 
 /*
     Clase que se encarga del rooteo
