@@ -4,16 +4,14 @@ require_once 'TwigView.php';
 
 class Home extends TwigView {
 
-    public function showHome() {
+    public function show($parametrosDeSesion) {
+      if (!$parametrosDeSesion['logueado']) {
         echo self::getTwig()->render('home-sin-loguear.html.twig');
-    }
-
-    public function showHomeLogueado(){
+      } elseif (!$parametrosDeSesion['administrador']) {
         echo self::getTwig()->render('home-logueado.html.twig');
-    }
-
-    public function showHomeAdministrador() {
+      } else {
         echo self::getTwig()->render('home-administrador.html.twig');
+      }
     }
 }
 

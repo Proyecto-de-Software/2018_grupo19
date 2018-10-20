@@ -3,26 +3,14 @@
 /*
 **  Controladores relacionados al manejo de sesiones
 */
+require_once 'model/SesionRepository.php';
+require_once 'controller/RooterController.php';
 
 class SessionController extends Controller{
 
-    public function redireccionarHome(){
-        $view = new Home();
-        if(!isset($_SESSION['id'])) {
-          $view->showHome();
-        } else {
-          //Chequear administrador
-          if($_SESSION['id'] == 1) {
-            $view->showHomeAdministrador();
-          } else {
-            $view->showHomeLogueado();
-          }
-        }
-      }
-
     public function login(){
         if(SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
-            $this->redireccionarHome();
+            RooterController::singleton()->redireccionar('');
         } else {
             // Codigo en caso de inicio incorrecto
         }
@@ -36,10 +24,6 @@ class SessionController extends Controller{
     public function closeSession() {
         $view = new Home();
         $view->showHome();
-    }
-
-    public function redireccionarLoginObligatorio() {
-        // Nothing
     }
 
 }

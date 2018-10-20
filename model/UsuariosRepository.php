@@ -36,11 +36,9 @@ class UsuariosRepository extends PDORepository {
 
     public function usuario($id) {
       $db = $this->conectarse();
-
       $sql = "SELECT * FROM usuario u WHERE u.id = ?";
       $query = $db->prepare($sql);
       $query->execute(array($id));
-
       return $query->fetch();
     }
 

@@ -11,11 +11,11 @@ class PacientesRepository extends PDORepository {
       $query->execute(array($apellido, $nombre, $fecha_nac, $lugar_nac, $localidad_id, $region_sanitaria_id, $domicilio, $genero_id, $tiene_documento, $tipo_doc_id, $numero, $tel, $nro_historia_clinica, $nro_carpeta, $obra_social_id));
     }
 
-    public function updatePaciente($id,$email,$username,$activo,$first_name,$last_name) {//No implementada, copiada de usuarios
+    public function actualizarPaciente($id, $apellido, $nombre, $fecha_nac, $lugar_nac, $localidad_id, $region_sanitaria_id, $domicilio, $genero_id, $tiene_documento, $tipo_doc_id, $numero, $tel, $nro_historia_clinica, $nro_carpeta, $obra_social_id) {
       $db = $this->conectarse();
-      $sql = "UPDATE usuario SET email = ?, activo = ?, updated_at = ?, first_name = ?, last_name = ?";
+      $sql = "UPDATE paciente SET apellido=?, nombre=?, fecha_nac=?, lugar_nac=?, localidad_id=?, region_sanitaria_id=?, domicilio=?, genero_id=?, tiene_documento=?, tipo_doc_id=?, numero=?, tel=?, nro_historia_clinica=?, nro_carpeta=?, obra_social_id=? WHERE paciente.id = $id";
       $query = $db->prepare($sql);
-      $query->execute(array($email,$activo,date("Y-m-d H:i:s"),$first_name,$last_name));
+      $query->execute(array($apellido, $nombre, $fecha_nac, $lugar_nac, $localidad_id, $region_sanitaria_id, $domicilio, $genero_id, $tiene_documento, $tipo_doc_id, $numero, $tel, $nro_historia_clinica, $nro_carpeta, $obra_social_id));
     }
 
     public function pacientes($historia_clinica = null, $apellido = null, $nombre = null, $documento = null, $tipo_doc = null) {
@@ -50,5 +50,13 @@ class PacientesRepository extends PDORepository {
       $query->execute($parametros);
 
       return $query->fetchAll();
+    }
+
+    public function paciente($id) {
+      $db = $this->conectarse();
+      $sql = "SELECT * FROM paciente p WHERE p.id = ?";
+      $query = $db->prepare($sql);
+      $query->execute(array($id));
+      return $query->fetch();
     }
 }

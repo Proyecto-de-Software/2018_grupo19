@@ -12,6 +12,11 @@ require_once 'controller/PacienteController.php';
 
 class RooterController extends Controller{
 
+  public function home($logueado = false, $username = null, $administrador = false){
+    $view = new Home();
+    $view->show(array('logueado'=>$logueado,'username'=>$username,'administrador'=>$administrador));
+  }
+
   public function redireccionar($comando){
 
     if (session_status() == PHP_SESSION_NONE) {
@@ -30,12 +35,8 @@ class RooterController extends Controller{
           SessionController::singleton()->redireccionarLogin();
           break;
 
-        case '':
-          SessionController::singleton()->redireccionarHome();
-          break;
-
         default:
-          SessionController::singleton()->redireccionarLoginObligatorio();
+          $this->home();
           break;
 
       }
@@ -47,16 +48,6 @@ class RooterController extends Controller{
         /*
         ** Session rooter
         */
-
-        case 'iniciar-sesion':
-          //MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
-          echo 'Session ya iniciada';
-          break;
-
-        case 'login':
-          //MODIFICAR: DEBERIA APARECER QUE LA SESSION ESTA INICIADA
-          echo 'Session ya iniciada';
-          break;
 
         case 'cerrar-session':
           SessionController::singleton()->closeSession();
@@ -105,17 +96,13 @@ class RooterController extends Controller{
         case 'actualizar-usuario':
           UsuarioController::singleton()->actualizarUsuario();
           break;
+          
         /*
         ** Default
         */
 
-        case '':
-          SessionController::singleton()->redireccionarHome();
-          break;
-
         default:
-          // MODIFICAR: ACA DEBERIA TIRAR ERROR
-          SessionController::singleton()->redireccionarHome();
+          $this->home(isset($_SESSION['id']),$_SESSION['username'],$_SESSION['administrador']);
           break;
       }
 

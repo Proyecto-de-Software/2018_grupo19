@@ -23,9 +23,9 @@ class AdministradorController extends Controller{
     public function actualizarConfiguracion(){
       if ((true) || (UsuariosRepository::singleton()->chequearPermiso('configuracion_update', $_SESSION["id"])) ){
         if (ConfiguracionRepository::singleton()->actualizarConfiguracion($_POST["titulo"], $_POST["mail"], $_POST["descripcion"], $_POST["cantidad"], isset($_POST["estadoDelSitio"]))){
-          SessionController::singleton()->redireccionarHome();
+          RooterController::singleton()->redireccionar('');
         } else {
-          SessionController::singleton()->redireccionarHome();
+          RooterController::singleton()->redireccionar('');
         }
       }
     }

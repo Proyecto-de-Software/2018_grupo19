@@ -21,6 +21,7 @@ class SesionRepository extends PDORepository{
           $_SESSION['activo'] = $fila['activo'];
           $_SESSION['first_name'] = $fila['first_name'];
           $_SESSION['last_name'] = $fila['last_name'];
+          $_SESSION['administrador'] = false; //Hacer consulta para si es admin
         }
         return true;
       }
