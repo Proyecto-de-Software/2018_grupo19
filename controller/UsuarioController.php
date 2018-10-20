@@ -34,7 +34,49 @@ class UsuarioController{
     }
 
     public function redireccionarCreacionUsuario(){
+
+        /* hardcodeados roles que llegarían del modelo */
+
+        $todosLosRoles = array ('Administrador', 'Equipo de guardia');
+
         $view = new CreacionUsuario();
-        $view->show();
+        $view->show($todosLosRoles);
+    }
+
+    public function redireccionarInfoUsuario(){
+
+        /* hardcodeado user que llegaría del modelo */
+
+        $roles = array ('Administrador', 'Equipo de guardia');
+
+        $usuario = array(
+            'roles' => $roles,
+            'nombre' => 'Juan',
+            'apellido' => 'Pelotas',
+            'email' => 'JuanPelotas@gmail.com',
+            'estado' => 'Bloqueado'
+        );
+
+        $view = New InfoUsuario();
+        $view->show($usuario);
+    }
+
+    public function redireccionarEdicionUsuario(){
+
+        /* hardcodeado user para editar */
+
+        $todosLosRoles = array ('Administrador', 'Equipo de guardia');
+        $roles = array ('Equipo de guardia');
+
+        $usuario = array(
+            'roles' => $roles,
+            'nombre' => 'Juan',
+            'apellido' => 'Pelotas',
+            'email' => 'JuanPelotas@gmail.com',
+            'estado' => 'Bloqueado'
+        );
+
+        $view = New EdicionUsuario();
+        $view->show($usuario, $todosLosRoles);
     }
 }

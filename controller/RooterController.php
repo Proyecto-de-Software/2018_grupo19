@@ -95,6 +95,14 @@ class RooterController {
         case 'creacion-usuario':
           UsuarioController::singleton()->redireccionarCreacionUsuario();
           break;
+        
+        case 'edicion-usuario':
+          UsuarioController::singleton()->redireccionarEdicionUsuario();
+          break;
+        
+        case 'info-usuario':
+          UsuarioController::singleton()->redireccionarInfoUsuario();
+          break;
 
         case 'buscar-username':
           UsuarioController::singleton()->buscarUsername(isset($_GET["numero-pagina"]) ? (int)$_GET["numero-pagina"]: 0);

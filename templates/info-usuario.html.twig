@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+{% block nav_equipodeguardia %}
+    {# sin implementar #}
+{% endblock %}
+
+{% block nav_sinloguear %}
+    {# sin implementar #}
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenido">
+    <div class="panel-principal">
+        <h1>{{usuario.nombre}} {{ usuario.apellido }}</h1>
+        <p><strong>Email:</strong> {{usuario.email}}</p>
+        <p><strong>Estado:</strong> {{usuario.estado}}</p>
+        <h2>Roles</h2>
+        {% for rol in usuario.roles %}
+            <p>{{rol}}</p>
+        {% endfor %}
+    <div class="botones">
+    <button class="boton-panel-principal">Editar usuario</button>
+    <button class="boton-panel-principal">Borrar usuario</button>
+    </div>
+    </div>
+</div>
+
+{% endblock  %}
