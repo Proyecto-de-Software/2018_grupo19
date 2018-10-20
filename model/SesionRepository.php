@@ -16,13 +16,15 @@ class SesionRepository extends PDORepository{
         return false;
       } else {
         $fila = $query->fetch();
-        $_SESSION['id'] = $fila["id"];
-        $_SESSION['username'] = $fila['username'];
-        $_SESSION['activo'] = $fila['activo'];
-        $_SESSION['first_name'] = $fila['first_name'];
-        $_SESSION['last_name'] = $fila['last_name'];
-        $_SESSION['administrador'] = $this->isAdministrador($fila["id"]);
-        return true;
+        if ($fila['activo'] == 0) {
+          $_SESSION['id'] = $fila["id"];
+          $_SESSION['username'] = $fila['username'];
+          $_SESSION['activo'] = $fila['activo'];
+          $_SESSION['first_name'] = $fila['first_name'];
+          $_SESSION['last_name'] = $fila['last_name'];
+          $_SESSION['administrador'] = $this->isAdministrador($fila["id"]);
+          return true;
+        } else {echo 'Usuario bloqueado - '; return false;}
       }
     } else {return null;}
   }

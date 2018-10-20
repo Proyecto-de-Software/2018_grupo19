@@ -11,7 +11,7 @@ class PacienteController extends Controller{
 
     public function redireccionarBusquedaPacientes(){
       if (UsuariosRepository::singleton()->chequearPermiso('paciente_index', $_SESSION["id"])) {
-        if(null != ($result = PacientesRepository::singleton()->pacientes(isset($_GET['nro_historia_clinica'])?$_GET['nro_historia_clinica']:null,isset($_GET['apellido'])?$_GET['apellido']:null,isset($_GET['nombre'])?$_GET['nombre']:null,isset($_GET['dni'])?$_GET['dni']:null,isset($_GET['tipo_doc_id'])?$_GET['tipo_doc_id']:null)) ) {
+        if(null !== ($result = PacientesRepository::singleton()->pacientes(isset($_GET['nro_historia_clinica'])?$_GET['nro_historia_clinica']:null,isset($_GET['apellido'])?$_GET['apellido']:null,isset($_GET['nombre'])?$_GET['nombre']:null,isset($_GET['dni'])?$_GET['dni']:null,isset($_GET['tipo_doc_id'])?$_GET['tipo_doc_id']:null)) ) {
           $view = new BusquedaPacientes();
           $view->show($result);
         } else { echo 'error en la bd'; }

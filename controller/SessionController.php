@@ -3,6 +3,7 @@
 /*
 **  Controladores relacionados al manejo de sesiones
 */
+
 require_once 'model/SesionRepository.php';
 require_once 'controller/RooterController.php';
 
@@ -12,7 +13,7 @@ class SessionController extends Controller{
         if(SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
             RooterController::singleton()->redireccionar('');
         } else {
-            echo 'Incorrecto';
+            echo 'Logueo Incorrecto';
         }
     }
 
