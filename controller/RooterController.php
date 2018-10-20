@@ -12,11 +12,6 @@ require_once 'controller/PacienteController.php';
 
 class RooterController extends Controller{
 
-  public function home($logueado = false, $username = null, $administrador = false){
-    $view = new Home();
-    $view->show(array('logueado'=>$logueado,'username'=>$username,'administrador'=>$administrador));
-  }
-
   public function redireccionar($comando){
 
     if (session_status() == PHP_SESSION_NONE) {

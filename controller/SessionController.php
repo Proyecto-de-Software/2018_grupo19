@@ -12,7 +12,7 @@ class SessionController extends Controller{
         if(SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
             RooterController::singleton()->redireccionar('');
         } else {
-            // Codigo en caso de inicio incorrecto
+            echo 'Incorrecto';
         }
     }
 
@@ -22,8 +22,10 @@ class SessionController extends Controller{
     }
 
     public function closeSession() {
-        $view = new Home();
-        $view->showHome();
+        if(isset($_SESSION["id"]) ) {
+            $view = new Home();
+            $view->showHome();
+        } else { echo 'No esta inciada ninguna session';}
     }
 
 }

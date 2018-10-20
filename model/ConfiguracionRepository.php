@@ -5,8 +5,7 @@ require_once 'model/PDORepository.php';
 class ConfiguracionRepository extends PDORepository {
 
   public function actualizarConfiguracion($titulo, $mail, $descripcion, $cantidad, $estadoDelSitio) {
-    try {
-      $db = $this->conectarse();
+   if( null !== ($db = $this->conectarse())){
       $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'titulo'");
       $query->execute(array($titulo));
       $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'mail'");
@@ -18,19 +17,18 @@ class ConfiguracionRepository extends PDORepository {
       $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'estadoDelSitio'");
       $query->execute(array($estadoDelSitio? 1:0));
       return true;
-    } catch (Exception $e) {
-      return false;
+    } else {
+      return null;
     }
   }
 
   public function getConfiguracion() {
-    try {
-      $db = $this->conectarse();
+    if( null !== ($db = $this->conectarse())) {
       $query = $db->prepare("SELECT * FROM configuracion");
       $query->execute();
       return $this->parseResultado($query->fetchAll());
-    } catch (Exception $e) {
-      throw $e;
+    } else {
+      return null;
     }
   }
 
