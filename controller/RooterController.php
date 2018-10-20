@@ -83,6 +83,10 @@ class RooterController extends Controller{
         case 'edicion-usuario':
           UsuarioController::singleton()->redireccionarEdicionUsuario();
           break;
+        
+        case 'borrar-usuario':
+          UsuarioController::singleton()->borrarUsuario();
+          break;
 
         case 'info-usuario':
           UsuarioController::singleton()->redireccionarInfoUsuario();
@@ -109,7 +113,7 @@ class RooterController extends Controller{
         */
 
         default:
-          $this->home(isset($_SESSION['id']),$_SESSION['username'],$_SESSION['administrador']);
+          RooterController::singleton()->home(isset($_SESSION['id']),$_SESSION['username'],$_SESSION['administrador']);
           break;
       }
 

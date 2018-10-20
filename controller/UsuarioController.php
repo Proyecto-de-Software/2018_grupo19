@@ -5,6 +5,7 @@
 */
 
 require_once 'model/UsuariosRepository.php';
+require_once 'model/RolesRepository.php';
 require_once 'controller/RooterController.php';
 
 class UsuarioController extends Controller{
@@ -62,6 +63,14 @@ class UsuarioController extends Controller{
     public function actualizarUsuario(){
         if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
             if (null !== UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'])) {
+                RooterController::singleton()->redireccionar('busqueda-usuarios');
+            } else { echo 'error en la bd'; }
+        } else { echo 'no se tiene permisos'; }
+    }
+
+    public function borrarUsuario() {
+        if(UsuariosRepository::singleton()->chequearPermiso('usuario_destroy', $_SESSION["id"])) {
+            if (null !== UsuariosRepository::singleton()->borrarUsuario($_GET['id'])) {
                 RooterController::singleton()->redireccionar('busqueda-usuarios');
             } else { echo 'error en la bd'; }
         } else { echo 'no se tiene permisos'; }

@@ -61,10 +61,19 @@ class UsuariosRepository extends PDORepository {
 
     public function actualizarUsuario($id,$email,$activo,$first_name,$last_name) {
       if (null !== ($db = $this->conectarse())) {
-        $db = $this->conectarse();
         $sql = "UPDATE `usuario` SET `email` = ?, `activo` = ?, `updated_at` = ?, `first_name` = ?, `last_name` = ? WHERE usuario.id = $id";
         $query = $db->prepare($sql);
         $query->execute(array($email,$activo,date("Y-m-d H:i:s"),$first_name,$last_name));
+        return true;
+      } else {
+        return null;
+      }
+    }
+
+    public function borrarUsuario($id) {
+      if (null !== ($db = $this->conectarse())) {
+        $query = $db->prepare("DELETE FROM `usuario` WHERE id = ?");
+        $query->execute(array($id));
         return true;
       } else {
         return null;
