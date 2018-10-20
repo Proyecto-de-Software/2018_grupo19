@@ -83,7 +83,7 @@ class RooterController extends Controller{
         case 'edicion-usuario':
           UsuarioController::singleton()->redireccionarEdicionUsuario();
           break;
-        
+
         case 'borrar-usuario':
           UsuarioController::singleton()->borrarUsuario();
           break;
@@ -106,6 +106,10 @@ class RooterController extends Controller{
 
         case 'creacion-paciente':
           PacienteController::singleton()->redireccionarCreacionPacientes();
+          break;
+
+        case 'insertar-paciente':
+          PacienteController::singleton()->insertarPaciente();
           break;
 
         /*

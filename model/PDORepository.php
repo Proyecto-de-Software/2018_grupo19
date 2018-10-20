@@ -23,6 +23,7 @@ abstract class PDORepository {
       if (is_null($this->dataBase)) {
         try {
           $this->dataBase = new PDO('mysql:host=localhost;dbname=grupo19', 'grupo19', 'NThlNWI1NWEwYjNi');
+          $this->dataBase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
           return null;
         }

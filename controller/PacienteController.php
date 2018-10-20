@@ -28,8 +28,8 @@ class PacienteController extends Controller{
     }
 
     public function insertarPaciente(){
-      if(UsuariosRepository::singleton()->chequearPermiso('paciente_new', $_SESSION["id"])) {
-        if(null !== PacientesRepository::singleton()->crearPaciente($_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], $_POST['tiene_documento'], $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id'])) {
+      if(true || UsuariosRepository::singleton()->chequearPermiso('paciente_new', $_SESSION["id"])) {
+        if(null !== PacientesRepository::singleton()->crearPaciente($_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id'])) {
           RooterController::singleton()->redireccionar('busqueda-pacientes');
         } else { echo 'error en la bd'; }
       } else { echo 'error de permisos'; }
