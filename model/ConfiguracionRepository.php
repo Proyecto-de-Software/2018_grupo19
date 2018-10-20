@@ -4,17 +4,6 @@ require_once 'model/PDORepository.php';
 
 class ConfiguracionRepository extends PDORepository {
 
-  private static $singleton;
-
-  // Metodo para acceder al singleton
-  public static function singleton() {
-      if(!isset(self::$singleton)){
-          self::$singleton = new self();
-      }
-      return self::$singleton;
-  }
-
-
   public function actualizarConfiguracion($titulo, $mail, $descripcion, $cantidad, $estadoDelSitio) {
     try {
       $db = $this->conectarse();

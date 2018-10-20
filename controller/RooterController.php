@@ -1,24 +1,15 @@
 <?php
 
-require 'controller/SessionController.php';
-require 'controller/AdministradorController.php';
-require 'controller/UsuarioController.php';
-
+require_once 'controller/Controller.php';
+require_once 'controller/SessionController.php';
+require_once 'controller/AdministradorController.php';
+require_once 'controller/UsuarioController.php';
 
 /*
     Clase que se encarga del rooteo
 */
 
-class RooterController {
-
-  private static $singleton;
-
-  public static function singleton(){
-    if(!isset(self::$singleton)){
-      self::$singleton = new self();
-    }
-    return self::$singleton;
-  }
+class RooterController extends Controller{
 
   public function redireccionar($comando){
 

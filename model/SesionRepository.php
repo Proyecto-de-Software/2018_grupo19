@@ -3,11 +3,10 @@
 /*
     Clase que realiza las consultas sobre la BD y crea los objetos (Para manejo de sesiones)
 */
-require 'model/PDORepository.php';
+
+require_once 'model/PDORepository.php';
 
 class SesionRepository extends PDORepository{
-
-    // AGREGAR UN SINGLETON
 
     public function iniciarSesion($usuario, $contrasena) {
       $db = $this->conectarse();
