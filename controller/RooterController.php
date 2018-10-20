@@ -105,7 +105,7 @@ class RooterController extends Controller{
           PacienteController::singleton()->redireccionarBusquedaPacientes();
           break;
 
-        case 'creacion-pacientes':
+        case 'creacion-paciente':
           PacienteController::singleton()->redireccionarCreacionPacientes();
           break;
 

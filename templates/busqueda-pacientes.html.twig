@@ -17,14 +17,17 @@
 
 <div class="contenido">
     {% block busqueda %}
-        <form action="#" method="post">
+        <form action="index.php" method="get">
+            <input type="hidden" name="comando" value="busqueda-pacientes">
             <h1>Buscar paciente</h1>
             <label>Historia clínica:</label><input name="nro_historia_clinica" type="text">
             <label>Apellido:</label><input name="apellido" type="text">
-            <label>Nombre:</label><input type="text">
+            <label>Nombre:</label><input name="nombre" type="text">
             <label>Tipo doc:</label><select name="tipo_doc_id">
-                <option value="DNI">DNI</option>
+                <option value=""></option>
+                <option value="1">DNI</option>
             </select>
+            <label>DNI:</label><input name="dni" type="number">
             <input type="submit" value="buscar">
         </form>
     {% endblock %}
@@ -37,7 +40,7 @@
             </a>
         {% endfor %}
         </div>
-        <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente'" >Crear usuario</button>
+        <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente'" >Crear paciente</button>
     </div>
 </div>
 

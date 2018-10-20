@@ -5,12 +5,18 @@
 */
 
 require_once 'RooterController.php';
+require_once 'model/PacientesRepository.php';
 
 class PacienteController extends Controller{
 
     public function redireccionarBusquedaPacientes(){
         $view = new BusquedaPacientes();
-        $view->show($pacientes);
+        $view->show(PacientesRepository::singleton()->pacientes(isset($_GET['nro_historia_clinica'])?$_GET['nro_historia_clinica']:null,isset($_GET['apellido'])?$_GET['apellido']:null,isset($_GET['nombre'])?$_GET['nombre']:null,isset($_GET['dni'])?$_GET['dni']:null,isset($_GET['tipo_doc_id'])?$_GET['tipo_doc_id']:null));
+    }
+
+    public function redireccionarCreacionPacientes(){
+      $view = new CreacionPaciente();
+      $view->show();
     }
 
     public function insertarPaciente(){

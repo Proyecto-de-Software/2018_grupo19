@@ -41,11 +41,10 @@ class PacientesRepository extends PDORepository {
           array_push($parametros,$documento.'%');
         }
         if ($tipo_doc != null){
-          $sql = $sql." AND p.tipo_doc_id LIKE ?";
+          $sql = $sql." AND p.tipo_doc_id = ?";
           array_push($parametros,$tipo_doc.'%');
         }
       }
-
       $query = $db->prepare($sql);
       $query->execute($parametros);
 
