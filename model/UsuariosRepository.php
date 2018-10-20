@@ -1,20 +1,8 @@
 <?php
 
-/*
-    Clase que realiza las consultas sobre la BD y crea los objetos (Para manejo de sesiones)
-*/
+require_once 'model/PDORepository.php';
 
 class UsuariosRepository extends PDORepository {
-
-    private static $singleton;
-
-    // Metodo para acceder al singleton
-    public static function singleton() {
-        if(!isset(self::$singleton)){
-            self::$singleton = new self();
-        }
-        return self::$singleton;
-    }
 
     public function chequearPermiso($permiso, $idUser) {
         $db = $this->conectarse();
@@ -28,21 +16,16 @@ class UsuariosRepository extends PDORepository {
     public function usuarios($nombreUsuario = null, $estado = null) {
       $db = $this->conectarse();
 
-      $sql = "SELECT * FROM usuario u";
+      $sql = "SELECT * FROM usuario u WHERE TRUE";  //El WHERE TRUE es para despues siempre concatenar a la consulta con ANDs
       $parametros = array();
 
       if ($estado != null){
-        $sql = $sql." WHERE u.activo = ?";
+        $sql = $sql." AND u.activo = ?";
         array_push($parametros,$estado);
-        if ($nombreUsuario != null){
-          $sql = $sql." AND u.username LIKE ?";
-          array_push($parametros,$nombreUsuario.'%');
-        }
-      } else {
-        if ($nombreUsuario != null){
-          $sql = $sql." WHERE u.username LIKE ?";
-          array_push($parametros,$nombreUsuario.'%');
-        }
+      }
+      if ($nombreUsuario != null){
+        $sql = $sql." AND u.username LIKE ?";
+        array_push($parametros,$nombreUsuario.'%');
       }
 
       $query = $db->prepare($sql);
@@ -61,5 +44,18 @@ class UsuariosRepository extends PDORepository {
       return $query->fetch();
     }
 
+    public function crearUsuario($email,$username,$password,$activo,$updated_at,$created_at,$first_name,$last_name) {
+      $db = $this->conectarse();
+      $sql = "INSERT INTO `usuario` (`email`, `username`, `password`, `activo`, `updated_at`, `created_at`, `first_name`, `last_name`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+      $query = $db->prepare($sql);
+      $query->execute(array($email,$username,$password,$activo,date("Y-m-d H:i:s"),date("Y-m-d H:i:s"),$first_name,$last_name));
+    }
+
+    public function updateUsuario($id,$email,$username,$activo,$first_name,$last_name) {
+      $db = $this->conectarse();
+      $sql = "UPDATE `usuario` SET `email` = ?, `activo` = ?, `updated_at` = ?, `first_name` = ?, `last_name` = ?";
+      $query = $db->prepare($sql);
+      $query->execute(array($email,$activo,date("Y-m-d H:i:s"),$first_name,$last_name));
+    }
 
 }

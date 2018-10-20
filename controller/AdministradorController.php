@@ -4,26 +4,11 @@
 **  Controladores relacionados a tareas especificas de un administrador del sitio
 */
 
-foreach (glob("views/*.php") as $vista)
-{
-    require_once $vista;
-}
-
 require_once 'model/UsuariosRepository.php';
 require_once 'model/ConfiguracionRepository.php';
 require_once 'controller/SessionController.php';
 
-class AdministradorController {
-
-    private static $singleton;
-
-    // Metodo para acceder al singleton
-    public static function singleton() {
-        if(!isset(self::$singleton)){
-            self::$singleton = new self();
-        }
-        return self::$singleton;
-    }
+class AdministradorController extends Controller{
 
     public function redireccionarConfiguracion(){
         $view = new Configuracion();

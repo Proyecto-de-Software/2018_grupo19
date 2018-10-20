@@ -3,7 +3,19 @@
     Clase Abstracta para los metodos de conexion con la BD
 */
 
-class PDORepository {
+abstract class PDORepository {
+
+    private static $singleton;
+
+    // Metodo para acceder al singleton
+    public static function singleton() {
+      static $instances = array();
+      $calledClass = get_called_class();
+      if (!isset($instances[$calledClass])) {
+          $instances[$calledClass] = new $calledClass();
+      }
+      return $instances[$calledClass];
+    }
 
     private $dataBase;
 

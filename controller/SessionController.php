@@ -4,24 +4,7 @@
 **  Controladores relacionados al manejo de sesiones
 */
 
-require 'model/SesionRepository.php';
-
-foreach (glob("views/*.php") as $vista)
-{
-    require_once $vista;
-}
-
-class SessionController {
-
-    private static $singleton;
-
-    // Metodo para acceder al singleton
-    public static function singleton() {
-        if(!isset(self::$singleton)){
-            self::$singleton = new self();
-        }
-        return self::$singleton;
-    }
+class SessionController extends Controller{
 
     public function redireccionarHome(){
         $view = new Home();
@@ -38,8 +21,7 @@ class SessionController {
       }
 
     public function login(){
-        $conexion = new SesionRepository();
-        if($conexion->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
+        if(SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
             $this->redireccionarHome();
         } else {
             // Codigo en caso de inicio incorrecto
