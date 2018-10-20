@@ -1,5 +1,89 @@
 {% extends 'layout.html.twig' %}
 
+{% block estilos %}
+{{parent()}}
+<link rel="stylesheet" href="templates/styles/creacion-pacientes.css">
+{% endblock %}
+
 {% block contenido %}
-bloque contenido
+
+<div class="contenido">
+    <div class="panel-principal">
+        <form class="formulario-principal" action="">
+            <h1>Creando paciente</h1>
+            <div class="label-input">
+                <label>Nombre de Paciente:</label>
+                <input class="inputf" type="text" name="username">
+            </div>
+            <div class="label-input">
+                <label>Fecha de nac.:</label>
+                <input class="inputf" type="date" name="username">
+            </div>
+            <div class="label-input">
+                <label>Lugar de nac.:</label>
+                <input class="inputf" type="text" name="username">
+            </div>
+            <div class="label-input">
+                <label>Partido:</label>
+                <select name="" id="">
+                    <option value="">Ajax1</option>
+                    <option value="">Ajax2</option>
+                    <option value="">Ajax3</option>
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Region sanitaria:</label>
+                <input class="inputf" type="text" readonly="readonly" name="username">
+            </div>
+            <div class="label-input">
+                <label>Localidad:</label>
+                <select name="" id="">
+                    <option value="">Ajax1</option>
+                    <option value="">Ajax2</option>
+                    <option value="">Ajax3</option>
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Domicilio:</label>
+                <input class="inputf" type="text" name="username">
+            </div>
+            <div class="label-input">
+                <label>Género:</label>
+                <select name="" id="">
+                    <option value="">Masculino</option>
+                    <option value="">Femenino</option>
+                    <option value="">Otro</option>
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Domicilio:</label>
+                <input class="inputf" type="text" name="username">
+            </div>
+            <div class="label-input">
+                <label>Posee documento:</label>
+                <input class="inputf checkb" type="checkbox">
+            </div>
+            <div class="label-input">
+                <label>Tipo de documento:</label>
+                <select name="" id="">
+                    <option value="">DNI</option>
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Nro de documento:</label>
+                <input class="inputf" type="number">
+            </div>
+            <div class="label-input">
+                <label>Nro de historia clínica:</label>
+                <input class="inputf" type="number">
+            </div>
+            <div class="label-input">
+                <label>Nro de carpeta:</label>
+                <input class="inputf" type="number">
+            </div>
+        </form>
+        <button type="submit" form="formulario" class="boton-panel-principal">Crear paciente</button>
+    </div>
+</div>
+
 {% endblock %}

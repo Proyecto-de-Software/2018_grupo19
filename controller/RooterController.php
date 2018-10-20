@@ -105,6 +105,20 @@ class RooterController extends Controller{
         case 'actualizar-usuario':
           UsuarioController::singleton()->actualizarUsuario();
           break;
+
+
+        /*
+        ** Pacientes rooter
+        */
+
+        case 'busqueda-pacientes':
+          PacienteController::singleton()->redireccionarBusquedaPacientes();
+          break;
+
+        case 'creacion-pacientes':
+          PacienteController::singleton()->redireccionarCreacionPacientes();
+          break;
+
         /*
         ** Default
         */
