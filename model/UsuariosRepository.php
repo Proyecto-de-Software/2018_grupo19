@@ -3,7 +3,6 @@
 /*
     Clase que realiza las consultas sobre la BD y crea los objetos (Para manejo de sesiones)
 */
-require_once 'model/Usuario.php';
 
 class UsuariosRepository extends PDORepository {
 
@@ -49,7 +48,7 @@ class UsuariosRepository extends PDORepository {
       $query = $db->prepare($sql);
       $query->execute($parametros);
 
-      return (array_map('Usuario::generarDesdeBD',$query->fetchAll()));
+      return $query->fetchAll();
     }
 
     public function usuario($id) {

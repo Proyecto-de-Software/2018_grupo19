@@ -35,11 +35,11 @@
             <a href="index.php?comando=editar-usuario&id={{resultado.id}}" class="tarjeta-usuario">
                 <div class="nombreyfoto-tarjeta-usuario">
                     <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
-                    <h1>{{resultado.nombre}}</h1>
+                    <h1>{{resultado.first_name}}</h1>
                 </div>
                 <div class="estado-tarjeta-usuario">
                     <h1>Estado:</h1>
-                    <h2>{{resultado.estado}}</h2>
+                    <h2>{% if resultado.activo == 0 %}Activo{% else %}Inactivo{% endif %}</h2>
                 </div>
             </a>
         {% endfor %}
