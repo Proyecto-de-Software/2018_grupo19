@@ -17,21 +17,23 @@
 
 <div class="contenido">
     {% block busqueda %}
-        {# historia clinica, o apellido #}
+        <form action="#" method="post">
+            <h1>Buscar paciente</h1>
+            <label>Historia clínica:</label><input name="nro_historia_clinica" type="text">
+            <label>Apellido:</label><input name="apellido" type="text">
+            <label>Nombre:</label><input type="text">
+            <label>Tipo doc:</label><select name="tipo_doc_id">
+                <option value="DNI">DNI</option>
+            </select>
+            <input type="submit" value="buscar">
+        </form>
     {% endblock %}
     <div class="panel-principal">
         <h1 class="titulo-contenido-de-usuarios">Pacientes</h1>
         <div class="tabla-usuarios">
         {% for resultado in resultados %}
-            <a href="index.php?comando=info-usuario&id={{resultado.id}}" class="tarjeta-usuario">
-                <div class="nombreyfoto-tarjeta-usuario">
-                    <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
-                    <h1>{{resultado.first_name}}</h1>
-                </div>
-                <div class="estado-tarjeta-usuario">
-                    <h1>Estado:</h1>
-                    <h2>{% if resultado.activo == 1 %}Activo{% else %}Bloqueado{% endif %}</h2>
-                </div>
+            <a href="index.php?comando=info-paciente&id={{resultado.id}}" class="tarjeta-usuario">
+                {{resultado.nombre}}
             </a>
         {% endfor %}
         </div>
