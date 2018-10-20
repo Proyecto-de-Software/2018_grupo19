@@ -28,7 +28,8 @@ class PacientesRepository extends PDORepository {
 
     public function pacientes($historia_clinica = null, $apellido = null, $nombre = null, $documento = null, $tipo_doc = null) {
       if( null !== ($db = $this->conectarse())) {
-        $sql = "SELECT * FROM paciente p WHERE TRUE";  //El WHERE TRUE es para despues siempre concatenar a la consulta con ANDs
+        $sql = "SELECT * FROM paciente p WHERE TRUE";  
+        //El WHERE TRUE es para despues siempre concatenar a la consulta con ANDs
         $parametros = array();
 
         if ($historia_clinica != null){

@@ -72,6 +72,8 @@ class UsuariosRepository extends PDORepository {
 
     public function borrarUsuario($id) {
       if (null !== ($db = $this->conectarse())) {
+        $query = $db->prepare("DELETE FROM `usuario_tiene_rol` WHERE usuario_id = ?");
+        $query->execute(array($id));
         $query = $db->prepare("DELETE FROM `usuario` WHERE id = ?");
         $query->execute(array($id));
         return true;
