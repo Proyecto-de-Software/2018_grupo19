@@ -36,6 +36,11 @@
             </a>
         {% endfor %}
         </div>
+        <div class="paginas">
+            {% for i in 1..cantidadPaginas %}
+                <a href="index.php?comando=busqueda-usuarios&pagina-actual={{i}}">{{i}}</a>
+            {% endfor %}
+        </div>
         <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-usuario'" >Crear usuario</button>
     </div>
 </div>

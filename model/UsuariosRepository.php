@@ -28,9 +28,8 @@ class UsuariosRepository extends PDORepository {
           array_push($parametros,$nombreUsuario.'%');
         }
 
-        $primero = ($paginaActual * $this->cantidadPorPagina() ) + 1;
-        $sql = $sql . " LIMIT " . $primero . ', ' . ($primero + $this->cantidadPorPagina() );
-  
+        $primero = ($paginaActual * $this->cantidadPorPagina() );
+        $sql = $sql . " LIMIT " . $primero . ', ' . (($this->cantidadPorPagina()) );
         $query = $db->prepare($sql);
         $query->execute($parametros);
   
@@ -45,7 +44,8 @@ class UsuariosRepository extends PDORepository {
       if (null !== ($db = $this->conectarse())) {
         $query = $db->prepare("SELECT COUNT(id) AS cantidad FROM usuario ");
         $query->execute();
-        return ($query->fetch()) / $this->cantidadPorPaginas();
+        $result = $query->fetch();
+        return ceil(($result["cantidad"]) / $this->cantidadPorPagina());
       }
     }
 
