@@ -10,7 +10,7 @@ class RolesRepository extends PDORepository {
 
     public function getAllRoles(){
         if(null !== ($db = $this->conectarse())) {
-            $query = $db->prepare("SELECT nombre FROM `roles`");
+            $query = $db->prepare("SELECT nombre FROM `rol`");
             $query->execute();
             return ($query->fetchAll());
         } else {

@@ -33,10 +33,10 @@
                 <h2>Seleccione uno o más roles</h2>
                 {% for rol in todoslosroles %}
                     <div class="label-input">
-                        <label>{{rol}}</label>
+                        <label>{{rol.nombre}}</label>
                         <input class="inputf checkb" type="checkbox"
-                    {% for roluser in usuario.roles %}
-                        {% if rol == roluser %}
+                    {% for roluser in rolesUsuario %}
+                        {% if rol.nombre == roluser.nombre %}
                             checked
                         {% endif %}
                     {% endfor %}
