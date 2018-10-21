@@ -85,7 +85,7 @@ class UsuariosRepository extends PDORepository {
         }
     }
 
-    public function actualizarUsuario($id,$email,$activo,$first_name,$last_name) {
+    public function actualizarUsuario($id,$email,$activo,$first_name,$last_name,$roles) {
         if (null !== ($db = $this->conectarse())) {
             $sql = "UPDATE `usuario` SET `email` = ?, `activo` = ?, `updated_at` = ?, `first_name` = ?, `last_name` = ? WHERE usuario.id = $id";
             $query = $db->prepare($sql);
@@ -108,7 +108,18 @@ class UsuariosRepository extends PDORepository {
         }
     }
 
+    public function limpiarRoles($id) {
+        if (null !== ($db = $this->conectarse())) {
+            $query = $db->prepare("DELETE FROM `usuario_tiene_rol` WHERE usuario_id = ?");
+            $query->execute(array($id));
+            return true;
+        } else {
+            return null;
+        }
+    }
+
     public function agregarRoles($idUsuario,$roles) {
+        $this->limpiarRoles($idUsuario);
         foreach ($roles as $key => $rol) {
             $this->agregarRol($idUsuario,$rol);
         }
