@@ -1,10 +1,9 @@
 {
   "autoload": {
-    "classmap": [
-      
-    ]
+    "classmap": []
   },
   "require": {
-    "twig/twig": "^2.0"
+    "twig/twig": "^2.0",
+    "components/jquery": "1.9.*"
   }
 }
