@@ -12,10 +12,10 @@ class UsuarioController extends Controller{
 
     public function redireccionarBusquedaUsuarios(){
         if(UsuariosRepository::singleton()->chequearPermiso('usuario_index', $_SESSION['id'])) {
-            if( null !== ($result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null,isset($_GET['estado'])? $_GET['estado']:null))) {
+            if( (null !== ($result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, ($_GET['pagina-actual'] -1) ))) && (null != ($cantidadPaginas = UsuarioRepository::singleton()->cantidadDePaginas()) )  ) {
                 $view = new BusquedaUsuarios();
-                $view->show($this->parametrosDeSesion(array('resultados' => $result)));
-            } else {
+                $view->show($this->parametrosDeSesion(array('resultados' => $result, 'paginaActual' => $_GET['pagina-actual'], 'cantidadPaginas' => $cantidadPaginas)));
+            } else { 
                 echo 'Error en la bd';
             }
         } else {

@@ -14,7 +14,7 @@ class UsuariosRepository extends PDORepository {
       }
     }
 
-    public function usuarios($nombreUsuario = null, $estado = null) {
+    public function usuarios($nombreUsuario = null, $estado = null, $paginaActual) {
       if (null !== ($db = $this->conectarse())) {
         $sql = "SELECT * FROM usuario u WHERE TRUE";  //El WHERE TRUE es para despues siempre concatenar a la consulta con ANDs
         $parametros = array();
@@ -27,6 +27,9 @@ class UsuariosRepository extends PDORepository {
           $sql = $sql." AND u.username LIKE ?";
           array_push($parametros,$nombreUsuario.'%');
         }
+
+        $primero = ($paginaActual * $this->cantidadPorPagina() ) + 1;
+        $sql = $sql . " LIMIT " . $primero . ', ' . ($primero + $this->cantidadPorPagina() );
   
         $query = $db->prepare($sql);
         $query->execute($parametros);
