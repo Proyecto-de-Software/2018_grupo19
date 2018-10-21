@@ -38,7 +38,16 @@ class UsuariosRepository extends PDORepository {
       } else {
         return null;
     }
+
   }
+  
+    public function cantidadDePaginas() {
+      if (null !== ($db = $this->conectarse())) {
+        $query = $db->prepare("SELECT COUNT(id) AS cantidad FROM usuario ");
+        $query->execute();
+        return ($query->fetch()) / $this->cantidadPorPaginas();
+      }
+    }
 
     public function usuario($id) {
       if (null !== ($db = $this->conectarse())) {
