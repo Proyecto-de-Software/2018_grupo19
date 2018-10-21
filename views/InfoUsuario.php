@@ -4,8 +4,8 @@ require_once 'TwigView.php';
 
 class InfoUsuario extends TwigView {
 
-    public function show($usuario, $rolesUsuario) {
-        echo self::getTwig()->render('info-usuario.html.twig', array('usuario' => $usuario, 'roles' => $rolesUsuario));
+    public function show($parametros) {
+        echo self::getTwig()->render('info-usuario.html.twig',$parametros);
     }
 }
 

@@ -19,13 +19,13 @@ class SessionController extends Controller{
 
     public function redireccionarLogin(){
         $view = new Login();
-        $view->show();
+        $view->show($this->parametrosDeSesion());
     }
 
     public function closeSession() {
         if(isset($_SESSION["id"]) ) {
-            $view = new Home();
-            $view->showHome();
+            session_destroy();
+            RooterController::singleton()->redireccionar('');
         } else { echo 'No esta inciada ninguna session';}
     }
 

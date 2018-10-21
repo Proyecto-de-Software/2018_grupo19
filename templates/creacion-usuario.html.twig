@@ -1,13 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-{% block nav_equipodeguardia %}
-    {# sin implementar #}
-{% endblock %}
-
-{% block nav_sinloguear %}
-    {# sin implementar #}
-{% endblock %}
-
 {% block contenido %}
 
     <div class="contenido">
@@ -45,7 +37,7 @@
                 <h2>Seleccione uno o más roles</h2>
                 {% for rol in roles %}
                     <div class="label-input">
-                        <label>{{rol}}</label>
+                        <label>{{rol.nombre}}</label>
                         <input class="inputf checkb" type="checkbox">
                     </div>
                 {% endfor %}

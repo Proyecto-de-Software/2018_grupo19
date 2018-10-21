@@ -14,7 +14,7 @@ class AdministradorController extends Controller{
       if (UsuariosRepository::singleton()->chequearPermiso('configuracion_update', $_SESSION['id'])) {
         if ( null !== ($result = ConfiguracionRepository::singleton()->getConfiguracion())) {
           $view = new Configuracion();
-          $view->show($result);
+          $view->show($this->parametrosDeSesion($result));
         } else {
           echo 'Error en la BD';
         }
@@ -25,7 +25,7 @@ class AdministradorController extends Controller{
 
     public function redireccionarSitioEnMantenimiento(){  // Que onda este metodo?
         $view = new SitioEnMantenimiento();
-        $view->show();
+        $view->show($this->parametrosDeSesion());
     }
 
     public function actualizarConfiguracion(){

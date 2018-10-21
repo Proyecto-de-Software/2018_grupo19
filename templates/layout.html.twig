@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Hospital Alejandro Korn</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block estilos %}
-    <link rel="stylesheet" href="templates/styles/layout.css">
-    {% endblock %}
-    {% block links %}
-    {% endblock %}
-  </head>
-  <body>
-    <nav>
-      <a id="link-inicio" href="index.php">
-          <img id="logo" src="recursos/logo_hospital.svg" alt="Logo">
-          <p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
-      </a>
-      {% block nav_administrador %}
-      <div class="dropdown">
-        <a href="#">Administración</a>
-          <ul class="dropdown-items">
-            <li><a href="index.php?comando=busqueda-usuarios">Usuarios</a></li>
-            <li><a href="index.php?comando=configuracion">Configuracion</a></li>
-        </ul>
-      </div>
-      {% endblock %}
+<head>
+	<meta charset="utf-8">
+	<title>Hospital Alejandro Korn</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% block estilos %}
+	<link rel="stylesheet" href="templates/styles/layout.css">
+	{% endblock %}
+	{% block links %}
+	{% endblock %}
+</head>
+<body>
+	<nav>
+		<a id="link-inicio" href="index.php">
+			<img id="logo" src="recursos/logo_hospital.svg" alt="Logo">
+			<p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
+		</a>
 
-      {% block nav_equipodeguardia %}
-        <a href="index.php?comando=busqueda-pacientes">Pacientes</a>
-      {% endblock %}
+		{% if logueado %}
+		<div class="dropdown">
+			<a href="#">{{username}}</a>
+			<ul class="dropdown-items">
+				<li><a href="index.php?comando=busqueda-pacientes">Pacientes</a></li>
+				{% if administrador %}
+				<li><a href="index.php?comando=busqueda-usuarios">Usuarios</a></li>
+				<li><a href="index.php?comando=configuracion">Configuracion</a></li>
+				{% endif %}
+				<li><a href="index.php?comando=cerrar-sesion">Cerrar sesion</a></li>
+			</ul>
+		</div>
+		{% else %}
+		<a href="index.php?comando=login">Iniciar sesión</a>
+		{% endif %}
 
-      {% block nav_sinloguear %}
-      <a href="index.php?comando=login">Iniciar sesión</a>
-      {% endblock %}
+	</nav>
 
-    </nav>
-        {% block contenido %}
-        {% endblock %}
-    <footer>
-    {% block footer %}
-      <p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
-      <p>v 0.1.0</p>
-    {% endblock %}
-    </footer>
-  </body>
+	{% block contenido %}
+	{% endblock %}
+
+	<footer>
+		{% block footer %}
+		<p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
+		<p>v 0.1.0</p>
+		{% endblock %}
+	</footer>
+</body>
 </html>

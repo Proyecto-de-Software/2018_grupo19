@@ -45,7 +45,7 @@ class RooterController extends Controller{
         ** Session rooter
         */
 
-        case 'cerrar-session':
+        case 'cerrar-sesion':
           SessionController::singleton()->closeSession();
           break;
 
@@ -134,7 +134,7 @@ class RooterController extends Controller{
         */
 
         default:
-          RooterController::singleton()->home(isset($_SESSION['id']),$_SESSION['username'],$_SESSION['administrador']);
+          RooterController::singleton()->home();
           break;
       }
 
