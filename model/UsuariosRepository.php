@@ -14,27 +14,39 @@ class UsuariosRepository extends PDORepository {
         }
     }
 
-    public function usuarios($nombreUsuario = null, $estado = null) {
-        if (null !== ($db = $this->conectarse())) {
-            $sql = "SELECT * FROM usuario u WHERE TRUE";  //El WHERE TRUE es para despues siempre concatenar a la consulta con ANDs
-            $parametros = array();
+    public function usuarios($nombreUsuario = null, $estado = null, $paginaActual) {
+      if (null !== ($db = $this->conectarse())) {
+        $sql = "SELECT * FROM usuario u WHERE TRUE";  //El WHERE TRUE es para despues siempre concatenar a la consulta con ANDs
+        $parametros = array();
 
-            if ($estado != null){
-                $sql = $sql." AND u.activo = ?";
-                array_push($parametros,$estado);
-            }
-            if ($nombreUsuario != null){
-                $sql = $sql." AND u.username LIKE ?";
-                array_push($parametros,$nombreUsuario.'%');
-            }
-
-            $query = $db->prepare($sql);
-            $query->execute($parametros);
-
-            return $query->fetchAll();
-        } else {
-            return null;
+        if ($estado != null){
+          $sql = $sql." AND u.activo = ?";
+          array_push($parametros,$estado);
         }
+        if ($nombreUsuario != null){
+          $sql = $sql." AND u.username LIKE ?";
+          array_push($parametros,$nombreUsuario.'%');
+        }
+
+        $primero = ($paginaActual * $this->cantidadPorPagina() ) + 1;
+        $sql = $sql . " LIMIT " . $primero . ', ' . ($primero + $this->cantidadPorPagina() );
+
+        $query = $db->prepare($sql);
+        $query->execute($parametros);
+
+        return $query->fetchAll();
+      } else {
+        return null;
+    }
+
+  }
+
+    public function cantidadDePaginas() {
+      if (null !== ($db = $this->conectarse())) {
+        $query = $db->prepare("SELECT COUNT(id) AS cantidad FROM usuario ");
+        $query->execute();
+        return ($query->fetch()) / $this->cantidadPorPaginas();
+      }
     }
 
     public function usuario($id) {
