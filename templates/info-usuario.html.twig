@@ -16,8 +16,8 @@
         <p><strong>Email:</strong> {{usuario.email}}</p>
         <p><strong>Estado:</strong> {% if usuario.activo == 1 %}Activo{% else %}Bloqueado{% endif %}</p>
         <h2>Roles</h2>
-        {% for rol in usuario.roles %}
-            <p>{{rol}}</p>
+        {% for rol in roles %}
+            <p>{{rol.nombre}}</p>
         {% endfor %}
     <div class="botones">
     <button class="boton-panel-principal" onclick="location.href='index.php?comando=edicion-usuario&id={{usuario.id}}'" >Editar usuario</button>

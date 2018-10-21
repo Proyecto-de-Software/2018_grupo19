@@ -39,18 +39,18 @@ class UsuarioController extends Controller{
 
     public function redireccionarInfoUsuario(){
         if(UsuariosRepository::singleton()->chequearPermiso('usuario_show', $_SESSION["id"])) {
-            if(null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) {
+            if((null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) && (null !== ($rolesUsuario = RolesRepository::singleton()->getRolesUsuario($_GET['id']))) ) {
                 $view = New InfoUsuario();
-                $view->show($usuario);
+                $view->show($usuario, $rolesUsuario);
             } else { echo 'error en la bd'; }
         } else { echo 'no se tiene permisos'; }
     }
 
     public function redireccionarEdicionUsuario(){
         if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
-            if((null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) && (null !== ($todosLosRoles = RolesRepository::singleton()->getAllRoles())) ) {
+            if((null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) && (null !== ($todosLosRoles = RolesRepository::singleton()->getAllRoles())) && (null !== ($rolesUsuario = RolesRepository::singleton()->getRolesUsuario($_GET['id']))) ) {
                 $view = New EdicionUsuario();
-                $view->show($usuario, $todosLosRoles);
+                $view->show($usuario, $todosLosRoles, $rolesUsuario);
             } else { echo 'error en la bd'; }
         } else { echo 'no se tiene permisos'; }
     }
