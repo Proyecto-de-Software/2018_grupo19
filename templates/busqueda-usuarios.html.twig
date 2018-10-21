@@ -7,47 +7,63 @@
 
 {% block contenido %}
 
-<div class="contenido">
-    {% block busqueda %}
-        <form class="formulario-busqueda" action="index.php" method="get">
-            <input type="hidden" name="comando" value="busqueda-usuarios">
-            <input type="hidden" name="pagina-actual" value="1">
-            <input type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar.." value="{{nombreDeUsuario}}">
-            <select name="estado" {# select="{{estado}} " #} >
-                <option value=""></option>
-                <option value="1">Activo</option>
-                <option value="0">Bloqueado</option>
-            </select>
-            <input type="submit" value="Filtrar">
-        </form>
-    {% endblock %}
-    <div class="panel-principal">
-        <h1 class="titulo-contenido-de-usuarios">Usuarios</h1>
-        <div class="tabla-usuarios">
-        {% for resultado in resultados %}
-            <a href="index.php?comando=info-usuario&id={{resultado.id}}" class="tarjeta-usuario">
-                <div class="nombreyfoto-tarjeta-usuario">
-                    <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
-                    <h1>{{resultado.first_name}}</h1>
-                </div>
-                <div class="estado-tarjeta-usuario">
-                    <h1>Estado:</h1>
-                    <h2>{% if resultado.activo == 1 %}Activo{% else %}Bloqueado{% endif %}</h2>
-                </div>
-            </a>
-        {% endfor %}
-        </div>
-        <div class="paginas">
-            {% if cantidadPaginas != 0 %}
-                {% for i in 1..cantidadPaginas %}
-                    <a href="index.php?comando=busqueda-usuarios&pagina-actual={{i}}&nombre-de-usuario={{nombreDeUsuario}}&estado={{estado}}">{{i}}</a>
+    <div class="contenido">
+        {% block busqueda %}
+            <form class="formulario-busqueda" action="index.php" method="get">
+                <input type="hidden" name="comando" value="busqueda-usuarios">
+                <input type="hidden" name="pagina-actual" value="1">
+                <input type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar.." value="{{nombreDeUsuario}}">
+                <select name="estado" {# select="{{estado}} " #}>
+                    <option value=""></option>
+                    <option value="1">Activo</option>
+                    <option value="0">Bloqueado</option>
+                </select>
+                <input type="submit" value="Filtrar">
+            </form>
+        {% endblock %}
+        <div class="panel-principal">
+            <h1 class="titulo-contenido-de-usuarios">Usuarios</h1>
+            <div class="tabla-usuarios">
+                {% for resultado in resultados %}
+                    <a href="index.php?comando=info-usuario&id={{resultado.id}}" class="tarjeta-usuario">
+                        <div class="nombreyfoto-tarjeta-usuario">
+                            <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
+                            <h1>{{resultado.first_name}}</h1>
+                        </div>
+                        <div class="estado-tarjeta-usuario">
+                            <h1>Estado:</h1>
+                            <h2>
+                                {% if resultado.activo == 1 %}Activo{% else %}Bloqueado{% endif %}
+                            </h2>
+                        </div>
+                    </a>
                 {% endfor %}
-            {% else %}
-                <p> No se han encontrado resultados </p>
-            {% endif %}
+            </div>
+            <div class="paginas">
+                {% if cantidadPaginas != 0 %}
+                    {% if paginaActual != 1%}
+                        <a href="index.php?comando=busqueda-usuarios&pagina-actual={{paginaActual -1 }}">Atrás</a>
+                    {% endif %}
+                    {% for i in 1..cantidadPaginas %}
+                        <a href="index.php?comando=busqueda-usuarios&pagina-actual={{i}}&nombre-de-usuario={{nombreDeUsuario}}&estado={{estado}}">
+                        {% if i == paginaActual %}
+                            <strong>{{i}}</strong>
+                        {% else %}
+                            {{i}}
+                        {% endif %}
+                        </a>
+                    {% endfor %}
+                    {% if paginaActual != cantidadPaginas%}
+                        <a href="index.php?comando=busqueda-usuarios&pagina-actual={{paginaActual +1 }}">Siguiente</a>
+                    {% endif %}
+                {% else %}
+                    <p>
+                        No se han encontrado resultados
+                    </p>
+                {% endif %}
+            </div>
+            <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-usuario'">Crear usuario</button>
         </div>
-        <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-usuario'" >Crear usuario</button>
     </div>
-</div>
 
 {% endblock %}
