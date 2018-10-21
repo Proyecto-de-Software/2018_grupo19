@@ -33,22 +33,18 @@
             </div>
             <div class="label-input">
                 <label>Partido:</label>
-                <select name="partido">
-                    <option value="1">Ajax1</option>
-                    <option value="2">Ajax2</option>
-                    <option value="3">Ajax3</option>
+                <select name="partido" id="partidos" required>
+                  <option value=""></option>
                 </select>
             </div>
             <div class="label-input">
                 <label>Region sanitaria:</label>
-                <input class="inputf" type="text" readonly="readonly" name="region_sanitaria_id" value="1">
+                <input id="region_sanitaria_id" class="inputf" type="text" readonly="readonly" name="region_sanitaria_id">
             </div>
             <div class="label-input">
                 <label>Localidad:</label>
-                <select name="localidad_id">
-                    <option value="1">Ajax1</option>
-                    <option value="2">Ajax2</option>
-                    <option value="3">Ajax3</option>
+                <select id="localidades" name="localidad_id">
+                  <option value=""></option>
                 </select>
             </div>
             <div class="label-input">
@@ -99,5 +95,45 @@
         <button type="submit" form="formulario" class="boton-panel-principal">Crear paciente</button>
     </div>
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    obtenerPartidos();
+    $("#partidos").on("input",
+    function () {
+      if ($("#partidos").val()) {
+        actualizarRegionSanitaria();
+        actualizarLocalidades();
+      } else {
+        $("#region_sanitaria_id").val('');
+        $('#localidades').empty();
+      }
+    });
+  });
+
+  function obtenerPartidos() {
+    $.get("index.php?comando=obtener-partidos",
+    function (partidos) {
+      $.each($.parseJSON(partidos),function (index, partido) {$('<option>').val(partido['id']).text(partido['nombre']).appendTo('#partidos');})
+    })
+  }
+
+  function actualizarRegionSanitaria() {
+    $.get("index.php?comando=obtener-region-sanitaria&partido="+($("#partidos").val()),
+    function (region) {
+      $("#region_sanitaria_id").val($.parseJSON(region)[0])
+    })
+  }
+
+  function actualizarLocalidades() {
+    $.get("index.php?comando=obtener-localidades&partido="+($("#partidos").val()),
+    function (localidades) {
+      $('#localidades').empty();
+      $.each($.parseJSON(localidades),function (index, localidad) {$('<option>').val(localidad['id']).text(localidad['nombre']).appendTo('#localidades');})
+    })
+  }
+
+</script>
 
 {% endblock %}

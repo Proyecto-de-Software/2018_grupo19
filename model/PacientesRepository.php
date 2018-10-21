@@ -72,15 +72,4 @@ class PacientesRepository extends PDORepository {
         return null;
       }
     }
-
-    public function localidadDePartido($id) {
-      if( null !== ($db = $this->conectarse())) {
-        $sql = "SELECT * FROM localidad l INNER JOIN partido p ON (p.id = l.partido_id) WHERE p.id = ?";
-        $query = $db->prepare($sql);
-        $query->execute(array($id));
-        return $query->fetchAll();
-      } else {
-        return null;
-      }
-    }
 }

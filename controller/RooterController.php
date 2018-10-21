@@ -5,6 +5,7 @@ require_once 'controller/SessionController.php';
 require_once 'controller/AdministradorController.php';
 require_once 'controller/UsuarioController.php';
 require_once 'controller/PacienteController.php';
+require_once 'controller/AjaxController.php';
 
 /*
     Clase que se encarga del rooteo
@@ -110,6 +111,22 @@ class RooterController extends Controller{
 
         case 'insertar-paciente':
           PacienteController::singleton()->insertarPaciente();
+          break;
+
+        /*
+        ** Pedidos AJAX
+        */
+
+        case 'obtener-partidos':
+          AjaxController::singleton()->obtenerPartidos();
+          break;
+
+        case 'obtener-region-sanitaria':
+          AjaxController::singleton()->obtenerRegionSanitaria();
+          break;
+
+        case 'obtener-localidades':
+          AjaxController::singleton()->obtenerLocalidades();
           break;
 
         /*
