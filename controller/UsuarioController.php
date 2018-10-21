@@ -39,9 +39,9 @@ class UsuarioController extends Controller{
 
     public function redireccionarInfoUsuario(){
         if(UsuariosRepository::singleton()->chequearPermiso('usuario_show', $_SESSION["id"])) {
-            if(null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) {
+            if((null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) && (null !== ($rolesUsuario = RolesRepository::singleton()->getRolesUsuario($_GET['id']))) ) {
                 $view = New InfoUsuario();
-                $view->show($usuario);
+                $view->show($usuario, $rolesUsuario);
             } else { echo 'error en la bd'; }
         } else { echo 'no se tiene permisos'; }
     }
