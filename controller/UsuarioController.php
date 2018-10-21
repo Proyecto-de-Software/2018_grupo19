@@ -56,7 +56,7 @@ class UsuarioController extends Controller{
     }
 
     public function insertarUsuario(){
-        UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido']);
+        UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],$_POST['roles']);
         RooterController::singleton()->redireccionar('busqueda-usuarios');
     }
 

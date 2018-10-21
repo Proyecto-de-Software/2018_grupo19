@@ -38,7 +38,7 @@
                 {% for rol in roles %}
                     <div class="label-input">
                         <label>{{rol.nombre}}</label>
-                        <input class="inputf checkb" type="checkbox">
+                        <input class="inputf checkb" type="checkbox" value="{{rol.id}}" name="roles[]">
                     </div>
                 {% endfor %}
             </form>
