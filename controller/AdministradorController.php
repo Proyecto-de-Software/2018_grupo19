@@ -23,9 +23,9 @@ class AdministradorController extends Controller{
       }
     }
 
-    public function redireccionarSitioEnMantenimiento(){  // Que onda este metodo?
+    public function redireccionarSitioEnMantenimiento(){ 
         $view = new SitioEnMantenimiento();
-        $view->show($this->parametrosDeSesion());
+        $view->show();
     }
 
     public function actualizarConfiguracion(){
@@ -38,6 +38,14 @@ class AdministradorController extends Controller{
       } else {
         echo 'No se tiene permisos';
       }
+    }
+
+    public function sitioHabilitado() {
+      return (1 == ConfiguracionRepository::singleton()->getPaginaEnMantenimiento());
+    }
+
+    public function hayUnAdministrador() { 
+      return isset($_SESSION["administrador"]) ? $_SESSION["administrador"]:false;
     }
 
 }

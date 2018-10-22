@@ -13,10 +13,40 @@ require_once 'controller/AjaxController.php';
 
 class RooterController extends Controller{
 
-  public function redireccionar($comando){
+  public function verificarSitioHabilitado($comando){
+    if(! AdministradorController::singleton()->sitioHabilitado()) {
+      
+      if (! AdministradorController::singleton()->hayUnAdministrador() ) {
+        if( isset($_POST['usuario']) && isset($_POST['contrasena'])) {
+          if(SessionController::singleton()->login()){
+            return true;
+          } else {
+            return false;
+          }
+        
+        }else if ( $comando == 'login' ){
+          echo 'b';
+          return true;
+        } else {
+          echo 'a';
+          return false;
+        }
+      
+      } else { return true;}
+    } else { return true; }
+  }
+
+  public function redireccionar(){
 
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
+    }
+
+    //session_destroy();
+
+    if(! $this->verificarSitioHabilitado($comando)) {
+      AdministradorController::singleton()->redireccionarSitioEnMantenimiento();
+      return;
     }
 
     if(!isset($_SESSION["id"])) {
