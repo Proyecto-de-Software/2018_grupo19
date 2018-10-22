@@ -10,10 +10,11 @@ require_once 'controller/RooterController.php';
 class SessionController extends Controller{
 
     public function login(){
-        if(SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
+        try {
+            SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena']);
             RooterController::singleton()->redireccionar('');
-        } else {
-            echo 'Logueo Incorrecto';
+        } catch (Exception $e) {
+            $this->redireccionarError('No se pudo iniciar sesion', $e->getMessage());
         }
     }
 
