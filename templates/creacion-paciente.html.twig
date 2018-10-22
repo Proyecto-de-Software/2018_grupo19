@@ -14,7 +14,7 @@
 <div class="contenido">
     <div class="panel-principal">
         <form id="formulario" class="formulario-principal" {% block accion %}action="index.php?comando=insertar-paciente"{% endblock %} method="post">
-            <h1>{% block tituloAccion %}Creando paciente{% endblock %}</h1>
+            <h3>{% block tituloAccion %}Creando paciente{% endblock %}</h3>
             <div class="label-input">
                 <label>Nombre de Paciente:</label>
                 <input class="inputf" type="text" name="nombre" value="{% block nombre_paciente %}{% endblock %}">

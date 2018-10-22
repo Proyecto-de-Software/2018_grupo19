@@ -231,6 +231,10 @@ textarea {
   margin-right: 15px;
 }
 
+.label-input label {
+  font-size: 13px;
+}
+
 @media only screen and (max-width: 768px){
   .tarjeta-resultado {
       width: 400px;
