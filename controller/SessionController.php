@@ -20,7 +20,9 @@ class SessionController extends Controller{
                 $_SESSION['last_name'] = $usuario['last_name'];
                 $_SESSION['administrador'] = UsuariosRepository::singleton()->isAdministrador($usuario["id"]);
             } else {
-                $this->redireccionarError('No se pudo iniciar sesion', "El usuario con el que intenta acceder se encuentra bloqueado");
+                if(AdministradorController::singleton()->sitioHabilitado()) {
+                    $this->redireccionarError('No se pudo iniciar sesion', "El usuario con el que intenta acceder se encuentra bloqueado");
+                }
                 return false;
             }
             if(! AdministradorController::singleton()->sitioHabilitado() && !$_SESSION['administrador']) {
