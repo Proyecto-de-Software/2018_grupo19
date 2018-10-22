@@ -13,10 +13,11 @@
                 <input type="hidden" name="comando" value="busqueda-usuarios">
                 <input type="hidden" name="pagina-actual" value="1">
                 <input type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar.." value="{{nombreDeUsuario}}">
-                <select name="estado" {# select="{{estado}} " #}>
-                    <option value=""></option>
-                    <option value="1">Activo</option>
-                    <option value="0">Bloqueado</option>
+                <select name="estado">
+                    <option value="">Todos</option>
+                    <option value="1" {% if estado == "1" %}selected{% endif %}
+                    >Activo</option>
+                    <option value="0" {% if estado == "0" %}selected{% endif %}>Bloqueado</option>
                 </select>
                 <input type="submit" value="Filtrar">
             </form>
@@ -42,7 +43,7 @@
             <div class="paginas">
                 {% if cantidadPaginas != 0 %}
                     {% if paginaActual != 1%}
-                        <a href="index.php?comando=busqueda-usuarios&pagina-actual={{paginaActual -1 }}">Atrás</a>
+                        <a href="index.php?comando=busqueda-usuarios&pagina-actual={{paginaActual -1}}&nombre-de-usuario={{nombreDeUsuario}}&estado={{estado}}">Atrás</a>
                     {% endif %}
                     {% for i in 1..cantidadPaginas %}
                         <a href="index.php?comando=busqueda-usuarios&pagina-actual={{i}}&nombre-de-usuario={{nombreDeUsuario}}&estado={{estado}}">
@@ -54,7 +55,7 @@
                         </a>
                     {% endfor %}
                     {% if paginaActual != cantidadPaginas%}
-                        <a href="index.php?comando=busqueda-usuarios&pagina-actual={{paginaActual +1 }}">Siguiente</a>
+                        <a href="index.php?comando=busqueda-usuarios&pagina-actual={{paginaActual +1 }}&nombre-de-usuario={{nombreDeUsuario}}&estado={{estado}}">Siguiente</a>
                     {% endif %}
                 {% else %}
                     <p>
