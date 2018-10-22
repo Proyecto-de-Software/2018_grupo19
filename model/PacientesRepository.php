@@ -11,6 +11,13 @@ class PacientesRepository extends PDORepository {
         $query->execute(array($apellido, $nombre, $fecha_nac, $lugar_nac, $localidad_id, $region_sanitaria_id, $domicilio, $genero_id, $tiene_documento, $tipo_doc_id, $numero, $tel, $nro_historia_clinica, $nro_carpeta, $obra_social_id));
     }
 
+    public function verificarHistoriaClinica($numero) {
+        $db = $this->conectarse();
+        $query = $db->prepare("SELECT * FROM paciente WHERE nro_historia_clinica = ?");
+        $query->execute(array($numero));
+        return ($query->rowCount() == 0);
+    }
+
     public function actualizarPaciente($id, $apellido, $nombre, $fecha_nac, $lugar_nac, $localidad_id, $region_sanitaria_id, $domicilio, $genero_id, $tiene_documento, $tipo_doc_id, $numero, $tel, $nro_historia_clinica, $nro_carpeta, $obra_social_id) {
         $db = $this->conectarse();
         $sql = "UPDATE paciente SET apellido=?, nombre=?, fecha_nac=?, lugar_nac=?, localidad_id=?, region_sanitaria_id=?, domicilio=?, genero_id=?, tiene_documento=?, tipo_doc_id=?, numero=?, tel=?, nro_historia_clinica=?, nro_carpeta=?, obra_social_id=? WHERE paciente.id = $id";

@@ -121,4 +121,11 @@ class UsuariosRepository extends PDORepository {
         $query->execute(array($idUsuario,$idRol));
     }
 
+    public function validarNombreUsuario($username) {
+        $db = $this->conectarse();
+        $query = $db->prepare("SELECT * FROM usuario WHERE username = ?");
+        $query->execute(array($username));
+        return ($query->rowCount() == 0);
+    }
+
 }
