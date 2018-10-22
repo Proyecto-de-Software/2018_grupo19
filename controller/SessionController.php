@@ -35,7 +35,9 @@ class SessionController extends Controller{
                 return true;
             }
         } catch (Exception $e) {
-            $this->redireccionarError('No se pudo iniciar sesion', $e->getMessage());
+            if(AdministradorController::singleton()->sitioHabilitado()) {
+                $this->redireccionarError('No se pudo iniciar sesion', $e->getMessage());
+            }
         }
     }
 
