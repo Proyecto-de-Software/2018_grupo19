@@ -43,4 +43,10 @@ class PacienteController extends Controller{
       } else { echo 'error de permisos'; }
     }
 
+    public function redireccionarInfoPaciente(){
+      $paciente = PacientesRepository::singleton()->infoPaciente($_GET['id']);
+      $view = new InfoPaciente();
+      $view->show($this->parametrosDeSesion(array('paciente' => $paciente)));
+    }
+
 }

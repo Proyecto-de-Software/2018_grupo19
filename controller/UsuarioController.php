@@ -15,7 +15,7 @@ class UsuarioController extends Controller{
             if( null !== ($result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):1 ))  )  {
                 $view = new BusquedaUsuarios();
                 $view->show($this->parametrosDeSesion(array('resultados' => $result["usuarios"], 'paginaActual' => isset($_GET['pagina-actual']) ? $_GET['pagina-actual']:1, 'cantidadPaginas' => $result["cantidadTotal"], "nombreDeUsuario" => isset($_GET["nombre-de-usuario"])? $_GET["nombre-de-usuario"]:null , "estado" => isset($_GET["estado"])? $_GET["estado"]:null )));
-            } else { 
+            } else {
                 echo 'Error en la bd';
             }
         } else {
@@ -62,7 +62,7 @@ class UsuarioController extends Controller{
 
     public function actualizarUsuario(){
         if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
-            if (null !== UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'])) {
+            if (null !== UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],isset($_POST['roles'])?$_POST['roles']:null)) {
                 RooterController::singleton()->redireccionar('busqueda-usuarios');
             } else { echo 'error en la bd'; }
         } else { echo 'no se tiene permisos'; }

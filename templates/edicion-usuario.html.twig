@@ -1,52 +1,50 @@
 {% extends 'layout.html.twig' %}
 
 {% block nav_equipodeguardia %}
-    {# sin implementar #}
+{# sin implementar #}
 {% endblock %}
 
 {% block nav_sinloguear %}
-    {# sin implementar #}
+{# sin implementar #}
 {% endblock %}
 
 {% block contenido %}
 
-    <div class="contenido">
-        <div class="panel-principal">
-            <form class="formulario-principal" action="index.php?comando=actualizar-usuario&id={{usuario.id}}" method="post" id="formulario">
-                <h1>{{usuario.first_name}} {{usuario.last_name}}</h1>
-                <div class="label-input">
-                    <label>Nombre:</label>
-                    <input class="inputf" type="text" name="nombre" value={{usuario.first_name}}>
-                </div>
-                <div class="label-input">
-                    <label>Apellido:</label>
-                    <input class="inputf" type="text" name="apellido" value={{usuario.last_name}}>
-                </div>
-                <div class="label-input">
-                    <label>Email:</label>
-                    <input class="inputf" type="text" name="email" value={{usuario.email}}>
-                </div>
-                <div class="label-input">
-                    <label>Usuario bloqueado:</label>
-                    <input class="inputf checkb" name="bloqueado" type="checkbox" {% if usuario.activo == 0 %}checked{% endif %}>
-                </div>
-                <h2>Seleccione uno o más roles</h2>
-                {% for rol in todoslosroles %}
-                    <div class="label-input">
-                        <label>{{rol.nombre}}</label>
-                        <input class="inputf checkb" type="checkbox"
-                    {% for roluser in rolesUsuario %}
-                        {% if rol.nombre == roluser.nombre %}
-                            checked
-                        {% endif %}
-                    {% endfor %}
-                    >
-                    </div>
+<div class="contenido">
+    <div class="panel-principal">
+        <form class="formulario-principal" action="index.php?comando=actualizar-usuario&id={{usuario.id}}" method="post" id="formulario">
+            <h1>{{usuario.first_name}} {{usuario.last_name}}</h1>
+            <div class="label-input">
+                <label>Nombre:</label>
+                <input class="inputf" type="text" name="nombre" value={{usuario.first_name}}>
+            </div>
+            <div class="label-input">
+                <label>Apellido:</label>
+                <input class="inputf" type="text" name="apellido" value={{usuario.last_name}}>
+            </div>
+            <div class="label-input">
+                <label>Email:</label>
+                <input class="inputf" type="text" name="email" value={{usuario.email}}>
+            </div>
+            <div class="label-input">
+                <label>Usuario bloqueado:</label>
+                <input class="inputf checkb" name="bloqueado" type="checkbox" {% if usuario.activo == 0 %}checked{% endif %}>
+            </div>
+            <h2>Seleccione uno o más roles</h2>
+            {% for rol in todoslosroles %}
+            <div class="label-input">
+                <label>{{rol.nombre}}</label>
+                <input class="inputf checkb" type="checkbox" value="{{rol.id}}" name="roles[]"
+                {% for roluser in rolesUsuario %}
+                {% if rol.nombre == roluser.nombre %}
+                checked
+                {% endif %}
                 {% endfor %}
-            </form>
-            <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
-
-        </div>
-
+                >
+            </div>
+            {% endfor %}
+        </form>
+        <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
     </div>
+</div>
 {% endblock %}

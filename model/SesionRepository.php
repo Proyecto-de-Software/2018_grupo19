@@ -16,7 +16,7 @@ class SesionRepository extends PDORepository{
         return false;
       } else {
         $fila = $query->fetch();
-        if ($fila['activo'] == 0) {
+        if ($fila['activo'] == 1) {
           $_SESSION['id'] = $fila["id"];
           $_SESSION['username'] = $fila['username'];
           $_SESSION['activo'] = $fila['activo'];
