@@ -14,7 +14,7 @@ class UsuarioController extends Controller{
     public function redireccionarBusquedaUsuarios(){
         try {
             if(UsuariosRepository::singleton()->chequearPermiso('usuario_index', $_SESSION['id'])) {
-                $result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):1 );
+                $result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):0 );
                 $view = new BusquedaUsuarios();
                 $view->show($this->parametrosDeSesion(array('resultados' => $result["usuarios"], 'paginaActual' => isset($_GET['pagina-actual']) ? $_GET['pagina-actual']:1, 'cantidadPaginas' => $result["cantidadTotal"], "nombreDeUsuario" => isset($_GET["nombre-de-usuario"])? $_GET["nombre-de-usuario"]:null , "estado" => isset($_GET["estado"])? $_GET["estado"]:null )));
             } else {
