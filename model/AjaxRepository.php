@@ -15,6 +15,30 @@ class AjaxRepository extends PDORepository {
         return $query->fetchAll();
     }
 
+    public function obtenerGeneros() {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM genero";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
+
+    public function obtenerTiposDeDocumento() {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM tipo_documento";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
+
+    public function obtenerObrasSociales() {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM obra_social";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
+
     public function obtenerRegionSanitaria($partido) {
         $db = $this->conectarse();
         $sql = "SELECT region_sanitaria_id FROM partido WHERE id = ?";
