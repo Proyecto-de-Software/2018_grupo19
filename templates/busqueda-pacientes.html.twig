@@ -32,7 +32,7 @@
             <div class="tabla-resultados">
                 {% for resultado in resultados %}
                     <a href="index.php?comando=info-paciente&id={{resultado.id}}" class="tarjeta-resultado">
-                        {{resultado.nombre}}
+                        <h1>{{resultado.nombre}}</h1>
                     </a>
                 {% endfor %}
             </div>

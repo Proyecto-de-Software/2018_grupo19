@@ -17,19 +17,19 @@
             <h1>Creando paciente</h1>
             <div class="label-input">
                 <label>Nombre de Paciente:</label>
-                <input class="inputf" type="text" name="nombre">
+                <input class="inputf" type="text" name="nombre" required>
             </div>
             <div class="label-input">
                 <label>Apellido de Paciente:</label>
-                <input class="inputf" type="text" name="apellido">
+                <input class="inputf" type="text" name="apellido" required>
             </div>
             <div class="label-input">
                 <label>Fecha de nac.:</label>
-                <input class="inputf" type="date" name="fecha_nac">
+                <input class="inputf" type="date" name="fecha_nac" required>
             </div>
             <div class="label-input">
                 <label>Lugar de nac.:</label>
-                <input class="inputf" type="text" name="lugar_nac">
+                <input class="inputf" type="text" name="lugar_nac" required>
             </div>
             <div class="label-input">
                 <label>Partido:</label>
@@ -43,17 +43,17 @@
             </div>
             <div class="label-input">
                 <label>Localidad:</label>
-                <select id="localidades" name="localidad_id">
+                <select id="localidades" name="localidad_id" required>
                     <option value=""></option>
                 </select>
             </div>
             <div class="label-input">
                 <label>Domicilio:</label>
-                <input class="inputf" type="text" name="domicilio">
+                <input class="inputf" type="text" name="domicilio" required>
             </div>
             <div class="label-input">
                 <label>Género:</label>
-                <select id="generos" name="genero_id"></select>
+                <select id="generos" name="genero_id" required></select>
             </div>
             <div class="label-input">
                 <label>Posee documento:</label>
@@ -61,27 +61,27 @@
             </div>
             <div class="label-input">
                 <label>Tipo de documento:</label>
-                <select id="tipos-doc" name="tipo_doc_id"></select>
+                <select id="tipos-doc" name="tipo_doc_id" required></select>
             </div>
             <div class="label-input">
                 <label>Nro de documento:</label>
-                <input class="inputf" name="numero" type="text">
+                <input class="inputf" name="numero" type="number" required>
             </div>
             <div class="label-input">
                 <label>Nro de historia clínica:</label>
-                <input class="inputf" name="nro_historia_clinica" type="number">
+                <input class="inputf" name="nro_historia_clinica" type="number" min="1" max="999999" required>
             </div>
             <div class="label-input">
                 <label>Nro de carpeta:</label>
-                <input class="inputf" name="nro_carpeta" type="number">
+                <input class="inputf" name="nro_carpeta" type="number" min="1" max="99999" required>
             </div>
             <div class="label-input">
                 <label>Telefono:</label>
-                <input class="inputf" name="tel" type="text">
+                <input class="inputf" name="tel" type="number" required>
             </div>
             <div class="label-input">
                 <label>Obra social:</label>
-                <select id="obras-sociales" name="obra_social_id"></select>
+                <select id="obras-sociales" name="obra_social_id" required></select>
             </div>
         </form>
         <button type="submit" form="formulario" class="boton-panel-principal">Crear paciente</button>
