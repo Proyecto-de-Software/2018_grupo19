@@ -25,10 +25,8 @@ class RooterController extends Controller{
           }
         
         }else if ( $comando == 'login' ){
-          echo 'b';
           return true;
         } else {
-          echo 'a';
           return false;
         }
       

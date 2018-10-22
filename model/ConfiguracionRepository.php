@@ -46,7 +46,6 @@ class ConfiguracionRepository extends PDORepository {
       $query = $db->prepare("SELECT valor FROM configuracion WHERE variable = 'estadoDelSitio'");
       $query->execute();
       $result = $query->fetchAll();
-      echo $result[0]['valor'];
       // Valor 0 Sitio desabilitado y 1 sitio habilitado
       return $result[0]['valor'];
     } else {
