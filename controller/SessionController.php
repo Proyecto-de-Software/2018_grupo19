@@ -11,8 +11,19 @@ class SessionController extends Controller{
 
     public function login(){
         try {
-            SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena']);
-            RooterController::singleton()->redireccionar('');
+            /*SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena']); Esto estaba antes
+            RooterController::singleton()->redireccionar('');*/
+            if(SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
+                if(! AdministradorController::singleton()->sitioHabilitado() && !$_SESSION['administrador']) {
+                    session_destroy();
+                    return false;
+                } else {
+                    RooterController::singleton()->redireccionar('');
+                    return true;
+                }
+            } else {
+                echo 'Logueo Incorrecto';
+                return false;
         } catch (Exception $e) {
             $this->redireccionarError('No se pudo iniciar sesion', $e->getMessage());
         }
