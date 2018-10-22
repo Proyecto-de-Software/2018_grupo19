@@ -65,6 +65,14 @@ class PacientesRepository extends PDORepository {
         return $query->fetch();
     }
 
+    public function esNN($id) {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM paciente p WHERE p.id = ? AND p.apellido = 'NN' AND p.nombre = 'NN'";
+        $query = $db->prepare($sql);
+        $query->execute(array($id));
+        return $query->rowCount();
+    }
+
     public function infoPaciente($id) {
         $paciente = $this->paciente($id);
         $paciente['localidad_nombre'] = $this->localidadConId($paciente['localidad_id'])['nombre'];
@@ -74,6 +82,13 @@ class PacientesRepository extends PDORepository {
         $paciente['obra_social_nombre'] = $this->obraSocialConId($paciente['obra_social_id'])['nombre'];
         $paciente['region_sanitaria_nombre'] = $this->regionSanitariaConId($paciente['region_sanitaria_id'])['nombre'];
         return $paciente;
+    }
+
+    public function borrarPaciente($id) {
+        $db = $this->conectarse();
+        $sql = "DELETE FROM paciente WHERE id = ?";
+        $query = $db->prepare($sql);
+        $query->execute(array($id));
     }
 
     // ** Funciones para obtener la info de un paciente

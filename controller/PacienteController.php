@@ -57,8 +57,8 @@ class PacienteController extends Controller{
 
     public function actualizarPaciente(){
         try {
-            if(UsuariosRepository::singleton()->chequearPermiso('paciente_new', $_SESSION["id"])) {
-                PacientesRepository::singleton()->actualizarPaciente($_GET['id'], $_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], $_POST['tiene_documento'], $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
+            if(UsuariosRepository::singleton()->chequearPermiso('paciente_update', $_SESSION["id"])) {
+                PacientesRepository::singleton()->actualizarPaciente($_GET['id'], $_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
                 RooterController::singleton()->redireccionar('busqueda-pacientes');
             } else {
                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
@@ -66,14 +66,41 @@ class PacienteController extends Controller{
         } catch (Exception $e) {
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
-
     }
 
     public function redireccionarInfoPaciente(){
         try {
+            if(UsuariosRepository::singleton()->chequearPermiso('paciente_show', $_SESSION["id"])) {
+                $paciente = PacientesRepository::singleton()->infoPaciente($_GET['id']);
+                $view = new InfoPaciente();
+                $view->show($this->parametrosDeSesion(array('paciente' => $paciente)),PacientesRepository::singleton()->esNN($_GET['id']));                
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+    public function redireccionarEditarPaciente(){
+        try {
             $paciente = PacientesRepository::singleton()->infoPaciente($_GET['id']);
-            $view = new InfoPaciente();
+            $view = new EdicionPaciente();
             $view->show($this->parametrosDeSesion(array('paciente' => $paciente)));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+
+    public function borrarPaciente() {
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('paciente_destroy', $_SESSION['id'])) {
+                $paciente = PacientesRepository::singleton()->borrarPaciente($_GET['id']);
+                RooterController::singleton()->redireccionar('busqueda-pacientes');
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
+            }
         } catch (Exception $e) {
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }

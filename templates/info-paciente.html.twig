@@ -1,31 +1,16 @@
-{% extends 'layout.html.twig' %}
+{% extends 'info-paciente-nn.html.twig' %}
 
-{% block contenido %}
-
-<div class="contenido">
-    <div class="panel-principal">
-        <h1>{{paciente.nombre}} {{ paciente.apellido }}</h1>
-        <p><strong>Fecha de nac.:</strong> {{paciente.fecha_nac}}</p>
-        <p><strong>Lugar de nac.:</strong> {{paciente.lugar_nac}}</p>
-        <p><strong>Partido:</strong> {{paciente.partido_nombre}}</p>
-        <p><strong>Region sanitaria:</strong> {{paciente.region_sanitaria_nombre}}</p>
-        <p><strong>Localidad:</strong> {{paciente.localidad_nombre}}</p>
-        <p><strong>Domicilio:</strong> {{paciente.domicilio}}</p>
-        <p><strong>Genero:</strong> {{paciente.genero_nombre}}</p>
-        <p><strong>Posee documento:</strong> {{paciente.tiene_documento}}</p> {# reemplazar clave foranea por valor correspondiente #}
-        <p><strong>Tipo de doc.:</strong> {{paciente.tipo_doc_nombre}}</p>
-        <p><strong>Número de doc.:</strong> {{paciente.numero}}</p>
-        <p><strong>Número de historia clínica:</strong> {{paciente.nro_historia_clinica}}</p>
-        <p><strong>Número de carpeta:</strong> {{paciente.nro_carpeta}}</p>
-        <p><strong>Telefono:</strong> {{paciente.tel}}</p>
-        <p><strong>Obra social:</strong> {{paciente.obra_social_nombre}}</p>
-
-
-    <div class="botones">
-    <button class="boton-panel-principal" onclick="#" >Editar Paciente</button>
-    <button class="boton-panel-principal" onclick="#">Borrar Paciente</button>
-    </div>
-    </div>
-</div>
-
-{% endblock  %}
+{% block campos %}
+<p><strong>Fecha de nac.:</strong> {{paciente.fecha_nac}}</p>
+<p><strong>Lugar de nac.:</strong> {{paciente.lugar_nac}}</p>
+<p><strong>Partido:</strong> {{paciente.partido_nombre}}</p>
+<p><strong>Region sanitaria:</strong> {{paciente.region_sanitaria_nombre}}</p>
+<p><strong>Localidad:</strong> {{paciente.localidad_nombre}}</p>
+<p><strong>Domicilio:</strong> {{paciente.domicilio}}</p>
+<p><strong>Genero:</strong> {{paciente.genero_nombre}}</p>
+<p><strong>Posee documento:</strong> {{paciente.tiene_documento}}</p> {# reemplazar clave foranea por valor correspondiente #}
+<p><strong>Tipo de doc.:</strong> {{paciente.tipo_doc_nombre}}</p>
+<p><strong>Número de doc.:</strong> {{paciente.numero}}</p>
+<p><strong>Telefono:</strong> {{paciente.tel}}</p>
+<p><strong>Obra social:</strong> {{paciente.obra_social_nombre}}</p>
+{% endblock %}
