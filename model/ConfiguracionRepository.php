@@ -15,7 +15,8 @@ class ConfiguracionRepository extends PDORepository {
       $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'cantidad'");
       $query->execute(array($cantidad));
       $query = $db->prepare("UPDATE configuracion SET valor = ? WHERE variable = 'estadoDelSitio'");
-      $query->execute(array($estadoDelSitio? 1:0));
+      $e = $estadoDelSitio ? 1:0;
+      $query->execute(array($e));
       return true;
     } else {
       return null;
@@ -38,6 +39,19 @@ class ConfiguracionRepository extends PDORepository {
       $arregloParseado[$value[1]] = $value[2];
     }
     return $arregloParseado;
+  }
+
+  public function getPaginaEnMantenimiento() {
+    if( null !== ($db = $this->conectarse())) {
+      $query = $db->prepare("SELECT valor FROM configuracion WHERE variable = 'estadoDelSitio'");
+      $query->execute();
+      $result = $query->fetchAll();
+      echo $result[0]['valor'];
+      // Valor 0 Sitio desabilitado y 1 sitio habilitado
+      return $result[0]['valor'];
+    } else {
+      return null;
+    }
   }
 
 }
