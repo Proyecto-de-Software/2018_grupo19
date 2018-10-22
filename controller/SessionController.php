@@ -15,7 +15,9 @@ class SessionController extends Controller{
                 session_destroy();
                 return false;
             } else {
-                RooterController::singleton()->redireccionar('');
+                if (! (! AdministradorController::singleton()->sitioHabilitado() && $_SESSION['administrador'])){
+                    RooterController::singleton()->redireccionar('');   
+                }
                 return true;
             }
         } else {

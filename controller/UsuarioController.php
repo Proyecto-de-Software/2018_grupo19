@@ -7,12 +7,14 @@
 require_once 'model/UsuariosRepository.php';
 require_once 'model/RolesRepository.php';
 require_once 'controller/RooterController.php';
+require_once 'controller/RooterController.php';
 
 class UsuarioController extends Controller{
 
     public function redireccionarBusquedaUsuarios(){
         if(UsuariosRepository::singleton()->chequearPermiso('usuario_index', $_SESSION['id'])) {
-            if( null !== ($result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):1 ))  )  {
+            if( null !== ($result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):0 ))  )  {
+                var_dump($result);
                 $view = new BusquedaUsuarios();
                 $view->show($this->parametrosDeSesion(array('resultados' => $result["usuarios"], 'paginaActual' => isset($_GET['pagina-actual']) ? $_GET['pagina-actual']:1, 'cantidadPaginas' => $result["cantidadTotal"], "nombreDeUsuario" => isset($_GET["nombre-de-usuario"])? $_GET["nombre-de-usuario"]:null , "estado" => isset($_GET["estado"])? $_GET["estado"]:null )));
             } else {
