@@ -65,6 +65,14 @@ class PacientesRepository extends PDORepository {
         return $query->fetch();
     }
 
+    public function esNN($id) {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM paciente p WHERE p.id = ? AND p.apellido = 'NN' AND p.nombre = 'NN'";
+        $query = $db->prepare($sql);
+        $query->execute(array($id));
+        return $query->rowCount();
+    }
+
     public function infoPaciente($id) {
         $paciente = $this->paciente($id);
         $paciente['localidad_nombre'] = $this->localidadConId($paciente['localidad_id'])['nombre'];

@@ -73,7 +73,7 @@ class PacienteController extends Controller{
         try {
             $paciente = PacientesRepository::singleton()->infoPaciente($_GET['id']);
             $view = new InfoPaciente();
-            $view->show($this->parametrosDeSesion(array('paciente' => $paciente)));
+            $view->show($this->parametrosDeSesion(array('paciente' => $paciente)),PacientesRepository::singleton()->esNN($_GET['id']));
         } catch (Exception $e) {
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
