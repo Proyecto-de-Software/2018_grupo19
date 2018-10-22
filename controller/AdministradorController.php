@@ -10,42 +10,49 @@ require_once 'controller/SessionController.php';
 
 class AdministradorController extends Controller{
 
-    public function redireccionarConfiguracion(){
-      if (UsuariosRepository::singleton()->chequearPermiso('configuracion_update', $_SESSION['id'])) {
-        if ( null !== ($result = ConfiguracionRepository::singleton()->getConfiguracion())) {
-          $view = new Configuracion();
-          $view->show($this->parametrosDeSesion($result));
-        } else {
-          echo 'Error en la BD';
-        }
-      } else {
-        echo 'Error en los permisos';
-      }
-    }
-
-    public function redireccionarSitioEnMantenimiento(){ 
+    public function redireccionarSitioEnMantenimiento(){
         $view = new SitioEnMantenimiento();
         $view->show();
     }
 
-    public function actualizarConfiguracion(){
-      if (UsuariosRepository::singleton()->chequearPermiso('configuracion_update', $_SESSION["id"]) ){
-        if (ConfiguracionRepository::singleton()->actualizarConfiguracion($_POST["titulo"], $_POST["mail"], $_POST["descripcion"], $_POST["cantidad"], isset($_POST["estadoDelSitio"]))){
-          RooterController::singleton()->redireccionar('');
-        } else {
-          echo 'No se pudo actualizar los permisos, error en la bd';
+    public function redireccionarConfiguracion(){
+        try {
+            if (UsuariosRepository::singleton()->chequearPermiso('configuracion_update', $_SESSION['id'])) {
+                $result = ConfiguracionRepository::singleton()->getConfiguracion();
+                $view = new Configuracion();
+                $view->show($this->parametrosDeSesion($result));
+            }
+            else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para accceder a la configuracion del sitio');
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
-      } else {
-        echo 'No se tiene permisos';
-      }
+    }
+
+    public function actualizarConfiguracion(){
+        try {
+            if (UsuariosRepository::singleton()->chequearPermiso('configuracion_update', $_SESSION["id"]) ){
+                ConfiguracionRepository::singleton()->actualizarConfiguracion($_POST["titulo"], $_POST["mail"], $_POST["descripcion"], $_POST["cantidad"], isset($_POST["estadoDelSitio"]));
+                RooterController::singleton()->redireccionar('');
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la configuracion del sitio');
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
     }
 
     public function sitioHabilitado() {
-      return (1 == ConfiguracionRepository::singleton()->getPaginaEnMantenimiento());
+        try {
+            return (1 == ConfiguracionRepository::singleton()->getPaginaEnMantenimiento());
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
     }
 
-    public function hayUnAdministrador() { 
-      return isset($_SESSION["administrador"]) ? $_SESSION["administrador"]:false;
+    public function hayUnAdministrador() {
+        return isset($_SESSION["administrador"]) ? $_SESSION["administrador"]:false;
     }
 
 }

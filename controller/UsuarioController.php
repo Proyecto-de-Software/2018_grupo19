@@ -12,69 +12,100 @@ require_once 'controller/RooterController.php';
 class UsuarioController extends Controller{
 
     public function redireccionarBusquedaUsuarios(){
-        if(UsuariosRepository::singleton()->chequearPermiso('usuario_index', $_SESSION['id'])) {
-            if( null !== ($result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):0 ))  )  {
-                var_dump($result);
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('usuario_index', $_SESSION['id'])) {
+                $result = UsuariosRepository::singleton()->usuarios(isset($_GET['nombre-de-usuario'])? $_GET['nombre-de-usuario']:null , isset($_GET['estado'])? $_GET['estado']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):1 );
                 $view = new BusquedaUsuarios();
                 $view->show($this->parametrosDeSesion(array('resultados' => $result["usuarios"], 'paginaActual' => isset($_GET['pagina-actual']) ? $_GET['pagina-actual']:1, 'cantidadPaginas' => $result["cantidadTotal"], "nombreDeUsuario" => isset($_GET["nombre-de-usuario"])? $_GET["nombre-de-usuario"]:null , "estado" => isset($_GET["estado"])? $_GET["estado"]:null )));
             } else {
-                echo 'Error en la bd';
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para accceder a la busqueda de usuarios');
             }
-        } else {
-            // Redireccion pantalla de falta de permisos
-            echo 'Error de permisos';
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
 
     public function redireccionarCreacionUsuario(){
-        if(UsuariosRepository::singleton()->chequearPermiso('usuario_new', $_SESSION["id"])) {
-            if(null !== ($todosLosRoles = RolesRepository::singleton()->getAllRoles())) {
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('usuario_new', $_SESSION["id"])) {
+                $todosLosRoles = RolesRepository::singleton()->getAllRoles();
                 $view = new CreacionUsuario();
                 $view->show($this->parametrosDeSesion(array('roles' => $todosLosRoles)));
             } else {
-                echo 'error en la bd';
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para accceder a la creacion de usuarios');
             }
-        } else {
-            echo 'no se tienen los permisos';
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
+
     }
 
     public function redireccionarInfoUsuario(){
-        if(UsuariosRepository::singleton()->chequearPermiso('usuario_show', $_SESSION["id"])) {
-            if((null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) && (null !== ($rolesUsuario = RolesRepository::singleton()->getRolesUsuario($_GET['id']))) ) {
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('usuario_show', $_SESSION["id"])) {
+                $usuario = UsuariosRepository::singleton()->usuario($_GET['id']);
+                $rolesUsuario = RolesRepository::singleton()->getRolesUsuario($_GET['id']);
                 $view = New InfoUsuario();
                 $view->show($this->parametrosDeSesion(array('usuario' => $usuario, 'roles' => $rolesUsuario)));
-            } else { echo 'error en la bd'; }
-        } else { echo 'no se tiene permisos'; }
+            } else {
+                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para accceder a la informacion de usuarios');
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+
     }
 
     public function redireccionarEdicionUsuario(){
-        if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
-            if((null !== ($usuario = UsuariosRepository::singleton()->usuario($_GET['id']))) && (null !== ($todosLosRoles = RolesRepository::singleton()->getAllRoles())) && (null !== ($rolesUsuario = RolesRepository::singleton()->getRolesUsuario($_GET['id']))) ) {
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
+                $usuario = UsuariosRepository::singleton()->usuario($_GET['id']);
+                $todosLosRoles = RolesRepository::singleton()->getAllRoles();
+                $rolesUsuario = RolesRepository::singleton()->getRolesUsuario($_GET['id']);
                 $view = New EdicionUsuario();
                 $view->show($this->parametrosDeSesion(array('usuario' => $usuario, 'todoslosroles' => $todosLosRoles, 'rolesUsuario' => $rolesUsuario)));
-            } else { echo 'error en la bd'; }
-        } else { echo 'no se tiene permisos'; }
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para accceder a la edicion de usuarios');
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
     }
 
     public function insertarUsuario(){
-        UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],$_POST['roles']);
-        RooterController::singleton()->redireccionar('busqueda-usuarios');
+        try {
+            UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],$_POST['roles']);
+            RooterController::singleton()->redireccionar('busqueda-usuarios');
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+
     }
 
     public function actualizarUsuario(){
-        if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
-            if (null !== UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],isset($_POST['roles'])?$_POST['roles']:null)) {
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
+                UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],isset($_POST['roles'])?$_POST['roles']:null);
                 RooterController::singleton()->redireccionar('busqueda-usuarios');
-            } else { echo 'error en la bd'; }
-        } else { echo 'no se tiene permisos'; }
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de usuarios');
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
     }
 
     public function borrarUsuario() {
-        if(UsuariosRepository::singleton()->chequearPermiso('usuario_destroy', $_SESSION["id"])) {
-            if (null !== UsuariosRepository::singleton()->borrarUsuario($_GET['id'])) {
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('usuario_destroy', $_SESSION["id"])) {
+                UsuariosRepository::singleton()->borrarUsuario($_GET['id']);
                 RooterController::singleton()->redireccionar('busqueda-usuarios');
-            } else { echo 'error en la bd'; }
-        } else { echo 'no se tiene permisos'; }
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para borrar un usuario'); 
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+
     }
 }
