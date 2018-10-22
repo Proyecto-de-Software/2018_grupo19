@@ -18,7 +18,7 @@ class PacientesRepository extends PDORepository {
         $query->execute(array($apellido, $nombre, $fecha_nac, $lugar_nac, $localidad_id, $region_sanitaria_id, $domicilio, $genero_id, $tiene_documento, $tipo_doc_id, $numero, $tel, $nro_historia_clinica, $nro_carpeta, $obra_social_id));
     }
 
-    public function pacientes($historia_clinica = null, $apellido = null, $nombre = null, $documento = null, $tipo_doc = null) {
+    public function pacientes($historia_clinica = null, $apellido = null, $nombre = null, $documento = null, $tipo_doc = null, $paginaActual = 0) {
         $db = $this->conectarse();
         $sql = "SELECT * FROM paciente p WHERE TRUE";
         //El WHERE TRUE es para despues siempre concatenar a la consulta con ANDs
@@ -47,8 +47,14 @@ class PacientesRepository extends PDORepository {
         }
         $query = $db->prepare($sql);
         $query->execute($parametros);
+        $cantidadPaginas = ceil( $query->rowCount() / $this->cantidadPorPagina() );
 
-        return $query->fetchAll();
+        $primero = ($paginaActual * $this->cantidadPorPagina() );
+        $sql = $sql . " LIMIT " . $primero . ', ' . (($this->cantidadPorPagina()) );
+        $query = $db->prepare($sql);
+        $query->execute($parametros);
+        $result = array("cantidadTotal" => $cantidadPaginas, "pacientes" => $query->fetchAll());
+        return $result;
     }
 
     public function paciente($id) {

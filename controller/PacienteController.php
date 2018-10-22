@@ -12,9 +12,10 @@ class PacienteController extends Controller{
     public function redireccionarBusquedaPacientes(){
         try {
             if (UsuariosRepository::singleton()->chequearPermiso('paciente_index', $_SESSION["id"])) {
-                $result = PacientesRepository::singleton()->pacientes(isset( $_GET['nro_historia_clinica'])?$_GET['nro_historia_clinica']:null , isset($_GET['apellido'])?$_GET['apellido']:null , isset($_GET['nombre'])?$_GET['nombre']:null , isset($_GET['dni'])?$_GET['dni']:null,isset($_GET['tipo_doc_id'])?$_GET['tipo_doc_id']:null);
+                $result = PacientesRepository::singleton()->pacientes(isset( $_GET['nro_historia_clinica'])?$_GET['nro_historia_clinica']:null , isset($_GET['apellido'])?$_GET['apellido']:null , isset($_GET['nombre'])?$_GET['nombre']:null , isset($_GET['dni'])?$_GET['dni']:null,isset($_GET['tipo_doc_id'])?$_GET['tipo_doc_id']:null, isset($_GET["pagina-actual"]) ? ($_GET['pagina-actual'] - 1):0);
+
                 $view = new BusquedaPacientes();
-                $view->show($this->parametrosDeSesion(array('resultados'=>$result)));
+                $view->show($this->parametrosDeSesion(array('resultados'=>$result['pacientes'], 'paginaActual' => isset($_GET['pagina-actual']) ? $_GET['pagina-actual']:1, 'cantidadPaginas' => $result["cantidadTotal"], 'nroHistoriaClinica' => isset($_GET['nro_historia_clinica'])?$_GET['nro_historia_clinica']:null, 'nombre' => isset($_GET['nombre'])?$_GET['nombre']:null, 'apellido' => isset($_GET['apellido'])?$_GET['apellido']:null, 'dni' => isset($_GET['dni'])?$_GET['dni']:null, 'tipoDocId' => isset($_GET['tipo_doc_id'])?$_GET['tipo_doc_id']:null )));
             } else {
                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para accceder a la busqueda de pacientes');
             }
