@@ -89,6 +89,7 @@ footer {
   position: relative;
   background-color:#C5CAE9;
   padding: 5px 5px 5px 0px;
+  margin-right:35px;
 } 
 
 .dropdown ul {
@@ -101,12 +102,15 @@ footer {
 .dropdown ul li {
   float: none;
   width: auto;
-  background-color:#C5CAE9;
+  background-color:#C5CAE9; 
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .dropdown ul a {
   white-space: nowrap;
 }
+
 .dropdown:hover ul {
   visibility: visible;
   border-radius: 4px;
@@ -185,7 +189,7 @@ textarea {
 
 .tarjeta-resultado {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border: 0.5px solid;
   width: 600px; /*se achica responsive*/

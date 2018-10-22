@@ -1,5 +1,9 @@
 {% extends "layout.html.twig" %}
-
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/busqueda-usuarios.css">
+    <link rel="stylesheet" href="templates/styles/busqueda-pacientes.css">
+{% endblock %}
 {% block contenido %}
 
     <div class="contenido">
@@ -32,7 +36,11 @@
             <div class="tabla-resultados">
                 {% for resultado in resultados %}
                     <a href="index.php?comando=info-paciente&id={{resultado.id}}" class="tarjeta-resultado">
-                        <h1>{{resultado.nombre}}</h1>
+                        <div class="nombreyfoto-tarjeta-usuario"> 
+                            <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
+                            <h1>{{resultado.nombre}} {{resultado.apellido}}</h1>
+                        </div>
+                        <h1 style="margin-right:10px;">Historia Clinica: {{resultado.nro_historia_clinica}}</h1>
                     </a>
                 {% endfor %}
             </div>
