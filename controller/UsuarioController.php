@@ -74,8 +74,12 @@ class UsuarioController extends Controller{
 
     public function insertarUsuario(){
         try {
-            UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],$_POST['roles']);
-            RooterController::singleton()->redireccionar('busqueda-usuarios');
+            if(UsuariosRepository::singleton()->chequearPermiso('usuario_new', $_SESSION["id"])) {
+                UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],$_POST['roles']);
+                RooterController::singleton()->redireccionar('busqueda-usuarios');
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para accceder a la edicion de usuarios');
+            }
         } catch (Exception $e) {
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
