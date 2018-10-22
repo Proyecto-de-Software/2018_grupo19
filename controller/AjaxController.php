@@ -17,6 +17,30 @@ class AjaxController extends Controller{
         }
     }
 
+    public function obtenerGeneros() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerGeneros()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+    public function obtenerTiposDeDocumento() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerTiposDeDocumento()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+    public function obtenerObrasSociales() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerObrasSociales()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
     public function obtenerRegionSanitaria() {
         try {
             echo (json_encode(AjaxRepository::singleton()->obtenerRegionSanitaria($_GET['partido'])));

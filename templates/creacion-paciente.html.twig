@@ -53,11 +53,7 @@
             </div>
             <div class="label-input">
                 <label>Género:</label>
-                <select name="genero_id">
-                    <option value="1">Masculino</option>
-                    <option value="2">Femenino</option>
-                    <option value="3">Otro</option>
-                </select>
+                <select id="generos" name="genero_id"></select>
             </div>
             <div class="label-input">
                 <label>Posee documento:</label>
@@ -65,9 +61,7 @@
             </div>
             <div class="label-input">
                 <label>Tipo de documento:</label>
-                <select name="tipo_doc_id">
-                    <option value="1">DNI</option>
-                </select>
+                <select id="tipos-doc" name="tipo_doc_id"></select>
             </div>
             <div class="label-input">
                 <label>Nro de documento:</label>
@@ -87,9 +81,7 @@
             </div>
             <div class="label-input">
                 <label>Obra social:</label>
-                <select name="obra_social_id">
-                    <option value="1">OSDE</option>
-                </select>
+                <select id="obras-sociales" name="obra_social_id"></select>
             </div>
         </form>
         <button type="submit" form="formulario" class="boton-panel-principal">Crear paciente</button>
@@ -100,7 +92,12 @@
 
 $(document).ready(function(){
     obtenerPartidos();
+    obtenerGeneros();
+    obtenerTiposDeDocumento();
+    obtenerObrasSociales();
 
+
+    //**
     //Event handler para cuando se ingresa un partido o se pone el campo en blanco
     $("#partidos").on("input",function () {
         if ($("#partidos").val()) {
@@ -111,12 +108,34 @@ $(document).ready(function(){
             $('#localidades').empty();
         }
     });
+    //**
 });
 
 function obtenerPartidos() {
     $.get("index.php?comando=obtener-partidos",
     function (partidos) {
         $.each($.parseJSON(partidos),function (index, partido) {$('<option>').val(partido['id']).text(partido['nombre']).appendTo('#partidos');})
+    })
+}
+
+function obtenerGeneros() {
+    $.get("index.php?comando=obtener-generos",
+    function (generos) {
+        $.each($.parseJSON(generos),function (index, genero) {$('<option>').val(genero['id']).text(genero['nombre']).appendTo('#generos');})
+    })
+}
+
+function obtenerTiposDeDocumento() {
+    $.get("index.php?comando=obtener-tipos-doc",
+    function (tiposDoc) {
+        $.each($.parseJSON(tiposDoc),function (index, tipo) {$('<option>').val(tipo['id']).text(tipo['nombre']).appendTo('#tipos-doc');})
+    })
+}
+
+function obtenerObrasSociales() {
+    $.get("index.php?comando=obtener-obras-sociales",
+    function (obrasSociales) {
+        $.each($.parseJSON(obrasSociales),function (index, obraSocial) {$('<option>').val(obraSocial['id']).text(obraSocial['nombre']).appendTo('#obras-sociales');})
     })
 }
 
