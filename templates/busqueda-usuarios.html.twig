@@ -11,8 +11,9 @@
     {% block busqueda %}
         <form class="formulario-busqueda" action="index.php" method="get">
             <input type="hidden" name="comando" value="busqueda-usuarios">
-            <input type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar..">
-            <select name="estado">
+            <input type="hidden" name="pagina-actual" value="1">
+            <input type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar.." value="{{nombreDeUsuario}}">
+            <select name="estado" {# select="{{estado}} " #} >
                 <option value=""></option>
                 <option value="1">Activo</option>
                 <option value="0">Bloqueado</option>
@@ -35,6 +36,15 @@
                 </div>
             </a>
         {% endfor %}
+        </div>
+        <div class="paginas">
+            {% if cantidadPaginas != 0 %}
+                {% for i in 1..cantidadPaginas %}
+                    <a href="index.php?comando=busqueda-usuarios&pagina-actual={{i}}&nombre-de-usuario={{nombreDeUsuario}}&estado={{estado}}">{{i}}</a>
+                {% endfor %}
+            {% else %}
+                <p> No se han encontrado resultados </p>
+            {% endif %}
         </div>
         <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-usuario'" >Crear usuario</button>
     </div>

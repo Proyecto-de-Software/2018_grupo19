@@ -27,27 +27,21 @@ class UsuariosRepository extends PDORepository {
           $sql = $sql." AND u.username LIKE ?";
           array_push($parametros,$nombreUsuario.'%');
         }
-
-        $primero = ($paginaActual * $this->cantidadPorPagina() ) + 1;
-        $sql = $sql . " LIMIT " . $primero . ', ' . ($primero + $this->cantidadPorPagina() );
-
         $query = $db->prepare($sql);
         $query->execute($parametros);
+        $cantidadPaginas = ceil( $query->rowCount() / $this->cantidadPorPagina() );
 
-        return $query->fetchAll();
+        $primero = ($paginaActual * $this->cantidadPorPagina() );
+        $sql = $sql . " LIMIT " . $primero . ', ' . (($this->cantidadPorPagina()) );
+        $query = $db->prepare($sql);
+        $query->execute($parametros);
+        $result = array("cantidadTotal" => $cantidadPaginas, "usuarios" => $query->fetchAll());
+        return $result;
       } else {
         return null;
     }
 
   }
-
-    public function cantidadDePaginas() {
-      if (null !== ($db = $this->conectarse())) {
-        $query = $db->prepare("SELECT COUNT(id) AS cantidad FROM usuario ");
-        $query->execute();
-        return ($query->fetch()) / $this->cantidadPorPaginas();
-      }
-    }
 
     public function usuario($id) {
         if (null !== ($db = $this->conectarse())) {
@@ -90,6 +84,10 @@ class UsuariosRepository extends PDORepository {
             $sql = "UPDATE `usuario` SET `email` = ?, `activo` = ?, `updated_at` = ?, `first_name` = ?, `last_name` = ? WHERE usuario.id = $id";
             $query = $db->prepare($sql);
             $query->execute(array($email,$activo,date("Y-m-d H:i:s"),$first_name,$last_name));
+            $this->limpiarRoles($id);
+            if ($roles) {
+                $this->agregarRoles($id,$roles);
+            }
             return true;
         } else {
             return null;

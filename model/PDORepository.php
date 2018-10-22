@@ -33,7 +33,7 @@ abstract class PDORepository {
 
     public function cantidadPorPagina() {
       if( null !== ($db = $this->conectarse())) {
-        $query = $db->prepare("SELECT valor FROM configuracion WHERE variable = 'cantidadPorPagina'");
+        $query = $db->prepare("SELECT valor FROM configuracion WHERE variable = 'cantidad'");
         $query->execute();
         if($query->rowCount() == 1) {
           $fila = $query->fetch();
