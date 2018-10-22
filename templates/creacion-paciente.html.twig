@@ -13,79 +13,81 @@
 
 <div class="contenido">
     <div class="panel-principal">
-        <form id="formulario" class="formulario-principal" action="index.php?comando=insertar-paciente" method="post">
-            <h1>Creando paciente</h1>
+        <form id="formulario" class="formulario-principal" {% block accion %}action="index.php?comando=insertar-paciente"{% endblock %} method="post">
+            <h1>{% block tituloAccion %}Creando paciente{% endblock %}</h1>
             <div class="label-input">
                 <label>Nombre de Paciente:</label>
-                <input class="inputf" type="text" name="nombre">
+                <input class="inputf" type="text" name="nombre" value="{% block nombre_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Apellido de Paciente:</label>
-                <input class="inputf" type="text" name="apellido">
+                <input class="inputf" type="text" name="apellido" value="{% block apellido_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Fecha de nac.:</label>
-                <input class="inputf" type="date" name="fecha_nac">
+                <input class="inputf" type="date" name="fecha_nac" value="{% block fecha_nac_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Lugar de nac.:</label>
-                <input class="inputf" type="text" name="lugar_nac">
+                <input class="inputf" type="text" name="lugar_nac" value="{% block lugar_nac_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Partido:</label>
-                <select name="partido" id="partidos" required>
+                <select name="partido" id="partidos" required value="{% block partido_paciente %}{% endblock %}">
                     <option value=""></option>
                 </select>
             </div>
             <div class="label-input">
                 <label>Region sanitaria:</label>
-                <input id="region_sanitaria_id" class="inputf" type="text" readonly="readonly" name="region_sanitaria_id">
+                <input id="region_sanitaria_id" class="inputf" type="text" readonly="readonly" name="region_sanitaria_id" value="{% block region_sanitaria_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Localidad:</label>
-                <select id="localidades" name="localidad_id">
+                <select id="localidades" name="localidad_id" value="{% block localidad_paciente %}{% endblock %}">
                     <option value=""></option>
                 </select>
             </div>
             <div class="label-input">
                 <label>Domicilio:</label>
-                <input class="inputf" type="text" name="domicilio">
+                <input class="inputf" type="text" name="domicilio" value="{% block domicilio_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Género:</label>
-                <select id="generos" name="genero_id"></select>
+                <select id="generos" name="genero_id" value="{% block genero_paciente %}{% endblock %}"></select>
             </div>
             <div class="label-input">
                 <label>Posee documento:</label>
-                <input class="inputf checkb" name="tiene_documento" type="checkbox">
+                <input class="inputf checkb" name="tiene_documento" type="checkbox" value="{% block tiene_documento_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Tipo de documento:</label>
-                <select id="tipos-doc" name="tipo_doc_id"></select>
+                <select id="tipos-doc" name="tipo_doc_id" value="{% block tipo_doc_paciente %}{% endblock %}"></select>
             </div>
             <div class="label-input">
                 <label>Nro de documento:</label>
-                <input class="inputf" name="numero" type="text">
+                <input class="inputf" name="numero" type="text" value="{% block numero_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Nro de historia clínica:</label>
-                <input class="inputf" name="nro_historia_clinica" type="number">
+                <input class="inputf" name="nro_historia_clinica" type="number" value="{% block nro_historia_clinica_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Nro de carpeta:</label>
-                <input class="inputf" name="nro_carpeta" type="number">
+                <input class="inputf" name="nro_carpeta" type="number" value="{% block nro_carpeta_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Telefono:</label>
-                <input class="inputf" name="tel" type="text">
+                <input class="inputf" name="tel" type="text" value="{% block tel_paciente %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Obra social:</label>
-                <select id="obras-sociales" name="obra_social_id"></select>
+                <select id="obras-sociales" name="obra_social_id" value="{% block obra_social_paciente %}{% endblock %}"></select>
             </div>
         </form>
-        <button type="submit" form="formulario" class="boton-panel-principal">Crear paciente</button>
+        <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
+        {% block cargaDeNN %}
         <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente-nn'">Cargar como NN</button>
+        {% endblock %}
     </div>
 </div>
 
