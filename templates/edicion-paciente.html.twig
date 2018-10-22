@@ -22,3 +22,7 @@
 {% block obra_social_paciente %}{{paciente.obra_social_id}}{% endblock %}
 
 {% block tituloAccion %}Editando paciente{% endblock %}
+
+{% block onDocumentReady %}
+{{parent()}}
+{% endblock %}

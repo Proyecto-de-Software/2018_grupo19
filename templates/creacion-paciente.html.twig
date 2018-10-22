@@ -94,6 +94,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+    {% block onDocumentReady %}
     obtenerPartidos();
     obtenerGeneros();
     obtenerTiposDeDocumento();
@@ -112,6 +113,8 @@ $(document).ready(function(){
         }
     });
     //**
+
+    {% endblock %}
 });
 
 function obtenerPartidos() {
