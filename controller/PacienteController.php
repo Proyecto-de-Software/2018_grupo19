@@ -78,4 +78,14 @@ class PacienteController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function redireccionarEditarPaciente(){
+        try {
+            $paciente = PacientesRepository::singleton()->infoPaciente($_GET['id']);
+            $view = new EdicionPaciente();
+            $view->show($this->parametrosDeSesion(array('paciente' => $paciente)));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }

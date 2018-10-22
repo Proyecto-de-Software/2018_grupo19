@@ -153,6 +153,14 @@ class RooterController extends Controller{
                 PacienteController::singleton()->redireccionarInfoPaciente();
                 break;
 
+                case 'editar-paciente':
+                PacienteController::singleton()->redireccionarEditarPaciente();
+                break;
+
+                case 'actualizar-paciente':
+                PacienteController::singleton()->actualizarPaciente();
+                break;
+
                 /*
                 ** Pedidos AJAX
                 */
