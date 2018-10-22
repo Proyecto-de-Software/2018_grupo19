@@ -44,6 +44,28 @@ class UsuariosRepository extends PDORepository {
         return $query->fetch();
     }
 
+    public function usuarioContrasena($username, $password) {
+        $db = $this->conectarse();
+        $query = $db->prepare("SELECT * FROM usuario WHERE username = ? AND password = ?");
+        $query->execute(array($username, $password));
+        if ($query->rowCount() == 0) {
+            throw new Exception("No coinciden los campos usuario y contrasena");
+        }
+        return $query->fetch();
+    }
+
+    public function isAdministrador($id) {
+        $db = $this->conectarse();
+        $query = $db->prepare("SELECT r.nombre FROM usuario u INNER JOIN usuario_tiene_rol utr ON (u.id = utr.usuario_id) INNER JOIN rol r ON (utr.rol_id = r.id) WHERE u.id = ?");
+        $query->execute(array($id));
+        while($rol = $query->fetch()) {
+            if($rol['nombre'] == 'Administrador') {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function idDeNombreDeUsuario($username) {
         $db = $this->conectarse();
         $sql = "SELECT * FROM usuario u WHERE u.username = ?";

@@ -4,26 +4,31 @@
 **  Controladores relacionados al manejo de sesiones
 */
 
-require_once 'model/SesionRepository.php';
+require_once 'model/UsuariosRepository.php';
 require_once 'controller/RooterController.php';
 
 class SessionController extends Controller{
 
     public function login(){
         try {
-            /*SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena']); Esto estaba antes
-            RooterController::singleton()->redireccionar('');*/
-            if(SesionRepository::singleton()->iniciarSesion($_POST['usuario'], $_POST['contrasena'])){
-                if(! AdministradorController::singleton()->sitioHabilitado() && !$_SESSION['administrador']) {
-                    session_destroy();
-                    return false;
-                } else {
-                    RooterController::singleton()->redireccionar('');
-                    return true;
-                }
+            $usuario = UsuariosRepository::singleton()->usuarioContrasena($_POST['usuario'], $_POST['contrasena']);
+            if ($usuario['activo']) {
+                $_SESSION['id'] = $usuario["id"];
+                $_SESSION['username'] = $usuario['username'];
+                $_SESSION['activo'] = $usuario['activo'];
+                $_SESSION['first_name'] = $usuario['first_name'];
+                $_SESSION['last_name'] = $usuario['last_name'];
+                $_SESSION['administrador'] = UsuariosRepository::singleton()->isAdministrador($usuario["id"]);
             } else {
-                echo 'Logueo Incorrecto';
+                $this->redireccionarError('No se pudo iniciar sesion', "El usuario con el que intenta acceder se encuentra bloqueado");
+            }
+            if(! AdministradorController::singleton()->sitioHabilitado() && !$_SESSION['administrador']) {
+                session_destroy();
                 return false;
+            } else {
+                RooterController::singleton()->redireccionar('');
+                return true;
+            }
         } catch (Exception $e) {
             $this->redireccionarError('No se pudo iniciar sesion', $e->getMessage());
         }
@@ -38,7 +43,9 @@ class SessionController extends Controller{
         if(isset($_SESSION["id"]) ) {
             session_destroy();
             RooterController::singleton()->redireccionar('');
-        } else { echo 'No esta inciada ninguna session';}
+        } else {
+            $this->redireccionarError('Error en cierre de sesion', 'No habia sesion iniciada');
+        }
     }
 
 }
