@@ -1,10 +1,14 @@
 {% extends 'layout.html.twig' %}
 
+{% block links %}
+<script src="../vendor/components/jquery/jquery.min.js"></script>
+{% endblock %}
+
 {% block contenido %}
 
 <div class="contenido">
     <div class="panel-principal">
-        <form class="formulario-principal" action="index.php?comando=actualizar-usuario&id={{usuario.id}}" method="post" id="formulario">
+        <form class="formulario-principal" action="index.php?comando=actualizar-usuario&id={{usuario.id}}" method="post" id="formulario" onsubmit="return chequearRoles()">
             <h1>{{usuario.first_name}} {{usuario.last_name}}</h1>
             <div class="label-input">
                 <label>Nombre:</label>
@@ -39,4 +43,13 @@
         <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
     </div>
 </div>
+
+<script type="text/javascript">
+    function chequearRoles() {
+        if ($("[name='roles[]']:checked").length <= 0) {
+            alert("Debe seleccionar al menos un rol")
+            return false;
+        }
+    }
+</script>
 {% endblock %}

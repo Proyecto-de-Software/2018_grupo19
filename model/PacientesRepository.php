@@ -77,6 +77,7 @@ class PacientesRepository extends PDORepository {
         $paciente = $this->paciente($id);
         $paciente['localidad_nombre'] = $this->localidadConId($paciente['localidad_id'])['nombre'];
         $paciente['partido_nombre'] = $this->partidoDe($paciente['localidad_id'])['nombre'];
+        $paciente['partido_id'] = $this->partidoDe($paciente['localidad_id'])['id'];
         $paciente['genero_nombre'] = $this->generoConId($paciente['genero_id'])['nombre'];
         $paciente['tipo_doc_nombre'] = $this->tipoDocConId($paciente['tipo_doc_id'])['nombre'];
         $paciente['obra_social_nombre'] = $this->obraSocialConId($paciente['obra_social_id'])['nombre'];
@@ -103,7 +104,7 @@ class PacientesRepository extends PDORepository {
 
     public function partidoDe($id) {
         $db = $this->conectarse();
-        $sql = "SELECT p.nombre FROM localidad l INNER JOIN partido p ON(p.id = l.partido_id) WHERE l.id = ?";
+        $sql = "SELECT * FROM localidad l INNER JOIN partido p ON(p.id = l.partido_id) WHERE l.id = ?";
         $query = $db->prepare($sql);
         $query->execute(array($id));
         return $query->fetch();
