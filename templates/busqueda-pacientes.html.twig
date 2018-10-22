@@ -8,23 +8,23 @@
                 <input type="hidden" name="comando" value="busqueda-pacientes">
                 <h1>Buscar paciente</h1>
                 <div class="label-input">
-                <label>Historia clínica:</label><input class="inputf" name="nro_historia_clinica" type="text">
+                    <label>Historia clínica:</label><input class="inputf" name="nro_historia_clinica" type="text">
                 </div>
                 <div class="label-input">
-                <label>Apellido:</label><input class="inputf" name="apellido" type="text">
+                    <label>Apellido:</label><input class="inputf" name="apellido" type="text">
                 </div>
                 <div class="label-input">
-                <label>Nombre:</label><input class="inputf" name="nombre" type="text">
+                    <label>Nombre:</label><input class="inputf" name="nombre" type="text">
                 </div>
                 <div class="label-input">
-                <label>Tipo doc:</label>
-                <select name="tipo_doc_id">
-                    <option value=""></option>
-                    <option value="1">DNI</option>
-                </select>
+                    <label>Tipo doc:</label>
+                    <select name="tipo_doc_id">
+                        <option value=""></option>
+                        <option value="1">DNI</option>
+                    </select>
                 </div>
                 <div class="label-input">
-                <label>DNI:</label><input class="inputf" name="dni" type="number">
+                    <label>DNI:</label><input class="inputf" name="dni" type="number">
                 </div>
                 <button type="submit" form="formulario-busqueda" class="boton-panel-principal">Buscar</button>
             </form>
@@ -36,6 +36,31 @@
                     </a>
                 {% endfor %}
             </div>
+
+            <div class="paginas">
+                {% if cantidadPaginas != 0 %}
+                    {% if paginaActual != 1%}
+                        <a href="index.php?comando=busqueda-pacientes&pagina-actual={{paginaActual -1}}&nro_historia_clinica={{nroHistoriaClinica}}&nombre={{nombre}}&apellido={{apellido}}&dni={{dni}}&tipo_doc_id={{tipoDocId}}&">Atrás</a>
+                    {% endif %}
+                    {% for i in 1..cantidadPaginas %}
+                        <a href="index.php?comando=busqueda-pacientes&pagina-actual={{i}}&nro_historia_clinica={{nroHistoriaClinica}}&nombre={{nombre}}&apellido={{apellido}}&dni={{dni}}&tipo_doc_id={{tipoDocId}}&">
+                            {% if i == paginaActual %}
+                                <strong>{{i}}</strong>
+                            {% else %}
+                                {{i}}
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                    {% if paginaActual != cantidadPaginas%}
+                        <a href="index.php?comando=busqueda-pacientes&pagina-actual={{paginaActual +1}}&nro_historia_clinica={{nroHistoriaClinica}}&nombre={{nombre}}&apellido={{apellido}}&dni={{dni}}&tipo_doc_id={{tipoDocId}}&">Siguiente</a>
+                    {% endif %}
+                {% else %}
+                    <p>
+                        No se han encontrado resultados
+                    </p>
+                {% endif %}
+            </div>
+
             <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente'">Crear paciente</button>
         </div>
     </div>
