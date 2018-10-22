@@ -1,39 +1,43 @@
 {% extends "layout.html.twig" %}
 
-{% block estilos %}
-    {{parent()}}
-    <link rel="stylesheet" href="templates/styles/busqueda-usuarios.css">
-{% endblock %}
-
 {% block contenido %}
 
-<div class="contenido">
-    {% block busqueda %}
-        <form action="index.php" method="get">
-            <input type="hidden" name="comando" value="busqueda-pacientes">
-            <h1>Buscar paciente</h1>
-            <label>Historia clínica:</label><input name="nro_historia_clinica" type="text">
-            <label>Apellido:</label><input name="apellido" type="text">
-            <label>Nombre:</label><input name="nombre" type="text">
-            <label>Tipo doc:</label><select name="tipo_doc_id">
-                <option value=""></option>
-                <option value="1">DNI</option>
-            </select>
-            <label>DNI:</label><input name="dni" type="number">
-            <input type="submit" value="buscar">
-        </form>
-    {% endblock %}
-    <div class="panel-principal">
-        <h1 class="titulo-contenido-de-usuarios">Pacientes</h1>
-        <div class="tabla-usuarios">
-        {% for resultado in resultados %}
-            <a href="index.php?comando=info-paciente&id={{resultado.id}}" class="tarjeta-usuario">
-                {{resultado.nombre}}
-            </a>
-        {% endfor %}
+    <div class="contenido">
+        <div class="panel-principal">
+            <form id="formulario-busqueda" action="index.php" method="get">
+                <input type="hidden" name="comando" value="busqueda-pacientes">
+                <h1>Buscar paciente</h1>
+                <div class="label-input">
+                <label>Historia clínica:</label><input class="inputf" name="nro_historia_clinica" type="text">
+                </div>
+                <div class="label-input">
+                <label>Apellido:</label><input class="inputf" name="apellido" type="text">
+                </div>
+                <div class="label-input">
+                <label>Nombre:</label><input class="inputf" name="nombre" type="text">
+                </div>
+                <div class="label-input">
+                <label>Tipo doc:</label>
+                <select name="tipo_doc_id">
+                    <option value=""></option>
+                    <option value="1">DNI</option>
+                </select>
+                </div>
+                <div class="label-input">
+                <label>DNI:</label><input class="inputf" name="dni" type="number">
+                </div>
+                <button type="submit" form="formulario-busqueda" class="boton-panel-principal">Buscar</button>
+            </form>
+            <h1>Pacientes</h1>
+            <div class="tabla-resultados">
+                {% for resultado in resultados %}
+                    <a href="index.php?comando=info-paciente&id={{resultado.id}}" class="tarjeta-resultado">
+                        {{resultado.nombre}}
+                    </a>
+                {% endfor %}
+            </div>
+            <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente'">Crear paciente</button>
         </div>
-        <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente'" >Crear paciente</button>
     </div>
-</div>
 
 {% endblock %}
