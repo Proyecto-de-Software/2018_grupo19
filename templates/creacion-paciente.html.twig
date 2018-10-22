@@ -33,8 +33,7 @@
             </div>
             <div class="label-input">
                 <label>Partido:</label>
-                <select name="partido" id="partidos" required value="{% block partido_paciente %}{% endblock %}">
-                    <option value=""></option>
+                <select name="partido" id="partidos" required>
                 </select>
             </div>
             <div class="label-input">
@@ -44,7 +43,6 @@
             <div class="label-input">
                 <label>Localidad:</label>
                 <select id="localidades" name="localidad_id" value="{% block localidad_paciente %}{% endblock %}">
-                    <option value=""></option>
                 </select>
             </div>
             <div class="label-input">
@@ -94,7 +92,6 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-    {% block onDocumentReady %}
     obtenerPartidos();
     obtenerGeneros();
     obtenerTiposDeDocumento();
@@ -105,22 +102,24 @@ $(document).ready(function(){
     //Event handler para cuando se ingresa un partido o se pone el campo en blanco
     $("#partidos").on("input",function () {
         if ($("#partidos").val()) {
+            {% block postCargaDePartidos %}
             actualizarRegionSanitaria();
             actualizarLocalidades();
+            {% endblock %}
         } else {
             $("#region_sanitaria_id").val('');
             $('#localidades').empty();
         }
     });
     //**
-
-    {% endblock %}
 });
 
 function obtenerPartidos() {
     $.get("index.php?comando=obtener-partidos",
     function (partidos) {
         $.each($.parseJSON(partidos),function (index, partido) {$('<option>').val(partido['id']).text(partido['nombre']).appendTo('#partidos');})
+        actualizarLocalidades()
+        actualizarRegionSanitaria()
     })
 }
 
