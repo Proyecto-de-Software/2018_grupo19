@@ -36,7 +36,7 @@ class RooterController extends Controller{
     } else { return true; }
   }
 
-  public function redireccionar(){
+  public function redireccionar($comando){
 
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
