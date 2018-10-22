@@ -43,4 +43,14 @@ class PacienteController extends Controller{
       } else { echo 'error de permisos'; }
     }
 
+    public function redireccionarInfoPaciente(){
+
+      #hardcodeado paciente para probar
+
+      $paciente = array ('nombre' => 'Blas', 'apellido' => 'Butera', 'fecha_nac' => '10/10/2000', 'lugar_nac' => 'Chivilcoy', 'nombre_partido' => 'Chivilcoy', 'region_sanitaria_id' => 'IV', 'localidad_id' => 'Chivilcoy', 'domicilio' => 'Gregorio Molina', 'genero_id' => 'Masculino', 'tiene_documento' => 'Si', 'tipo_doc_id' => 'DNI', 'numero' => '39786168', 'nro_historia_clinica' => '21323', 'nro_carpeta' => '12321', 'tel' => '39292', 'obra_social_id' => 'OSDE');
+
+      $view = new InfoPaciente();
+      $view->show($this->parametrosDeSesion(array('paciente' => $paciente)));
+    }
+
 }
