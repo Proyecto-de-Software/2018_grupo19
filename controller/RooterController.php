@@ -161,6 +161,10 @@ class RooterController extends Controller{
                 PacienteController::singleton()->actualizarPaciente();
                 break;
 
+                case 'borrar-paciente':
+                PacienteController::singleton()->borrarPaciente();
+                break;
+
                 /*
                 ** Pedidos AJAX
                 */

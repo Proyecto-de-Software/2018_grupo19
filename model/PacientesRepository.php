@@ -84,6 +84,13 @@ class PacientesRepository extends PDORepository {
         return $paciente;
     }
 
+    public function borrarPaciente($id) {
+        $db = $this->conectarse();
+        $sql = "DELETE FROM paciente WHERE id = ?";
+        $query = $db->prepare($sql);
+        $query->execute(array($id));
+    }
+
     // ** Funciones para obtener la info de un paciente
 
     public function localidadConId($id) {
