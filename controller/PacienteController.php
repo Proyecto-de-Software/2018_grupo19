@@ -78,4 +78,17 @@ class PacienteController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function borrarPaciente() {
+        try {
+            if(UsuariosRepository::singleton()->chequearPermiso('paciente_destroy', $_SESSION['id'])) {
+                $paciente = PacientesRepository::singleton()->borrarPaciente($_GET['id']);
+                RooterController::singleton()->redireccionar('busqueda-pacientes');
+            } else {
+                $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
+            }
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }

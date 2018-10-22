@@ -4,8 +4,9 @@
 
 <div class="contenido">
     <div class="panel-principal">
-        <h1>{{paciente.nombre}} {{ paciente.apellido }}</h1>
-        {% block campos %}
+        <h1>{{paciente.nombre}} {{paciente.apellido }}   
+        </h1>
+        {% block campos %} 
         {% endblock %}
         <p><strong>Número de historia clínica:</strong> {{paciente.nro_historia_clinica}}</p>
         <p><strong>Número de carpeta:</strong> {{paciente.nro_carpeta}}</p>
@@ -13,7 +14,7 @@
 
     <div class="botones">
     <button class="boton-panel-principal" onclick="#" >Editar Paciente</button>
-    <button class="boton-panel-principal" onclick="#">Borrar Paciente</button>
+    <button class="boton-panel-principal" onclick="location.href='index.php?comando=borrar-paciente&id={{paciente.id}}'">Borrar Paciente</button>
     </div>
     </div>
 </div>
