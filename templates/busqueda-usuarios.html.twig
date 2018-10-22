@@ -9,24 +9,26 @@
 
     <div class="contenido">
         {% block busqueda %}
-            <form class="formulario-busqueda" action="index.php" method="get">
+            
+        {% endblock %}
+        
+        <div class="panel-principal">
+            <h1>Usuarios</h1>
+            <form id="formulario-busqueda" class="formulario-busqueda" action="index.php" method="get">
                 <input type="hidden" name="comando" value="busqueda-usuarios">
-                <input type="hidden" name="pagina-actual" value="1">
-                <input type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar.." value="{{nombreDeUsuario}}">
-                <select name="estado">
+                <input class="inputf" type="hidden" name="pagina-actual" value="1">
+                <input class="inputf" type="text" name="nombre-de-usuario" placeholder="Nombre de usuario a buscar.." value="{{nombreDeUsuario}}">
+                <select class="inputf" name="estado">
                     <option value="">Todos</option>
                     <option value="1" {% if estado == "1" %}selected{% endif %}
                     >Activo</option>
                     <option value="0" {% if estado == "0" %}selected{% endif %}>Bloqueado</option>
                 </select>
-                <input type="submit" value="Filtrar">
+                <button type="submit" form="formulario-busqueda" class="boton-panel-principal">Filtrar</button>
             </form>
-        {% endblock %}
-        <div class="panel-principal">
-            <h1 class="titulo-contenido-de-usuarios">Usuarios</h1>
-            <div class="tabla-usuarios">
+            <div class="tabla-resultados">
                 {% for resultado in resultados %}
-                    <a href="index.php?comando=info-usuario&id={{resultado.id}}" class="tarjeta-usuario">
+                    <a href="index.php?comando=info-usuario&id={{resultado.id}}" class="tarjeta-resultado">
                         <div class="nombreyfoto-tarjeta-usuario">
                             <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
                             <h1>{{resultado.first_name}}</h1>
