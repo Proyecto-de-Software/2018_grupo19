@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<title>Hospital Alejandro Korn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="lista-feriados">
+        <ul>
+          <li v-for="feriado in feriados">
+            {{ feriado.id }} - {{ feriado.dia }} - {{ feriado.mes }}
+          </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+        el: '#lista-feriados',
+        data: {
+            feriados: []
+        },
+        created() {
+            fetch('http://nolaborables.com.ar/API/v2/feriados/2018')
+            .then(response => response.json())
+            .then(json =>{
+            this.feriados = json
+        })
+      }
+    })
+    </script>
+</body>
+</html>

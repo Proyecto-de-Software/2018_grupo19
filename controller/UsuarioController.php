@@ -116,4 +116,9 @@ class UsuarioController extends Controller{
         }
 
     }
+
+    public function mostrarPaginaFeriados() {
+        header('location:templates/feriados.html');
+    }
+
 }

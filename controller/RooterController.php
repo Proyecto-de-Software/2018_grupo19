@@ -185,6 +185,15 @@ class RooterController extends Controller{
                 ConsultaController::singleton()->insertarConsulta();
                 break;
 
+                case 'editar-consulta':
+                ConsultaController::singleton()->modificarConsulta();
+                break;
+
+                case 'borrar-consulta':
+                ConsultaController::singleton()->borrarConsulta();
+                break;
+                
+
                 /*
                 ** Default
                 */
