@@ -1,0 +1,52 @@
+{% extends "layout.html.twig" %}
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/busqueda-usuarios.css">
+    <link rel="stylesheet" href="templates/styles/busqueda-pacientes.css">
+{% endblock %}
+{% block contenido %}
+
+    <div class="contenido">
+        <div class="panel-principal">
+            <h1>Consultas</h1>
+            <div class="tabla-resultados">
+                {% for resultado in resultados %}
+                    <a href="index.php?comando=editar-consulta&id={{resultado.id}}" class="tarjeta-resultado">
+                        <div class="nombreyfoto-tarjeta-usuario"> 
+                            <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
+                            <h1>{{resultado.nombre}} {{resultado.apellido}}</h1>
+                        </div>
+                        <h1 style="margin-right:10px;">Historia Clinica: {{resultado.nro_historia_clinica}}</h1>
+                    </a>
+                {% endfor %}
+            </div>
+
+            <div class="paginas">
+                {% if cantidadPaginas != 0 %}
+                    {% if paginaActual != 1%}
+                        <a href="index.php?comando=listado-consultas&pagina-actual={{paginaActual -1}}">Atrás</a>
+                    {% endif %}
+                    {% for i in 1..cantidadPaginas %}
+                        <a href="index.php?comando=listado-consultas&pagina-actual={{i}}">
+                            {% if i == paginaActual %}
+                                <strong>{{i}}</strong>
+                            {% else %}
+                                {{i}}
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                    {% if paginaActual != cantidadPaginas%}
+                        <a href="index.php?comando=listado-consultas&pagina-actual={{paginaActual +1}}">Siguiente</a>
+                    {% endif %}
+                {% else %}
+                    <p>
+                        No se han encontrado resultados
+                    </p>
+                {% endif %}
+            </div>
+
+            <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-consulta'">Cargar consulta</button>
+        </div>
+    </div>
+
+{% endblock %}
