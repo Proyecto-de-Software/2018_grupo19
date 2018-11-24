@@ -47,7 +47,6 @@ class PacienteController extends Controller{
                     } else {
                         PacientesRepository::singleton()->crearPaciente($_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
                     }
-                    $_POST['usuario_cargado']  = 'Eeeeeee';
                     RooterController::singleton()->redireccionar('creacion-consulta');
                 } else {
                     $this->redireccionarError('Error en la creacion', 'El numero de historia clinica ya fue ingresado con anterioridad en el sistema');
