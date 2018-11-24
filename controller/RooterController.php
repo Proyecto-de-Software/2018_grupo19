@@ -6,6 +6,7 @@ require_once 'controller/AdministradorController.php';
 require_once 'controller/UsuarioController.php';
 require_once 'controller/PacienteController.php';
 require_once 'controller/AjaxController.php';
+require_once 'controller/ConsultaController.php';
 
 /*
 Clase que se encarga del rooteo
@@ -169,6 +170,14 @@ class RooterController extends Controller{
                 break;
 
                 
+                /*
+                ** Consultas router
+                */
+
+                case 'creacion-consulta':
+                ConsultaController::singleton()->redireccionarCreacionConsulta();
+                break;
+
                 /*
                 ** Default
                 */

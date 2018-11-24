@@ -1,0 +1,159 @@
+{% extends 'layout.html.twig' %}
+
+{% block links %}
+<script src="../vendor/components/jquery/jquery.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenido">
+    <div class="panel-principal">
+        <form id="formulario" class="formulario-principal" {% block accion %}action="index.php?comando=insertar-consulta"{% endblock %} method="post">
+            <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
+            <div class="label-input">
+                <label>Nombre de Paciente:</label>
+                <input class="inputf" type="text" name="nombre" value="{% block nombre_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Apellido de Paciente:</label>
+                <input class="inputf" type="text" name="apellido" value="{% block apellido_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Fecha de nac.:</label>
+                <input class="inputf" type="date" name="fecha_nac" value="{% block fecha_nac_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Lugar de nac.:</label>
+                <input class="inputf" type="text" name="lugar_nac" value="{% block lugar_nac_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Partido:</label>
+                <select name="partido" id="partidos" required>
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Region sanitaria:</label>
+                <input id="region_sanitaria_id" class="inputf" type="text" readonly="readonly" name="region_sanitaria_id" value="{% block region_sanitaria_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Localidad:</label>
+                <select id="localidades" name="localidad_id" value="{% block localidad_paciente %}{% endblock %}">
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Domicilio:</label>
+                <input class="inputf" type="text" name="domicilio" value="{% block domicilio_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Género:</label>
+                <select id="generos" name="genero_id" value="{% block genero_paciente %}{% endblock %}"></select>
+            </div>
+            <div class="label-input">
+                <label>Posee documento:</label>
+                <input class="inputf checkb" name="tiene_documento" type="checkbox" value="{% block tiene_documento_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Tipo de documento:</label>
+                <select id="tipos-doc" name="tipo_doc_id" value="{% block tipo_doc_paciente %}{% endblock %}"></select>
+            </div>
+            <div class="label-input">
+                <label>Nro de documento:</label>
+                <input class="inputf" name="numero" type="text" value="{% block numero_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Nro de historia clínica:</label>
+                <input class="inputf" name="nro_historia_clinica" type="number" value="{% block nro_historia_clinica_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Nro de carpeta:</label>
+                <input class="inputf" name="nro_carpeta" type="number" value="{% block nro_carpeta_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Telefono:</label>
+                <input class="inputf" name="tel" type="text" value="{% block tel_paciente %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Obra social:</label>
+                <select id="obras-sociales" name="obra_social_id" value="{% block obra_social_paciente %}{% endblock %}"></select>
+            </div>
+        </form>
+        <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
+        {% block cargaDeNN %}
+        <button class="boton-panel-principal" onclick="location.href='index.php?comando=creacion-paciente-nn'">Cargar como NN</button>
+        {% endblock %}
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    obtenerPartidos();
+    obtenerGeneros();
+    obtenerTiposDeDocumento();
+    obtenerObrasSociales();
+
+
+    //**
+    //Event handler para cuando se ingresa un partido o se pone el campo en blanco
+    $("#partidos").on("input",function () {
+        if ($("#partidos").val()) {
+            {% block postCargaDePartidos %}
+            actualizarRegionSanitaria();
+            actualizarLocalidades();
+            {% endblock %}
+        } else {
+            $("#region_sanitaria_id").val('');
+            $('#localidades').empty();
+        }
+    });
+    //**
+});
+
+function obtenerPartidos() {
+    $.get("index.php?comando=obtener-partidos",
+    function (partidos) {
+        $.each($.parseJSON(partidos),function (index, partido) {$('<option>').val(partido['id']).text(partido['nombre']).appendTo('#partidos');})
+        actualizarLocalidades()
+        actualizarRegionSanitaria()
+    })
+}
+
+function obtenerGeneros() {
+    $.get("index.php?comando=obtener-generos",
+    function (generos) {
+        $.each($.parseJSON(generos),function (index, genero) {$('<option>').val(genero['id']).text(genero['nombre']).appendTo('#generos');})
+    })
+}
+
+function obtenerTiposDeDocumento() {
+    $.get("index.php?comando=obtener-tipos-doc",
+    function (tiposDoc) {
+        $.each($.parseJSON(tiposDoc),function (index, tipo) {$('<option>').val(tipo['id']).text(tipo['nombre']).appendTo('#tipos-doc');})
+    })
+}
+
+function obtenerObrasSociales() {
+    $.get("index.php?comando=obtener-obras-sociales",
+    function (obrasSociales) {
+        $.each($.parseJSON(obrasSociales),function (index, obraSocial) {$('<option>').val(obraSocial['id']).text(obraSocial['nombre']).appendTo('#obras-sociales');})
+    })
+}
+
+function actualizarRegionSanitaria() {
+    $.get("index.php?comando=obtener-region-sanitaria&partido="+($("#partidos").val()),
+    function (region) {
+        $("#region_sanitaria_id").val($.parseJSON(region)[0])
+    })
+}
+
+function actualizarLocalidades() {
+    $.get("index.php?comando=obtener-localidades&partido="+($("#partidos").val()),
+    function (localidades) {
+        $('#localidades').empty();
+        $.each($.parseJSON(localidades),function (index, localidad) {$('<option>').val(localidad['id']).text(localidad['nombre']).appendTo('#localidades');})
+    })
+}
+
+</script>
+
+{% endblock %}
