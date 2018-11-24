@@ -31,6 +31,14 @@ class ConsultaRepository extends PDORepository {
         $query = $db->prepare($sql);
         $query->execute(array($id_paciente));
     }
+
+    public function consultas() {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) INNER JOIN motivo_consulta m ON (c.motivo_id = m.id)";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
 }
 
 ?>

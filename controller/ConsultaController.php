@@ -41,6 +41,19 @@
             }
         }
 
+        public function redireccionarListadoConsultas(){
+            try {
+                if(UsuariosRepository::singleton()->chequearPermiso('consulta_show', $_SESSION["id"])) {
+                    $view = new ListadoConsultas();
+                    $view->show($this->parametrosDeSesion(array('resultados' => ConsultaRepository::singleton()->consultas())));
+                } else {
+                    $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
+                }
+            } catch (Exception $e) {
+                $this->redireccionarError('Error en la base de datos', $e->getMessage());
+            }
+        }
+
         public function modificarConsulta() {
             try {
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_update', $_SESSION["id"])) {

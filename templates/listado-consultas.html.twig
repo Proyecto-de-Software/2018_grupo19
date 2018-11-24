@@ -13,10 +13,12 @@
                 {% for resultado in resultados %}
                     <a href="index.php?comando=editar-consulta&id={{resultado.id}}" class="tarjeta-resultado">
                         <div class="nombreyfoto-tarjeta-usuario"> 
-                            <img class="usuario-image" src="recursos/user.svg" alt="Imagen usuario">
-                            <h1>{{resultado.nombre}} {{resultado.apellido}}</h1>
+                            <h1>{{resultado.13}} {{resultado.apellido}}</h1>
                         </div>
-                        <h1 style="margin-right:10px;">Historia Clinica: {{resultado.nro_historia_clinica}}</h1>
+                        <div>
+                            <p>{{resultado.fecha}}</p>
+                            <p>Motivo: {{resultado.nombre}}</p>
+                        </div>
                     </a>
                 {% endfor %}
             </div>

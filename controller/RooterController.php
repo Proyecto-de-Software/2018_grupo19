@@ -193,6 +193,9 @@ class RooterController extends Controller{
                 ConsultaController::singleton()->borrarConsulta();
                 break;
                 
+                case 'listado-consultas':
+                ConsultaController::singleton()->redireccionarListadoConsultas();
+                break;
 
                 /*
                 ** Default
