@@ -169,6 +169,9 @@ class RooterController extends Controller{
                 AjaxController::singleton()->obtenerLocalidades();
                 break;
 
+                case 'obtener-motivos':
+                AjaxController::singleton()->obtenerMotivos();
+                break;
                 
                 /*
                 ** Consultas router
@@ -181,6 +184,15 @@ class RooterController extends Controller{
                 case 'insertar-consulta':
                 ConsultaController::singleton()->insertarConsulta();
                 break;
+
+                case 'editar-consulta':
+                ConsultaController::singleton()->modificarConsulta();
+                break;
+
+                case 'borrar-consulta':
+                ConsultaController::singleton()->borrarConsulta();
+                break;
+                
 
                 /*
                 ** Default
