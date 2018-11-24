@@ -169,6 +169,9 @@ class RooterController extends Controller{
                 AjaxController::singleton()->obtenerLocalidades();
                 break;
 
+                case 'obtener-motivos':
+                AjaxController::singleton()->obtenerMotivos();
+                break;
                 
                 /*
                 ** Consultas router

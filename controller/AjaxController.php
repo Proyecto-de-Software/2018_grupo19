@@ -56,5 +56,13 @@ class AjaxController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function obtenerMotivos() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerMotivos()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }
 ?>

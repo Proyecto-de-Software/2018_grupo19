@@ -1,14 +1,16 @@
 <?php
 
     require_once 'model/ConsultaRepository.php';
+    require_once 'model/PacientesRepository.php';
     require_once 'controller/RooterController.php';
     require_once 'views/CreacionConsulta.php';
 
     class ConsultaController extends Controller{
 
         public function insertarConsulta(){
-            try { 
-                ConsultaRepository::singleton()->crearConsulta($_POST['paciente'],$_POST['fecha'],$_POST['motivo'],$_POST['derivacion'],$_POST['articulacion'],$_POST['internacion'],$_POST['diagnostico'],$_POST['observaciones'],$_POST['tratamiento'],$_POST['acompanamiento']);
+            try {
+                $id = PacientesRepository::singleton()->pacienteCOnHistoria($_POST['paciente'])['id'];
+                ConsultaRepository::singleton()->crearConsulta($id,$_POST['fecha'],$_POST['motivo'],$_POST['derivacion'],$_POST['articulacion'],isset($_POST['internacion']),$_POST['diagnostico'],$_POST['observaciones'],$_POST['tratamiento'],$_POST['acompanamiento']);
             } catch (Exception $e) {
                 $this->redireccionarError('Error en la base de datos', $e->getMessage());
             }

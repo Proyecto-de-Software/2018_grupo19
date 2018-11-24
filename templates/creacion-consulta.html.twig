@@ -20,7 +20,7 @@
             </div>
             <div class="label-input">
                 <label>Motivo de atencion:</label>
-                <select name="motivo">
+                <select name="motivo" id="motivos">
                 </select>
             </div>
             <div class="label-input">
@@ -67,5 +67,20 @@
         <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
     </div>
 </div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    obtenerMotivos()
+});
+
+function obtenerMotivos() {
+    $.get("index.php?comando=obtener-motivos",
+    function (motivos) {
+        $.each($.parseJSON(motivos),function (index, motivo) {$('<option>').val(motivo['id']).text(motivo['nombre']).appendTo('#motivos');})
+    })
+}
+
+</script>
 
 {% endblock %}

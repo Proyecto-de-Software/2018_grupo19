@@ -149,5 +149,13 @@ class PacientesRepository extends PDORepository {
         return $query->fetch();
     }
 
+    public function pacienteConHistoria($historia){
+        $db = $this->conectarse();
+        $sql = "SELECT id FROM paciente p WHERE p.nro_historia_clinica = ?";
+        $query = $db->prepare($sql);
+        $query->execute(array($historia));
+        return $query->fetch();
+    }
+
     // **
 }

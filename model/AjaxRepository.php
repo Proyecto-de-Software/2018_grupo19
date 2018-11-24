@@ -54,6 +54,14 @@ class AjaxRepository extends PDORepository {
         $query->execute(array($id));
         return $query->fetchAll();
     }
+
+    public function obtenerMotivos() {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM motivo_consulta";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
 }
 
 ?>
