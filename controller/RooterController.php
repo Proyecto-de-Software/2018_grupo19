@@ -178,6 +178,10 @@ class RooterController extends Controller{
                 ConsultaController::singleton()->redireccionarCreacionConsulta();
                 break;
 
+                case 'insertar-consulta':
+                ConsultaController::singleton()->insertarConsulta();
+                break;
+
                 /*
                 ** Default
                 */

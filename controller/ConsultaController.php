@@ -8,7 +8,7 @@
 
         public function insertarConsulta(){
             try { 
-                ConsultaRepository::singleton()->crearConsulta($_POST['paciente'],$_POST['fecha'],$_POST['motivo'],$_POST['derivacion'],$_POST['articulacion'],$_POST['internacion'],$_POST['diagnostico'],$_POST['tratamiento'],$_POST['acompanamiento']);
+                ConsultaRepository::singleton()->crearConsulta($_POST['paciente'],$_POST['fecha'],$_POST['motivo'],$_POST['derivacion'],$_POST['articulacion'],$_POST['internacion'],$_POST['diagnostico'],$_POST['observaciones'],$_POST['tratamiento'],$_POST['acompanamiento']);
             } catch (Exception $e) {
                 $this->redireccionarError('Error en la base de datos', $e->getMessage());
             }
@@ -18,8 +18,8 @@
             try {
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_show', $_SESSION["id"])) {
                     $view = new CreacionConsulta();
-                    if (isset($_POST['usuario_cargado'])) {
-                        $view->show($this->parametrosDeSesion(array('usuario_cargado' => $_POST['usuario_cargado'])));                
+                    if (isset($_POST['nro_historia_clinica'])) {
+                        $view->show($this->parametrosDeSesion(array('usuario_cargado' => $_POST['nro_historia_clinica'])));                
                     } else {
                         $view->show($this->parametrosDeSesion());
                     }
