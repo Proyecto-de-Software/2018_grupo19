@@ -169,6 +169,7 @@ class RooterController extends Controller{
                 AjaxController::singleton()->obtenerLocalidades();
                 break;
 
+                
                 /*
                 ** Consultas router
                 */
@@ -184,7 +185,11 @@ class RooterController extends Controller{
                 /*
                 ** Default
                 */
-
+                
+                case 'feriados':
+                UsuarioController::singleton()->mostrarPaginaFeriados();
+                break; 
+                
                 default:
                 RooterController::singleton()->home();
                 break;
