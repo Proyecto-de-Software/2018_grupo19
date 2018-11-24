@@ -1,6 +1,7 @@
 <?php
 
 require_once 'model/PDORepository.php';
+require_once 'model/ConsultaRepository.php';
 
 class PacientesRepository extends PDORepository {
 
@@ -93,6 +94,7 @@ class PacientesRepository extends PDORepository {
     }
 
     public function borrarPaciente($id) {
+        ConsultaRepository::singleton()->borrarTodasLasConsultasDelPaciente($id);
         $db = $this->conectarse();
         $sql = "DELETE FROM paciente WHERE id = ?";
         $query = $db->prepare($sql);
