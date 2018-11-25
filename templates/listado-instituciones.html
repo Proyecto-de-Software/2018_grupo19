@@ -16,7 +16,7 @@
             <p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
 		</a>
     </nav>
-    <section>
+    <section id="general">
         <h2 class="display-4">Buscador de instituciones</h2>
         <section style="margin:20px;">
             <div class="row form-partidos">
@@ -24,14 +24,13 @@
                     <p>
                         Seleccione el partido:
                     </p>
-                    <select name="partido-select" id="partido-select">
-                        <option value="1">Partido 1</option>
-                        <option value="2">Partido 2</option>
-                        <option value="3">Partido 3</option>
+                    <select name="partido-select" id="partido-select" v-model="selected" v-on:change="actualizarRegionSanitaria">
+                        <option value="0">Todas</option>
+                        <option v-for="p in partidos" v-bind:value="p.id">{{p.nombre}}</option>
                     </select>
                 </div>
-                <p>Region sanitaria: IV</p>
-                <button>Buscar >></button>
+                <p>Region sanitaria: {{regSanitaria}} </p>
+                <button v-on:click="actualizarListado">Buscar >></button>
             </div>
         </section>
         <section>
@@ -64,19 +63,51 @@
     </footer>
     
     <script>
-            var app = new Vue({
-            el: '#tabla-instituciones',
+        var app = new Vue({
+            el: '#general',
             data: {
-                instituciones: []
+                instituciones: [],
+                partidos: [],
+                selected: 0,
+                regSanitaria: "Todas"
             },
             created() {
                 fetch('http://localhost/api/instituciones')
                 .then(response => response.json())
                 .then(json =>{
                 this.instituciones = json
-            })
-          }
+                })
+                fetch('https://api-referencias.proyecto2018.linti.unlp.edu.ar/partido')
+                .then(response => response.json())
+                .then(json =>{
+                this.partidos = json
+                })
+            },
+            methods: {
+                actualizarRegionSanitaria: function(){
+                    if(this.selected == 0){
+                        this.regSanitaria = "Todas"
+                    } else {
+                    this.regSanitaria = this.partidos[this.selected-1].region_sanitaria_id
+                    }
+                },
+                actualizarListado: function() {
+                    this.instituciones = [];
+                    if(this.selected == 0){
+                        fetch('http://localhost/api/instituciones')
+                        .then(response => response.json())
+                        .then(json =>{
+                        this.instituciones = json})
+                    } else {
+                        url = "http://localhost/api/instituciones/region-sanitaria/" + this.regSanitaria 
+                        fetch(url)
+                        .then(response => response.json())
+                        .then(json =>{
+                        this.instituciones = json})
+                    }
+                }
+            }
         })
-        </script>
+    </script>
 </body>
 </html>
