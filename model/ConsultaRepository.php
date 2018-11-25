@@ -13,7 +13,7 @@ class ConsultaRepository extends PDORepository {
 
     public function actualizarConsulta($id_consulta, $motivo_id, $derivacion, $articulacion, $internacion, $diagnostico, $observaciones, $tratamiento, $acompanamiento) {
         $db = $this->conectarse();
-        $sql = "UPDATE consulta SET motivo_id = ?, derivacion_id = ?, articulacion_con_instituciones = ?, internacion = ?, diagnostico = ?, observaciones = ?, tratamiento_farmacologico_id = ?, acompanamiento_id = ? WHERE id = ?";
+        $sql = "UPDATE consulta SET motivo_id = ?, derivacion_id = ?, articulacion_con_instituciones = ?, internacion = ?, diagnostico = ?, observaciones = ?, tratamiento_farmacologico_id = ?, acompanamiento_id = ? WHERE consulta.id = ?";
         $query = $db->prepare($sql);
         $query->execute(array($motivo_id, $derivacion, $articulacion, $internacion, $diagnostico, $observaciones, $tratamiento, $acompanamiento, $id_consulta));
     }
@@ -38,6 +38,14 @@ class ConsultaRepository extends PDORepository {
         $query = $db->prepare($sql);
         $query->execute(array());
         return $query->fetchAll();
+    }
+
+    public function consultaConId($id) {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) WHERE c.id = ?";
+        $query = $db->prepare($sql);
+        $query->execute(array($id));
+        return $query->fetch();
     }
 }
 

@@ -12,11 +12,11 @@
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
                 <label>Nro Historia Clinica de Paciente:</label>
-                <input class="inputf" type="text" name="paciente" required {% if usuario_cargado is defined %}value={{usuario_cargado}} readonly{% endif %}>
+                <input class="inputf" type="text" name="paciente" value="{% block nro_historia_clinica %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
             </div>
             <div class="label-input">
                 <label>Fecha:</label>
-                <input class="inputf" type="date" name="fecha" required>
+                <input class="inputf" type="date" name="fecha" value="{% block fecha %}{% endblock %}" required>
             </div>
             <div class="label-input">
                 <label>Motivo de atencion:</label>
@@ -30,19 +30,19 @@
             </div>
             <div class="label-input">
                 <label>Articulacion:</label>
-                <input class="inputf" type="textarea" name="articulacion">
+                <input class="inputf" type="textarea" name="articulacion" value="{% block articulacion_con_instituciones %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Internacion:</label>
-                <input class="inputf checkb" type="checkbox" name="internacion">
+                <input class="inputf checkb" type="checkbox" name="internacion" value="{% block internacion %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Diagnostico:</label>
-                <input class="inputf" type="textarea" name="diagnostico">
+                <input class="inputf" type="textarea" name="diagnostico" value="{% block diagnostico %}{% endblock %}" >
             </div>
             <div class="label-input">
                 <label>Observaciones:</label>
-                <input class="inputf" type="textarea" name="observaciones">
+                <input class="inputf" type="textarea" name="observaciones" value="{% block observaciones %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Tratamiento farmacologico:</label>

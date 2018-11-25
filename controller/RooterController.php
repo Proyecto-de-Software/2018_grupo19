@@ -186,7 +186,7 @@ class RooterController extends Controller{
                 break;
 
                 case 'editar-consulta':
-                ConsultaController::singleton()->modificarConsulta();
+                ConsultaController::singleton()->redireccionarEdicionConsulta();
                 break;
 
                 case 'borrar-consulta':
@@ -195,6 +195,10 @@ class RooterController extends Controller{
                 
                 case 'listado-consultas':
                 ConsultaController::singleton()->redireccionarListadoConsultas();
+                break;
+
+                case 'actualizar-consulta':
+                ConsultaController::singleton()->actualizarConsulta();
                 break;
 
                 /*
