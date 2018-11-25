@@ -12,11 +12,11 @@
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
                 <label>Nro Historia Clinica de Paciente:</label>
-                <input class="inputf" type="text" name="paciente" value="{% block nro_historia_clinica %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
+                <input class="inputf" type="text" name="paciente" value="{% block nro_historia_clinica %}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
             </div>
             <div class="label-input">
                 <label>Fecha:</label>
-                <input class="inputf" type="date" name="fecha" value="{% block fecha %}{% endblock %}" required>
+                <input class="inputf" type="date" name="fecha" value="{% block fecha %}{% endblock %}" "{% block fecha_props %}{% endblock %}" required>
             </div>
             <div class="label-input">
                 <label>Motivo de atencion:</label>
