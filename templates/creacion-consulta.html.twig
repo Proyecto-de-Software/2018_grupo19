@@ -25,7 +25,8 @@
             </div>
             <div class="label-input">
                 <label>Derivacion:</label>
-                <input class="inputf" type="textarea" name="derivacion">
+                <select name="derivacion" id="derivacion">
+                </select>
             </div>
             <div class="label-input">
                 <label>Articulacion:</label>
@@ -72,7 +73,19 @@
 
 $(document).ready(function(){
     obtenerMotivos()
+    obtenerInstituciones()
 });
+
+function obtenerInstituciones(){
+    fetch('api/instituciones')
+    .then(function(response) {
+        response.json().then(function(instituciones) {
+            instituciones.forEach(function(institucion) {
+                $('<option>').val(institucion['id']).text(institucion['nombre']).appendTo('#derivacion')
+            })
+        })
+    })
+}
 
 function obtenerMotivos() {
     $.get("index.php?comando=obtener-motivos",
