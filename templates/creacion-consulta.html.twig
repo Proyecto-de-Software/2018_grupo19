@@ -12,7 +12,10 @@
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
                 <label>Nro Historia Clinica de Paciente:</label>
-                <input class="inputf" type="text" name="paciente" value="{% block nro_historia_clinica %}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
+                <input class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
+            </div>
+            <div>
+                <p>Paciente: </p><p id="nombre_paciente"></p>
             </div>
             <div class="label-input">
                 <label>Fecha:</label>
@@ -74,6 +77,7 @@
 $(document).ready(function(){
     obtenerMotivos()
     obtenerInstituciones()
+    cargarPaciente()
 });
 
 function obtenerInstituciones(){
@@ -91,6 +95,15 @@ function obtenerMotivos() {
     $.get("index.php?comando=obtener-motivos",
     function (motivos) {
         $.each($.parseJSON(motivos),function (index, motivo) {$('<option>').val(motivo['id']).text(motivo['nombre']).appendTo('#motivos');})
+    })
+}
+
+function cargarPaciente() {
+    fetch('paciente.json')
+    .then(function(response) {
+        response.json().then(function(paciente) {
+            $('#nombre_paciente').text(paciente['nombre'])
+        })
     })
 }
 
