@@ -35,6 +35,10 @@ class RooterController extends Controller{
                 SessionController::singleton()->redireccionarLogin();
                 break;
 
+                case 'listado-instituciones':
+                header('location:templates/listado-instituciones.html');
+                break;
+
                 default:
                 $this->home();
                 break;
@@ -208,6 +212,10 @@ class RooterController extends Controller{
                 case 'feriados':
                 UsuarioController::singleton()->mostrarPaginaFeriados();
                 break; 
+
+                case 'listado-instituciones':
+                header('location=templates/listado-instituciones.html');
+                break;
                 
                 default:
                 RooterController::singleton()->home();
