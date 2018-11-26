@@ -75,9 +75,13 @@ class UsuarioController extends Controller{
     public function insertarUsuario(){
         try {
             if(UsuariosRepository::singleton()->chequearPermiso('usuario_new', $_SESSION["id"])) {
-                if(UsuariosRepository::singleton()->validarNombreUsuario($_POST['username'])) {
-                    UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],$_POST['roles']);
-                    RooterController::singleton()->redireccionar('busqueda-usuarios');
+                if(isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST["nombre"]) && isset($_POST['apellido'])) {
+                    if(UsuariosRepository::singleton()->validarNombreUsuario($_POST['username'])) {
+                        UsuariosRepository::singleton()->crearUsuario($_POST['email'],$_POST['username'],$_POST['password'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],$_POST['roles']);
+                        RooterController::singleton()->redireccionar('busqueda-usuarios');
+                    } else {
+                        $this->redireccionarError('Error en los campos', 'Puede que algunos campos esten vacios');
+                    }
                 } else {
                     $this->redireccionarError('Error en la creacion', 'El nombre de usuario ya existe en el sistema');
                 }
@@ -93,8 +97,12 @@ class UsuarioController extends Controller{
     public function actualizarUsuario(){
         try {
             if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
-                UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],isset($_POST['roles'])?$_POST['roles']:null);
-                RooterController::singleton()->redireccionar('busqueda-usuarios');
+                if(isset($_GET["id"]) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST["nombre"]) && isset($_POST['apellido'])) {
+                    UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],isset($_POST['roles'])?$_POST['roles']:null);
+                    RooterController::singleton()->redireccionar('busqueda-usuarios');
+                } else {
+                    $this->redireccionarError('Error al editar', 'Parece que algunos campos estan vacios');
+                }        
             } else {
                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de usuarios');
             }
@@ -106,8 +114,12 @@ class UsuarioController extends Controller{
     public function borrarUsuario() {
         try {
             if(UsuariosRepository::singleton()->chequearPermiso('usuario_destroy', $_SESSION["id"])) {
-                UsuariosRepository::singleton()->borrarUsuario($_GET['id']);
-                RooterController::singleton()->redireccionar('busqueda-usuarios');
+                if(isset($_GET["id"])) {    
+                    UsuariosRepository::singleton()->borrarUsuario($_GET['id']);
+                    RooterController::singleton()->redireccionar('busqueda-usuarios');
+                } else {
+                    $this->redireccionarError('Error al borrar', 'Parece que algunos campos estan vacios'); 
+                }
             } else {
                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para borrar un usuario'); 
             }
