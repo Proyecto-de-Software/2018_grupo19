@@ -4,6 +4,7 @@ Clase para manejar los pedidos ajax a la base de datos
 */
 
 require_once 'model/PDORepository.php';
+require_once 'model/ConsultaRepository.php';
 
 class AjaxRepository extends PDORepository {
 
@@ -69,6 +70,11 @@ class AjaxRepository extends PDORepository {
         $query = $db->prepare($sql);
         $query->execute(array($historia));
         return $query->fetch();
+    }
+
+    public function obtenerUbicacionesDeConsultasDePaciente($id_paciente) {
+        $consultas = ConsultaRepository::singleton()->idConsultasDePaciente($id_paciente);
+        return array_map(function($consulta){ return ConsultaRepository::singleton()->ubicacion($consulta);},$consultas);
     }
 }
 
