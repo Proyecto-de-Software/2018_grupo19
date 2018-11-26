@@ -7,6 +7,7 @@ require_once 'controller/UsuarioController.php';
 require_once 'controller/PacienteController.php';
 require_once 'controller/AjaxController.php';
 require_once 'controller/ConsultaController.php';
+require_once 'controller/RolController.php';
 
 /*
 Clase que se encarga del rooteo
@@ -195,6 +196,38 @@ class RooterController extends Controller{
                 
                 case 'listado-consultas':
                 ConsultaController::singleton()->redireccionarListadoConsultas();
+                break;
+
+                /*
+                ** Roles
+                */
+
+                case 'listado-roles':
+                RolController::singleton()->redireccionarListadoRoles();
+                break;
+
+                case 'info-rol':
+                RolController::singleton()->redireccionarInfoRol();
+                break;
+
+                case 'editar-rol':
+                RolController::singleton()->redireccionarEditarRol();
+                break;
+
+                case 'crear-rol':
+                RolController::singleton()->redireccionarCrearRol();
+                break;
+
+                case 'editando-rol':
+                RolController::singleton()->editarRol();
+                break;
+
+                case 'borrando-rol':
+                RolController::singleton()->borrarRol();
+                break;
+
+                case 'creando-rol':
+                RolController::singleton()->crearRol();
                 break;
 
                 /*
