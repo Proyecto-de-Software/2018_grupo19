@@ -64,5 +64,13 @@ class AjaxController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function obtenerPacientePorHistoria() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerPacientePorHistoria($_GET['nro_historia'])));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }
 ?>

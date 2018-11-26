@@ -46,7 +46,8 @@
             try {
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_show', $_SESSION["id"])) {
                     $view = new ListadoConsultas();
-                    $view->show($this->parametrosDeSesion(array('resultados' => ConsultaRepository::singleton()->consultas())));
+                    $result = ConsultaRepository::singleton()->consultas(isset($_GET['pagina-actual']) ? $_GET['pagina-actual']-1:0);
+                    $view->show($this->parametrosDeSesion(array('resultados' => $result['consultas'], 'paginaActual' => isset($_GET['pagina-actual']) ? $_GET['pagina-actual']:1, 'cantidadPaginas' => $result["cantidadTotal"])));
                 } else {
                     $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
                 }
