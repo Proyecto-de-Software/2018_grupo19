@@ -73,5 +73,13 @@ class AjaxController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function obtenerUbicacionesDePaciente() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerUbicacionesDeConsultasDePaciente($_GET['id'])));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }
 ?>
