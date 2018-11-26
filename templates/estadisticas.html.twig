@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/estadisticas.css">
+{% endblock %}
+
+{% block links %}
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+    <div class="graph-container">
+        <div class="graph" id="chartContainergenero"></div>
+        <div class="graph" id="chartContainermotivo"></div>
+        <div class="graph" id="chartContainerlocalidad"></div>     
+    </div>
+    
+    <script>
+        
+        fetch("index.php?comando=obtener-consultas-por-motivo").then(
+            function(response){
+                response.json().then(
+                    function(estadisticas){
+                        estadisticas = estadisticas.map(function (estadistica) {
+                            return {y:estadistica.cantidad, label:estadistica.motivo}
+                        })
+                        generarGrafico(estadisticas,'motivo')
+                    })
+            }
+        )
+        fetch("index.php?comando=obtener-consultas-por-genero").then(
+            function(response){
+                response.json().then(
+                    function(estadisticas){
+                        estadisticas = estadisticas.map(function (estadistica) {
+                            return {y:estadistica.cantidad, label:estadistica.genero}
+                        })
+                        generarGrafico(estadisticas,'genero')
+                    })
+            }
+        )
+        fetch("index.php?comando=obtener-consultas-por-localidad").then(
+            function(response){
+                response.json().then(
+                    function(estadisticas){
+                        estadisticas = estadisticas.map(function (estadistica) {
+                            return {y:estadistica.cantidad, label:estadistica.localidad}
+                        })
+                        generarGrafico(estadisticas,'localidad')
+                    })
+            }
+        )
+
+        function generarGrafico(estadisticas, agrupador){
+            var chart = new CanvasJS.Chart("chartContainer"+agrupador, {
+                animationEnabled: true,
+                title: {
+                    text: "Consultas por "+agrupador
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{y} {label}",
+                    dataPoints: estadisticas
+                }]
+            });
+            chart.render();
+        }
+    </script>
+
+{% endblock %}
