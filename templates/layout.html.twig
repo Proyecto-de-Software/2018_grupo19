@@ -14,7 +14,7 @@
 	<nav>
 		<a id="link-inicio" href="index.php">
 			<img id="logo" src="recursos/logo_hospital.svg" alt="Logo">
-			<p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
+			<p class="nombre-hospital">{{tituloPagina}}</p>
 		</a>
 		<a href="index.php?comando=listado-instituciones">Listado de Instuciones</a>
 
@@ -47,7 +47,8 @@
 
 	<footer>
 		{% block footer %}
-		<p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
+		<p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn - {{mailPagina}} - {{descPagina}}</p>
+		<p></p>
 		<p>v 0.1.0</p>
 		{% endblock %}
 	</footer>

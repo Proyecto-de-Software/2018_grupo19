@@ -5,11 +5,11 @@ function validarFormConfiguracion() {
         alert('El mail ingresado no es correcto')
         return false
     }
-    if(document.getElementById('input_titulo').value != "") {
+    if(document.getElementById('input_titulo').value == "") {
         alert('Campo titulo esta vacio')
         return false
     }
-    if(document.getElementById('input_cant').value != "") {
+    if(document.getElementById('input_cant').value == "") {
         alert('Campo titulo esta vacio')
         return false
     }

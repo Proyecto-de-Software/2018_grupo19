@@ -97,7 +97,7 @@ class UsuarioController extends Controller{
     public function actualizarUsuario(){
         try {
             if(UsuariosRepository::singleton()->chequearPermiso('usuario_update', $_SESSION["id"])) {
-                if(isset($_GET["id"]) && isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST["nombre"]) && isset($_POST['apellido'])) {
+                if(isset($_GET["id"]) && isset($_POST['email']) && isset($_POST["nombre"]) && isset($_POST['apellido'])) {
                     UsuariosRepository::singleton()->actualizarUsuario($_GET['id'],$_POST['email'],!isset($_POST['bloqueado']),$_POST['nombre'],$_POST['apellido'],isset($_POST['roles'])?$_POST['roles']:null);
                     RooterController::singleton()->redireccionar('busqueda-usuarios');
                 } else {

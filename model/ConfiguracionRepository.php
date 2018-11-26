@@ -49,4 +49,21 @@ class ConfiguracionRepository extends PDORepository {
     }
   }
 
+  public function datosDeLaPagina(){
+    $db = $this->conectarse();
+    $query = $db->prepare("SELECT * FROM configuracion WHERE variable = 'titulo'");
+    $query->execute();
+    $result = $query->fetch();
+    $titulo = $result["valor"];
+    $query = $db->prepare("SELECT * FROM configuracion WHERE variable = 'mail'");
+    $query->execute();
+    $result = $query->fetch();
+    $mail = $result["valor"];
+    $query = $db->prepare("SELECT * FROM configuracion WHERE variable = 'descripcion'");
+    $query->execute();
+    $result = $query->fetch();
+    $desc = $result["valor"];
+    return array($titulo, $mail, $desc);
+  }
+
 }
