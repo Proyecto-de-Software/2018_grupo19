@@ -111,13 +111,18 @@ $(document).ready(function(){
             $('#localidades').empty();
         }
     });
-    //**
 });
 
 function obtenerPartidos() {
-    $.get("index.php?comando=obtener-partidos",
-    function (partidos) {
-        $.each($.parseJSON(partidos),function (index, partido) {$('<option>').val(partido['id']).text(partido['nombre']).appendTo('#partidos');})
+    fetch('https://api-referencias.proyecto2018.linti.unlp.edu.ar/partido')
+    .then(function(response) {
+        response.json().then(function(partidos) {
+            partidos.forEach(function(partido) {
+                $('<option>').val(partido['id']).text(partido['nombre']).appendTo('#partidos')
+            })
+        })
+    }).then(function(){
+        $("#partidos").val("1")
         actualizarLocalidades()
         actualizarRegionSanitaria()
     })
@@ -131,31 +136,45 @@ function obtenerGeneros() {
 }
 
 function obtenerTiposDeDocumento() {
-    $.get("index.php?comando=obtener-tipos-doc",
-    function (tiposDoc) {
-        $.each($.parseJSON(tiposDoc),function (index, tipo) {$('<option>').val(tipo['id']).text(tipo['nombre']).appendTo('#tipos-doc');})
+    fetch('https://api-referencias.proyecto2018.linti.unlp.edu.ar/tipo-documento')
+    .then(function(response) {
+        response.json().then(function(tiposDocumentos) {
+            tiposDocumentos.forEach(function(tipoDoc) {
+                $('<option>').val(tipoDoc['id']).text(tipoDoc['nombre']).appendTo('#tipos-doc')
+            })
+        })
     })
 }
 
 function obtenerObrasSociales() {
-    $.get("index.php?comando=obtener-obras-sociales",
-    function (obrasSociales) {
-        $.each($.parseJSON(obrasSociales),function (index, obraSocial) {$('<option>').val(obraSocial['id']).text(obraSocial['nombre']).appendTo('#obras-sociales');})
+    fetch('https://api-referencias.proyecto2018.linti.unlp.edu.ar/obra-social')
+    .then(function(response) {
+        response.json().then(function(obs) {
+            obs.forEach(function(ob) {
+                $('<option>').val(ob['id']).text(ob['nombre']).appendTo('#obras-sociales')
+            })
+        })
     })
 }
 
 function actualizarRegionSanitaria() {
-    $.get("index.php?comando=obtener-region-sanitaria&partido="+($("#partidos").val()),
-    function (region) {
-        $("#region_sanitaria_id").val($.parseJSON(region)[0])
+    fetch('https://api-referencias.proyecto2018.linti.unlp.edu.ar/partido/' + $('#partidos').val())
+    .then(function(response) {
+        response.json().then(function(partidos) {
+            $('#region_sanitaria_id').val(partidos['region_sanitaria_id'])
+        })
     })
 }
 
 function actualizarLocalidades() {
-    $.get("index.php?comando=obtener-localidades&partido="+($("#partidos").val()),
-    function (localidades) {
-        $('#localidades').empty();
-        $.each($.parseJSON(localidades),function (index, localidad) {$('<option>').val(localidad['id']).text(localidad['nombre']).appendTo('#localidades');})
+    fetch('https://api-referencias.proyecto2018.linti.unlp.edu.ar/localidad/partido/'+($("#partidos").val()))
+    .then(function(response) {
+        response.json().then(function(localidades) {
+            $('#localidades').empty();
+            localidades.forEach(function(localidad) {
+                $('<option>').val(localidad['id']).text(localidad['nombre']).appendTo('#localidades')
+            })
+        })
     })
 }
 
