@@ -6,6 +6,8 @@ require_once 'controller/AdministradorController.php';
 require_once 'controller/UsuarioController.php';
 require_once 'controller/PacienteController.php';
 require_once 'controller/AjaxController.php';
+require_once 'controller/ConsultaController.php';
+require_once 'controller/RolController.php';
 
 /*
 Clase que se encarga del rooteo
@@ -13,38 +15,13 @@ Clase que se encarga del rooteo
 
 class RooterController extends Controller{
 
-    public function verificarSitioHabilitado($comando){
-        if(! AdministradorController::singleton()->sitioHabilitado()) {
-
-            if (! AdministradorController::singleton()->hayUnAdministrador() ) {
-                if( isset($_POST['usuario']) && isset($_POST['contrasena'])) {
-                    if(SessionController::singleton()->login()){
-                        return true;
-                    } else {
-                        return false;
-                    }
-
-                }else if ( $comando == 'login' ){
-                    return true;
-                } else {
-                    return false;
-                }
-
-            } else { return true;}
-        } else { return true; }
-    }
-
     public function redireccionar($comando){
 
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
+        if(!isset($_SESSION)){session_start();}
 
-        //session_destroy();
-
-        if(! $this->verificarSitioHabilitado($comando)) {
+        if(!AdministradorController::singleton()->verificarEstadoDelSitio($comando)){
             AdministradorController::singleton()->redireccionarSitioEnMantenimiento();
-            return;
+            exit();
         }
 
         if(!isset($_SESSION["id"])) {
@@ -57,6 +34,10 @@ class RooterController extends Controller{
 
                 case 'login':
                 SessionController::singleton()->redireccionarLogin();
+                break;
+
+                case 'listado-instituciones':
+                header('location:templates/listado-instituciones.html');
                 break;
 
                 default:
@@ -193,10 +174,90 @@ class RooterController extends Controller{
                 AjaxController::singleton()->obtenerLocalidades();
                 break;
 
+                case 'obtener-motivos':
+                AjaxController::singleton()->obtenerMotivos();
+                break;
+
+                case 'obtener-paciente-por-historia':
+                AjaxController::singleton()->obtenerPacientePorHistoria();
+                break;
+
+                case 'obtener-ubicaciones':
+                AjaxController::singleton()->obtenerUbicacionesDePaciente();
+                break;
+                
+                /*
+                ** Consultas router
+                */
+
+                case 'creacion-consulta':
+                ConsultaController::singleton()->redireccionarCreacionConsulta();
+                break;
+
+                case 'insertar-consulta':
+                ConsultaController::singleton()->insertarConsulta();
+                break;
+
+                case 'editar-consulta':
+                ConsultaController::singleton()->redireccionarEdicionConsulta();
+                break;
+
+                case 'borrar-consulta':
+                ConsultaController::singleton()->borrarConsulta();
+                break;
+                
+                case 'listado-consultas':
+                ConsultaController::singleton()->redireccionarListadoConsultas();
+                break;
+
+                case 'actualizar-consulta':
+                ConsultaController::singleton()->actualizarConsulta();
+                break;
+
+                /*
+                ** Roles
+                */
+
+                case 'listado-roles':
+                RolController::singleton()->redireccionarListadoRoles();
+                break;
+
+                case 'info-rol':
+                RolController::singleton()->redireccionarInfoRol();
+                break;
+
+                case 'editar-rol':
+                RolController::singleton()->redireccionarEditarRol();
+                break;
+
+                case 'crear-rol':
+                RolController::singleton()->redireccionarCrearRol();
+                break;
+
+                case 'editando-rol':
+                RolController::singleton()->editarRol();
+                break;
+
+                case 'borrando-rol':
+                RolController::singleton()->borrarRol();
+                break;
+
+                case 'creando-rol':
+                RolController::singleton()->crearRol();
+                break;
+
                 /*
                 ** Default
                 */
+                
+                case 'feriados':
+                UsuarioController::singleton()->mostrarPaginaFeriados();
+                break; 
 
+                case 'listado-instituciones':
+                header('location=templates/listado-instituciones.html');
+                break;
+                
                 default:
                 RooterController::singleton()->home();
                 break;

@@ -12,19 +12,22 @@
 </head>
 <body>
 	<nav>
-		<a id="link-inicio" href="index.php">
+		<a id="link-inicio" href="/index.php">
 			<img id="logo" src="recursos/logo_hospital.svg" alt="Logo">
 			<p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
 		</a>
+		<a href="/templates/listado-instituciones.html">Listado de Instuciones</a>
 
 		{% if logueado %}
 		<div class="dropdown">
 			<a href="#">{{username}}</a>
 			<ul class="dropdown-items">
 				<li><a href="index.php?comando=busqueda-pacientes">Pacientes</a></li>
+				<li><a href="index.php?comando=creacion-consulta">Cargar consulta</a></li>
 				{% if administrador %}
 				<li><a href="index.php?comando=busqueda-usuarios&pagina-actual=1">Usuarios</a></li>
 				<li><a href="index.php?comando=configuracion">Configuracion</a></li>
+				<li><a href="index.php?comando=listado-roles">Roles y permisos</a></li>
 				{% endif %}
 				<li><a href="index.php?comando=cerrar-sesion">Cerrar sesion</a></li>
 			</ul>

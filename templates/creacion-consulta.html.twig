@@ -1,0 +1,120 @@
+{% extends 'layout.html.twig' %}
+
+{% block links %}
+<script src="../vendor/components/jquery/jquery.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenido">
+    <div class="panel-principal">
+        <form id="formulario" class="formulario-principal"{% block accion %}action="index.php?comando=insertar-consulta"{% endblock %} method="post">
+            <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
+            <div class="label-input">
+                <label>Nro Historia Clinica de Paciente:</label>
+                <input id="nro_historia" class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{{usuario_cargado}}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} readonly {% endif %}>
+            </div>
+            <div>
+                <p>Paciente: </p><p id="nombre_paciente"></p>
+            </div>
+            <div class="label-input">
+                <label>Fecha:</label>
+                <input class="inputf" type="date" name="fecha" value="{% block fecha %}{% endblock %}" "{% block fecha_props %}{% endblock %}" required>
+            </div>
+            <div class="label-input">
+                <label>Motivo de atencion:</label>
+                <select name="motivo" id="motivos">
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Derivacion:</label>
+                <select name="derivacion" id="derivacion">
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Articulacion:</label>
+                <input class="inputf" type="textarea" name="articulacion" value="{% block articulacion_con_instituciones %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Internacion:</label>
+                <input class="inputf checkb" type="checkbox" name="internacion" value="{% block internacion %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Diagnostico:</label>
+                <input class="inputf" type="textarea" name="diagnostico" value="{% block diagnostico %}{% endblock %}" >
+            </div>
+            <div class="label-input">
+                <label>Observaciones:</label>
+                <input class="inputf" type="textarea" name="observaciones" value="{% block observaciones %}{% endblock %}">
+            </div>
+            <div class="label-input">
+                <label>Tratamiento farmacologico:</label>
+                <select name="tratamiento">
+                    <option value='1'>Manana</option>
+                    <option value='2'>Tarde</option>
+                    <option value='3'>Noche</option>
+                </select>
+            </div>
+            <div class="label-input">
+                <label>Acompanamiento:</label>
+                <select name="acompanamiento">
+                    <option value='1'>Familiar cercano</option>
+                    <option value='2'>Hermanos e hijos</option>
+                    <option value='3'>Pareja</option>
+                    <option value='4'>Referentes vinculares</option>
+                    <option value='5'>Policia</option>
+                    <option value='6'>SAME</option>
+                    <option value='7'>Por sus propios medios</option>
+                </select>
+            </div>
+        </form>
+        <div>
+            {% block botones %}
+                <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    obtenerMotivos()
+    obtenerInstituciones()
+    cargarPaciente()
+});
+
+function obtenerInstituciones(){
+    fetch('api/instituciones')
+    .then(function(response) {
+        response.json().then(function(instituciones) {
+            instituciones.forEach(function(institucion) {
+                $('<option>').val(institucion['id']).text(institucion['nombre']).appendTo('#derivacion')
+            })
+        })
+    })
+}
+
+function obtenerMotivos() {
+    $.get("index.php?comando=obtener-motivos",
+    function (motivos) {
+        $.each($.parseJSON(motivos),function (index, motivo) {$('<option>').val(motivo['id']).text(motivo['nombre']).appendTo('#motivos');})
+    })
+}
+
+function cargarPaciente() {
+    fetch('index.php?comando=obtener-paciente-por-historia&nro_historia='+document.getElementById('nro_historia').value)
+    .then(function(response) {
+        response.json().then(function(paciente) {
+            if(paciente){
+                $('#nombre_paciente').text(paciente['nombre'])
+            } else {
+                $('#nombre_paciente').text('-')
+            }
+        })
+    })
+}
+
+</script>
+
+{% endblock %}

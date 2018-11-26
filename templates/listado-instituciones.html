@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<title>Hospital Alejandro Korn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/listado-instituciones.css">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+	<nav>
+		<a id="link-inicio" href="index.php">
+            <img id="logo" src="../recursos/logo_hospital.svg" alt="Logo">
+            <p class="nombre-hospital">Hospital Dr. Alejandro Korn</p>
+		</a>
+    </nav>
+    <section id="general">
+        <h2 class="display-4">Buscador de instituciones</h2>
+        <section style="margin:20px;">
+            <div class="row form-partidos">
+                <div>
+                    <p>
+                        Seleccione el partido:
+                    </p>
+                    <select name="partido-select" id="partido-select" v-model="selected" v-on:change="actualizar">
+                        <option value="0">Todas</option>
+                        <option v-for="p in partidos" v-bind:value="p.id">{{p.nombre}}</option>
+                    </select>
+                </div>
+                <p>Region sanitaria: {{regSanitaria}} </p>
+                <!-- <button v-on:click="actualizarListado">Buscar >></button> -->
+            </div>
+        </section>
+        <section>
+            <table class="table" id="tabla-instituciones">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>institucion</th>
+                        <th>Director/a</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="i in instituciones">
+                        <td scope="row">{{i.id}}</td>
+                        <td>{{i.nombre}}</td>
+                        <td>{{i.director}}</td>
+                        <td>Desconocida</td>
+                        <td>{{i.telefono}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </section>
+
+	<footer>
+		<p>Proyecto de Software 2018 - Hospital Dr. Alejandro Korn</p>
+		<p>v 0.1.0</p>
+    </footer>
+    
+    <script src="vue_scripts/listado-instituciones.js"></script>
+</body>
+</html>

@@ -56,5 +56,30 @@ class AjaxController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function obtenerMotivos() {
+        try {
+            var_dump(json_encode(AjaxRepository::singleton()->obtenerMotivos()));
+            echo (json_encode(AjaxRepository::singleton()->obtenerMotivos()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+    public function obtenerPacientePorHistoria() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerPacientePorHistoria($_GET['nro_historia'])));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+    public function obtenerUbicacionesDePaciente() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->obtenerUbicacionesDeConsultasDePaciente($_GET['id'])));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }
 ?>

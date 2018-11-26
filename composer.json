@@ -4,6 +4,7 @@
   },
   "require": {
     "twig/twig": "^2.0",
-    "components/jquery": "1.9.*"
+    "components/jquery": "1.9.*",
+    "slim/slim": "^3.0"
   }
 }

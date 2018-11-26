@@ -1,0 +1,27 @@
+{% extends "layout.html.twig" %}
+{% block estilos %}
+    {{parent()}}
+    <link rel="stylesheet" href="templates/styles/busqueda-usuarios.css">
+    <link rel="stylesheet" href="templates/styles/busqueda-pacientes.css">
+{% endblock %}
+{% block contenido %}
+
+    <div class="contenido">
+        <div class="panel-principal">
+            <h1>Rol: {{rol.nombre}}</h1>
+            <h3>Permisos:</h3>
+            <br> 
+            <ul>
+                {% for permiso in rol.permisos %}
+                    <li>{{permiso.nombre}}</li>                    
+                {% endfor %}
+            </ul>
+            <div>
+                <button class="boton-panel-principal" onclick="location.href='index.php?comando=editar-rol&id={{rol.id}}'">Editar</button>
+            <button class="boton-panel-principal" onclick="location.href='index.php?comando=borrando-rol&id={{rol.id}}'">Borrar</button>
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}

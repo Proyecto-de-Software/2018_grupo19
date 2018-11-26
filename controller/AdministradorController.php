@@ -45,14 +45,41 @@ class AdministradorController extends Controller{
 
     public function sitioHabilitado() {
         try {
-            return (1 == ConfiguracionRepository::singleton()->getPaginaEnMantenimiento());
+            return ConfiguracionRepository::singleton()->getPaginaEnMantenimiento();
         } catch (Exception $e) {
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
 
     public function hayUnAdministrador() {
-        return isset($_SESSION["administrador"]) ? $_SESSION["administrador"]:false;
+
+        if(isset($_SESSION["administrador"])){
+            return $_SESSION["administrador"];
+        }else{
+            return false;
+        }
+    }
+
+    public function verificarEstadoDelSitio($comando){
+
+        if(self::singleton()->sitioHabilitado()){ return true;}
+
+        if(self::singleton()->hayUnAdministrador()){return true;}
+
+        if($comando != 'login' && $comando != 'iniciar-sesion'){return false;}
+
+        switch ($comando) {
+            case 'iniciar-sesion':
+                if(SessionController::singleton()->loginComoAdministrador()){
+                    RooterController::singleton()->redireccionar('');
+                    exit();
+                }
+                return false;
+                break;
+            case 'login':
+                return true;
+                break;
+        }
     }
 
 }
