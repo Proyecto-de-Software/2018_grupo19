@@ -159,5 +159,4 @@ class PacientesRepository extends PDORepository {
         return $query->fetch();
     }
 
-    // **
 }

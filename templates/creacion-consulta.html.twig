@@ -12,7 +12,7 @@
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
                 <label>Nro Historia Clinica de Paciente:</label>
-                <input id="nro_historia" class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
+                <input id="nro_historia" class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{{usuario_cargado}}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} readonly {% endif %}>
             </div>
             <div>
                 <p>Paciente: </p><p id="nombre_paciente"></p>
@@ -68,7 +68,11 @@
                 </select>
             </div>
         </form>
-        <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
+        <div>
+            {% block botones %}
+                <button type="submit" form="formulario" class="boton-panel-principal">Guardar</button>
+            {% endblock %}
+        </div>
     </div>
 </div>
 

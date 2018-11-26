@@ -32,19 +32,20 @@ class ConsultaRepository extends PDORepository {
         $query->execute(array($id_paciente));
     }
 
-    public function consultas($paginaActual = 0) {
+    public function consultas() {
         $db = $this->conectarse();
         $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) INNER JOIN motivo_consulta m ON (c.motivo_id = m.id)";
         $query = $db->prepare($sql);
         $query->execute(array());
-
-        $cantidadPaginas = ceil( $query->rowCount() / $this->cantidadPorPagina() );
-        $primero = ($paginaActual * $this->cantidadPorPagina() );
-        $sql = $sql . " LIMIT " . $primero . ', ' . (($this->cantidadPorPagina()) );
-        $query = $db->prepare($sql);
-        $query->execute(array());
-        $result = array("cantidadTotal" => $cantidadPaginas, "consultas" => $query->fetchAll());
         return $result;
+    }
+
+    public function consultasDePaciente($id_paciente) {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) INNER JOIN motivo_consulta m ON (c.motivo_id = m.id) WHERE p.id = ?";
+        $query = $db->prepare($sql);
+        $query->execute(array($id_paciente));
+        return $query->fetchAll();
     }
 
     public function consultaConId($id) {
