@@ -11,20 +11,24 @@ class SessionController extends Controller{
 
     public function login(){
         try {
-            $usuario = UsuariosRepository::singleton()->usuarioContrasena($_POST['usuario'], $_POST['contrasena']);
+            if(isset($_POST["usuario"]) && isset($_POST["contrasena"])) {
+                $usuario = UsuariosRepository::singleton()->usuarioContrasena($_POST['usuario'], $_POST['contrasena']);
 
-            if(!$usuario['activo']){
-                $this->redireccionarError('No se pudo iniciar sesion', "El usuario con el que intenta acceder se encuentra bloqueado");
-                exit();
+                if(!$usuario['activo']){
+                    $this->redireccionarError('No se pudo iniciar sesion', "El usuario con el que intenta acceder se encuentra bloqueado");
+                    exit();
+                }
+
+                $_SESSION['id'] = $usuario["id"];
+                $_SESSION['username'] = $usuario['username'];
+                $_SESSION['activo'] = $usuario['activo'];
+                $_SESSION['first_name'] = $usuario['first_name'];
+                $_SESSION['last_name'] = $usuario['last_name'];
+                $_SESSION['administrador'] = UsuariosRepository::singleton()->isAdministrador($usuario["id"]);
+                RooterController::singleton()->redireccionar('');
+            } else {
+                $this->redireccionarError('Error al iniciar', 'Parece que faltan algunos campos');
             }
-
-            $_SESSION['id'] = $usuario["id"];
-            $_SESSION['username'] = $usuario['username'];
-            $_SESSION['activo'] = $usuario['activo'];
-            $_SESSION['first_name'] = $usuario['first_name'];
-            $_SESSION['last_name'] = $usuario['last_name'];
-            $_SESSION['administrador'] = UsuariosRepository::singleton()->isAdministrador($usuario["id"]);
-            RooterController::singleton()->redireccionar('');
             
         } catch (Exception $e) {
             if(AdministradorController::singleton()->sitioHabilitado()) {

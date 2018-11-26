@@ -79,8 +79,12 @@ class RolController extends Controller{
     public function borrarRol(){
         if(UsuariosRepository::singleton()->chequearPermiso('rol_delete', $_SESSION['id'])){
             try {
-                RolesRepository::singleton()->borrarRol($_GET['id']);
-                header("location:index.php?comando=listado-roles");
+                if(isset($_GET["id"])) {
+                    RolesRepository::singleton()->borrarRol($_GET['id']);
+                    header("location:index.php?comando=listado-roles");
+                } else {
+                    $this->redireccionarError('Error en el borrado', 'El nombre de usuario ya existe en el sistema');
+                }
             } catch (Exception $e) {
                 $this->redireccionarError('Error en la base de datos', $e->getMessage());
             }

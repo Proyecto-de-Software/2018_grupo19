@@ -269,7 +269,7 @@ class RooterController extends Controller{
                 break; 
 
                 case 'listado-instituciones':
-                header('location=templates/listado-instituciones.html');
+                header('location:templates/listado-instituciones.html');
                 break;
                 
                 default:

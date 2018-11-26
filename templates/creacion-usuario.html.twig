@@ -2,13 +2,14 @@
 
 {% block links %}
 <script src="../vendor/components/jquery/jquery.min.js"></script>
+<script src="scripts/creacion-usuario.js"></script>
 {% endblock %}
 
 {% block contenido %}
 
 <div class="contenido">
     <div class="panel-principal">
-        <form class="formulario-principal" action="index.php?comando=insertar-usuario" method="post" id="formulario" onsubmit="return chequearRoles()">
+        <form class="formulario-principal" action="index.php?comando=insertar-usuario" method="post" id="formulario" onsubmit="return (chequearRoles() & validarForm())">
             <h1>Creando usuario</h1>
             <div class="label-input">
                 <label>Nombre de usuario:</label>
@@ -24,7 +25,7 @@
             </div>
             <div class="label-input">
                 <label>Email:</label>
-                <input class="inputf" type="text" name="email" required>
+                <input id="input_mail" class="inputf" type="text" name="email" required>
             </div>
             <div class="label-input">
                 <label>Password:</label>
@@ -47,14 +48,5 @@
     </div>
 
 </div>
-
-<script type="text/javascript">
-function chequearRoles() {
-    if ($("[name='roles[]']:checked").length <= 0) {
-        alert("Debe seleccionar al menos un rol")
-        return false;
-    }
-}
-</script>
 
 {% endblock %}
