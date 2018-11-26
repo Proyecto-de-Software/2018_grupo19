@@ -7,8 +7,8 @@
 /* GENERAL */
 
 html, body {
-  height: 100%;
   background-color: #E8EAF6;
+  height: 100%;
 }
 
 body {
@@ -22,6 +22,8 @@ body {
 .contenido {
   display: flex;
   justify-content: center;
+  align-items: center;  
+  min-height: 600px;
 }
 
 /* NAV Y FOOTER */

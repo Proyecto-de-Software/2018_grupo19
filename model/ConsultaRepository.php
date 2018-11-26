@@ -42,7 +42,7 @@ class ConsultaRepository extends PDORepository {
 
     public function idConsultasDePaciente($id_paciente) {
         $db = $this->conectarse();
-        $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) INNER JOIN motivo_consulta m ON (c.motivo_id = m.id) WHERE p.id = ?";
+        $sql = "SELECT c.id FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) WHERE p.id = ?";
         $query = $db->prepare($sql);
         $query->execute(array($id_paciente));
         return $query->fetchAll();

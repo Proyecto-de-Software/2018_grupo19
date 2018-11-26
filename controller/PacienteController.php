@@ -6,6 +6,7 @@
 
 require_once 'RooterController.php';
 require_once 'model/PacientesRepository.php';
+require_once 'views/InstitucionesMap.php';
 
 class PacienteController extends Controller{
 
@@ -124,5 +125,9 @@ class PacienteController extends Controller{
         } catch (Exception $e) {
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
+    }
+
+    public function redireccionarUltimasDerivaciones(){
+        InstitucionesMap::show($this->parametrosDeSesion(array('idPaciente' => $_GET['id'])));
     }
 }

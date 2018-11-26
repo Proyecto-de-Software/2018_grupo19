@@ -27,8 +27,7 @@
         </form>
     </div>
 
-    <h1>Atenciones</h1>
-    <div class="tabla-resultados">
+    <h1>Atenciones</h1> <a href="index.php?comando=mapa-de-instituciones&id={{paciente.id}}">(ver en mapa)</a>
         {% for resultado in resultados %}
             <a href="index.php?comando=editar-consulta&id={{resultado.0}}" class="tarjeta-resultado">
                 <div class="nombreyfoto-tarjeta-usuario"> 

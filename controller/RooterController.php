@@ -185,7 +185,19 @@ class RooterController extends Controller{
                 case 'obtener-ubicaciones':
                 AjaxController::singleton()->obtenerUbicacionesDePaciente();
                 break;
-                
+
+                case 'obtener-consultas-por-motivo':
+                AjaxController::singleton()->obtenerConsultasPorMotivo();
+                break;
+
+                case 'obtener-consultas-por-genero':
+                AjaxController::singleton()->obtenerConsultasPorGenero();
+                break;
+
+                case 'obtener-consultas-por-localidad':
+                AjaxController::singleton()->obtenerConsultasPorLocalidad();
+                break;
+
                 /*
                 ** Consultas router
                 */
@@ -247,11 +259,21 @@ class RooterController extends Controller{
                 break;
 
                 /*
+                ** Map
+                */
+
+                case 'mapa-de-instituciones':
+                PacienteController::singleton()->redireccionarUltimasDerivaciones();
+                break;
+                
+                /*
                 ** Default
                 */
                 
-                case 'feriados':
-                UsuarioController::singleton()->mostrarPaginaFeriados();
+                case 'estadisticas':
+                    require_once 'views/Estadisticas.php';
+                    $view = new Estadisticas();
+                    $view->show($this->parametrosDeSesion());
                 break; 
 
                 case 'listado-instituciones':

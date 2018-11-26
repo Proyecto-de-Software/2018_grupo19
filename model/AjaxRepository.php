@@ -74,8 +74,42 @@ class AjaxRepository extends PDORepository {
 
     public function obtenerUbicacionesDeConsultasDePaciente($id_paciente) {
         $consultas = ConsultaRepository::singleton()->idConsultasDePaciente($id_paciente);
-        return array_map(function($consulta){ return ConsultaRepository::singleton()->ubicacion($consulta);},$consultas);
+        return array_map(function($consulta){return ConsultaRepository::singleton()->ubicacion($consulta['id']);},$consultas);
     }
+
+    public function consultasPorMotivo() {
+        $db = $this->conectarse();
+        $sql = "SELECT COUNT(*) as cantidad, mc.nombre as motivo
+            FROM consulta c INNER JOIN motivo_consulta mc ON(c.motivo_id = mc.id)
+            GROUP BY c.motivo_id, mc.nombre
+            ORDER BY c.motivo_id ASC";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
+
+    public function consultasPorGenero() {
+        $db = $this->conectarse();
+        $sql = "SELECT COUNT(*) as cantidad, g.nombre as genero
+            FROM consulta c INNER JOIN paciente p ON(c.paciente_id = p.id) INNER JOIN genero g ON(p.genero_id = g.id)
+            GROUP BY g.id, g.nombre
+            ORDER BY g.nombre ASC";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
+
+    public function consultasPorLocalidad() {
+        $db = $this->conectarse();
+        $sql = "SELECT COUNT(*) as cantidad, l.nombre as localidad
+            FROM consulta c INNER JOIN paciente p ON(c.paciente_id = p.id) INNER JOIN localidad l ON(p.localidad_id = l.id)
+            GROUP BY l.id, l.nombre
+            ORDER BY l.nombre ASC";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
+
 }
 
 ?>
