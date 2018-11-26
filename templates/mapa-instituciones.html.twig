@@ -19,7 +19,7 @@
     var markers = new OpenLayers.Layer.Markers( "Markers" );
     map.addLayer(markers);
 
-    fetch("index.php?comando=obtener-ubicaciones&id=2")
+    fetch("index.php?comando=obtener-ubicaciones&id={{idPaciente}}")
         .then(function(reponse){
           reponse.json().then(function(instituciones){
             iterarInstituciones(instituciones);
