@@ -43,9 +43,17 @@ class PacienteController extends Controller{
             if(UsuariosRepository::singleton()->chequearPermiso('paciente_new', $_SESSION["id"])) {
                 if(PacientesRepository::singleton()->verificarHistoriaClinica($_POST["nro_historia_clinica"])) {
                     if ($nn) {
-                        PacientesRepository::singleton()->crearPaciente('NN', 'NN', '0000-00-00', null, '1', '1', '', '3', '0', '1', '0', '0', $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], '1');
+                        if(isset($_POST['nro_historia_clinica']) && isset($_POST['nro_carpeta'])) {
+                            PacientesRepository::singleton()->crearPaciente('NN', 'NN', '0000-00-00', null, '1', '1', '', '3', '0', '1', '0', '0', $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], '1');
+                        } else {
+                            $this->redireccionarError('Error en la creacion', 'Parece que algunos campos estan vacios');
+                        }
                     } else {
-                        PacientesRepository::singleton()->crearPaciente($_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
+                        if(isset($_POST['apellido']) && isset($_POST['nombre']) && isset($_POST['fecha_nac']) && isset($_POST['lugar_nac']) && isset($_POST['localidad_id']) && isset($_POST['region_sanitaria_id']) && isset($_POST['domicilio']) && isset($_POST['genero_id']) && isset($_POST['nro_historia_clinica']) && isset($_POST['nro_carpeta'])) {
+                            PacientesRepository::singleton()->crearPaciente($_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
+                        } else {
+                            $this->redireccionarError('Error en la creacion', 'Parece que algunos campos estan vacios');
+                        }
                     }
                     RooterController::singleton()->redireccionar('creacion-consulta');
                 } else {
@@ -62,8 +70,12 @@ class PacienteController extends Controller{
     public function actualizarPaciente(){
         try {
             if(UsuariosRepository::singleton()->chequearPermiso('paciente_update', $_SESSION["id"])) {
-                PacientesRepository::singleton()->actualizarPaciente($_GET['id'], $_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
-                RooterController::singleton()->redireccionar('busqueda-pacientes');
+                if(isset($_POST['apellido']) && isset($_POST['nombre']) && isset($_POST['fecha_nac']) && isset($_POST['lugar_nac']) && isset($_POST['localidad_id']) && isset($_POST['region_sanitaria_id']) && isset($_POST['domicilio']) && isset($_POST['genero_id']) && isset($_POST['nro_historia_clinica']) && isset($_POST['nro_carpeta'])) {    
+                    PacientesRepository::singleton()->actualizarPaciente($_GET['id'], $_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
+                    RooterController::singleton()->redireccionar('busqueda-pacientes');
+                } else {
+                    $this->redireccionarError('Error en la creacion', 'Parece que algunos campos estan vacios');
+                }
             } else {
                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
             }
@@ -101,8 +113,12 @@ class PacienteController extends Controller{
     public function borrarPaciente() {
         try {
             if(UsuariosRepository::singleton()->chequearPermiso('paciente_destroy', $_SESSION['id'])) {
-                $paciente = PacientesRepository::singleton()->borrarPaciente($_GET['id']);
-                RooterController::singleton()->redireccionar('busqueda-pacientes');
+                if(isset($_GET["id"])) {
+                    $paciente = PacientesRepository::singleton()->borrarPaciente($_GET['id']);
+                    RooterController::singleton()->redireccionar('busqueda-pacientes');
+                } else {
+                    $this->redireccionarError('Error en el borrado', 'Parece que algunos campos estan vacios');
+                }
             } else {
                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la informacion de pacientes');
             }

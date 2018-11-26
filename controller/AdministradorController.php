@@ -33,8 +33,12 @@ class AdministradorController extends Controller{
     public function actualizarConfiguracion(){
         try {
             if (UsuariosRepository::singleton()->chequearPermiso('configuracion_update', $_SESSION["id"]) ){
-                ConfiguracionRepository::singleton()->actualizarConfiguracion($_POST["titulo"], $_POST["mail"], $_POST["descripcion"], $_POST["cantidad"], isset($_POST["estadoDelSitio"]));
-                RooterController::singleton()->redireccionar('');
+                if(isset($_POST["titulo"]) && isset($_POST["mail"]) && isset($_POST["cantidad"])) {
+                    ConfiguracionRepository::singleton()->actualizarConfiguracion($_POST["titulo"], $_POST["mail"], $_POST["descripcion"], $_POST["cantidad"], isset($_POST["estadoDelSitio"]));
+                    RooterController::singleton()->redireccionar('');
+                } else {
+                    $this->redireccionarError('Error al actualizar los campos', 'Parece que algunos campos estan vacios');
+                }
             } else {
                 $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios para actualizar la configuracion del sitio');
             }

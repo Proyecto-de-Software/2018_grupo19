@@ -1,0 +1,9 @@
+.graph{
+    height: 300px; 
+    width: 500px
+}
+
+.graph-container{
+    display: flex;
+    justify-content: space-between
+}

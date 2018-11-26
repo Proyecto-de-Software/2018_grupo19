@@ -81,5 +81,29 @@ class AjaxController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function obtenerConsultasPorMotivo() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->consultasPorMotivo()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+    public function obtenerConsultasPorGenero() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->consultasPorGenero()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
+
+    public function obtenerConsultasPorLocalidad() {
+        try {
+            echo (json_encode(AjaxRepository::singleton()->consultasPorLocalidad()));
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }
 ?>
