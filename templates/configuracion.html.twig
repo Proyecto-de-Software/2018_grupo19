@@ -5,20 +5,24 @@
     <link rel="stylesheet" href="templates/styles/configuracion.css">
 {% endblock %}
 
+{% block links %}
+    <script src="templates/scripts/configuracion.js"></script>
+{% endblock %}
+
 {% block contenido %}
 
 <div class="contenido">
     <div class="panel-principal">
-        <form class="formulario-principal" action="index.php?comando=cambio-configuracion" method="post" id="formulario">
+        <form class="formulario-principal" action="index.php?comando=cambio-configuracion" method="post" id="formulario" onSubmit="return validarFormConfiguracion();">
             <h1>Configuración</h1>
             <h2>Información del hospital</h2>
             <div class="label-input">
                 <label>Título: </label>
-                <input class="inputf" type="text" value={{titulo}} name="titulo">
+                <input id="input_titulo" class="inputf" type="text" value={{titulo}} name="titulo" required>
             </div>
             <div class="label-input">
                 <label>Mail de contacto:</label>
-                <input class="inputf" type="text" value={{mail}} name="mail" >
+                <input id="input_mail" class="inputf" type="text" value={{mail}} name="mail" required>
             </div>
             <div class="label-input">
                 <label>Descripción:</label>
@@ -27,7 +31,7 @@
             <h2>Configuración del sitio</h2>
             <div class="label-input">
                 <label>Cantidad de elementos por página:</label>
-                <input type="number" name="cantidad" value="{{cantidad}}">
+                <input id="input_cant" type="number" name="cantidad" value="{{cantidad}}" required>
             </div>
             <div class="label-input">
                 <label>Sitio web habilitado:</label>

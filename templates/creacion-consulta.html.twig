@@ -23,17 +23,17 @@
             </div>
             <div class="label-input">
                 <label>Motivo de atencion:</label>
-                <select name="motivo" id="motivos">
+                <select name="motivo" id="motivos" required>
                 </select>
             </div>
             <div class="label-input">
                 <label>Derivacion:</label>
-                <select name="derivacion" id="derivacion">
+                <select name="derivacion" id="derivacion" required>
                 </select>
             </div>
             <div class="label-input">
                 <label>Articulacion:</label>
-                <input class="inputf" type="textarea" name="articulacion" value="{% block articulacion_con_instituciones %}{% endblock %}">
+                <input class="inputf" type="textarea" name="articulacion" value="{% block articulacion_con_instituciones %}{% endblock %}" required>
             </div>
             <div class="label-input">
                 <label>Internacion:</label>
@@ -41,7 +41,7 @@
             </div>
             <div class="label-input">
                 <label>Diagnostico:</label>
-                <input class="inputf" type="textarea" name="diagnostico" value="{% block diagnostico %}{% endblock %}" >
+                <input class="inputf" type="textarea" name="diagnostico" value="{% block diagnostico %}{% endblock %}" required>
             </div>
             <div class="label-input">
                 <label>Observaciones:</label>
