@@ -176,6 +176,10 @@ class RooterController extends Controller{
                 case 'obtener-motivos':
                 AjaxController::singleton()->obtenerMotivos();
                 break;
+
+                case 'obtener-paciente-por-historia':
+                AjaxController::singleton()->obtenerPacientePorHistoria();
+                break;
                 
                 /*
                 ** Consultas router

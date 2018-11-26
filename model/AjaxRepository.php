@@ -62,6 +62,14 @@ class AjaxRepository extends PDORepository {
         $query->execute(array());
         return $query->fetchAll();
     }
+
+    public function obtenerPacientePorHistoria($historia){
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM paciente p WHERE p.nro_historia_clinica = ?";
+        $query = $db->prepare($sql);
+        $query->execute(array($historia));
+        return $query->fetch();
+    }
 }
 
 ?>

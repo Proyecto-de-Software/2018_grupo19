@@ -12,7 +12,7 @@
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
                 <label>Nro Historia Clinica de Paciente:</label>
-                <input class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
+                <input id="nro_historia" class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
             </div>
             <div>
                 <p>Paciente: </p><p id="nombre_paciente"></p>
@@ -99,10 +99,14 @@ function obtenerMotivos() {
 }
 
 function cargarPaciente() {
-    fetch('paciente.json')
+    fetch('index.php?comando=obtener-paciente-por-historia&nro_historia='+document.getElementById('nro_historia').value)
     .then(function(response) {
         response.json().then(function(paciente) {
-            $('#nombre_paciente').text(paciente['nombre'])
+            if(paciente){
+                $('#nombre_paciente').text(paciente['nombre'])
+            } else {
+                $('#nombre_paciente').text('-')
+            }
         })
     })
 }
