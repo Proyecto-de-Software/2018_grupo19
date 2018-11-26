@@ -36,6 +36,10 @@ class RooterController extends Controller{
                 SessionController::singleton()->redireccionarLogin();
                 break;
 
+                case 'listado-instituciones':
+                header('location:templates/listado-instituciones.html');
+                break;
+
                 default:
                 $this->home();
                 break;
@@ -173,6 +177,10 @@ class RooterController extends Controller{
                 case 'obtener-motivos':
                 AjaxController::singleton()->obtenerMotivos();
                 break;
+
+                case 'obtener-paciente-por-historia':
+                AjaxController::singleton()->obtenerPacientePorHistoria();
+                break;
                 
                 /*
                 ** Consultas router
@@ -187,7 +195,7 @@ class RooterController extends Controller{
                 break;
 
                 case 'editar-consulta':
-                ConsultaController::singleton()->modificarConsulta();
+                ConsultaController::singleton()->redireccionarEdicionConsulta();
                 break;
 
                 case 'borrar-consulta':
@@ -196,6 +204,10 @@ class RooterController extends Controller{
                 
                 case 'listado-consultas':
                 ConsultaController::singleton()->redireccionarListadoConsultas();
+                break;
+
+                case 'actualizar-consulta':
+                ConsultaController::singleton()->actualizarConsulta();
                 break;
 
                 /*
@@ -237,6 +249,10 @@ class RooterController extends Controller{
                 case 'feriados':
                 UsuarioController::singleton()->mostrarPaginaFeriados();
                 break; 
+
+                case 'listado-instituciones':
+                header('location=templates/listado-instituciones.html');
+                break;
                 
                 default:
                 RooterController::singleton()->home();

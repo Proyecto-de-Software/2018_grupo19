@@ -12,11 +12,14 @@
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
                 <label>Nro Historia Clinica de Paciente:</label>
-                <input class="inputf" type="text" name="paciente" required {% if usuario_cargado is defined %}value={{usuario_cargado}} readonly{% endif %}>
+                <input id="nro_historia" class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} value={{usuario_cargado}} readonly {% endif %}>
+            </div>
+            <div>
+                <p>Paciente: </p><p id="nombre_paciente"></p>
             </div>
             <div class="label-input">
                 <label>Fecha:</label>
-                <input class="inputf" type="date" name="fecha" required>
+                <input class="inputf" type="date" name="fecha" value="{% block fecha %}{% endblock %}" "{% block fecha_props %}{% endblock %}" required>
             </div>
             <div class="label-input">
                 <label>Motivo de atencion:</label>
@@ -25,23 +28,24 @@
             </div>
             <div class="label-input">
                 <label>Derivacion:</label>
-                <input class="inputf" type="textarea" name="derivacion">
+                <select name="derivacion" id="derivacion">
+                </select>
             </div>
             <div class="label-input">
                 <label>Articulacion:</label>
-                <input class="inputf" type="textarea" name="articulacion">
+                <input class="inputf" type="textarea" name="articulacion" value="{% block articulacion_con_instituciones %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Internacion:</label>
-                <input class="inputf checkb" type="checkbox" name="internacion">
+                <input class="inputf checkb" type="checkbox" name="internacion" value="{% block internacion %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Diagnostico:</label>
-                <input class="inputf" type="textarea" name="diagnostico">
+                <input class="inputf" type="textarea" name="diagnostico" value="{% block diagnostico %}{% endblock %}" >
             </div>
             <div class="label-input">
                 <label>Observaciones:</label>
-                <input class="inputf" type="textarea" name="observaciones">
+                <input class="inputf" type="textarea" name="observaciones" value="{% block observaciones %}{% endblock %}">
             </div>
             <div class="label-input">
                 <label>Tratamiento farmacologico:</label>
@@ -72,12 +76,38 @@
 
 $(document).ready(function(){
     obtenerMotivos()
+    obtenerInstituciones()
+    cargarPaciente()
 });
+
+function obtenerInstituciones(){
+    fetch('api/instituciones')
+    .then(function(response) {
+        response.json().then(function(instituciones) {
+            instituciones.forEach(function(institucion) {
+                $('<option>').val(institucion['id']).text(institucion['nombre']).appendTo('#derivacion')
+            })
+        })
+    })
+}
 
 function obtenerMotivos() {
     $.get("index.php?comando=obtener-motivos",
     function (motivos) {
         $.each($.parseJSON(motivos),function (index, motivo) {$('<option>').val(motivo['id']).text(motivo['nombre']).appendTo('#motivos');})
+    })
+}
+
+function cargarPaciente() {
+    fetch('index.php?comando=obtener-paciente-por-historia&nro_historia='+document.getElementById('nro_historia').value)
+    .then(function(response) {
+        response.json().then(function(paciente) {
+            if(paciente){
+                $('#nombre_paciente').text(paciente['nombre'])
+            } else {
+                $('#nombre_paciente').text('-')
+            }
+        })
     })
 }
 
