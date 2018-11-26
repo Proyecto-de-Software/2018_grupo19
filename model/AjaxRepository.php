@@ -74,7 +74,7 @@ class AjaxRepository extends PDORepository {
 
     public function obtenerUbicacionesDeConsultasDePaciente($id_paciente) {
         $consultas = ConsultaRepository::singleton()->idConsultasDePaciente($id_paciente);
-        return array_map(function($consulta){ return ConsultaRepository::singleton()->ubicacion($consulta);},$consultas);
+        return array_map(function($consulta){return ConsultaRepository::singleton()->ubicacion($consulta['id']);},$consultas);
     }
 }
 

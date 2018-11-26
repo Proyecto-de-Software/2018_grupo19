@@ -112,6 +112,6 @@ class PacienteController extends Controller{
     }
 
     public function redireccionarUltimasDerivaciones(){
-        InstitucionesMap::show();
+        InstitucionesMap::show($this->parametrosDeSesion(array('idPaciente' => $_GET['id'])));
     }
 }
