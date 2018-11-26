@@ -243,6 +243,14 @@ class RooterController extends Controller{
                 break;
 
                 /*
+                ** Map
+                */
+
+                case 'mapa-de-instituciones':
+                PacienteController::singleton()->redireccionarUltimasDerivaciones();
+                break;
+                
+                /*
                 ** Default
                 */
                 
@@ -251,7 +259,7 @@ class RooterController extends Controller{
                 break; 
 
                 case 'listado-instituciones':
-                header('location=templates/listado-instituciones.html');
+                header('location:templates/listado-instituciones.html');
                 break;
                 
                 default:

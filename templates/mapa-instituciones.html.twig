@@ -1,0 +1,42 @@
+<html>
+  <head>
+      <link rel="stylesheet" href="templates/styles/prueba-mapa.css">
+      <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+      <script src="map_script/openstreetmap.js"></script>
+      
+  </head>
+  <body>
+    <div class="map-container">
+        <h1>Últimas derivaciones del paciente</h1>
+        <div id="mapdiv" style="width: 400; height: 400"></div>
+    </div>
+  </body>
+
+  <script>
+    map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+    
+    var lonLat = new OpenLayers.LonLat(-60.03704, -34.91181)
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+    
+    var lonLat2 = new OpenLayers.LonLat(-59.4292,-34.6573)
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+          
+    var zoom=8;
+    
+    var markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
+    
+    markers.addMarker(new OpenLayers.Marker(lonLat));
+    markers.addMarker(new OpenLayers.Marker(lonLat2));
+    
+    map.setCenter (lonLat, zoom);
+  </script>
+
+</body></html>
