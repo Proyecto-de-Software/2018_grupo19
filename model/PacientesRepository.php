@@ -159,5 +159,9 @@ class PacientesRepository extends PDORepository {
         return $query->fetch();
     }
 
-    // **
+    public function ubicacionDeConsultas($id){
+        $consultas = ConsultaRepository::singleton()->idConsultasDePaciente($id);
+        return array_map(ConsultaRepository::singleton()->ubicacion(),$consultas);
+    }
+
 }

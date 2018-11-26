@@ -14,3 +14,7 @@
 
 {% block tituloAccion %}Editando consulta{% endblock %}
 
+{% block botones %}
+    {{parent()}}
+    <button onclick="window.location.href='index.php?comando=borrar-consulta&id-consulta={{consulta.0}}'" class="boton-panel-principal">Borrar</button>
+{% endblock %}

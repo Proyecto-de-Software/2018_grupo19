@@ -32,19 +32,20 @@ class ConsultaRepository extends PDORepository {
         $query->execute(array($id_paciente));
     }
 
-    public function consultas($paginaActual = 0) {
+    public function consultasDePaciente($id_paciente) {
         $db = $this->conectarse();
-        $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) INNER JOIN motivo_consulta m ON (c.motivo_id = m.id)";
+        $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) INNER JOIN motivo_consulta m ON (c.motivo_id = m.id) WHERE p.id = ?";
         $query = $db->prepare($sql);
-        $query->execute(array());
+        $query->execute(array($id_paciente));
+        return $query->fetchAll();
+    }
 
-        $cantidadPaginas = ceil( $query->rowCount() / $this->cantidadPorPagina() );
-        $primero = ($paginaActual * $this->cantidadPorPagina() );
-        $sql = $sql . " LIMIT " . $primero . ', ' . (($this->cantidadPorPagina()) );
+    public function idConsultasDePaciente($id_paciente) {
+        $db = $this->conectarse();
+        $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) INNER JOIN motivo_consulta m ON (c.motivo_id = m.id) WHERE p.id = ?";
         $query = $db->prepare($sql);
-        $query->execute(array());
-        $result = array("cantidadTotal" => $cantidadPaginas, "consultas" => $query->fetchAll());
-        return $result;
+        $query->execute(array($id_paciente));
+        return $query->fetchAll();
     }
 
     public function consultaConId($id) {
@@ -52,6 +53,14 @@ class ConsultaRepository extends PDORepository {
         $sql = "SELECT * FROM consulta c INNER JOIN paciente p ON (c.paciente_id = p.id) WHERE c.id = ?";
         $query = $db->prepare($sql);
         $query->execute(array($id));
+        return $query->fetch();
+    }
+
+    public function ubicacion($id_consulta) {
+        $db = $this->conectarse();
+        $sql = "SELECT latitud,longitud FROM consulta c INNER JOIN institucion i ON (c.derivacion_id = i.id) WHERE c.id = ?";
+        $query = $db->prepare($sql);
+        $query->execute(array($id_consulta));
         return $query->fetch();
     }
 }
