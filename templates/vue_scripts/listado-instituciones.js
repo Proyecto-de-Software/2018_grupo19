@@ -8,7 +8,7 @@ var app = new Vue({
         regSanitaria: "Todas"
     },
     created() {
-        fetch('http://localhost/api/instituciones')
+        fetch('/api/instituciones')
         .then(response => response.json())
         .then(json =>{
         this.instituciones = json
@@ -36,7 +36,7 @@ var app = new Vue({
                 .then(response => response.json())
                 .then(json =>{
                 this.regSanitaria = json.nombre})
-            url = "http://localhost/api/instituciones/region-sanitaria/" + this.regSanitariaid
+            url = "/api/instituciones/region-sanitaria/" + this.regSanitariaid
             fetch(url)
                 .then(response => response.json())
                 .then(json =>{
