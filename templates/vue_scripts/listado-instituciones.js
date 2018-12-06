@@ -25,7 +25,7 @@ var app = new Vue({
             if(this.selected == 0){
                 this.regSanitaria = "Todas"
                 this.regSanitariaid = -1
-                fetch('http://localhost/api/instituciones')
+                fetch('/api/instituciones')
                 .then(response => response.json())
                 .then(json =>{
                 this.instituciones = json})
