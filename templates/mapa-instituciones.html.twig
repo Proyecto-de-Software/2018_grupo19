@@ -1,17 +1,16 @@
 <html>
   <head>
       <link rel="stylesheet" href="templates/styles/pag-mapa.css">
-      <script src="https://www.openlayers.org/api/OpenLayers.js"></script>
-      
   </head>
   <body>
     <div class="map-container">
         <h1>Últimas derivaciones del paciente</h1>
         <div id="mapdiv" style="width: 400; height: 400"></div>
-        <a href="index.php?comando=info-paciente&id={{idPaciente}}">Volver</a>
+        <a href="/index.php?comando=info-paciente&id={{idPaciente}}">Volver</a>
     </div>
   </body>
 
+  <script src="//www.openlayers.org/api/OpenLayers.js"></script>
   <script>
     map = new OpenLayers.Map("mapdiv");
     map.addLayer(new OpenLayers.Layer.OSM());
