@@ -10,8 +10,8 @@
         public function insertarConsulta(){
             try { 
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_new', $_SESSION["id"])){
-                    if(isset($_POST["paciente"]) && isset($_POST['fecha']) && isset($_POST["motivo"]) && isset($_POST["derivacion"]) && isset($_POST["articulacion"]) && isset($_POST['diagnostico']) && isset($_POST['observaciones']) && isset($_POST['tratamiento']) && isset($_POST['acompanamiento'])) {
-                        $id = PacientesRepository::singleton()->pacienteCOnHistoria($_POST['paciente'])['id'];
+                    if(isset($_POST["id-paciente"]) && isset($_POST['fecha']) && isset($_POST["motivo"]) && isset($_POST["derivacion"]) && isset($_POST["articulacion"]) && isset($_POST['diagnostico']) && isset($_POST['observaciones']) && isset($_POST['tratamiento']) && isset($_POST['acompanamiento'])) {
+                        $id = $_POST["id-paciente"];
                         ConsultaRepository::singleton()->crearConsulta($id,$_POST['fecha'],$_POST['motivo'],$_POST['derivacion'],$_POST['articulacion'],isset($_POST['internacion']),$_POST['diagnostico'],$_POST['observaciones'],$_POST['tratamiento'],$_POST['acompanamiento']);
                         header("location:index.php?comando=info-paciente&id=$id");
                     } else {

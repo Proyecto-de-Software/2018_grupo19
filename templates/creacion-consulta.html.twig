@@ -2,6 +2,9 @@
 
 {% block links %}
 <script src="../vendor/components/jquery/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 {% endblock %}
 
 {% block contenido %}
@@ -11,11 +14,12 @@
         <form id="formulario" class="formulario-principal"{% block accion %}action="index.php?comando=insertar-consulta"{% endblock %} method="post">
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
-                <label>Nro Historia Clinica de Paciente:</label>
-                <input id="nro_historia" class="inputf" type="text" name="paciente" oninput="cargarPaciente()" value="{% block nro_historia_clinica %}{{usuario_cargado}}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} readonly {% endif %}>
+                <label>Nombre del Paciente:</label>
+                <input id="nombre-paciente" class="inputf" type="text" name="paciente" value="" required>
+                <input id="id-paciente" type="hidden" required>
             </div>
             <div>
-                <p>Paciente: </p><p id="nombre_paciente"></p>
+                <p id="dni-paciente">Ningun paciente seleccionado</p>
             </div>
             <div class="label-input">
                 <label>Fecha:</label>
@@ -81,7 +85,6 @@
 $(document).ready(function(){
     obtenerMotivos()
     obtenerInstituciones()
-    cargarPaciente()
 });
 
 function obtenerInstituciones(){
@@ -102,19 +105,18 @@ function obtenerMotivos() {
     })
 }
 
-function cargarPaciente() {
-    fetch('index.php?comando=obtener-paciente-por-historia&nro_historia='+document.getElementById('nro_historia').value)
-    .then(function(response) {
-        response.json().then(function(paciente) {
-            if(paciente){
-                $('#nombre_paciente').text(paciente['nombre'])
-            } else {
-                $('#nombre_paciente').text('-')
+
+fetch("index.php?comando=obtener-nombres-pacientes").then(function(response) {
+    response.json().then(function(pacientes){
+        $("#nombre-paciente").autocomplete({
+            source: pacientes,
+            select: function(event, ui){
+                $("#id-paciente").val(ui.item.id)
+                $("#dni-paciente").text("DNI: " + ui.item.data)
             }
         })
     })
-}
-
+})
 </script>
 
 {% endblock %}

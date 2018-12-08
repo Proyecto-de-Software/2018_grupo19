@@ -110,6 +110,15 @@ class AjaxRepository extends PDORepository {
         return $query->fetchAll();
     }
 
+    public function obtenerPacientes() {
+        $db = $this->conectarse();
+        $sql = "SELECT nombre, apellido, numero, id 
+                FROM paciente";
+        $query = $db->prepare($sql);
+        $query->execute(array());
+        return $query->fetchAll();
+    }
+
 }
 
 ?>

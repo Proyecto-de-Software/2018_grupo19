@@ -105,5 +105,18 @@ class AjaxController extends Controller{
             $this->redireccionarError('Error en la base de datos', $e->getMessage());
         }
     }
+
+    public function obtenerNombresDePacientes() {
+        try {
+            $res = AjaxRepository::singleton()->obtenerPacientes(); 
+            $new = array();
+            foreach($res as $pac){
+                array_push($new, array("value" => $pac["nombre"] . " " . $pac["apellido"], "data" => $pac["numero"], "id" => $pac["id"]));
+            }
+            echo json_encode($new);
+        } catch (Exception $e) {
+            $this->redireccionarError('Error en la base de datos', $e->getMessage());
+        }
+    }
 }
 ?>
