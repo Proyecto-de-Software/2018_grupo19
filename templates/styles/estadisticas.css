@@ -1,9 +1,9 @@
 .graph{
     height: 300px; 
-    width: 500px
+    width: 350px
 }
 
 .graph-container{
     display: flex;
-    justify-content: space-between
+    justify-content: space-around
 }
