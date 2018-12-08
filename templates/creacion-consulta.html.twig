@@ -15,11 +15,11 @@
             <h3>{% block tituloAccion %}Cargando atencion{% endblock %}</h3>
             <div class="label-input">
                 <label>Nombre del Paciente:</label>
-                <input id="nombre-paciente" class="inputf" type="text" name="paciente" value="" required>
-                <input id="id-paciente" type="hidden" required>
+                <input id="nombre-paciente" class="inputf" type="text" name="paciente" value="{% block nro_historia_clinica %}{{usuario_cargado}}{% endblock %}" "{% block nro_historia_clinica_props %}{% endblock %}" required {% if usuario_cargado is defined %} readonly {% endif %} required>
+                <input id="id-paciente" type="hidden" {% if id is defined %} value="{{id}}" {% endif %}required>
             </div>
             <div>
-                <p id="dni-paciente">Ningun paciente seleccionado</p>
+                <p id="dni-paciente">{%if dni is defined%} DNI: {{dni}} {% else %}Ningun paciente seleccionado {% endif %}</p>
             </div>
             <div class="label-input">
                 <label>Fecha:</label>

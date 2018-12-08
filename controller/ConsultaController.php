@@ -29,8 +29,8 @@
             try {
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_show', $_SESSION["id"])) {
                     $view = new CreacionConsulta();
-                    if (isset($_POST['nro_historia_clinica'])) {
-                        $view->show($this->parametrosDeSesion(array('usuario_cargado' => $_POST['nro_historia_clinica'])));                
+                    if (isset($_POST['id']) && isset($_POST["dni"]) && isset($_POST["nombre"]) && isset($_POST["apellido"])) {
+                        $view->show($this->parametrosDeSesion(array('usuario_cargado' => $_POST['nombre'] . " " . $_POST["apellido"], "dni" => $_POST["dni"], "id" => $_POST["id"])));                
                     } else {
                         $view->show($this->parametrosDeSesion());
                     }
