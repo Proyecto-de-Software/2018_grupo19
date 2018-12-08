@@ -6,14 +6,17 @@
 {% endblock %}
 
 {% block links %}
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
 {% endblock %}
 
 {% block contenido %}
+
     <div class="graph-container">
-        <div class="graph" id="chartContainergenero"></div>
-        <div class="graph" id="chartContainermotivo"></div>
-        <div class="graph" id="chartContainerlocalidad"></div>     
+        <div class="graph" id="chartContainerGenero"></div>
+        <div class="graph" id="chartContainerMotivo"></div>
+        <div class="graph" id="chartContainerLocalidad"></div>     
     </div>
     
     <script>
@@ -23,51 +26,71 @@
                 response.json().then(
                     function(estadisticas){
                         estadisticas = estadisticas.map(function (estadistica) {
-                            return {y:estadistica.cantidad, label:estadistica.motivo}
+                            return {y:parseFloat(estadistica.cantidad), name:estadistica.motivo}
                         })
-                        generarGrafico(estadisticas,'motivo')
+                        generarGrafico(estadisticas,'motivo',"chartContainerMotivo")
                     })
             }
         )
+
         fetch("index.php?comando=obtener-consultas-por-genero").then(
             function(response){
                 response.json().then(
                     function(estadisticas){
                         estadisticas = estadisticas.map(function (estadistica) {
-                            return {y:estadistica.cantidad, label:estadistica.genero}
+                            return {y:parseFloat(estadistica.cantidad), name:estadistica.genero}
                         })
-                        generarGrafico(estadisticas,'genero')
+                        generarGrafico(estadisticas,'genero',"chartContainerGenero")
                     })
             }
         )
+
         fetch("index.php?comando=obtener-consultas-por-localidad").then(
             function(response){
                 response.json().then(
                     function(estadisticas){
                         estadisticas = estadisticas.map(function (estadistica) {
-                            return {y:estadistica.cantidad, label:estadistica.localidad}
+                            return {y:parseFloat(estadistica.cantidad), name:estadistica.localidad}
                         })
-                        generarGrafico(estadisticas,'localidad')
+                        generarGrafico(estadisticas,'localidad',"chartContainerLocalidad")
                     })
             }
         )
 
-        function generarGrafico(estadisticas, agrupador){
-            var chart = new CanvasJS.Chart("chartContainer"+agrupador, {
-                animationEnabled: true,
-                title: {
-                    text: "Consultas por "+agrupador
+        function generarGrafico(estadisticas, titulo, idContenedor){
+            console.log(estadisticas);
+            // Build the chart
+            Highcharts.chart(idContenedor, {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
                 },
-                data: [{
-                    type: "pie",
-                    startAngle: 240,
-                    yValueFormatString: "##0.00\"%\"",
-                    indexLabel: "{y} {label}",
-                    dataPoints: estadisticas
+                title: {
+                    text: 'Consultas agrupadas por '+titulo
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Estadisticas',
+                    colorByPoint: true,
+                    data: estadisticas
                 }]
             });
-            chart.render();
         }
+
     </script>
 
 {% endblock %}
