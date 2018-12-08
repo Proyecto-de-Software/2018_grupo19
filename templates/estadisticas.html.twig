@@ -16,17 +16,17 @@
 
     <div class="graph-container" id="graph-container">
         <div>
-            <ul id="listaPorgenero"> Cantidad de consultas por genero:</ul>
+            <ul id="listaPorgenero"><h3>Cantidad de consultas por genero:</h3></ul>
             <div class="graph" id="chartContainergenero"></div>
             <Button onclick="descargarPDF('listaPorgenero')">Descargar</Button>
         </div>
         <div>
-            <ul id="listaPormotivo"> Cantidad de consultas por motivo:</ul>
+            <ul id="listaPormotivo"> <h3>Cantidad de consultas por motivo:</h3></ul>
             <div class="graph" id="chartContainermotivo"></div>
             <Button onclick="descargarPDF('listaPormotivo')">Descargar</Button>
         </div>
         <div>
-            <ul id="listaPorlocalidad"> Cantidad de consultas por localidad:</ul>
+            <ul id="listaPorlocalidad"> <h3>Cantidad de consultas por localidad:</h3></ul>
             <div class="graph" id="chartContainerlocalidad"></div>     
             <Button onclick="descargarPDF('listaPorlocalidad')">Descargar</Button>
         </div>
@@ -72,7 +72,7 @@
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
-                    type: 'pie'
+                    type: 'pie',
                 },
                 title: {
                     text: 'Consultas agrupadas por '+titulo
