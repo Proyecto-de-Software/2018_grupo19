@@ -14,48 +14,44 @@
 {% block contenido %}
 
     <div class="graph-container">
-        <div class="graph" id="chartContainerGenero"></div>
-        <div class="graph" id="chartContainerMotivo"></div>
-        <div class="graph" id="chartContainerLocalidad"></div>     
+        <div>
+            <ul id="listaPorgenero"> Cantidad de consultas por genero:</ul>
+            <div class="graph" id="chartContainergenero"></div>
+        </div>
+        <div>
+            <ul id="listaPormotivo"> Cantidad de consultas por motivo:</ul>
+            <div class="graph" id="chartContainermotivo"></div>
+        </div>
+        <div>
+            <ul id="listaPorlocalidad"> Cantidad de consultas por localidad:</ul>
+            <div class="graph" id="chartContainerlocalidad"></div>     
+        </div>
     </div>
     
     <script>
-        
-        fetch("index.php?comando=obtener-consultas-por-motivo").then(
-            function(response){
-                response.json().then(
-                    function(estadisticas){
-                        estadisticas = estadisticas.map(function (estadistica) {
-                            return {y:parseFloat(estadistica.cantidad), name:estadistica.motivo}
-                        })
-                        generarGrafico(estadisticas,'motivo',"chartContainerMotivo")
-                    })
-            }
-        )
 
-        fetch("index.php?comando=obtener-consultas-por-genero").then(
-            function(response){
-                response.json().then(
-                    function(estadisticas){
-                        estadisticas = estadisticas.map(function (estadistica) {
-                            return {y:parseFloat(estadistica.cantidad), name:estadistica.genero}
-                        })
-                        generarGrafico(estadisticas,'genero',"chartContainerGenero")
-                    })
-            }
-        )
+        cargarDatos('motivo')
+        cargarDatos('genero')
+        cargarDatos('localidad')
 
-        fetch("index.php?comando=obtener-consultas-por-localidad").then(
-            function(response){
-                response.json().then(
-                    function(estadisticas){
-                        estadisticas = estadisticas.map(function (estadistica) {
-                            return {y:parseFloat(estadistica.cantidad), name:estadistica.localidad}
+        function cargarDatos(titulo) {
+            fetch("index.php?comando=obtener-consultas-por-"+titulo).then(
+                function(response){
+                    response.json().then(
+                        function(estadisticas){
+                            estadisticas = estadisticas.map(function (estadistica) {
+                                return {y:parseFloat(estadistica.cantidad), name:estadistica[titulo]}
+                            })
+                            estadisticas.forEach(data => {
+                                elem = document.createElement("LI")
+                                elem.innerHTML = data.name+': '+data.y
+                                document.getElementById("listaPor"+titulo).appendChild(elem)
+                            });
+                            generarGrafico(estadisticas,titulo,"chartContainer"+titulo)
                         })
-                        generarGrafico(estadisticas,'localidad',"chartContainerLocalidad")
-                    })
-            }
-        )
+                }
+            )
+        }
 
         function generarGrafico(estadisticas, titulo, idContenedor){
             console.log(estadisticas);
