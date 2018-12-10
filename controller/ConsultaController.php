@@ -30,6 +30,7 @@
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_show', $_SESSION["id"])) {
                     $view = new CreacionConsulta();
                     if (isset($_POST['id']) && isset($_POST["dni"]) && isset($_POST["nombre"]) && isset($_POST["apellido"])) {
+                        var_dump($_POST);
                         $view->show($this->parametrosDeSesion(array('usuario_cargado' => $_POST['nombre'] . " " . $_POST["apellido"], "dni" => $_POST["dni"], "id" => $_POST["id"])));                
                     } else {
                         $view->show($this->parametrosDeSesion());
@@ -45,8 +46,10 @@
         public function redireccionarEdicionConsulta(){
             try {
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_update', $_SESSION["id"])) {
+                    $consulta = ConsultaRepository::singleton()->consultaConId($_GET['id']);
+                    $paciente = PacientesRepository::singleton()->paciente($consulta["paciente_id"]);
                     $view = new EdicionConsulta();
-                    $view->show($this->parametrosDeSesion(array('consulta' => ConsultaRepository::singleton()->consultaConId($_GET['id']))));
+                    $view->show($this->parametrosDeSesion(array('consulta' => $consulta, 'usuario_cargado' => $paciente["nombre"] . " " . $paciente["apellido"], "dni" => $paciente["numero"], 'id' => $consulta["paciente_id"])));
                 } else {
                     $this->redireccionarError('Error de permisos', 'No cuentas con los permisos necesarios.');
                 }
@@ -58,10 +61,9 @@
         public function actualizarConsulta() {
             try {
                 if(UsuariosRepository::singleton()->chequearPermiso('consulta_update', $_SESSION["id"])) {
-                    var_dump($_POST);
                     if(isset($_POST["motivo"]) && isset($_POST["derivacion"]) && isset($_POST["articulacion"]) && isset($_POST['diagnostico']) && isset($_POST['observaciones']) && isset($_POST['tratamiento']) && isset($_POST['acompanamiento'])) {
                         ConsultaRepository::singleton()->actualizarConsulta($_GET["id"],$_POST['motivo'],$_POST['derivacion'],$_POST['articulacion'],isset($_POST['internacion']),$_POST['diagnostico'],$_POST['observaciones'],$_POST['tratamiento'],$_POST['acompanamiento']);
-                        $paciente = PacientesRepository::singleton()->pacienteConHistoria($_POST['paciente'])[0];
+                        $paciente = $_POST["id-paciente"];
                         header("location:index.php?comando=info-paciente&id=$paciente");
                     } else {
                         $this->redireccionarError('Error en los campos', 'Alguno de los campos obligatorios esta vacio');

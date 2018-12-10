@@ -45,12 +45,20 @@ class PacienteController extends Controller{
                     if ($nn) {
                         if(isset($_POST['nro_historia_clinica']) && isset($_POST['nro_carpeta'])) {
                             PacientesRepository::singleton()->crearPaciente('NN', 'NN', '0000-00-00', null, '1', '1', '', '3', '0', '1', '0', '0', $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], '1');
+                            $_POST["nombre"] = 'NN';
+                            $_POST["apellido"] = "NN";
+                            $aux = PacientesRepository::singleton()->pacienteConHistoria($_POST['nro_historia_clinica']);
+                            $_POST["id"] = $aux["id"];
+                            $_POST["dni"] = "-";
                         } else {
                             $this->redireccionarError('Error en la creacion', 'Parece que algunos campos estan vacios');
                         }
                     } else {
                         if(isset($_POST['apellido']) && isset($_POST['nombre']) && isset($_POST['fecha_nac']) && isset($_POST['lugar_nac']) && isset($_POST['localidad_id']) && isset($_POST['region_sanitaria_id']) && isset($_POST['domicilio']) && isset($_POST['genero_id']) && isset($_POST['nro_historia_clinica']) && isset($_POST['nro_carpeta'])) {
                             PacientesRepository::singleton()->crearPaciente($_POST['apellido'], $_POST['nombre'], $_POST['fecha_nac'], $_POST['lugar_nac'], $_POST['localidad_id'], $_POST['region_sanitaria_id'], $_POST['domicilio'], $_POST['genero_id'], isset($_POST['tiene_documento']), $_POST['tipo_doc_id'], $_POST['numero'], $_POST['tel'], $_POST['nro_historia_clinica'], $_POST['nro_carpeta'], $_POST['obra_social_id']);
+                            $aux = PacientesRepository::singleton()->pacienteConHistoria($_POST['nro_historia_clinica']);
+                            $_POST["id"] = $aux["id"];
+                            $_POST["dni"] = isset($_POST["numero"]) ? $_POST["numero"]:"-";
                         } else {
                             $this->redireccionarError('Error en la creacion', 'Parece que algunos campos estan vacios');
                         }
