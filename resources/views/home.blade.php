@@ -1,14 +1,23 @@
-<!-- Login -->
-
-@extends('layout')
-
-@section('title', 'Hospital Alejandro Korn')
+@extends('layouts.app')
 
 @section('content')
-    <div class="jumbotron">
-        <h1 class="display-4">Bienvenidos al Hospital Alejandro Korn</h1>
-        <p class="lead">Aca hay info.</p>
-        <hr class="my-4">
-        <p>Aca hay mas info.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in!
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 @endsection
