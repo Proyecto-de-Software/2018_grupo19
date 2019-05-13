@@ -1,5 +1,4 @@
 <?php
-use App\Paciente;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,49 +11,23 @@ use App\Paciente;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
 //Rutas de pacientes
 
-Route::get('/paciente/{id}', function ($id) {
-    //Listar pacientes
-});
+Route::get('/paciente/all', 'PacienteController@index');
 
-Route::post('/paciente', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
-    ]);
+Route::get('/paciente/new', 'PacienteController@create');
 
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
+Route::get('/paciente/{id}', 'PacienteController@show');
 
-    $paciente = new Paciente;
-    $paciente->nombre = $request->nombre;
-    $paciente->save();
+Route::post('/paciente', 'PacienteController@store');
 
-    return redirect('/');
-});
-
-Route::delete('/paciente/{id}', function ($id) {
-    Paciente::findOrFail($id)->delete();
-
-    return redirect('/');
-});
-
-Route::get('/pacientes', function () {
-    $pacientes = Paciente::orderBy('created_at', 'asc')->get();
-
-    return view('pacientes.listado', [
-        'pacientes' => $pacientes
-    ]);
-});
+Route::delete('/paciente/{id}', 'PacienteController@destroy');
 
 //Rutas de consultas
 
