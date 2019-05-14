@@ -16,7 +16,7 @@ class PacienteController extends Controller
     {
         $pacientes = Paciente::orderBy('created_at', 'asc')->get();
 
-        return view('pacientes.listado', [
+        return view('pacientes.index', [
             'pacientes' => $pacientes
         ]);
     }
@@ -28,7 +28,7 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        return view('pacientes.creacion');
+        return view('pacientes.new');
     }
 
     /**
