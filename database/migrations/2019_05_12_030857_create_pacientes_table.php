@@ -23,10 +23,10 @@ class CreatePacientesTable extends Migration
             $table->date('fecha_nac');
             $table->string('domicilio');
             $table->boolean('tiene_documento');
-            $table->integer('numero');
-            $table->string('tel');
-            $table->integer('nro_historia_clinica');
-            $table->integer('nro_carpeta');
+            $table->string('documento');
+            $table->string('telefono');
+            $table->string('nro_historia_clinica');
+            $table->string('nro_carpeta');
 
             //Claves foraneas
             $table->integer('localidad_id')->unsigned();

@@ -5,7 +5,7 @@
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    New Task
+                    Filtrar
                 </div>
 
                 <div class="panel-body">
@@ -13,15 +13,14 @@
                     @include('common.errors')
 
                     <!-- New Task Form -->
-                    <form action="{{ url('task')}}" method="POST" class="form-horizontal">
+                    <form action="{{ url('paciente/all')}}" method="GET" class="form-horizontal">
                         {{ csrf_field() }}
 
                         <!-- Task Name -->
                         <div class="form-group">
-                            <label for="task-name" class="col-sm-3 control-label">Task</label>
-
+                            <label for="filtro-nombre" class="col-sm-3 control-label">Nombre</label>
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="task-name" class="form-control" value="{{ old('task') }}">
+                                <input type="text" name="nombre" id="filtro-nombre" class="form-control">
                             </div>
                         </div>
 
@@ -29,7 +28,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-btn fa-plus"></i>Add Task
+                                    <i class="fa fa-btn fa-plus"></i>Aplicar filtros
                                 </button>
                             </div>
                         </div>
@@ -53,7 +52,7 @@
                             <tbody>
                                 @foreach ($pacientes as $paciente)
                                     <tr>
-                                        <td class="table-text"><div>{{ $paciente->name }}</div></td>
+                                        <td class="table-text"><div>{{ $paciente->nombre . ' ' . $paciente->apellido }}</div></td>
 
                                         <!-- Boton eliminar -->
                                         <td>

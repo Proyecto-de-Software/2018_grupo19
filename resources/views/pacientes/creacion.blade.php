@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label for="paciente-region-sanitaria" class="col-sm-3 control-label">Region sanitaria</label>
                             <div class="col-sm-6">
-                                <input name="region-sanitaria" id="paciente-region-sanitaria" class="form-control" required readonly>
+                                <input name="region_sanitaria" id="paciente-region-sanitaria" class="form-control" required readonly>
                                 <!-- Cargar con AJAX y deberia ser solo lectura en funcion del partido -->
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label for="paciente-domicilio" class="col-sm-3 control-label">Domicilio</label>
                             <div class="col-sm-6">
-                                <input type="date" name="domicilio" id="paciente-domicilio" class="form-control" required>
+                                <input type="text" name="domicilio" id="paciente-domicilio" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -87,13 +87,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="paciente-tiene-documento" class="col-sm-3 control-label">Domicilio</label>
+                            <label for="paciente-tiene-documento" class="col-sm-3 control-label">Posee documento</label>
                             <div class="col-sm-6">
-                                <input type="checkbox" name="tiene_documento" id="paciente-tiene-documento" class="form-check-input" required>
+                                <input type="checkbox" name="tiene_documento" id="paciente-tiene-documento" class="form-check-input" value="1">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="paciente-tipo-documento" class="col-sm-3 control-label">Genero</label>
+                            <label for="paciente-tipo-documento" class="col-sm-3 control-label">Tipo documento</label>
                             <div class="col-sm-6">
                                 <select name="tipo_documento" id="paciente-tipo-documento" class="form-control" required>
                                     <option value=1>DNI</option>
@@ -103,9 +103,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="paciente-numero" class="col-sm-3 control-label">Documento</label>
+                            <label for="paciente-documento" class="col-sm-3 control-label">Documento</label>
                             <div class="col-sm-6">
-                                <input type="text" name="numero" id="paciente-numero" class="form-control" required>
+                                <input type="text" name="documento" id="paciente-documento" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -123,7 +123,7 @@
                         <div class="form-group">
                             <label for="paciente-telefono" class="col-sm-3 control-label">Telefono</label>
                             <div class="col-sm-6">
-                                <input type="text" name="tel" id="paciente-telefono" class="form-control" required>
+                                <input type="text" name="telefono" id="paciente-telefono" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
