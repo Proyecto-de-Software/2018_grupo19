@@ -108,7 +108,24 @@ class PacienteController extends Controller
      */
     public function update(Request $request, Paciente $paciente)
     {
-        //
+        $paciente->nombre = $request->nombre;
+        $paciente->apellido = $request->apellido;
+        $paciente->fecha_nac = $request->fecha_nac;
+        $paciente->lugar_nac = $request->lugar_nac;
+        $paciente->region_sanitaria_id = $request->region_sanitaria;
+        $paciente->localidad_id = $request->localidad;
+        $paciente->domicilio = $request->domicilio;
+        $paciente->genero_id = $request->genero;
+        $paciente->tiene_documento = $request->tiene_documento ? 1 : 0;
+        $paciente->tipo_doc_id = $request->tipo_documento;
+        $paciente->documento = $request->documento;
+        $paciente->nro_historia_clinica = $request->nro_historia_clinica;
+        $paciente->nro_carpeta = $request->nro_carpeta;
+        $paciente->telefono = $request->telefono;
+        $paciente->obra_social_id = $request->obra_social;
+        $paciente->save();
+
+        return redirect('/pacientes/'.$paciente->id);
     }
 
     /**

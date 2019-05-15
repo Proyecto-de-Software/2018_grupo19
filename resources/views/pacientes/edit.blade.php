@@ -13,8 +13,10 @@
                     @include('common.errors')
 
                     <!-- Formulario de creacion de paciente -->
-                    <form action="{{ url('pacientes')}}" method="POST" class="form-horizontal">
+                    <form action="{{ url('pacientes/'.$paciente->id)}}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+
                         <div class="form-group">
                             <label for="paciente-nombre" class="col-sm-3 control-label">Nombre</label>
                             <div class="col-sm-6">
@@ -149,6 +151,14 @@
                                 </button>
                             </div>
                         </div>
+                    </form>
+                    <!-- Boton cancelar -->
+                    <form action="{{ url('pacientes/') }}">
+                        {{ csrf_field() }}
+
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-btn fa-trash"></i>Descartar 
+                        </button>
                     </form>
                 </div>
             </div>
