@@ -18,16 +18,7 @@ Route::get('/home', 'HomeController@index');
 Auth::routes();
 
 //Rutas de pacientes
-
-Route::get('/paciente/all', 'PacienteController@index');
-
-Route::get('/paciente/new', 'PacienteController@create');
-
-Route::get('/paciente/{id}', 'PacienteController@show');
-
-Route::post('/paciente', 'PacienteController@store');
-
-Route::delete('/paciente/{id}', 'PacienteController@destroy');
+Route::resource('pacientes', 'PacienteController');
 
 //Rutas de consultas
 

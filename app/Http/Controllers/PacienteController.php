@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Paciente;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Log;
+
 class PacienteController extends Controller
 {
     /**
@@ -28,7 +30,7 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        return view('pacientes.new');
+        return view('pacientes.create');
     }
 
     /**
@@ -39,6 +41,7 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
+        //Revisar el tema del validator en el quickstart con tasks
         /*$validator = Validator::make($request->all(), [
             'nombre' => 'required|max:255',
         ]);
@@ -67,7 +70,7 @@ class PacienteController extends Controller
         $paciente->obra_social_id = $request->obra_social;
         $paciente->save();
     
-        return redirect('/paciente/all');
+        return redirect('/pacientes');
     }
 
     /**
@@ -78,7 +81,9 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        //
+        return view('pacientes.show', [
+            'paciente' => $paciente
+        ]);
     }
 
     /**
@@ -89,7 +94,9 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $paciente)
     {
-        //
+        return view('pacientes.edit', [
+            'paciente' => $paciente
+        ]);
     }
 
     /**
@@ -114,6 +121,6 @@ class PacienteController extends Controller
     {
         Paciente::findOrFail($paciente->id)->delete();
 
-        return redirect('/');
+        return redirect('/pacientes');
     }
 }
