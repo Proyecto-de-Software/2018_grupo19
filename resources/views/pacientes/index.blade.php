@@ -65,6 +65,14 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <!-- Boton Nuevo paciente -->
+                        <form action="{{ url('pacientes/create') }}">
+                            {{ csrf_field() }}
+
+                            <button type="submit" class="btn">
+                                <i class="fa fa-btn fa-trash"></i>Nuevo paciente 
+                            </button>
+                        </form>
                     </div>
                 </div>
             @endif
