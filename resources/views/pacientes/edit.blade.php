@@ -8,6 +8,10 @@
     {{ url('pacientes/'.$paciente->id) }}
 @endsection
 
+@section('cancel-action')
+    {{ url('pacientes/'.$paciente->id) }}
+@endsection
+
 @section('form-fields')
     {{ method_field('PUT') }}
     <div class="form-group">

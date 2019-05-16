@@ -8,6 +8,10 @@
     {{ url('pacientes')}}
 @endsection
 
+@section('cancel-action')
+    {{ url('pacientes/') }}
+@endsection
+
 @section('form-fields')
     <div class="form-group">
         <label for="paciente-nombre" class="col-sm-3 control-label">Nombre</label>

@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Consulta;
 use Illuminate\Http\Request;
 
+//Imports para generar las opciones de los formularios
+use App\MotivoConsulta;
+use App\Institucion;
+use App\TratamientoFarmacologico;
+use App\Acompanamiento;
+
 use Illuminate\Support\Facades\Log;
 
 class ConsultaController extends Controller
@@ -30,7 +36,13 @@ class ConsultaController extends Controller
      */
     public function create()
     {
-        return view('consultas.create');
+        return view('consultas.create', [
+            'motivos_consultas' => MotivoConsulta::get(),
+            'instituciones' => Institucion::get(),
+            'motivos_consultas' => MotivoConsulta::get(),
+            'tratamientos' => TratamientoFarmacologico::get(),
+            'acompanamiento' => Acompanamiento::get()
+        ]);
     }
 
     /**
@@ -79,7 +91,12 @@ class ConsultaController extends Controller
     public function edit(Consulta $consulta)
     {
         return view('consultas.edit', [
-            'consulta' => $consulta
+            'consulta' => $consulta,
+            'motivos_consultas' => MotivoConsulta::get(),
+            'instituciones' => Institucion::get(),
+            'motivos_consultas' => MotivoConsulta::get(),
+            'tratamientos' => TratamientoFarmacologico::get(),
+            'acompanamientos' => Acompanamiento::get()
         ]);
     }
 

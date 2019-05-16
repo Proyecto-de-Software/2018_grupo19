@@ -25,7 +25,7 @@
                         </div>
                     </form>
                     <!-- Boton cancelar -->
-                    <form action="{{ url('pacientes/') }}">
+                    <form action="@yield('cancel-action')">
                         {{ csrf_field() }}
 
                         <button type="submit" class="btn btn-danger">

@@ -8,6 +8,10 @@
     {{ url('consultas')}}
 @endsection
 
+@section('cancel-action')
+    {{ url('consultas/')}}
+@endsection
+
 @section('form-fields')
     <div class="form-group">
         <label for="consulta-fecha" class="col-sm-3 control-label">Fecha</label>
@@ -49,11 +53,10 @@
         <label for="consulta-motivo" class="col-sm-3 control-label">Motivo</label>
         <div class="col-sm-6">
             <select name="motivo_consulta_id" id="consulta-motivo" class="form-control" required>
-                <!-- Se deberian cargar con AJAX -->
-                <option value=1>Receta medica</option>
-                <option value=2>Control</option>
-                <option value=3>Consulta</option>
-                <option value=4>Suicidio</option>
+                <!-- Se deberian cargar con AJAX? -->
+                @foreach ($motivos_consultas as $motivo)
+                    <option value={{$motivo->id}}>{{$motivo->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -62,7 +65,9 @@
         <div class="col-sm-6">
             <select name="derivacion_id" id="consulta-derivacion" class="form-control" required>
                 <!-- Mirar que onda las instituciones -->
-                <option value=1>Aca iba una institucion?</option>
+                @foreach ($instituciones as $institucion)
+                    <option value={{$institucion->id}}>{{$institucion->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -70,10 +75,9 @@
         <label for="consulta-tratamiento-farmacologico" class="col-sm-3 control-label">Tratamiento</label>
         <div class="col-sm-6">
             <select name="tratamiento_farmacologico_id" id="consulta-tratamiento-farmacologico" class="form-control" required>
-                <!-- Se deberian cargar con AJAX -->
-                <option value=1>Manana</option>
-                <option value=2>Tarde</option>
-                <option value=3>Noche</option>
+                @foreach ($tratamientos as $tratamiento)
+                    <option value={{$tratamiento->id}}>{{$tratamiento->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -81,10 +85,9 @@
         <label for="consulta-acompanamiento" class="col-sm-3 control-label">Acompanamiento</label>
         <div class="col-sm-6">
             <select name="acompanamiento_id" id="consulta-acompanamiento" class="form-control" required>
-                <!-- Se deberian cargar con AJAX -->
-                <option value=1>Familiar</option>
-                <option value=2>Hermanos</option>
-                <option value=3>Pareja</option>
+                @foreach ($acompanamientos as $acompanamiento)
+                    <option value={{$acompanamiento->id}}>{{$acompanamiento->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
