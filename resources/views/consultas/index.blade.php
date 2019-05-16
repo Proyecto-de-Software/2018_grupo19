@@ -49,7 +49,7 @@
                         <tbody>
                             @foreach ($consultas as $consulta)
                                 <tr>
-                                    <td class="table-text"><div>{{ $consulta->fecha }}</div></td>
+                                    <td class="table-text"><div>{{ $consulta->paciente->apellido . ', ' . $consulta->paciente->nombre . ' el ' . $consulta->fecha }}</div></td>
                                     <td>
                                         <!-- Boton mas info -->
                                         <form action="{{ url('consultas/'.$consulta->id) }}">

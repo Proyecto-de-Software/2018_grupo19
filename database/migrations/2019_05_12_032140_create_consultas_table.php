@@ -26,8 +26,8 @@ class CreateConsultasTable extends Migration
             //Claves foraneas
             $table->integer('paciente_id')->unsigned();
             $table->foreign('paciente_id')->references('id')->on('pacientes');
-            $table->integer('motivo_id')->unsigned();
-            $table->foreign('motivo_id')->references('id')->on('motivo_consultas');
+            $table->integer('motivo_consulta_id')->unsigned();
+            $table->foreign('motivo_consulta_id')->references('id')->on('motivo_consultas');
             $table->integer('derivacion_id')->unsigned();
             $table->foreign('derivacion_id')->references('id')->on('institucions');
             $table->integer('tratamiento_farmacologico_id')->unsigned();

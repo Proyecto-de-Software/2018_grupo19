@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Consulta;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Log;
+
 class ConsultaController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class ConsultaController extends Controller
      */
     public function index()
     {
-        $consultas = Consulta::orderBy('created_at', 'asc')->get();
+        $consultas = Consulta::orderBy('consultas.created_at', 'asc')->get();
 
         return view('consultas.index', [
             'consultas' => $consultas
@@ -46,7 +48,7 @@ class ConsultaController extends Controller
         $consulta->diagnostico = $request->diagnostico;
         $consulta->observaciones = $request->observaciones;
         $consulta->paciente_id = $request->paciente_id;
-        $consulta->motivo_id = $request->motivo_id;
+        $consulta->motivo_consulta_id = $request->motivo_consulta_id;
         $consulta->derivacion_id = $request->derivacion_id;
         $consulta->tratamiento_farmacologico_id = $request->tratamiento_farmacologico_id;
         $consulta->acompanamiento_id = $request->acompanamiento_id;
@@ -96,7 +98,7 @@ class ConsultaController extends Controller
         $consulta->diagnostico = $request->diagnostico;
         $consulta->observaciones = $request->observaciones;
         $consulta->paciente_id = $request->paciente_id;
-        $consulta->motivo_id = $request->motivo_id;
+        $consulta->motivo_consulta_id = $request->motivo_consulta_id;
         $consulta->derivacion_id = $request->derivacion_id;
         $consulta->tratamiento_farmacologico_id = $request->tratamiento_farmacologico_id;
         $consulta->acompanamiento_id = $request->acompanamiento_id;

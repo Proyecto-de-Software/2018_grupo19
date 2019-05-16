@@ -22,7 +22,10 @@ class DatabaseSeeder extends Seeder
             ObraSocialsTableSeeder::class,
             TipoDocumentosTableSeeder::class,
             TipoInstitucionsTableSeeder::class,
-            TratamientoFarmacologicosTableSeeder::class
+            TratamientoFarmacologicosTableSeeder::class,
+
+            //Revisar si habia que seedear la tabla institucions
+            InstitucionsTableSeeder::class
         ]);
     }
 }

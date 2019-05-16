@@ -1,7 +1,7 @@
 @extends('layouts.show')
 
 @section('title')
-    {{$consulta->paciente_id . ' en ' . $consulta->fecha}}
+    {{ $consulta->paciente->apellido . ', ' . $consulta->paciente->nombre . ' en ' . $consulta->fecha}}
 @endsection
 
 @section('edit-action')
@@ -15,12 +15,12 @@
 @section('fields')
     <p>Articulacion con instituciones: {{ $consulta->articulacion_con_instituciones }}</p>
     @if ($consulta->internacion)
-        Se requirio internacion.
+        <p>Se requirio internacion.</p>
     @endif
     <p>Diagnostico: {{ $consulta->diagnostico }}</p>
     <p>Observaciones: {{ $consulta->observaciones }}</p>
-    <p>Motivo: {{ $consulta->motivo_id }}</p>
-    <p>Derivacion: {{ $consulta->derivacion_id }}</p>
-    <p>Tratamiento farmacologico: {{ $consulta->tratamiento_farmacologico_id }}</p>
-    <p>Acompanamiento: {{ $consulta->acompanamiento_id }}</p>
+    <p>Motivo: {{ $consulta->motivo_consulta->nombre }}</p>
+    <p>Derivacion: {{ $consulta->derivacion->nombre }}</p>
+    <p>Tratamiento farmacologico: {{ $consulta->tratamiento_farmacologico->nombre }}</p>
+    <p>Acompanamiento: {{ $consulta->acompanamiento->nombre }}</p>
 @endsection

@@ -48,7 +48,7 @@
     <div class="form-group">
         <label for="consulta-motivo" class="col-sm-3 control-label">Motivo</label>
         <div class="col-sm-6">
-            <select name="motivo_id" id="consulta-motivo" class="form-control" required>
+            <select name="motivo_consulta_id" id="consulta-motivo" class="form-control" required>
                 <!-- Se deberian cargar con AJAX -->
                 <option value=1>Receta medica</option>
                 <option value=2>Control</option>
