@@ -76,7 +76,9 @@ class ConsultaController extends Controller
      */
     public function edit(Consulta $consulta)
     {
-        //
+        return view('consultas.edit', [
+            'consulta' => $consulta
+        ]);
     }
 
     /**
@@ -88,7 +90,19 @@ class ConsultaController extends Controller
      */
     public function update(Request $request, Consulta $consulta)
     {
-        //
+        $consulta->fecha = $request->fecha;
+        $consulta->articulacion_con_instituciones = $request->articulacion_con_instituciones;
+        $consulta->internacion = $request->internacion ? true : false;
+        $consulta->diagnostico = $request->diagnostico;
+        $consulta->observaciones = $request->observaciones;
+        $consulta->paciente_id = $request->paciente_id;
+        $consulta->motivo_id = $request->motivo_id;
+        $consulta->derivacion_id = $request->derivacion_id;
+        $consulta->tratamiento_farmacologico_id = $request->tratamiento_farmacologico_id;
+        $consulta->acompanamiento_id = $request->acompanamiento_id;
+        $consulta->save();
+
+        return redirect('consultas/'.$consulta->id);
     }
 
     /**
@@ -99,6 +113,8 @@ class ConsultaController extends Controller
      */
     public function destroy(Consulta $consulta)
     {
-        //
+        Consulta::findOrFail($consulta->id)->delete();
+
+        return redirect('/consultas');
     }
 }
