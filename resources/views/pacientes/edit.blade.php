@@ -42,11 +42,14 @@
         <label for="paciente-partido" class="col-sm-3 control-label">Partido</label>
         <div class="col-sm-6">
             <select name="partido" id="paciente-partido" class="form-control" value="{{$paciente->partido_id}}" required>
-                <!-- Se deberian cargar con AJAX -->
-                <option value=1>La Plata</option>
-                <option value=2>Chivilcoy</option>
-                <option value=3>GBA</option>
-                <option value=4>CABA</option>
+                <!-- Se deberian cargar con AJAX? -->
+                @foreach ($partidos as $partido)
+                    <option value={{$partido->id}}
+                        @if ($partido->id == $paciente->localidad->partido_id)
+                            selected
+                        @endif    
+                    >{{$partido->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -62,10 +65,13 @@
         <div class="col-sm-6">
             <select name="localidad" id="paciente-localidad" class="form-control" value="{{$paciente->localidad_id}}" required>
                 <!-- Cargar con AJAX en funcion de partido -->
-                <option value=1>La Plata</option>
-                <option value=2>Tolosa</option>
-                <option value=1>Chivilcoy</option>
-                <option value=1>Belgrano</option>
+                @foreach ($localidades as $localidad)
+                    <option value={{$localidad->id}}
+                        @if ($localidad->id == $paciente->localidad_id)
+                            selected
+                        @endif 
+                    >{{$localidad->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -79,9 +85,13 @@
         <label for="paciente-genero" class="col-sm-3 control-label">Genero</label>
         <div class="col-sm-6">
             <select name="genero" id="paciente-genero" class="form-control" value="{{$paciente->genero_id}}" required>
-                <option value=1>Masculino</option>
-                <option value=2>Femenino</option>
-                <option value=3>Otro</option>
+                @foreach ($generos as $genero)
+                    <option value={{$genero->id}}
+                        @if ($genero->id == $paciente->genero_id)
+                            selected
+                        @endif    
+                    >{{$genero->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -99,9 +109,13 @@
         <label for="paciente-tipo-documento" class="col-sm-3 control-label">Tipo documento</label>
         <div class="col-sm-6">
             <select name="tipo_documento" id="paciente-tipo-documento" class="form-control" value="{{$paciente->tipo_documento_id}}" required>
-                <option value=1>DNI</option>
-                <option value=2>LC</option>
-                <option value=3>LI</option>
+                @foreach ($tipos_documento as $tipo_documento)
+                    <option value={{$tipo_documento->id}}
+                        @if ($tipo_documento->id == $paciente->tipo_doc_id)
+                            selected
+                        @endif    
+                    >{{$tipo_documento->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -134,9 +148,13 @@
         <div class="col-sm-6">
             <select name="obra_social" id="paciente-obra-social" class="form-control" value="{{$paciente->obra_social_id}}" required>
                 <!-- Se deberian cargar con AJAX -->
-                <option value=1>IOMA</option>
-                <option value=2>OSDE</option>
-                <option value=3>OSECAC</option>
+                @foreach ($obras_sociales as $obra_social)
+                    <option value={{$obra_social->id}}
+                        @if ($obra_social->id == $paciente->obra_social_id)
+                            selected
+                        @endif    
+                    >{{$obra_social->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>

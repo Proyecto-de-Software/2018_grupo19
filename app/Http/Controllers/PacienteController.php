@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Paciente;
 use Illuminate\Http\Request;
 
+//Imports para generar las opciones de los formularios
+use App\Partido;
+use App\Localidad;
+use App\Genero;
+use App\TipoDocumento;
+use App\ObraSocial;
+
 use Illuminate\Support\Facades\Log;
 
 class PacienteController extends Controller
@@ -30,7 +37,13 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        return view('pacientes.create');
+        return view('pacientes.create', [
+            'partidos' => Partido::get(),
+            'localidades' => Localidad::get(),
+            'generos' => Genero::get(),
+            'tipos_documento' => TipoDocumento::get(),
+            'obras_sociales' => ObraSocial::get()
+        ]);
     }
 
     /**
@@ -95,7 +108,12 @@ class PacienteController extends Controller
     public function edit(Paciente $paciente)
     {
         return view('pacientes.edit', [
-            'paciente' => $paciente
+            'paciente' => $paciente,
+            'partidos' => Partido::get(),
+            'localidades' => Localidad::get(),
+            'generos' => Genero::get(),
+            'tipos_documento' => TipoDocumento::get(),
+            'obras_sociales' => ObraSocial::get()
         ]);
     }
 

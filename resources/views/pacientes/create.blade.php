@@ -41,11 +41,10 @@
         <label for="paciente-partido" class="col-sm-3 control-label">Partido</label>
         <div class="col-sm-6">
             <select name="partido" id="paciente-partido" class="form-control" required>
-                <!-- Se deberian cargar con AJAX -->
-                <option value=1>La Plata</option>
-                <option value=2>Chivilcoy</option>
-                <option value=3>GBA</option>
-                <option value=4>CABA</option>
+                <!-- Se deberian cargar con AJAX? -->
+                @foreach ($partidos as $partido)
+                    <option value={{$partido->id}}>{{$partido->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -61,10 +60,9 @@
         <div class="col-sm-6">
             <select name="localidad" id="paciente-localidad" class="form-control" required>
                 <!-- Cargar con AJAX en funcion de partido -->
-                <option value=1>La Plata</option>
-                <option value=2>Tolosa</option>
-                <option value=1>Chivilcoy</option>
-                <option value=1>Belgrano</option>
+                @foreach ($localidades as $localidad)
+                    <option value={{$localidad->id}}>{{$localidad->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -78,9 +76,9 @@
         <label for="paciente-genero" class="col-sm-3 control-label">Genero</label>
         <div class="col-sm-6">
             <select name="genero" id="paciente-genero" class="form-control" required>
-                <option value=1>Masculino</option>
-                <option value=2>Femenino</option>
-                <option value=3>Otro</option>
+                @foreach ($generos as $genero)
+                    <option value={{$genero->id}}>{{$genero->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -94,9 +92,9 @@
         <label for="paciente-tipo-documento" class="col-sm-3 control-label">Tipo documento</label>
         <div class="col-sm-6">
             <select name="tipo_documento" id="paciente-tipo-documento" class="form-control" required>
-                <option value=1>DNI</option>
-                <option value=2>LC</option>
-                <option value=3>LI</option>
+                @foreach ($tipos_documento as $tipo_documento)
+                    <option value={{$tipo_documento->id}}>{{$tipo_documento->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -129,9 +127,9 @@
         <div class="col-sm-6">
             <select name="obra_social" id="paciente-obra-social" class="form-control" required>
                 <!-- Se deberian cargar con AJAX -->
-                <option value=1>IOMA</option>
-                <option value=2>OSDE</option>
-                <option value=3>OSECAC</option>
+                @foreach ($obras_sociales as $obra_social)
+                    <option value={{$obra_social->id}}>{{$obra_social->nombre}}</option>
+                @endforeach
             </select>
         </div>
     </div>
