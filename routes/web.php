@@ -21,20 +21,4 @@ Auth::routes();
 Route::resource('pacientes', 'PacienteController');
 
 //Rutas de consultas
-
-Route::get('/consulta/{id}', function ($id) {
-    //Listar consultas
-});
-
-Route::post('/consulta', function (Request $request) {
-    //Agregar consulta
-});
-
-Route::delete('/consulta/{id}', function ($id) {
-    //Eliminar consulta
-});
-
-Route::get('/consultas', function () {
-    //Listar consultas
-    return view('consultas');
-});
+Route::resource('consultas', 'ConsultaController');

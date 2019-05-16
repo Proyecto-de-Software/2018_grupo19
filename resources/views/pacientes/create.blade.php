@@ -9,7 +9,7 @@
 @endsection
 
 @section('form-fields')
-<div class="form-group">
+    <div class="form-group">
         <label for="paciente-nombre" class="col-sm-3 control-label">Nombre</label>
         <div class="col-sm-6">
             <input type="text" name="nombre" id="paciente-nombre" class="form-control" required autofocus>

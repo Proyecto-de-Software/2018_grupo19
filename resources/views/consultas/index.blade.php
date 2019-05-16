@@ -13,7 +13,7 @@
                     @include('common.errors')
 
                     <!-- Formulario de busqueda -->
-                    <form action="{{ url('pacientes')}}" method="GET" class="form-horizontal">
+                    <form action="{{ url('consultas')}}" method="GET" class="form-horizontal">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -37,22 +37,22 @@
             <!-- Listado -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Listado de pacientes
+                    Listado de consultas
                 </div>
 
                 <div class="panel-body">
                     <table class="table table-striped task-table">
                         <thead>
-                            <th>Paciente</th>
+                            <th>Consulta</th>
                             <th>&nbsp;</th>
                         </thead>
                         <tbody>
-                            @foreach ($pacientes as $paciente)
+                            @foreach ($consultas as $consulta)
                                 <tr>
-                                    <td class="table-text"><div>{{ $paciente->nombre . ' ' . $paciente->apellido }}</div></td>
+                                    <td class="table-text"><div>{{ $consulta->fecha }}</div></td>
                                     <td>
                                         <!-- Boton mas info -->
-                                        <form action="{{ url('pacientes/'.$paciente->id) }}">
+                                        <form action="{{ url('consultas/'.$consulta->id) }}">
                                             {{ csrf_field() }}
 
                                             <button type="submit" class="btn">
@@ -64,12 +64,12 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <!-- Boton Nuevo paciente -->
-                    <form action="{{ url('pacientes/create') }}">
+                    <!-- Boton Nuevo consulta -->
+                    <form action="{{ url('consultas/create') }}">
                         {{ csrf_field() }}
 
                         <button type="submit" class="btn">
-                            <i class="fa fa-btn fa-trash"></i>Nuevo paciente 
+                            <i class="fa fa-btn fa-trash"></i>Nueva consulta 
                         </button>
                     </form>
                 </div>

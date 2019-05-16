@@ -61,7 +61,7 @@ class PacienteController extends Controller
         $paciente->localidad_id = $request->localidad;
         $paciente->domicilio = $request->domicilio;
         $paciente->genero_id = $request->genero;
-        $paciente->tiene_documento = $request->tiene_documento ? 1 : 0;
+        $paciente->tiene_documento = $request->tiene_documento ? true : false;
         $paciente->tipo_doc_id = $request->tipo_documento;
         $paciente->documento = $request->documento;
         $paciente->nro_historia_clinica = $request->nro_historia_clinica;
@@ -116,7 +116,7 @@ class PacienteController extends Controller
         $paciente->localidad_id = $request->localidad;
         $paciente->domicilio = $request->domicilio;
         $paciente->genero_id = $request->genero;
-        $paciente->tiene_documento = $request->tiene_documento ? 1 : 0;
+        $paciente->tiene_documento = $request->tiene_documento ? true : false;
         $paciente->tipo_doc_id = $request->tipo_documento;
         $paciente->documento = $request->documento;
         $paciente->nro_historia_clinica = $request->nro_historia_clinica;
