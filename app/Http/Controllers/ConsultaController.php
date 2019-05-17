@@ -41,7 +41,7 @@ class ConsultaController extends Controller
             'instituciones' => Institucion::get(),
             'motivos_consultas' => MotivoConsulta::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
-            'acompanamiento' => Acompanamiento::get()
+            'acompanamientos' => Acompanamiento::get()
         ]);
     }
 
