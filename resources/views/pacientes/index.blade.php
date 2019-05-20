@@ -5,7 +5,7 @@
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Filtrar
+                    <h4>Filtrar</h4>
                 </div>
 
                 <div class="panel-body">
@@ -37,7 +37,7 @@
             <!-- Listado -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Listado de pacientes
+                    <h4>Listado de pacientes</h4>
                 </div>
 
                 <div class="panel-body">
