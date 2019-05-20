@@ -63,9 +63,14 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="{{ url('config/edit') }}">
+                                            Configuracion
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                                             Cerrar sesion
                                         </a>
 

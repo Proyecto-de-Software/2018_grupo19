@@ -39,7 +39,6 @@ class ConsultaController extends Controller
         return view('consultas.create', [
             'motivos_consultas' => MotivoConsulta::get(),
             'instituciones' => Institucion::get(),
-            'motivos_consultas' => MotivoConsulta::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
             'acompanamientos' => Acompanamiento::get()
         ]);
@@ -94,7 +93,6 @@ class ConsultaController extends Controller
             'consulta' => $consulta,
             'motivos_consultas' => MotivoConsulta::get(),
             'instituciones' => Institucion::get(),
-            'motivos_consultas' => MotivoConsulta::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
             'acompanamientos' => Acompanamiento::get()
         ]);

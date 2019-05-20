@@ -22,6 +22,6 @@ Route::resources([
     'consultas'=> 'ConsultaController'
 ]);
 
-Route::resource('config', 'ConfigController')->only([
-    'edit', 'update'
-]);
+//Rutas de configuracion
+Route::get('/config/edit', 'ConfigController@edit');
+Route::put('/config/update', 'ConfigController@update');
