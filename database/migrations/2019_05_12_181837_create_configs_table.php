@@ -17,7 +17,7 @@ class CreateConfigsTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string('variable');
+            $table->string('variable')->unique();
             $table->string('valor');
         });
     }
