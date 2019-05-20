@@ -17,8 +17,11 @@ Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
-//Rutas de pacientes
-Route::resource('pacientes', 'PacienteController');
+Route::resources([
+    'pacientes' => 'PacienteController',
+    'consultas'=> 'ConsultaController'
+]);
 
-//Rutas de consultas
-Route::resource('consultas', 'ConsultaController');
+Route::resource('config', 'ConfigController')->only([
+    'edit', 'update'
+]);
