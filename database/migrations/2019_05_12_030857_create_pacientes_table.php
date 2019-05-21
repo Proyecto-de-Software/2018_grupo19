@@ -25,8 +25,8 @@ class CreatePacientesTable extends Migration
             $table->boolean('tiene_documento');
             $table->string('documento');
             $table->string('telefono');
-            $table->string('nro_historia_clinica');
-            $table->string('nro_carpeta');
+            $table->string('nro_historia_clinica')->unique();
+            $table->string('nro_carpeta')->unique();
 
             //Claves foraneas
             $table->integer('localidad_id')->unsigned();
