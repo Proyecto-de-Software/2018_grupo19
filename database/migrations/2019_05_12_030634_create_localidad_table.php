@@ -18,7 +18,7 @@ class CreateLocalidadTable extends Migration
             $table->timestamps();
 
             $table->string('nombre');
-            $table->integer('partido_id')->unsigned()->unique();
+            $table->integer('partido_id')->unsigned();
             $table->foreign('partido_id')->references('id')->on('partidos');
         });
     }
