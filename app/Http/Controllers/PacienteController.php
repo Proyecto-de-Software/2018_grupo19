@@ -58,13 +58,13 @@ class PacienteController extends Controller
         /*$validator = Validator::make($request->all(), [
             'nombre' => 'required|max:255',
         ]);
-    
+
         if ($validator->fails()) {
             return redirect('/')
                 ->withInput()
                 ->withErrors($validator);
         }*/
-    
+
         $paciente = new Paciente;
         $paciente->nombre = $request->nombre;
         $paciente->apellido = $request->apellido;
@@ -82,7 +82,7 @@ class PacienteController extends Controller
         $paciente->telefono = $request->telefono;
         $paciente->obra_social_id = $request->obra_social;
         $paciente->save();
-    
+
         return redirect('/pacientes');
     }
 
@@ -94,6 +94,7 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
+        // dd($paciente);
         return view('pacientes.show', [
             'paciente' => $paciente
         ]);

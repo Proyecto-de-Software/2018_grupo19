@@ -51,26 +51,27 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ url('pacientes') }}">
-                                            Pacientes
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('consultas') }}">
-                                            Consultas
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('users') }}">
-                                            Usuarios
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('config/edit') }}">
-                                            Configuracion
-                                        </a>
-                                    </li>
+                                    @can('paciente_index')
+                                        <li>
+                                            <a href="{{ url('pacientes') }}">
+                                                Pacientes
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('consulta_index')
+                                        <li>
+                                            <a href="{{ url('consultas') }}">
+                                                Consultas
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('config_index')
+                                        <li>
+                                            <a href="{{ url('config/edit') }}">
+                                                Configuracion
+                                            </a>
+                                        </li>
+                                    @endcan
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

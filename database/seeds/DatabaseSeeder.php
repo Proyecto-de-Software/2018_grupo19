@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
             TipoInstitucionsTableSeeder::class,
             TratamientoFarmacologicosTableSeeder::class,
 
+            //Roles
+            RolesAndPermissions::class,
+
             //Inserta usuario root
             UsersTableSeeder::class,
 
