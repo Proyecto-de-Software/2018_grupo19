@@ -25,8 +25,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'equipoGuardia',
             'email' => 'equipoguardia@hak.com',
             'password' => bcrypt('123456'),
-            'nombre' => 'equipo'.
-            'apellido' => 'guardia'
+            'nombre' => 'equipo',
+            'apellido' => 'guardia',
             'activo' => true
         ])->assignRole('Equipo de Guardia');
 
@@ -34,8 +34,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'atencion',
             'email' => 'atencion@hak.com',
             'password' => bcrypt('123456'),
-            'nombre' => 'atencion'.
-            'apellido' => 'atencion'
+            'nombre' => 'atencion',
+            'apellido' => 'atencion',
             'activo' => true
         ])->assignRole('Personal de Atencion');
     }

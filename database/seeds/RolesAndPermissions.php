@@ -43,7 +43,7 @@ class RolesAndPermissions extends Seeder
 
         //Permisos del personal de atencion
         $atenc->givePermissionTo('paciente_index', 'paciente_show', 'paciente_new', 'paciente_update');
-        //$atenc->givePermissionTo('consulta_index', 'consulta_show');
+        //  $atenc->givePermissionTo('consulta_index', 'consulta_show');
         $atenc->givePermissionTo('user_index', 'user_show');
     }
 }

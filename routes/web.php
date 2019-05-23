@@ -29,9 +29,14 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 /*-----------------------------------------------------------------------------------------------------------
 */
 
-Route::resources([
-    'users' => 'UserController'
-]);
+//Rutas de usuarios
+Route::get('users', 'UserController@index')->middleware('permission:user_index');
+Route::get('users/create', 'UserController@create')->middleware('permission:user_new');
+Route::post('users', 'UserController@store')->middleware('permission:user_new');
+Route::get('users/{user}', 'UserController@show')->middleware('permission:user_show');
+Route::get('users/{user}/edit', 'UserController@edit')->middleware('permission:user_update');
+Route::put('users/{user}', 'UserController@update')->middleware('permission:user_update');
+Route::delete('users/{user}', 'UserController@destroy')->middleware('permission:user_delete');
 
 //Rutas de consulta
 Route::get('consultas', 'ConsultaController@index')->middleware('permission:consulta_index');
@@ -41,7 +46,6 @@ Route::get('consultas/{consulta}', 'ConsultaController@show')->middleware('permi
 Route::get('consultas/{consulta}/edit', 'ConsultaController@edit')->middleware('permission:consulta_update');
 Route::put('consultas/{consulta}', 'ConsultaController@update')->middleware('permission:consulta_update');
 Route::delete('consultas/{consulta}', 'ConsultaController@destroy')->middleware('permission:consulta_delete');
-
 
 //Rutas de paciente
 Route::get('pacientes', 'PacienteController@index')->middleware('permission:paciente_index');

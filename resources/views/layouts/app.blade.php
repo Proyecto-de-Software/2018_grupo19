@@ -51,6 +51,13 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    @can('user_index')
+                                        <li>
+                                            <a href="{{ url('users') }}">
+                                                Usuarios
+                                            </a>
+                                        </li>
+                                    @endcan
                                     @can('paciente_index')
                                         <li>
                                             <a href="{{ url('pacientes') }}">
