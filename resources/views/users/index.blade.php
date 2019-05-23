@@ -1,14 +1,12 @@
-@extends('layouts.index', ['resources' => $consultas, 'title' => "consultas"])
-
-@section('search')@endsection
+@extends('layouts.index', ['resources' => $users, 'title' => "users"])
 
 @section('item-list')
-    @foreach ($consultas as $resource)
+    @foreach ($users as $resource)
         <tr>
-            <td class="table-text"><div>{{ $resource->fecha . ', ' . $resource->paciente->nombre . ' ' . $resource->paciente->apellido }}</div></td>
+            <td class="table-text"><div>{{ $resource->name }}</div></td>
             <td>
                 <!-- Boton mas info -->
-                <form action="{{ url('consultas/'.$resource->id) }}">
+                <form action="{{ url('users/'.$resource->id) }}">
                     {{ csrf_field() }}
 
                     <button type="submit" class="btn">

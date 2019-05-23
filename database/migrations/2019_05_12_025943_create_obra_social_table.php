@@ -17,7 +17,7 @@ class CreateObraSocialTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string('nombre');
+            $table->string('nombre')->unique();
         });
     }
 

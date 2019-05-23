@@ -44,7 +44,6 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Iniciar sesion</a></li>
-                            <li><a href="{{ route('register') }}">Registrarse</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
@@ -63,9 +62,19 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="{{ url('users') }}">
+                                            Usuarios
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('config/edit') }}">
+                                            Configuracion
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                                             Cerrar sesion
                                         </a>
 

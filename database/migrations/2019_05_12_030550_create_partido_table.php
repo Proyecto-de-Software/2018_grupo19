@@ -17,8 +17,8 @@ class CreatePartidoTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string('nombre');
-            
+            $table->string('nombre')->unique();
+
             $table->integer('region_sanitaria_id')->unsigned();
             $table->foreign('region_sanitaria_id')->references('id')->on('region_sanitarias');
         });
