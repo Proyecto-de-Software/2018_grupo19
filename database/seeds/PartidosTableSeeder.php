@@ -13,20 +13,52 @@ class PartidosTableSeeder extends Seeder
     public function run()
     {
         DB::table('partidos')->insert([
-            'nombre'=>'La Plata',
-            'region_sanitaria_id'=>1
+            'nombre'=>'Bahia Blanca',
+            'region_sanitaria_id'=>'1'
         ]);
         DB::table('partidos')->insert([
-            'nombre'=>'Chivilcoy',
-            'region_sanitaria_id'=>2
+            'nombre'=>'Nueve de julio',
+            'region_sanitaria_id'=>'2'
         ]);
         DB::table('partidos')->insert([
-            'nombre'=>'GBA',
-            'region_sanitaria_id'=>3
+            'nombre'=>'Junin',
+            'region_sanitaria_id'=>'3'
         ]);
         DB::table('partidos')->insert([
-            'nombre'=>'CABA',
-            'region_sanitaria_id'=>4
+            'nombre'=>'Pergamino',
+            'region_sanitaria_id'=>'4'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'General San Martin',
+            'region_sanitaria_id'=>'5'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'Lomas de Zamora',
+            'region_sanitaria_id'=>'6'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'General Rodriguez',
+            'region_sanitaria_id'=>'7'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'Mar del Plata',
+            'region_sanitaria_id'=>'8'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'Azul',
+            'region_sanitaria_id'=>'9'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'Lobos',
+            'region_sanitaria_id'=>'10'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'Ensenada',
+            'region_sanitaria_id'=>'11'
+        ]);
+        DB::table('partidos')->insert([
+            'nombre'=>'La Matanza',
+            'region_sanitaria_id'=>'12'
         ]);
     }
 }
