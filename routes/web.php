@@ -11,6 +11,8 @@
 |
 */
 
+$a =  ConfigPage::getValue('cantidad_por_pag');
+
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index');

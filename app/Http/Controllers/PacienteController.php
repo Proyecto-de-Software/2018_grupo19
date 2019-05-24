@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Paciente;
 use Illuminate\Http\Request;
+use ConfigPage;
 
 //Imports para generar las opciones de los formularios
 use App\Partido;
@@ -23,10 +24,9 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::orderBy('created_at', 'asc')->get();
 
         return view('pacientes.index', [
-            'pacientes' => $pacientes
+            'pacientes' => Paciente::paginate(ConfigPage::getValue('cantidad_por_pag'))
         ]);
     }
 

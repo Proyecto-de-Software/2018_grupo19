@@ -53,6 +53,7 @@
                             @yield('item-list')
                         </tbody>
                     </table>
+                    @yield('pagination')
                     <!-- Boton Nuevo -->
                     <form action="{{ url($title."/create")}}">
                         {{ csrf_field() }}

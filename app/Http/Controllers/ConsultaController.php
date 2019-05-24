@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Consulta;
 use Illuminate\Http\Request;
+use ConfigPage;
 
 //Imports para generar las opciones de los formularios
 use App\MotivoConsulta;
@@ -22,10 +23,8 @@ class ConsultaController extends Controller
      */
     public function index()
     {
-        $consultas = Consulta::orderBy('consultas.created_at', 'asc')->get();
-
         return view('consultas.index', [
-            'consultas' => $consultas
+            'consultas' => Consulta::paginate(ConfigPage::getValue('cantidad_por_pag'))
         ]);
     }
 

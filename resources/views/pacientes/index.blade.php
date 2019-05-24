@@ -17,3 +17,8 @@
         </tr>
     @endforeach
 @endsection
+@section('pagination')
+<div class="text-center">
+{{ $pacientes->links() }}
+</div>
+@endsection
