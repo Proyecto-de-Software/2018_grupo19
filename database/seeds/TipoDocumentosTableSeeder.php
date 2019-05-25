@@ -24,5 +24,8 @@ class TipoDocumentosTableSeeder extends Seeder
         DB::table('tipo_documentos')->insert([
             'nombre'=>'LE'
         ]);
+        DB::table('tipo_documentos')->insert([
+            'nombre'=>'Pasaporte'
+        ]);
     }
 }

@@ -1,7 +1,11 @@
 @extends('layouts.form')
 
 @section('title')
-    Nuevo Usuario
+    @if (isset($user))
+    Editar usuario
+    @else
+    Nuevo usuario
+    @endif
 @endsection
 
 @section('action')
