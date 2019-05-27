@@ -31,7 +31,13 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
 
             //Revisar si habia que seedear la tabla institucions
-            InstitucionsTableSeeder::class
+            InstitucionsTableSeeder::class,
+
+            //Pacientes
+            PacienteTableSeeder::class,
+
+            //Consultas
+            ConsultaTableSeeder::class,
         ]);
     }
 }
