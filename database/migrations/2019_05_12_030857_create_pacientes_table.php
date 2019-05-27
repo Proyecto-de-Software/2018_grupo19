@@ -19,19 +19,19 @@ class CreatePacientesTable extends Migration
 
             $table->string('apellido');
             $table->string('nombre');
-            $table->string('lugar_nac');
+            $table->string('lugar_nac')->nullable();
             $table->date('fecha_nac');
             $table->string('domicilio');
             $table->boolean('tiene_documento');
             $table->string('documento');
             $table->string('telefono');
-            $table->string('nro_historia_clinica')->unique();
-            $table->string('nro_carpeta')->unique();
+            $table->string('nro_historia_clinica')->unique()->nullable();
+            $table->string('nro_carpeta')->unique()->nullable();
 
             //Claves foraneas
-            $table->integer('localidad_id')->unsigned();
+            $table->integer('localidad_id')->unsigned()->nullable();
             $table->foreign('localidad_id')->references('id')->on('localidads');
-            $table->integer('region_sanitaria_id')->unsigned();
+            $table->integer('region_sanitaria_id')->unsigned()->nullable();
             $table->foreign('region_sanitaria_id')->references('id')->on('region_sanitarias');
             $table->integer('genero_id')->unsigned();
             $table->foreign('genero_id')->references('id')->on('generos');
