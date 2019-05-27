@@ -38,11 +38,7 @@ class PacienteController extends Controller
     public function create()
     {
         return view('pacientes.create', [
-            'partidos' => Partido::get(),
-            'localidades' => Localidad::get(),
-            'generos' => Genero::get(),
-            'tipos_documento' => TipoDocumento::get(),
-            'obras_sociales' => ObraSocial::get()
+            'generos' => Genero::get()
         ]);
     }
 
@@ -108,13 +104,9 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $paciente)
     {
-        return view('pacientes.edit', [
+        return view('pacientes.create', [
             'paciente' => $paciente,
-            'partidos' => Partido::get(),
-            'localidades' => Localidad::get(),
             'generos' => Genero::get(),
-            'tipos_documento' => TipoDocumento::get(),
-            'obras_sociales' => ObraSocial::get()
         ]);
     }
 

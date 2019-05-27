@@ -13,28 +13,52 @@ class LocalidadsTableSeeder extends Seeder
     public function run()
     {
         DB::table('localidads')->insert([
-            'nombre'=>'La Plata',
+            'nombre'=>'Bahia Blanca',
             'partido_id'=>'1'
         ]);
         DB::table('localidads')->insert([
-            'nombre'=>'Tolosa',
-            'partido_id'=>'1'
-        ]);
-        DB::table('localidads')->insert([
-            'nombre'=>'Chivilcoy',
+            'nombre'=>'Nueve de julio',
             'partido_id'=>'2'
         ]);
         DB::table('localidads')->insert([
-            'nombre'=>'La Matanza',
+            'nombre'=>'Junin',
             'partido_id'=>'3'
         ]);
         DB::table('localidads')->insert([
-            'nombre'=>'Belgrano',
+            'nombre'=>'Pergamino',
             'partido_id'=>'4'
         ]);
         DB::table('localidads')->insert([
-            'nombre'=>'Nunez',
-            'partido_id'=>'4'
+            'nombre'=>'General San Martin',
+            'partido_id'=>'5'
+        ]);
+        DB::table('localidads')->insert([
+            'nombre'=>'Lomas de Zamora',
+            'partido_id'=>'6'
+        ]);
+        DB::table('localidads')->insert([
+            'nombre'=>'General Rodriguez',
+            'partido_id'=>'7'
+        ]);
+        DB::table('localidads')->insert([
+            'nombre'=>'Mar del Plata',
+            'partido_id'=>'8'
+        ]);
+        DB::table('localidads')->insert([
+            'nombre'=>'Azul',
+            'partido_id'=>'9'
+        ]);
+        DB::table('localidads')->insert([
+            'nombre'=>'Lobos',
+            'partido_id'=>'10'
+        ]);
+        DB::table('localidads')->insert([
+            'nombre'=>'Ensenada',
+            'partido_id'=>'11'
+        ]);
+        DB::table('localidads')->insert([
+            'nombre'=>'La Matanza',
+            'partido_id'=>'12'
         ]);
     }
 }
