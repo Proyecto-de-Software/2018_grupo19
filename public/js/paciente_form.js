@@ -1,5 +1,7 @@
 import { load_to_select } from './helpers/form_helpers.js'
 
+const default_value = field => document.getElementById(`paciente-${field}-default`) ? parseInt(document.getElementById(`paciente-${field}-default`).innerHTML) : undefined
+
 window.onload = function() {
     partidos_load(default_value('partido')).then(
         _ => {
@@ -24,5 +26,3 @@ const tipo_documento_load = def => load_to_select('paciente-tipo-documento', 'ht
 const obra_social_load = def => load_to_select('paciente-obra-social', 'https://inicio.proyecto2018.linti.unlp.edu.ar/obra-social', undefined, def)
 
 const region_sanitaria_set = () => document.getElementById('paciente-region-sanitaria').value = document.getElementById('paciente-partido').selectedOptions[0].value
-
-const default_value = field => document.getElementById(`paciente-${field}-default`) ? parseInt(document.getElementById(`paciente-${field}-default`).innerHTML) : undefined

@@ -1,61 +1,104 @@
 @extends('layouts.form')
 
 @section('title')
-    Nueva Consulta
+    @if (isset($consulta))
+        Editar Consulta
+    @else
+        Nueva Consulta
+    @endif
+@endsection
+
+@section('js')
+    <script src="{{ asset('/js/consulta_form.js') }}" type="module"></script>
 @endsection
 
 @section('action')
-    {{ url('consultas')}}
+    @if (isset($consulta))
+        {{ url('consultas/'.$consulta->id)}}
+    @else
+        {{ url('consultas')}}
+    @endif
 @endsection
 
 @section('cancel-action')
-    {{ url('consultas/')}}
+    @if (isset($consulta))
+        {{ url('consultas/'.$consulta->id)}}
+    @else
+        {{ url('consultas/')}}
+    @endif
 @endsection
 
 @section('form-fields')
+    @if (isset($consulta))
+        {{ method_field('PUT') }}
+    @endif
     <div class="form-group">
         <label for="consulta-fecha" class="col-sm-3 control-label">Fecha</label>
         <div class="col-sm-6">
-            <input type="date" name="fecha" id="consulta-fecha" class="form-control" required>
+            <input type="date" name="fecha" id="consulta-fecha" class="form-control" required
+            @if (isset($consulta))
+                value="{{$consulta->fecha}}"
+            @endif>
         </div>
     </div>
     <div class="form-group">
         <label for="consulta-articulacion-con-instituciones" class="col-sm-3 control-label">Articulacion con instituciones</label>
         <div class="col-sm-6">
-            <input type="text" name="articulacion_con_instituciones" id="consulta-articulacion-con-instituciones" class="form-control" required>
+            <input type="text" name="articulacion_con_instituciones" id="consulta-articulacion-con-instituciones" class="form-control" required
+            @if (isset($consulta))
+                value="{{$consulta->articulacion_con_instituciones}}"
+            @endif>
         </div>
     </div>
     <div class="form-group">
         <label for="consulta-internacion" class="col-sm-3 control-label">Internacion</label>
         <div class="col-sm-6">
-            <input type="checkbox" name="internacion" id="consulta-internacion" class="form-check-input" value="1">
+            <input type="checkbox" name="internacion" id="consulta-internacion" class="form-check-input" value="1"
+            @if (isset($consulta))
+                @if ($consulta->internacion)
+                    checked
+                @endif
+            @endif>
         </div>
     </div>
     <div class="form-group">
         <label for="consulta-diagnostico" class="col-sm-3 control-label">Diagnostico</label>
         <div class="col-sm-6">
-            <input type="text" name="diagnostico" id="consulta-diagnostico" class="form-control" required>
+            <input type="text" name="diagnostico" id="consulta-diagnostico" class="form-control" required
+            @if (isset($consulta))
+                value="{{$consulta->diagnostico}}"
+            @endif>
         </div>
     </div>
     <div class="form-group">
         <label for="consulta-observaciones" class="col-sm-3 control-label">Observaciones</label>
         <div class="col-sm-6">
-            <input type="text" name="observaciones" id="consulta-observaciones" class="form-control" required>
+            <input type="text" name="observaciones" id="consulta-observaciones" class="form-control" required
+            @if (isset($consulta))
+                value="{{$consulta->observaciones}}"
+            @endif>
         </div>
     </div>
     <div class="form-group">
         <label for="consulta-paciente-id" class="col-sm-3 control-label">Paciente</label>
         <div class="col-sm-6">
-            <input type="text" name="paciente_id" id="consulta-paciente-id" class="form-control" required>
+            <input type="text" name="paciente_id" id="consulta-paciente-id" class="form-control" required
+            @if (isset($consulta))
+                value="{{$consulta->paciente_id}}"
+            @endif>
         </div>
     </div>
     <div class="form-group">
         <label for="consulta-motivo" class="col-sm-3 control-label">Motivo</label>
         <div class="col-sm-6">
             <select name="motivo_consulta_id" id="consulta-motivo" class="form-control" required>
-                <!-- Se deberian cargar con AJAX? -->
                 @foreach ($motivos_consultas as $motivo)
-                    <option value={{$motivo->id}}>{{$motivo->nombre}}</option>
+                    <option value={{$motivo->id}}
+                    @if (isset($consulta))
+                        @if ($motivo->id == $consulta->motivo_consulta_id)
+                            selected
+                        @endif  
+                    @endif>{{$motivo->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -63,12 +106,10 @@
     <div class="form-group">
         <label for="consulta-derivacion" class="col-sm-3 control-label">Derivacion</label>
         <div class="col-sm-6">
-            <select name="derivacion_id" id="consulta-derivacion" class="form-control" required>
-                <!-- Mirar que onda las instituciones -->
-                @foreach ($instituciones as $institucion)
-                    <option value={{$institucion->id}}>{{$institucion->nombre}}</option>
-                @endforeach
-            </select>
+            <select name="derivacion_id" id="consulta-derivacion" class="form-control" required></select>
+            @if (isset($consulta))
+                <div id="consulta-derivacion-default" hidden>{{$consulta->derivacion_id}}</div>
+            @endif
         </div>
     </div>
     <div class="form-group">
@@ -76,7 +117,12 @@
         <div class="col-sm-6">
             <select name="tratamiento_farmacologico_id" id="consulta-tratamiento-farmacologico" class="form-control" required>
                 @foreach ($tratamientos as $tratamiento)
-                    <option value={{$tratamiento->id}}>{{$tratamiento->nombre}}</option>
+                    <option value={{$tratamiento->id}}
+                    @if (isset($consulta))
+                        @if ($tratamiento->id == $consulta->tratamiento_farmacologico_id)
+                            selected
+                        @endif  
+                    @endif>{{$tratamiento->nombre}}</option>
                 @endforeach
             </select>
         </div>
@@ -86,7 +132,12 @@
         <div class="col-sm-6">
             <select name="acompanamiento_id" id="consulta-acompanamiento" class="form-control" required>
                 @foreach ($acompanamientos as $acompanamiento)
-                    <option value={{$acompanamiento->id}}>{{$acompanamiento->nombre}}</option>
+                    <option value={{$acompanamiento->id}}
+                    @if (isset($consulta))
+                        @if ($acompanamiento->id == $consulta->acompanamiento_id)
+                            selected
+                        @endif  
+                    @endif>{{$acompanamiento->nombre}}</option>
                 @endforeach
             </select>
         </div>

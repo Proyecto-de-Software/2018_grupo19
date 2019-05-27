@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 //Imports para generar las opciones de los formularios
 use App\MotivoConsulta;
-use App\Institucion;
 use App\TratamientoFarmacologico;
 use App\Acompanamiento;
 
@@ -38,7 +37,6 @@ class ConsultaController extends Controller
     {
         return view('consultas.create', [
             'motivos_consultas' => MotivoConsulta::get(),
-            'instituciones' => Institucion::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
             'acompanamientos' => Acompanamiento::get()
         ]);
@@ -89,10 +87,9 @@ class ConsultaController extends Controller
      */
     public function edit(Consulta $consulta)
     {
-        return view('consultas.edit', [
+        return view('consultas.create', [
             'consulta' => $consulta,
             'motivos_consultas' => MotivoConsulta::get(),
-            'instituciones' => Institucion::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
             'acompanamientos' => Acompanamiento::get()
         ]);
