@@ -16,7 +16,7 @@ $factory->define(\App\Paciente::class, function (Faker $faker) {
         'documento' => $faker->numberBetween($min = 10000000, $max = 50000000),
         'telefono' => $faker->e164PhoneNumber,
         'nro_historia_clinica' => $faker->numberBetween($min = 100000, $max = 999999),
-        'nro_carpeta' => $faker->numberBetween($min = 100000, $max = 999999),
+        'nro_carpeta' => $faker->numberBetween($min = 10000, $max = 99999),
         'localidad_id' => $id,
         'region_sanitaria_id' => $id,
         'genero_id' => $faker->numberBetween($min = 1, $max = 3),

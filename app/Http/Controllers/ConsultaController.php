@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Consulta;
 use Illuminate\Http\Request;
+use Validator;
 use ConfigPage;
 
 //Imports para generar las opciones de los formularios
@@ -49,6 +50,14 @@ class ConsultaController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = $this->validate_c($request);
+
+        if ($validator->fails()) {
+            return redirect('consultas/create')
+                ->withErrors($validator)
+                ->withInput($request->input());
+        }
+
         $consulta = new Consulta;
         $consulta->fecha = $request->fecha;
         $consulta->articulacion_con_instituciones = $request->articulacion_con_instituciones;
@@ -103,6 +112,14 @@ class ConsultaController extends Controller
      */
     public function update(Request $request, Consulta $consulta)
     {
+        $validator = $this->validate_c($request);
+
+        if ($validator->fails()) {
+            return redirect("consultas/$consulta->id/edit")
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $consulta->fecha = $request->fecha;
         $consulta->articulacion_con_instituciones = $request->articulacion_con_instituciones;
         $consulta->internacion = $request->internacion ? true : false;
@@ -129,5 +146,22 @@ class ConsultaController extends Controller
         Consulta::findOrFail($consulta->id)->delete();
 
         return redirect('/consultas');
+    }
+
+    public function validate_c(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'fecha' => 'required|date|before_or_equal:today',
+            'ariculacion_con_instituciones' => 'string',
+            'diagnostico' => 'required|string',
+            'observaciones' => 'string',
+            'paciente_id' => 'required|integer|exists:pacientes,id',
+            'motivo_consulta_id' => 'required|integer|exists:motivo_consultas,id',
+            'derivacion_id' => 'required|integer|exists:institucions,id',
+            'tratamiento_farmacologico_id' => 'required|integer|exists:tratamiento_farmacologicos,id',
+            'acompanamiento_id' => 'required|integer|exists:acompanamientos,id',]
+        );
+
+        return $validator;
     }
 }

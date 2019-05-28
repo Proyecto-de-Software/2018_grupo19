@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Paciente;
 use Illuminate\Http\Request;
+use Validator;
 use ConfigPage;
 
 //Imports para generar las opciones de los formularios
@@ -24,7 +25,6 @@ class PacienteController extends Controller
      */
     public function index()
     {
-
         return view('pacientes.index', [
             'pacientes' => Paciente::paginate(ConfigPage::getValue('cantidad_por_pag'))
         ]);
@@ -50,17 +50,14 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //Revisar el tema del validator en el quickstart con tasks
-        /*$validator = Validator::make($request->all(), [
-            'nombre' => 'required|max:255',
-        ]);
+        $validator = $this->validate_p($request, false);
 
         if ($validator->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($validator);
-        }*/
-
+            return redirect('pacientes/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
         $paciente = new Paciente;
         $paciente->nombre = $request->nombre;
         $paciente->apellido = $request->apellido;
@@ -119,6 +116,14 @@ class PacienteController extends Controller
      */
     public function update(Request $request, Paciente $paciente)
     {
+        $validator = $this->validate_p($request, true);
+
+        if ($validator->fails()) {
+            return redirect("pacientes/$paciente->id/edit")
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $paciente->nombre = $request->nombre;
         $paciente->apellido = $request->apellido;
         $paciente->fecha_nac = $request->fecha_nac;
@@ -150,5 +155,26 @@ class PacienteController extends Controller
         Paciente::findOrFail($paciente->id)->delete();
 
         return redirect('/pacientes');
+    }
+
+    public function validate_p(Request $request, $edit)
+    {
+        $validator = Validator::make($request->all(),[
+            'nombre' => 'required|string',
+            'apellido' => 'required|string',
+            'fecha_nac' => 'required|date|before_or_equal:today',
+            'lugar_nac' => 'string',
+            'localidad' => 'numeric|digits_between:1,12',
+            'domicilio' => 'required|string',
+            'genero' => 'required|integer|between:1,3',
+            'tipo_documento' => 'required_if:tiene_documento,true|integer|between:1,5',
+            'documento' => 'required_if:tiene_documento,true|numeric|digits:8' . ($edit ? '' : '|unique:pacientes'),
+            'nro_historia_clinica' => 'numeric|digits_between:1,6' . ($edit ? '' : '|unique:pacientes'),
+            'nro_carpeta' => 'numeric|digits_between:1,5' . ($edit ? '' : '|unique:pacientes'),
+            'telefono' => 'regex:/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/',
+            'obra_social' => 'numeric|digits_between:1,21',]
+        );
+
+        return $validator;
     }
 }
