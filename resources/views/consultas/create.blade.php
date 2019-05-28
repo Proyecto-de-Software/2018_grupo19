@@ -38,6 +38,8 @@
             <input type="date" name="fecha" id="consulta-fecha" class="form-control" required
             @if (isset($consulta))
                 value="{{$consulta->fecha}}"
+            @else
+                value="{{ old('fecha') }}"
             @endif>
         </div>
     </div>
@@ -47,6 +49,8 @@
             <input type="text" name="articulacion_con_instituciones" id="consulta-articulacion-con-instituciones" class="form-control" required
             @if (isset($consulta))
                 value="{{$consulta->articulacion_con_instituciones}}"
+            @else
+                value="{{ old('articulacion_con_instituciones') }}"
             @endif>
         </div>
     </div>
@@ -67,6 +71,8 @@
             <input type="text" name="diagnostico" id="consulta-diagnostico" class="form-control" required
             @if (isset($consulta))
                 value="{{$consulta->diagnostico}}"
+            @else
+                value="{{ old('diagnostico') }}"
             @endif>
         </div>
     </div>
@@ -76,6 +82,8 @@
             <input type="text" name="observaciones" id="consulta-observaciones" class="form-control" required
             @if (isset($consulta))
                 value="{{$consulta->observaciones}}"
+            @else
+                value="{{ old('observaciones') }}"
             @endif>
         </div>
     </div>
@@ -85,6 +93,8 @@
             <input type="text" name="paciente_id" id="consulta-paciente-id" class="form-control" required
             @if (isset($consulta))
                 value="{{$consulta->paciente_id}}"
+            @else
+                value="{{ old('paciente_id') }}"
             @endif>
         </div>
     </div>

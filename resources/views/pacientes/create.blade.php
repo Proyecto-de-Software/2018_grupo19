@@ -38,6 +38,8 @@
             <input type="text" name="nombre" id="paciente-nombre" class="form-control" required autofocus
             @if (isset($paciente))
                 value="{{$paciente->nombre}}"
+            @else
+                value="{{ old('nombre') }}"
             @endif>
         </div>
     </div>
@@ -47,6 +49,8 @@
             <input type="text" name="apellido" id="paciente-apellido" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->apellido}}"
+            @else
+                value="{{ old('apellido') }}"
             @endif>
         </div>
     </div>
@@ -56,6 +60,8 @@
             <input type="date" name="fecha_nac" id="paciente-fecha-nac" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->fecha_nac}}"
+            @else
+                value="{{ old('fecha_nac') }}"
             @endif>
         </div>
     </div>
@@ -65,6 +71,8 @@
             <input type="text" name="lugar_nac" id="paciente-lugar-nac" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->lugar_nac}}"
+            @else
+                value="{{ old('lugar_nac') }}"
             @endif>
         </div>
     </div>
@@ -83,6 +91,8 @@
             <input name="region_sanitaria" id="paciente-region-sanitaria" class="form-control" required readonly
             @if (isset($paciente))
                 value="{{$paciente->region_sanitaria_id}}"
+            @else
+                value="{{ old('region_sanitaria') }}"
             @endif>
         </div>
     </div>
@@ -101,6 +111,8 @@
             <input type="text" name="domicilio" id="paciente-domicilio" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->region_sanitaria_id}}"
+            @else
+                value="{{ old('domicilio') }}"
             @endif>
         </div>
     </div>
@@ -146,6 +158,8 @@
             <input type="text" name="documento" id="paciente-documento" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->documento}}"
+            @else
+                value="{{ old('documento') }}"
             @endif>
         </div>
     </div>
@@ -155,6 +169,8 @@
             <input type="text" name="nro_historia_clinica" id="paciente-nro-historia-clinica" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->nro_historia_clinica}}"
+            @else
+                value="{{ old('nro_historia_clinica') }}"
             @endif>
         </div>
     </div>
@@ -164,6 +180,8 @@
             <input type="text" name="nro_carpeta" id="paciente-nro-carpeta" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->nro_carpeta}}"
+            @else
+                value="{{ old('nro_carpeta') }}"
             @endif>
         </div>
     </div>
@@ -173,6 +191,8 @@
             <input type="text" name="telefono" id="paciente-telefono" class="form-control" required
             @if (isset($paciente))
                 value="{{$paciente->telefono}}"
+            @else
+                value="{{ old('telefono') }}"
             @endif>
         </div>
     </div>
