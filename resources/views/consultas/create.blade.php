@@ -117,9 +117,13 @@
         <label for="consulta-derivacion" class="col-sm-3 control-label">Derivacion</label>
         <div class="col-sm-6">
             <select name="derivacion_id" id="consulta-derivacion" class="form-control" required></select>
-            @if (isset($consulta))
-                <div id="consulta-derivacion-default" hidden>{{$consulta->derivacion_id}}</div>
-            @endif
+            <div id="consulta-derivacion-default" hidden>
+                @if (isset($consulta))
+                    {{$consulta->derivacion_id}}
+                @else
+                    {{ old('derivacion_id') }}
+                @endif
+            </div>
         </div>
     </div>
     <div class="form-group">

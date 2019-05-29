@@ -81,9 +81,13 @@
         <div class="col-sm-6">
             <select name="partido" id="paciente-partido" class="form-control" required></select>
         </div>
-        @if (isset($paciente))
-            <div id="paciente-partido-default" hidden>{{$paciente->localidad->partido->id}}</div>
-        @endif
+        <div id="paciente-partido-default" hidden>
+            @if (isset($paciente))
+                {{$paciente->localidad->partido->id}}
+            @else
+                {{ old('partido') }}
+            @endif
+        </div>
     </div>
     <div class="form-group">
         <label for="paciente-region-sanitaria" class="col-sm-3 control-label">Region sanitaria</label>
@@ -101,9 +105,13 @@
         <div class="col-sm-6">
             <select name="localidad" id="paciente-localidad" class="form-control" required></select>
         </div>
-        @if (isset($paciente))
-            <div id="paciente-localidad-default" hidden>{{$paciente->localidad_id}}</div>
-        @endif
+        <div id="paciente-localidad-default" hidden>
+            @if (isset($paciente))
+                {{$paciente->localidad_id}}
+            @else
+                {{ old('localidad') }}
+            @endif
+        </div>
     </div>
     <div class="form-group">
         <label for="paciente-domicilio" class="col-sm-3 control-label">Domicilio</label>
@@ -148,9 +156,13 @@
             <select name="tipo_documento" id="paciente-tipo-documento" class="form-control" required>
             </select>
         </div>
-        @if (isset($paciente))
-            <div id="paciente-tipo-documento-default" hidden>{{$paciente->tipo_doc_id}}</div>
-        @endif
+        <div id="paciente-tipo-documento-default" hidden>
+            @if (isset($paciente))
+                {{$paciente->tipo_doc_id}}
+            @else
+                {{ old('tipo_documento') }}
+            @endif
+        </div>
     </div>
     <div class="form-group">
         <label for="paciente-documento" class="col-sm-3 control-label">Documento</label>
@@ -202,8 +214,12 @@
             <select name="obra_social" id="paciente-obra-social" class="form-control" required>
             </select>
         </div>
-        @if (isset($paciente))
-            <div id="paciente-obra-social-default" hidden>{{$paciente->obra_social_id}}</div>
-        @endif
+        <div id="paciente-obra-social-default" hidden>
+            @if (isset($paciente))
+                {{$paciente->obra_social_id}}
+            @else
+                {{ old('obra_social') }}
+            @endif
+        </div>
     </div>
 @endsection
