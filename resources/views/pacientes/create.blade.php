@@ -68,7 +68,7 @@
     <div class="form-group">
         <label for="paciente-lugar-nac" class="col-sm-3 control-label">Lugar de nacimiento</label>
         <div class="col-sm-6">
-            <input type="text" name="lugar_nac" id="paciente-lugar-nac" class="form-control" required
+            <input type="text" name="lugar_nac" id="paciente-lugar-nac" class="form-control"
             @if (isset($paciente))
                 value="{{$paciente->lugar_nac}}"
             @else
