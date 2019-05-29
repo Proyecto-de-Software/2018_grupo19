@@ -9,21 +9,16 @@
                 <div class="panel-heading">
                     <h4>Filtrar</h4>
                 </div>
-                
+
                 <div class="panel-body">
                     <!-- Display Validation Errors -->
                     @include('common.errors')
-                    
+
                     <!-- Formulario de busqueda -->
                     <form action="{{ url($title)}}" method="GET" class="form-horizontal">
                         {{ csrf_field() }}
 
-                        <div class="form-group">
-                            <label for="filtro-nombre" class="col-sm-3 control-label">Nombre</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="nombre" id="filtro-nombre" class="form-control">
-                            </div>
-                        </div>
+                        @yield('campos_form_busqueda')
 
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
@@ -59,7 +54,7 @@
                         {{ csrf_field() }}
 
                         <button type="submit" class="btn">
-                            <i class="fa fa-btn fa-trash"></i>Agregar {{substr($title,0,-1)}} 
+                            <i class="fa fa-btn fa-trash"></i>Agregar {{substr($title,0,-1)}}
                         </button>
                     </form>
                 </div>
