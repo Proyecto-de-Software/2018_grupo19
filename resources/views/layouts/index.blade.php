@@ -17,13 +17,14 @@
                     <!-- Formulario de busqueda -->
                     <form action="{{ url($title)}}" method="GET" class="form-horizontal">
                         {{ csrf_field() }}
+                        <input type="hidden" value="on" name="search">
 
                         @yield('campos_form_busqueda')
 
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-btn fa-plus"></i>Aplicar filtros
+                                    <i class="fa fa-btn fa-plus">Aplicar filtros</i>
                                 </button>
                             </div>
                         </div>
@@ -35,7 +36,16 @@
             <!-- Listado -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>Listado de {{$title}}</h4>
+                    <div class="container">
+                        <div class="row align-items-start">
+                            <div class="col-sm-5">
+                                <h4>Listado de {{$title}}</h4>
+                            </div>
+                            <div class="col-sm-3">
+                                @yield('boton_listado_completo')
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="panel-body">
