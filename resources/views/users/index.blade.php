@@ -4,7 +4,7 @@
     <div class="form-group">
         <label for="filtro-nombre" class="col-sm-2 control-label">Nombre</label>
         <div class="col-sm-6">
-        <input type="text" name="username" id="filtro-username" class="form-control"`value="{{app('request')->input('username')}}">
+        <input type="text" name="username" id="filtro-username" class="form-control" value="{{app('request')->input('username')}}">
         </div>
         <label for="filtro-nombre" class="col-sm-2 control-label">Activo</label>
         <div class="col-sm-1">

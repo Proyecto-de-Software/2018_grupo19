@@ -19,8 +19,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if($request->get('search')) {
-            $users = User::where('activo', ($request->get('active') == 'on') ? 1:0)
-                ->where('name', 'like', $request->get('username') . '%')
+            $users = User::activo(($request->get('active') == 'on') ? 1:0)
+                ->username($request->get('username'))
                 ->paginate(ConfigPage::getValue('cantidad_por_pag'));
         } else { $users = User::paginate(ConfigPage::getValue('cantidad_por_pag'));}
 
