@@ -23,12 +23,21 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pacientes.index', [
-            'pacientes' => Paciente::paginate(ConfigPage::getValue('cantidad_por_pag'))
-        ]);
+        if($request->get('search')) {
+            $pacientes = Paciente::nombre($request->get('nombre'))
+                ->apellido($request->get('apellido'))
+                ->nroDoc($request->get('nro-doc'))
+                ->tipoDoc($request->get('tipo-doc'))
+                ->nroHistoriaClinica($request->get('historia-clinica'))
+                ->paginate(ConfigPage::getValue('cantidad_por_pag'));
+        } else { $pacientes = Paciente::paginate(ConfigPage::getValue('cantidad_por_pag')); }
+
+        return view('pacientes.index', ['pacientes' => $pacientes]);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +66,7 @@ class PacienteController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        
+
         $paciente = new Paciente;
         $paciente->nombre = $request->nombre;
         $paciente->apellido = $request->apellido;
