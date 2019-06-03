@@ -30,6 +30,8 @@
             <input type="text" name="name" id="user-name" class="form-control" required autofocus
             @if (isset($user))
                 value="{{$user->name}}"
+            @else
+                value="{{old('name')}}"
             @endif>
         </div>
     </div>
@@ -47,6 +49,8 @@
             <input type="text" name="email" id="paciente-email" class="form-control" required
             @if (isset($user))
                 value="{{$user->email}}"
+            @else
+                value="{{old('email')}}"
             @endif>
         </div>
     </div>
@@ -56,6 +60,8 @@
             <input type="text" name="nombre" id="user-nombre" class="form-control" required
             @if (isset($user))
                 value="{{$user->nombre}}"
+            @else
+                value="{{old('nombre')}}"
             @endif>
         </div>
     </div>
@@ -65,6 +71,8 @@
             <input type="text" name="apellido" id="user-apellido" class="form-control" required
             @if (isset($user))
                 value="{{$user->apellido}}"
+            @else
+                value="{{old('apellido')}}"
             @endif>
         </div>
     </div>

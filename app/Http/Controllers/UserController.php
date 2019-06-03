@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
-
+use Validator;
 use ConfigPage;
 
 use Illuminate\Support\Facades\Log;
@@ -46,6 +46,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = $this->validate_u($request, false);
+
+        if ($validator->fails()) {
+            return redirect("users/create")
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $user = new User;
         $user->email = $request->email;
         $user->name = $request->name;
@@ -92,6 +100,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $validator = $this->validate_u($request, true);
+
+        if ($validator->fails()) {
+            return redirect("users/$user->id/edit")
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $user->email = $request->email;
         $user->name = $request->name;
         $user->nombre = $request->nombre;
@@ -122,5 +138,18 @@ class UserController extends Controller
             User::findOrFail($user->id)->delete();
             return redirect('/users');
         }
+    }
+
+    public function validate_u(Request $request, $edit)
+    {
+        $validator = Validator::make($request->all(),[
+            'nombre' => 'required|string',
+            'apellido' => 'required|string',
+            'email' => 'required|email' . ($edit ? '' : '|unique:users'),
+            'name' => 'required|string' . ($edit ? '' : '|unique:users'),
+            'password' => $edit ? 'required' : '',]
+        );
+
+        return $validator;
     }
 }
