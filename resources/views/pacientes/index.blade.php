@@ -71,8 +71,20 @@
         </tr>
     @endforeach
 @endsection
+
+@section('extra_buttons')
+    <!-- Boton Nuevo N.N -->
+    <form action="{{ url('/pacientes/nn/create')}}">
+        {{ csrf_field() }}
+
+        <button type="submit" class="btn">
+            <i class="fa fa-btn fa-trash"></i>Agregar Paciente N.N.
+        </button>
+    </form>
+@endsection
+
 @section('pagination')
-<div class="text-center">
-{{ $pacientes->links() }}
-</div>
+    <div class="text-center">
+        {{ $pacientes->links() }}
+    </div>
 @endsection

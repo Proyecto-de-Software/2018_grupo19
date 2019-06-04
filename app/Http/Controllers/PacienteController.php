@@ -148,6 +148,7 @@ class PacienteController extends Controller
         $paciente->nro_carpeta = $request->nro_carpeta;
         $paciente->telefono = $request->telefono;
         $paciente->obra_social_id = $request->obra_social;
+        $paciente->nn = false;
         $paciente->save();
 
         return redirect('/pacientes/'.$paciente->id);
@@ -162,6 +163,29 @@ class PacienteController extends Controller
     public function destroy(Paciente $paciente)
     {
         Paciente::findOrFail($paciente->id)->delete();
+
+        return redirect('/pacientes');
+    }
+
+    public function create_nn()
+    {
+        return view('pacientes.create_nn');
+    }
+
+    public function store_nn(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'nro_historia_clinica' => 'numeric|digits_between:1,6|unique:pacientes',
+            'nro_carpeta' => 'numeric|digits_between:1,5|unique:pacientes',
+        ]) -> validate();
+
+        $paciente = new Paciente();
+        $paciente->nombre = 'N.';
+        $paciente->apellido = 'N.';
+        $paciente->nro_historia_clinica = $request->nro_historia_clinica;
+        $paciente->nro_carpeta = $request->nro_carpeta;
+        $paciente->nn = true;
+        $paciente->save();
 
         return redirect('/pacientes');
     }

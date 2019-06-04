@@ -67,6 +67,7 @@
                             <i class="fa fa-btn fa-trash"></i>Agregar {{substr($title,0,-1)}}
                         </button>
                     </form>
+                    @yield('extra_buttons')
                 </div>
             </div>
         </div>

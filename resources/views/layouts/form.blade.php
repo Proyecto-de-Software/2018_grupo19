@@ -12,7 +12,7 @@
                     <!-- Display Validation Errors -->
                     @include('common.errors')
 
-                    <form action="@yield('action')" method="POST" class="form-horizontal">
+                    <form action="@yield('action')" method="POST" class="form-horizontal" id="form">
                         {{ csrf_field() }}
                         @yield('form-fields')
                         <!-- Guardar -->
