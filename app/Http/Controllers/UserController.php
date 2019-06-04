@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Validator;
 use ConfigPage;
@@ -34,7 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('users.create', ['todosLosRoles' => Role::all(), 'roles' => []]);
     }
 
     /**
@@ -60,6 +61,9 @@ class UserController extends Controller
         $user->apellido = $request->apellido;
         $user->password = bcrypt($request->password);
         $user->activo = $request->activo ? 1 : 0;
+        foreach($request->roles as $rol) {
+            $user->assignRole($rol);
+        }
         $user->save();
 
         return redirect('/users');
@@ -73,7 +77,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        return view('users.show', ['user' => $user, 'roles' => $user->getRoleNames()]);
     }
 
     /**
@@ -84,7 +88,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.create', ['user' => $user]);
+        return view('users.create', ['user' => $user, 'todosLosRoles' => Role::all(), 'roles' => $user->getRoleNames()->toArray()]);
     }
 
     /**
@@ -109,6 +113,12 @@ class UserController extends Controller
         $user->nombre = $request->nombre;
         $user->apellido = $request->apellido;
         $user->activo = $request->activo ? 1 : 0;
+        foreach($user->getRoleNames() as $r) {
+            $user->removeRole($r);
+        }
+        foreach($request->roles as $rol) {
+            $user->assignRole($rol);
+        }
         $user->save();
 
         return redirect('/users');
