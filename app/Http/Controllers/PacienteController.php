@@ -186,4 +186,13 @@ class PacienteController extends Controller
 
         return $validator;
     }
+
+    public function derivations(Paciente $paciente){
+
+        //Obtener consultas de paciente
+
+        return view('pacientes.derivaciones', [
+            'paciente' => $paciente,
+        ]);
+    }
 }

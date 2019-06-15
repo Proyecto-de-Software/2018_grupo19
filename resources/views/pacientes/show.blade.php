@@ -26,4 +26,6 @@
     <p>Nro. carpeta: {{ $paciente->nro_carpeta }}</p>
     <p>Telefono: {{ $paciente->telefono }}</p>
     <p>Obra social: {{ $paciente->obra_social->nombre }}</p>
+    <a href="{{ url('pacientes/derivaciones/'.$paciente->id) }}" class="btn btn-info" role="button">Últimas derivaciones</a>
 @endsection
+

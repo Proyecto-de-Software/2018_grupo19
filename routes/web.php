@@ -53,6 +53,7 @@ Route::get('pacientes/create', 'PacienteController@create')->middleware('permiss
 Route::post('pacientes', 'PacienteController@store')->middleware('permission:paciente_new');
 Route::get('pacientes/{paciente}', 'PacienteController@show')->middleware('permission:paciente_show');
 Route::get('pacientes/{paciente}/edit', 'PacienteController@edit')->middleware('permission:paciente_update');
+Route::get('pacientes/derivaciones/{paciente}', 'PacienteController@derivations')->middleware('permission:paciente_show');
 Route::put('pacientes/{paciente}', 'PacienteController@update')->middleware('permission:paciente_update');
 Route::delete('pacientes/{paciente}', 'PacienteController@destroy')->middleware('permission:paciente_delete');
 

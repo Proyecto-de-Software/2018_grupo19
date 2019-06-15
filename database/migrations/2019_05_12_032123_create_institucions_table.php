@@ -20,6 +20,8 @@ class CreateInstitucionsTable extends Migration
             $table->string('nombre');
             $table->string('director');
             $table->string('telefono');
+            $table->string('longitud');
+            $table->string('latitud');
 
             //Claves foraneas
             $table->integer('region_sanitaria_id')->unsigned();
