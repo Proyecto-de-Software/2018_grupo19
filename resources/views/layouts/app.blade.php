@@ -48,33 +48,33 @@
                         @guest
                             <li><a href="{{ route('login') }}">Iniciar sesion</a></li>
                         @else
+                            @can('user_index')
+                                <li>
+                                    <a href="{{ url('users') }}">
+                                        Usuarios
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('paciente_index')
+                                <li>
+                                    <a href="{{ url('pacientes') }}">
+                                        Pacientes
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('consulta_index')
+                                <li>
+                                    <a href="{{ url('consultas') }}">
+                                        Consultas
+                                    </a>
+                                </li>
+                            @endcan
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    @can('user_index')
-                                        <li>
-                                            <a href="{{ url('users') }}">
-                                                Usuarios
-                                            </a>
-                                        </li>
-                                    @endcan
-                                    @can('paciente_index')
-                                        <li>
-                                            <a href="{{ url('pacientes') }}">
-                                                Pacientes
-                                            </a>
-                                        </li>
-                                    @endcan
-                                    @can('consulta_index')
-                                        <li>
-                                            <a href="{{ url('consultas') }}">
-                                                Consultas
-                                            </a>
-                                        </li>
-                                    @endcan
                                     @can('config_index')
                                         <li>
                                             <a href="{{ url('config/edit') }}">

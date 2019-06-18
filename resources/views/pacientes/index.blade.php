@@ -74,13 +74,9 @@
 
 @section('extra_buttons')
     <!-- Boton Nuevo N.N -->
-    <form action="{{ url('/pacientes/nn/create')}}">
-        {{ csrf_field() }}
-
-        <button type="submit" class="btn">
-            <i class="fa fa-btn fa-trash"></i>Agregar Paciente N.N.
-        </button>
-    </form>
+    <a class="btn btn-primary" role="button" href="{{ url('/pacientes/nn/create')}}">
+        Agregar Paciente N.N.
+    </a>
 @endsection
 
 @section('pagination')
