@@ -183,6 +183,11 @@ return [
          */
         App\Providers\HospitalServiceProvider::class,
 
+        /*
+         * Charts
+         */
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class
+
     ],
 
     /*
@@ -232,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'ConfigPage' => App\Helpers\ConfigHelper::class,
+        'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
 
     ],
 

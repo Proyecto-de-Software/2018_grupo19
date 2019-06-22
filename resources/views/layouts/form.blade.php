@@ -12,7 +12,7 @@
                     <!-- Display Validation Errors -->
                     @include('common.errors')
 
-                    <form action="@yield('action')" method="POST" class="form-horizontal">
+                    <form action="@yield('action')" method="POST" class="form-horizontal" id="form">
                         {{ csrf_field() }}
                         @yield('form-fields')
                         <!-- Guardar -->
@@ -21,16 +21,12 @@
                                 <button type="submit" class="btn btn-default">
                                     <i class="fa fa-btn fa-plus"></i>Guardar
                                 </button>
+                                <!-- Boton cancelar -->
+                                <a class="btn btn-danger" role="button" href="@yield('cancel-action')">
+                                    Descartar
+                                </a>
                             </div>
                         </div>
-                    </form>
-                    <!-- Boton cancelar -->
-                    <form action="@yield('cancel-action')">
-                        {{ csrf_field() }}
-
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-btn fa-trash"></i>Descartar 
-                        </button>
                     </form>
                 </div>
             </div>

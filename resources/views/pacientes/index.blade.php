@@ -71,8 +71,16 @@
         </tr>
     @endforeach
 @endsection
+
+@section('extra_buttons')
+    <!-- Boton Nuevo N.N -->
+    <a class="btn btn-primary" role="button" href="{{ url('/pacientes/nn/create')}}">
+        Agregar Paciente N.N.
+    </a>
+@endsection
+
 @section('pagination')
-<div class="text-center">
-{{ $pacientes->links() }}
-</div>
+    <div class="text-center">
+        {{ $pacientes->links() }}
+    </div>
 @endsection

@@ -56,6 +56,8 @@ Route::get('pacientes/{paciente}/edit', 'PacienteController@edit')->middleware('
 Route::get('pacientes/derivaciones/{paciente}', 'PacienteController@derivations')->middleware('permission:paciente_show');
 Route::put('pacientes/{paciente}', 'PacienteController@update')->middleware('permission:paciente_update');
 Route::delete('pacientes/{paciente}', 'PacienteController@destroy')->middleware('permission:paciente_delete');
+Route::get('pacientes/nn/create', 'PacienteController@create_nn')->middleware('permission:paciente_new');
+Route::post('pacientes/nn', 'PacienteController@store_nn')->middleware('permission:paciente_new');
 
 //Rutas de configuracion
 Route::get('/config/edit', 'ConfigController@edit')->middleware('permission:config_index');

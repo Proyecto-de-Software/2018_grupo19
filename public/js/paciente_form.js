@@ -1,4 +1,4 @@
-import { load_to_select } from './helpers/form_helpers.js'
+import { load_to_select } from './helpers/API_loaders.js'
 
 const default_value = field => document.getElementById(`paciente-${field}-default`) ? parseInt(document.getElementById(`paciente-${field}-default`).innerHTML) : undefined
 
