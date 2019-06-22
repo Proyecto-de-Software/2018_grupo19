@@ -39,9 +39,13 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="config-{{$estado_del_sitio->variable}}" class="col-sm-3 control-label">{{$estado_del_sitio->variable}}</label>
+        <label for="config-{{$estado_del_sitio->variable}}" class="col-sm-3 control-label">Sitio Habilitado</label>
         <div class="col-sm-6">
-            <input type="checkbox" name="{{$estado_del_sitio->variable}}" id="config-{{$estado_del_sitio->variable}}" class="form-check-input" value="{{$estado_del_sitio->valor}}">
+            <input type="checkbox" name="{{$estado_del_sitio->variable}}" id="config-{{$estado_del_sitio->variable}}" class="form-check-input"
+                @if ($estado_del_sitio->valor == 1)
+                    checked
+                @endif
+            >
         </div>
     </div>
 @endsection
