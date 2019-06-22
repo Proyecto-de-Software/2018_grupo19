@@ -8,7 +8,7 @@
         </div>
         <label for="filtro-nombre" class="col-sm-2 control-label">Activo</label>
         <div class="col-sm-1">
-            <input type="checkbox" @if (app('request')->input('search') == 'on' && app('request')->input('active') == '') @else checked @endif name="active" id="filtro-active" class="form-control">
+            <input type="checkbox" @if (app('request')->input('search') == 'on' && app('request')->input('active') == '') @else checked @endif name="active" id="filtro-active" class="">
         </div>
     </div>
 @endsection
