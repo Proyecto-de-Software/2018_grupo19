@@ -213,10 +213,19 @@ class PacienteController extends Controller
 
     public function derivations(Paciente $paciente){
 
-        //Obtener consultas de paciente
+        $markers = [];
+
+        foreach ($paciente->consultas as $consulta) {
+
+            array_push($markers,  [
+                'title' => $consulta->fecha,
+                'lat' => $consulta->derivacion->latitud,
+                'lng' => $consulta->derivacion->longitud,
+               ]);
+        }
 
         return view('pacientes.derivaciones', [
-            'paciente' => $paciente,
+            'paciente' => $paciente, 'markers' => $markers
         ]);
     }
 }

@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
+@section('js')
+@mapstyles
+@mapscripts
+@endsection
+
 @section('title')
-    {{$paciente->nombre . ' ' . $paciente->apellido}}
+Últimas derivaciones de <a href="{{url("pacientes/$paciente->id")}}">{{$paciente->nombre . ' ' . $paciente->apellido}}</a>
 @endsection
 
 @section('js')
@@ -11,23 +16,17 @@
 
 @section('content')
 
-<div class="d-flex align-items-center">
-    <div>Flex item 1</div>
-    <div>Flex item 2</div>
-    <div>Flex item 3</div>
-    <div style="width: 400; height: 400; display: block;"></div>
-</div>
-
-
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading text-center">
                 @yield('title')
             </div>
-            
-            <div class="panel-body">
-                <div id="mapdiv" >Asdas</div>
-                <!-- Display Validation Errors -->
-                @include('common.errors')
+            <div class="center">
+            @map([
+                'lat' => empty($markers)?'-34.9238':$markers[0]['lat'],
+                'lng' => empty($markers)?'-57.9475':$markers[0]['lng'],
+                'zoom' => '14',
+                'markers' => $markers,
+            ])
             </div>
         </div>
 
