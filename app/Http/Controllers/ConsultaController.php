@@ -33,9 +33,10 @@ class ConsultaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($paciente_id)
     {
         return view('consultas.create', [
+            'paciente_id' => $paciente_id,
             'motivos_consultas' => MotivoConsulta::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
             'acompanamientos' => Acompanamiento::get()

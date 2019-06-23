@@ -29,5 +29,8 @@
     <p>Obra social: {{ $paciente->obra_social->nombre }}</p>
     <a href="{{ url('pacientes/derivaciones/'.$paciente->id) }}" class="btn btn-info" role="button">Últimas derivaciones</a>
 @endif
+<a class="btn btn-primary" role="button" href="{{ url("consultas/create/".$paciente->id)}}">
+    Agregar consulta
+</a>
 @endsection
 

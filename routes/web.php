@@ -43,7 +43,7 @@ Route::group(['middleware' => ['sitioMantenimiento']], function () {
 
     //Rutas de consulta
     Route::get('consultas', 'ConsultaController@index')->middleware('permission:consulta_index');
-    Route::get('consultas/create', 'ConsultaController@create')->middleware('permission:consulta_new');
+    Route::get('consultas/create/{paciente_id}', 'ConsultaController@create')->middleware('permission:consulta_new');
     Route::post('consultas', 'ConsultaController@store')->middleware('permission:consulta_new');
     Route::get('consultas/{consulta}', 'ConsultaController@show')->middleware('permission:consulta_show');
     Route::get('consultas/{consulta}/edit', 'ConsultaController@edit')->middleware('permission:consulta_update');
