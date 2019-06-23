@@ -61,6 +61,9 @@ Route::group(['middleware' => ['sitioMantenimiento']], function () {
     Route::get('pacientes/nn/create', 'PacienteController@create_nn')->middleware('permission:paciente_new');
     Route::post('pacientes/nn', 'PacienteController@store_nn')->middleware('permission:paciente_new');
 
+    //Rutas de instituciones
+    //Route::get()
+
 });
 
 Route::get('/config/edit', 'ConfigController@edit')->middleware('permission:config_index');
