@@ -2,9 +2,9 @@
 
 @section('title')
     @if (isset($consulta))
-        Editar Consulta
+        Editar Consulta de {{"$paciente->nombre $paciente->apellido"}}
     @else
-        Nueva Consulta
+        Nueva Consulta de {{"$paciente->nombre $paciente->apellido"}}
     @endif
 @endsection
 
@@ -94,7 +94,7 @@
             @if (isset($consulta))
                 value="{{$consulta->paciente_id}}"
             @else
-                value="{{ $paciente_id }}"
+                value="{{ $paciente->id }}"
             @endif>
         </div>
     </div>

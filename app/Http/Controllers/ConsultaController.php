@@ -11,6 +11,7 @@ use ConfigPage;
 use App\MotivoConsulta;
 use App\TratamientoFarmacologico;
 use App\Acompanamiento;
+use App\Paciente;
 
 use Illuminate\Support\Facades\Log;
 
@@ -36,7 +37,7 @@ class ConsultaController extends Controller
     public function create($paciente_id)
     {
         return view('consultas.create', [
-            'paciente_id' => $paciente_id,
+            'paciente' => Paciente::find($paciente_id),
             'motivos_consultas' => MotivoConsulta::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
             'acompanamientos' => Acompanamiento::get()
@@ -97,6 +98,7 @@ class ConsultaController extends Controller
     public function edit(Consulta $consulta)
     {
         return view('consultas.create', [
+            'paciente' => $consulta->paciente,
             'consulta' => $consulta,
             'motivos_consultas' => MotivoConsulta::get(),
             'tratamientos' => TratamientoFarmacologico::get(),
