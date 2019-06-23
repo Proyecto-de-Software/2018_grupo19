@@ -210,4 +210,22 @@ class PacienteController extends Controller
 
         return $validator;
     }
+
+    public function derivations(Paciente $paciente){
+
+        $markers = [];
+
+        foreach ($paciente->consultas as $consulta) {
+
+            array_push($markers,  [
+                'title' => $consulta->fecha,
+                'lat' => $consulta->derivacion->latitud,
+                'lng' => $consulta->derivacion->longitud,
+               ]);
+        }
+
+        return view('pacientes.derivaciones', [
+            'paciente' => $paciente, 'markers' => $markers
+        ]);
+    }
 }

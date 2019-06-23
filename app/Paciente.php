@@ -27,6 +27,10 @@ class Paciente extends Model
         return $this->belongsTo('App\ObraSocial');
     }
 
+    public function consultas() {
+        return $this->hasMany('App\Consulta');
+    }
+
     public function scopeNombre($query, $nombre) {
         if($nombre) {
             $query->where('nombre',  'like', $nombre . '%');
