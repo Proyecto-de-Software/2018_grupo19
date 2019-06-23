@@ -14,7 +14,7 @@ class ConfigController extends Controller
             'mail' => Config::where('variable','mail')->first(),
             'descripcion' => Config::where('variable','descripcion')->first(),
             'cantidad_por_pag' => Config::where('variable','cantidad_por_pag')->first(),
-            'estado_del_sitio' => Config::where('variable','estado_del_sitio')->first()
+            'estado_del_sitio' => Config::where('variable','estado_del_sitio')->first(),
         ]);
     }
 
@@ -33,9 +33,22 @@ class ConfigController extends Controller
         $config->valor = $request->cantidad_por_pag;
         $config->save();
         $config = Config::where('variable','estado_del_sitio')->first();
-        $config->valor = $request->estado_del_sitio ? 1 : 0;
+        //dd($request);
+        if($request->estado_del_sitio == 'on' ){
+            $config->valor = 1;
+        }else{
+            $config->valor = 0;
+        }
         $config->save();
 
         return redirect('/');
+    }
+
+    public function redirigirSitioEnMantenimiento() {
+        return view('mantenimiento');
+    }
+
+    public static function isActive(){
+        return (Config::where('variable', 'estado_del_sitio')->first()->valor ? 1:0);
     }
 }

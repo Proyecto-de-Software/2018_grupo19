@@ -40,6 +40,14 @@ class User extends Authenticatable
     public function scopeActivo($query, $activo) {
         if($activo) {
             $query->where('activo', 1);
+        } else {
+            $query->where('activo', 0);
         }
     }
+
+    public function scopeEmail($query, $email) {
+        $query->where('email', $email);
+    }
+
+
 }

@@ -18,6 +18,7 @@
 </head>
 <body>
     <div id="app">
+        @section('navbar')
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -105,6 +106,7 @@
                 </div>
             </div>
         </nav>
+        @show
 
         @yield('content')
     </div>
