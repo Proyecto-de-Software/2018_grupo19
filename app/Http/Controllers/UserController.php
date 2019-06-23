@@ -147,7 +147,7 @@ class UserController extends Controller
             'apellido' => 'required|string',
             'email' => 'required|email' . ($edit ? '' : '|unique:users'),
             'name' => 'required|string' . ($edit ? '' : '|unique:users'),
-            'password' => $edit ? 'required' : '',]
+            'password' => $edit ? '' : 'required',]
         );
 
         return $validator;

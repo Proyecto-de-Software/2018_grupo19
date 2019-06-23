@@ -44,4 +44,10 @@ class User extends Authenticatable
             $query->where('activo', 0);
         }
     }
+
+    public function scopeEmail($query, $email) {
+        $query->where('email', $email);
+    }
+
+
 }

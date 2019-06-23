@@ -16,8 +16,9 @@ Route::get('mantenimiento', 'ConfigController@redirigirSitioEnMantenimiento');
 
 //Rutas de login (sin middleware de mantenimiento)
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', 'Auth\LoginController@login')->middleware('usuarioBloqueado');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('usuarioBloqueado', 'Auth\LoginController@showUsuarioBloqueado');
 
 //Grupo de rutas con middlware sitio mantenimiento requirido
 Route::group(['middleware' => ['sitioMantenimiento']], function () {
