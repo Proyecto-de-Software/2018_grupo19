@@ -9,36 +9,18 @@ use Lava;
 
 class ReportesController extends Controller
 {
-    public function index()
-    {
-        $c = Consulta::
-        join('pacientes', 'pacientes.id', '=', 'consultas.paciente_id')
-        ->join('generos', 'generos.id', '=', 'pacientes.genero_id')
-        ->groupBy('genero_id')
-        ->select('genero_id','generos.nombre',DB::raw('count(genero_id) as count'))->get();
+    public function index() {
+        
+        $this->generateChart('motivo','Motivo',$this->getChartData('motivo_consulta',false));
+        
+        $this->generateChart('genero','Genero',$this->getChartData('genero',true));
 
-        $this->generateChart('Consultas agrupadas por genero','genero','Genero',$c);
-
-        $c = Consulta::
-        join('motivo_consultas', 'motivo_consultas.id', '=', 'consultas.motivo_consulta_id')
-        ->groupBy('motivo_consulta_id')
-        ->select('motivo_consulta_id','motivo_consultas.nombre',DB::raw('count(motivo_consulta_id) as count'))->get();
-
-        $this->generateChart('Consultas agrupadas por motivo','motivo','Motivo',$c);
-
-        $c = Consulta::
-        join('pacientes', 'pacientes.id', '=', 'consultas.paciente_id')
-        ->join('localidads', 'localidads.id', '=', 'pacientes.localidad_id')
-        ->groupBy('localidad_id')
-        ->select('localidad_id','localidads.nombre',DB::raw('count(localidad_id) as count'))->get();
-
-        $this->generateChart('Consultas agrupadas por localidad','localidad','Localidad',$c);
+        $this->generateChart('localidad','Localidad',$this->getChartData('localidad',true));
 
         return view('reportes');
     }
 
-    public function generateChart($title,$id,$field,$rows)
-    {
+    public function generateChart($id, $field, $rows) {
         $reasons = Lava::DataTable();
 
         $reasons->addStringColumn($field)
@@ -49,7 +31,21 @@ class ReportesController extends Controller
         }
 
         Lava::DonutChart($id, $reasons, [
-            'title' => $title
+            'title' => "Consultas agrupadas por $id",
+            //'png' => true
         ]);
+    }
+
+    public function getChartData($table, $joinPacientes) {
+        $data = Consulta::join('pacientes', 'pacientes.id', '=', 'consultas.paciente_id');
+        if ($joinPacientes) {
+            $data->join("{$table}s", "{$table}s.id", '=', "pacientes.{$table}_id");
+        } else {
+            $data->join("{$table}s", "{$table}s.id", '=', "consultas.{$table}_id");
+        }
+        $data->groupBy("{$table}_id")
+        ->select("{$table}_id","{$table}s.nombre",DB::raw("count({$table}_id) as count"));
+        
+        return $data->get();
     }
 }

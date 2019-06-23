@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('js')
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+@endsection
+
 @section('content')
 
 <div id="chart-motivo"></div>
