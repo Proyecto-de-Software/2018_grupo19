@@ -12,13 +12,9 @@
                     @yield('fields')
 
                     <!-- Boton editar -->
-                    <form action="@yield('edit-action')">
-                        {{ csrf_field() }}
-
-                        <button type="submit" class="btn">
-                            <i class="fa fa-btn fa-trash"></i>Editar 
-                        </button>
-                    </form>
+                    <a class="btn btn-primary" role="button" href="@yield('edit-action')">
+                        Editar
+                    </a>
 
                     <!-- Boton eliminar -->
                     <form action="@yield('delete-action')" method="POST">

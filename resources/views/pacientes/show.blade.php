@@ -13,6 +13,8 @@
 @endsection
 
 @section('fields')
+<p>Historia Clinica: {{ $paciente->nro_historia_clinica }}</p>
+<p>Nro. carpeta: {{ $paciente->nro_carpeta }}</p>
 @if (!$paciente->nn)
     <p>Fecha de nacimiento: {{ $paciente->fecha_nac }}</p>
     <p>Lugar de nacimiento: {{ $paciente->lugar_nac }}</p>
@@ -27,7 +29,5 @@
     <p>Obra social: {{ $paciente->obra_social->nombre }}</p>
     <a href="{{ url('pacientes/derivaciones/'.$paciente->id) }}" class="btn btn-info" role="button">Últimas derivaciones</a>
 @endif
-    <p>Historia Clinica: {{ $paciente->nro_historia_clinica }}</p>
-    <p>Nro. carpeta: {{ $paciente->nro_carpeta }}</p>
 @endsection
 
