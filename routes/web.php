@@ -47,6 +47,8 @@ Route::get('consultas/{consulta}/edit', 'ConsultaController@edit')->middleware('
 Route::put('consultas/{consulta}', 'ConsultaController@update')->middleware('permission:consulta_update');
 Route::delete('consultas/{consulta}', 'ConsultaController@destroy')->middleware('permission:consulta_delete');
 
+Route::get('/reportes', 'ReportesController@index');
+
 //Rutas de paciente
 Route::get('pacientes', 'PacienteController@index')->middleware('permission:paciente_index');
 Route::get('pacientes/create', 'PacienteController@create')->middleware('permission:paciente_new');
@@ -61,3 +63,4 @@ Route::post('pacientes/nn', 'PacienteController@store_nn')->middleware('permissi
 //Rutas de configuracion
 Route::get('/config/edit', 'ConfigController@edit')->middleware('permission:config_index');
 Route::put('/config/update', 'ConfigController@update')->middleware('permission:config_index', 'permission:config_update');
+
