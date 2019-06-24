@@ -63,7 +63,12 @@ Route::group(['middleware' => ['sitioMantenimiento']], function () {
     Route::post('pacientes/nn', 'PacienteController@store_nn')->middleware('permission:paciente_new');
 
     //Rutas de instituciones
-    //Route::get()
+    Route::get('listadoInstituciones', function(){
+        // $path = resource_path() . '/views/instituciones/listadoInstituciones.html';
+        //dd($path);
+        //return \File::get(public_path() . '/instituciones/listadoInstituciones.html');
+        return view('instituciones.listadoInstituciones');
+    });
 
     //Rutas de reportes
     Route::get('/reportes', 'ReportesController@index');
