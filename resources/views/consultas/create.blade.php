@@ -2,9 +2,9 @@
 
 @section('title')
     @if (isset($consulta))
-        Editar Consulta
+        Editar Consulta de {{"$paciente->nombre $paciente->apellido"}}
     @else
-        Nueva Consulta
+        Nueva Consulta de {{"$paciente->nombre $paciente->apellido"}}
     @endif
 @endsection
 
@@ -90,11 +90,11 @@
     <div class="form-group">
         <label for="consulta-paciente-id" class="col-sm-3 control-label">Paciente</label>
         <div class="col-sm-6">
-            <input type="text" name="paciente_id" id="consulta-paciente-id" class="form-control" required
+            <input type="text" name="paciente_id" id="consulta-paciente-id" class="form-control" required readonly
             @if (isset($consulta))
                 value="{{$consulta->paciente_id}}"
             @else
-                value="{{ old('paciente_id') }}"
+                value="{{ $paciente->id }}"
             @endif>
         </div>
     </div>

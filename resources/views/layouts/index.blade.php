@@ -59,10 +59,6 @@
                         </tbody>
                     </table>
                     @yield('pagination')
-                    <!-- Boton Nuevo -->
-                    <a class="btn btn-primary" role="button" href="{{ url($title."/create")}}">
-                        Agregar {{substr($title,0,-1)}}
-                    </a>
                     @yield('extra_buttons')
                 </div>
             </div>

@@ -38,6 +38,14 @@
         </tr>
     @endforeach
 @endsection
+
+@section('extra_buttons')
+    <!-- Boton Nuevo -->
+    <a class="btn btn-primary" role="button" href="{{ url("users/create")}}">
+        Agregar usuario
+    </a>
+@endsection
+
 @section('pagination')
 <div class="text-center">
 {{ $users->links() }}

@@ -73,6 +73,10 @@
 @endsection
 
 @section('extra_buttons')
+    <!-- Boton Nuevo -->
+    <a class="btn btn-primary" role="button" href="{{ url("pacientes/create")}}">
+        Agregar paciente
+    </a>
     <!-- Boton Nuevo N.N -->
     <a class="btn btn-primary" role="button" href="{{ url('/pacientes/nn/create')}}">
         Agregar Paciente N.N.
