@@ -23,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('instituciones', 'InstitucionController@index');
 Route::get('instituciones/{institucion}', 'InstitucionController@show');
 Route::get('instituciones/region-sanitaria/{regionsanitaria}', 'InstitucionController@showByRegion');
+Route::get('institucionesq', 'InstitucionController@store');
