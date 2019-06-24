@@ -11,16 +11,22 @@ class ReportesController extends Controller
 {
     public function index() {
         
-        $this->generateChart('motivo','Motivo',$this->getChartData('motivo_consulta',false));
+        $data_motivo = $this->getChartData('motivo_consulta',false);
+        $this->generateChart('motivo','Motivo',$data_motivo,true);
+        $this->generateChart('motivo','Motivo',$data_motivo,false);
         
-        $this->generateChart('genero','Genero',$this->getChartData('genero',true));
+        $data_genero = $this->getChartData('genero',true);
+        $this->generateChart('genero','Genero',$data_genero,true);
+        $this->generateChart('genero','Genero',$data_genero,false);
 
-        $this->generateChart('localidad','Localidad',$this->getChartData('localidad',true));
+        $data_localidad = $this->getChartData('localidad',true);
+        $this->generateChart('localidad','Localidad',$data_localidad,true);
+        $this->generateChart('localidad','Localidad',$data_localidad,false);
 
         return view('reportes');
     }
 
-    public function generateChart($id, $field, $rows) {
+    public function generateChart($id, $field, $rows, $png) {
         $reasons = Lava::DataTable();
 
         $reasons->addStringColumn($field)
@@ -30,9 +36,11 @@ class ReportesController extends Controller
             $reasons->addRow([$row->nombre,$row->count]);
         }
 
-        Lava::DonutChart($id, $reasons, [
+        $chart_id = $png ? "{$id}_png" : $id;
+
+        Lava::DonutChart($chart_id, $reasons, [
             'title' => "Consultas agrupadas por $id",
-            //'png' => true
+            'png' => $png ? true : false
         ]);
     }
 
