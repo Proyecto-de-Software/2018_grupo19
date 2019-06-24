@@ -6,6 +6,7 @@ use App\Institucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundException;
 
 class InstitucionController extends Controller
 {
@@ -28,7 +29,6 @@ class InstitucionController extends Controller
     public function store(Request $request)
     {
         if($this->validate_i($request)->fails()){
-
             return response("Fallo",400);
         }else{
             $institucion = new Institucion;
@@ -40,7 +40,6 @@ class InstitucionController extends Controller
             $institucion->region_sanitaria_id = $request->region_sanitaria_id;
             $institucion->tipo_institucion_id = $request->tipo_institucion_id;
             $institucion->save();
-
             return response("Ok",200);
         }
     }
@@ -63,9 +62,18 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Institucion $institucion)
+    public function update(Request $request, $id)
     {
-        //
+        if($this->validate_i($request)->fails()){
+            return response("Fallo",400);
+        }else{
+            try {
+                Institucion::findOrFail($id)->fill($request->all())->save();
+                return response("OK", 200);
+            } catch (ModelNotFoundException $e) {
+                return response("Fallo. ID inválido.",400);
+            }
+        }
     }
 
     /**
@@ -74,9 +82,14 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Institucion $institucion)
+    public function destroy($id)
     {
-        //
+        try {
+            Institucion::findOrFail($id)->delete();
+            return response("OK, el id $id", 200);
+        } catch (ModelNotFoundException $e) {
+            return response("Fallo. id inválido",400);
+        }
     }
 
     public function showByRegion($idRegion)
