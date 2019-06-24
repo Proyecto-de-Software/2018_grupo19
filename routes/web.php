@@ -66,7 +66,7 @@ Route::group(['middleware' => ['sitioMantenimiento']], function () {
     //Route::get()
 
     //Rutas de reportes
-    Route::get('/reportes', 'ReportesController@index');
+    Route::get('/reportes', 'ReportesController@index')->middleware('auth');
 
 });
 
