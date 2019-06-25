@@ -49,6 +49,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+                        <li>
+                            <a href="{{ url('listadoInstituciones') }}">
+                                Instituciones
+                            </a>
+                        </li>
                         @guest
                             <li><a href="{{ route('login') }}">Iniciar sesion</a></li>
                         @else

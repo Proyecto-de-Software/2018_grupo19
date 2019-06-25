@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-<section id="general">
+<section id="general" style="margin:20px">
     <h2 class="display-4">Buscador de instituciones</h2>
     <section style="margin:20px;">
             <div class="row form-partidos">
