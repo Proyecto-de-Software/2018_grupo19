@@ -36,6 +36,10 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'paciente_delete'])->assignRole($admin);
         Permission::create(['name' => 'config_index'])->assignRole($admin);
         Permission::create(['name' => 'config_update'])->assignRole($admin);
+        Permission::create(['name' => 'institucion_new'])->assignRole($admin);
+        Permission::create(['name' => 'institucion_update'])->assignRole($admin);
+        Permission::create(['name' => 'institucion_delete'])->assignRole($admin);
+
 
         //Permisos del equipo de guardia
         $equip->givePermissionTo('consulta_index', 'consulta_show', 'consulta_new', 'consulta_update', 'consulta_delete');

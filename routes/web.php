@@ -63,17 +63,11 @@ Route::group(['middleware' => ['sitioMantenimiento']], function () {
     Route::post('pacientes/nn', 'PacienteController@store_nn')->middleware('permission:paciente_new');
 
     //Rutas de instituciones
-    Route::get('listadoInstituciones', function(){
-        // $path = resource_path() . '/views/instituciones/listadoInstituciones.html';
-        //dd($path);
-        //return \File::get(public_path() . '/instituciones/listadoInstituciones.html');
-        return view('instituciones.listadoInstituciones');
-    });
+    Route::get('instituciones', 'InstitucionController@viewIndex');
     Route::get('instituciones/create', 'InstitucionController@create');
     Route::post('instituciones', 'InstitucionController@store');
     Route::get('instituciones/{institucion}/edit', 'InstitucionController@edit');
     Route::put('instituciones/{institucion}', 'InstitucionController@update');
-    Route::delete('instituciones/{institucion}', 'InstitucionController@destroy');
 
     //Rutas de reportes
     Route::get('/reportes', 'ReportesController@index')->middleware('auth');

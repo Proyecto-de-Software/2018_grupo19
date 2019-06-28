@@ -21,6 +21,10 @@ class InstitucionController extends Controller
         return Institucion::all();
     }
 
+    public function viewIndex() {
+        return view('instituciones.listadoInstituciones');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +61,7 @@ class InstitucionController extends Controller
             $institucion->region_sanitaria_id = $request->region_sanitaria_id;
             $institucion->tipo_institucion_id = $request->tipo_institucion_id;
             $institucion->save();
-            return redirect('listadoInstituciones');
+            return redirect('instituciones');
         }
     }
 
@@ -67,10 +71,10 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function show(Institucion $institucion)
+    /*public function show(Institucion $institucion)
     {
         return $institucion;
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
@@ -110,7 +114,7 @@ class InstitucionController extends Controller
             $institucion->region_sanitaria_id = $request->region_sanitaria_id;
             $institucion->tipo_institucion_id = $request->tipo_institucion_id;
             $institucion->save();
-            return redirect('listadoInstituciones');
+            return redirect('instituciones');
         }
     }
 
@@ -120,11 +124,11 @@ class InstitucionController extends Controller
      * @param  \App\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Institucion $institucion)
-    {
-        Institucion::findOrFail($institucion->id)->delete();
-        return redirect('listadoInstituciones');
-    }
+    // public function destroy(Institucion $institucion)
+    // {
+    //     Institucion::findOrFail($institucion->id)->delete();
+    //     return redirect('listadoInstituciones');
+    // }
 
     public function showByRegion($idRegion)
     {

@@ -50,7 +50,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         <li>
-                            <a href="{{ url('listadoInstituciones') }}">
+                            <a href="{{ url('instituciones') }}">
                                 Instituciones
                             </a>
                         </li>

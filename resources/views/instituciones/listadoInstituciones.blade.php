@@ -27,6 +27,11 @@
                 </div>
                 <p>Region sanitaria: @{{regSanitaria}} </p>
                 <!-- <button v-on:click="actualizarListado">Buscar >></button> -->
+                @can('institucion_new')
+                    <a class="btn btn-primary" role="button" href="{{ url("instituciones/create")}}">
+                        Agregar Institucion
+                    </a>
+                @endcan
             </div>
         </section>
         <section>
@@ -47,6 +52,11 @@
                     <td>@{{i.director}}</td>
                     <td>Desconocida</td>
                     <td>@{{i.telefono}}</td>
+                    <td>
+                        <a class="btn btn-primary" role="button" v-bind:href="'instituciones/' +  i.id + '/edit'">
+                            Editar
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
