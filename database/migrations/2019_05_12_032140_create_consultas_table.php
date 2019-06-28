@@ -25,7 +25,7 @@ class CreateConsultasTable extends Migration
 
             //Claves foraneas
             $table->integer('paciente_id')->unsigned();
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
             $table->integer('motivo_consulta_id')->unsigned();
             $table->foreign('motivo_consulta_id')->references('id')->on('motivo_consultas');
             $table->integer('derivacion_id')->unsigned()->nullable();
