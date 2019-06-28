@@ -22,8 +22,9 @@ class UserController extends Controller
         if($request->get('search')) {
             $users = User::activo(($request->get('active') == 'on') ? 1:0)
                 ->username($request->get('username'))
+                ->latest()
                 ->paginate(ConfigPage::getValue('cantidad_por_pag'));
-        } else { $users = User::paginate(ConfigPage::getValue('cantidad_por_pag'));}
+        } else { $users = User::latest()->paginate(ConfigPage::getValue('cantidad_por_pag'));}
 
         return view('users.index',['users' => $users]);
     }

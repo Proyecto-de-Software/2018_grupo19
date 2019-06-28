@@ -87,7 +87,7 @@
             @endif>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" hidden>
         <label for="consulta-paciente-id" class="col-sm-3 control-label">Paciente</label>
         <div class="col-sm-6">
             <input type="text" name="paciente_id" id="consulta-paciente-id" class="form-control" required readonly
@@ -107,7 +107,7 @@
                     @if (isset($consulta))
                         @if ($motivo->id == $consulta->motivo_consulta_id)
                             selected
-                        @endif  
+                        @endif
                     @endif>{{$motivo->nombre}}</option>
                 @endforeach
             </select>
@@ -135,7 +135,7 @@
                     @if (isset($consulta))
                         @if ($tratamiento->id == $consulta->tratamiento_farmacologico_id)
                             selected
-                        @endif  
+                        @endif
                     @endif>{{$tratamiento->nombre}}</option>
                 @endforeach
             </select>
@@ -150,7 +150,7 @@
                     @if (isset($consulta))
                         @if ($acompanamiento->id == $consulta->acompanamiento_id)
                             selected
-                        @endif  
+                        @endif
                     @endif>{{$acompanamiento->nombre}}</option>
                 @endforeach
             </select>

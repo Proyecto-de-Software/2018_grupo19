@@ -31,8 +31,9 @@ class PacienteController extends Controller
                 ->nroDoc($request->get('nro-doc'))
                 ->tipoDoc($request->get('tipo-doc'))
                 ->nroHistoriaClinica($request->get('historia-clinica'))
+                ->latest()
                 ->paginate(ConfigPage::getValue('cantidad_por_pag'));
-        } else { $pacientes = Paciente::paginate(ConfigPage::getValue('cantidad_por_pag')); }
+        } else { $pacientes = Paciente::latest()->paginate(ConfigPage::getValue('cantidad_por_pag')); }
 
         return view('pacientes.index', ['pacientes' => $pacientes]);
     }

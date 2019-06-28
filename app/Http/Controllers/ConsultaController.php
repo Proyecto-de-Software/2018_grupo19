@@ -25,7 +25,7 @@ class ConsultaController extends Controller
     public function index()
     {
         return view('consultas.index', [
-            'consultas' => Consulta::paginate(ConfigPage::getValue('cantidad_por_pag'))
+            'consultas' => Consulta::latest()->paginate(ConfigPage::getValue('cantidad_por_pag'))
         ]);
     }
 
