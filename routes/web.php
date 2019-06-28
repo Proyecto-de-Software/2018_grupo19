@@ -69,6 +69,11 @@ Route::group(['middleware' => ['sitioMantenimiento']], function () {
         //return \File::get(public_path() . '/instituciones/listadoInstituciones.html');
         return view('instituciones.listadoInstituciones');
     });
+    Route::get('instituciones/create', 'InstitucionController@create');
+    Route::post('instituciones', 'InstitucionController@store');
+    Route::get('instituciones/{institucion}/edit', 'InstitucionController@edit');
+    Route::put('instituciones/{institucion}', 'InstitucionController@update');
+    Route::delete('instituciones/{institucion}', 'InstitucionController@destroy');
 
     //Rutas de reportes
     Route::get('/reportes', 'ReportesController@index')->middleware('auth');
