@@ -64,10 +64,10 @@ Route::group(['middleware' => ['sitioMantenimiento']], function () {
 
     //Rutas de instituciones
     Route::get('instituciones', 'InstitucionController@viewIndex');
-    Route::get('instituciones/create', 'InstitucionController@create');
-    Route::post('instituciones', 'InstitucionController@store');
-    Route::get('instituciones/{institucion}/edit', 'InstitucionController@edit');
-    Route::put('instituciones/{institucion}', 'InstitucionController@update');
+    Route::get('instituciones/create', 'InstitucionController@create')->middleware('permission:institucion_new');
+    Route::post('instituciones', 'InstitucionController@store')->middleware('permission:institucion_new');
+    Route::get('instituciones/{institucion}/edit', 'InstitucionController@edit')->middleware('permission:institucion_update');
+    Route::put('instituciones/{institucion}', 'InstitucionController@update')->middleware('permission:institucion_update');
 
     //Rutas de reportes
     Route::get('/reportes', 'ReportesController@index')->middleware('auth');

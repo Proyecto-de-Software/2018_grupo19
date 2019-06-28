@@ -38,7 +38,6 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'config_update'])->assignRole($admin);
         Permission::create(['name' => 'institucion_new'])->assignRole($admin);
         Permission::create(['name' => 'institucion_update'])->assignRole($admin);
-        Permission::create(['name' => 'institucion_delete'])->assignRole($admin);
 
 
         //Permisos del equipo de guardia

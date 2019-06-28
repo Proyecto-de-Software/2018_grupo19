@@ -39,9 +39,8 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>institución</th>
+                    <th>Institución</th>
                     <th>Director/a</th>
-                    <th>Direccion</th>
                     <th>Telefono</th>
                 </tr>
             </thead>
@@ -50,13 +49,14 @@
                     <td scope="row">@{{i.id}}</td>
                     <td>@{{i.nombre}}</td>
                     <td>@{{i.director}}</td>
-                    <td>Desconocida</td>
                     <td>@{{i.telefono}}</td>
+                    @can('institucion_update')
                     <td>
                         <a class="btn btn-primary" role="button" v-bind:href="'instituciones/' +  i.id + '/edit'">
                             Editar
                         </a>
                     </td>
+                    @endcan
                 </tr>
             </tbody>
         </table>
