@@ -55,7 +55,7 @@ class ConsultaController extends Controller
         $validator = $this->validate_c($request);
 
         if ($validator->fails()) {
-            return redirect('consultas/create')
+            return redirect("consultas/create/$request->paciente_id")
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
